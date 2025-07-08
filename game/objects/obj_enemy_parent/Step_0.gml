@@ -33,7 +33,14 @@ function state_chasing() {
 		} else {
 			speed = movementSpeed;	
 		}
-			
+		
+		// Check if enemy throws a projectile and create a new object
+		if (throwsProjectile != noone) {
+			if (!instance_exists(throwsProjectile)) {
+				instance_create_layer(x, y+5, "Instances", throwsProjectile);
+			}
+		}
+		
 	} else {
 		currentState = EnemyState.IDLE;
 	}
