@@ -1,12 +1,17 @@
-enum CurrentState {
-	RISING,
-	FALLING
-}
+xStart = x;
+yStart = y;
+xEnd = obj_player.x;
+yEnd = obj_player.y;
 
-state = CurrentState.RISING;
-movementSpeed = 2;
-maximumHeight = 10;
-verticalAcceleration = 0.5;
+mediumPoint = (xStart + xEnd) / 2; // Midpoint between launch and target H
+maxHeight = yStart - 50; // Maximum launch height K
 
-direction = point_direction(x, y, obj_player.x, y);
-speed = movementSpeed;
+// Parabola of the launch with quadratic equation 
+division = sqr(xStart - mediumPoint)
+if division == 0 division = 0.0001;
+a = (yStart - maxHeight) / division;
+
+// Defines direction of movement
+dir = sign(xEnd - xStart); // +1 right, -1 left
+
+velocity = 1;
