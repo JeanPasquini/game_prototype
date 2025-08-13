@@ -1,13 +1,26 @@
+// states
+enum PlayerState {
+    IDLE,
+	WALK,
+    RUN,
+    JUMP,
+	RUN_JUMP,
+    FALL,
+	RUN_FALL
+}
+state = PlayerState.IDLE;
+
 // Movement
-spd = 4;
-grv = 0.5;
+hsp = 0;
+face = 1;
 vsp = 0;
+grv = 0.5;
 jmp = -10;
+spd = 1.5;
+ong = false;
 
-ong = false; // on ground
+tap_timer_left = 0;
+tap_timer_right = 0;
+double_tap_threshold = 15; // time for double tap
+run = false;
 
-// Direction
-face = 1; // 1 = right, -1 = left
-
-// Animation
-image_speed = 0.2;
