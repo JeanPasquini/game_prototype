@@ -8,6 +8,7 @@ if (keyboard_check(vk_right)) {
     hsp = spd;
     face = 1;
 }
+
 if (keyboard_check(vk_left)) {
     hsp = -spd;
     face = -1;
