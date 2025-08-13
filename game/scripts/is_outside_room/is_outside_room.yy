@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"is_outside_room",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"is_outside_room",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
