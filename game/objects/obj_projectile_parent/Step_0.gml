@@ -1,16 +1,17 @@
-// Moves towards the target
-x += dir * velocity;
-
-// Update Y based on quadratic function
-y = a * sqr(x - mediumPoint) + maxHeight;
-
-image_angle++;
-
-// Destroys if collided
-if (
-    place_meeting(x, y, obj_player) ||
-    place_meeting(x, y, obj_wall) ||
-    is_outside_room(id)
-) {
-    instance_destroy();
+if (instance_exists(obj_projectile_parent)) {
+	if (
+		place_meeting(x+1, y+1, obj_player) || 
+		place_meeting(x+1, y+1, obj_wall) ||
+		is_outside_room(id)
+		) 
+	{
+		instance_destroy();
+	} else {
+		if (y <= maximumHeight && CurrentState.RISING) {
+			y += verticalAcceleration;
+		} else {
+			state = CurrentState.FALLING;
+			y -= verticalAcceleration;
+		}
+	}
 }

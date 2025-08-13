@@ -37,12 +37,7 @@ function state_chasing() {
 		// Check if enemy throws a projectile and create a new object
 		if (throwsProjectile != noone) {
 			if (!instance_exists(throwsProjectile)) {
-				if (projectileDelay == 0) {
-					instance_create_layer(x, y, "Instances", throwsProjectile);
-					projectileDelay = 1 * 60;
-				} else {
-					projectileDelay--;
-				}
+				instance_create_layer(x, y+5, "Instances", throwsProjectile);
 			}
 		}
 		
