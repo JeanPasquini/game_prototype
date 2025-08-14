@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"check_state_transitions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"check_state_transitions",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
