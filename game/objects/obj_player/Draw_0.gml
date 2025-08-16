@@ -10,6 +10,8 @@ function get_state_name(state_val) {
         case PlayerState.RUN_JUMP:	   return "RUN_JUMP";
         case PlayerState.FALL:         return "FALL";
         case PlayerState.RUN_FALL:     return "RUN_FALL";
+        case PlayerState.LIGHT_ATTACK: return "LIGHT_ATTACK";
+        case PlayerState.HEAVY_ATTACK: return "HEAVY_ATTACK";
         default:                       return "UNKNOWN";
     }
 }

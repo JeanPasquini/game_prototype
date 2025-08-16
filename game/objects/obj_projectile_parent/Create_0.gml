@@ -21,3 +21,4 @@ a = (yStart - maxHeight) / division;
 dir = sign(xEnd - xStart); // +1 right, -1 left
 
 velocity = 1;
+

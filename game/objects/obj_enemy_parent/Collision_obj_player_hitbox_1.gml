@@ -1,0 +1,1 @@
+life -= other.damage;

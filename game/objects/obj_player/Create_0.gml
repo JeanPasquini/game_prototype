@@ -6,7 +6,9 @@ enum PlayerState {
     JUMP,
 	RUN_JUMP,
     FALL,
-	RUN_FALL
+	RUN_FALL,
+	LIGHT_ATTACK,
+	HEAVY_ATTACK
 }
 state = PlayerState.IDLE;
 
@@ -16,8 +18,19 @@ face = 1;
 vsp = 0;
 grv = 0.5;
 jmp = -10;
-spd = 1.5;
 ong = false;
+
+// Status
+life_max = 5;
+life = 5;
+damage_base = 1;
+damage = damage_base;
+spd = 1.5;
+spd_max = 10;
+
+attack_timer = 0;
+light_attack_duration = 15; // frames
+heavy_attack_duration = 25; // frames
 
 tap_timer_left = 0;
 tap_timer_right = 0;

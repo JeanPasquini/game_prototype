@@ -1,4 +1,8 @@
 
+if(life <= 0){
+	instance_destroy();	
+}
+
 // === Enemy Random Moviment ===
 
 switch (currentState) {
