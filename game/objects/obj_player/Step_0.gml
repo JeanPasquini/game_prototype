@@ -1,6 +1,9 @@
 if (life <= 0){
-	instance_destroy();
-	room_restart();
+	life = life_max; // redefines the player life 
+	// teleports the player to the origin of the room
+	obj_player.x = global.rooms_map[$ room_get_name(room)].px;
+    obj_player.y = global.rooms_map[$ room_get_name(room)].py;
+	room_goto(room); // reload the other objects from the room
 }
 
 switch (state) {

@@ -1,5 +1,3 @@
-// room_restart();
-
 var connections = global.rooms_map[$ room_get_name(room)];
 var destiny = noone;
 
@@ -18,10 +16,8 @@ with obj_player {
 }
 
 
-
-if (destiny != noone) {
-	
-	    obj_player.x = 100;
-    obj_player.y = 200;
+if (destiny != noone) {	
+	obj_player.x = global.rooms_map[$ room_get_name(destiny)].px;
+    obj_player.y = global.rooms_map[$ room_get_name(destiny)].py;
 	room_goto(destiny);
 }
