@@ -1,5 +1,6 @@
 
 var life_atual    = clamp(life, 0, life_max); 
+var _life_max    = clamp(life_max, 0, life_max); 
 var damage_atual  = max(0, damage_base);      
 var vel_atual     = max(0, spd);              
 
@@ -37,5 +38,6 @@ var tx = x1 + pad;
 var ty = y1 + pad;
 
 draw_text(tx, ty,       "LFE: "       + string_format(life_atual, 0, 2));
-draw_text(tx, ty + 20,  "DMG: "  + string_format(damage_atual, 0, 2));
-draw_text(tx, ty + 40,  "SPD: " + string_format(vel_atual, 0, 2));
+draw_text(tx, ty + 20,  "LFM: "       + string_format(_life_max, 0, 2));
+draw_text(tx, ty + 40,  "DMG: "  + string_format(damage_atual, 0, 2));
+draw_text(tx, ty + 60,  "SPD: " + string_format(vel_atual, 0, 2));
