@@ -19,8 +19,8 @@ if (!variable_global_exists("rooms_map")) {
         challenge_01: {
             up: noone,
             down: noone,
-            left: HUB,
-            right: challenge_02,
+            left: Room1,
+            right: noone,
 			px: 64,
 			py: 448
         },
@@ -33,4 +33,6 @@ if (!variable_global_exists("rooms_map")) {
 			py: 200
         }
     };
+	
+	global.current_room_name = "HUB";
 }
