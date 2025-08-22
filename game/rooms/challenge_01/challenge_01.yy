@@ -9,12 +9,16 @@
     {"name":"inst_421827F9","path":"rooms/challenge_01/challenge_01.yy",},
     {"name":"inst_623FA3B8","path":"rooms/challenge_01/challenge_01.yy",},
     {"name":"inst_2CD624FD","path":"rooms/challenge_01/challenge_01.yy",},
+    {"name":"inst_4E01A117","path":"rooms/challenge_01/challenge_01.yy",},
   ],
   "isDnd":false,
   "layers":[
     {"$GMRInstanceLayer":"","%Name":"cam","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":true,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v2","%Name":"inst_421827F9","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":true,"inheritedItemId":{"name":"inst_421827F9","path":"rooms/base_rom/base_rom.yy",},"inheritItemSettings":true,"isDnd":false,"name":"inst_421827F9","objectId":{"name":"obj_cam","path":"objects/obj_cam/obj_cam.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-32.0,"y":-32.0,},
         {"$GMRInstance":"v2","%Name":"inst_2CD624FD","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2CD624FD","objectId":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.0,"scaleY":3.0,"x":-32.0,"y":384.0,},
+        {"$GMRInstance":"v2","%Name":"inst_4E01A117","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4E01A117","objectId":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},"propertyId":{"name":"room_direction","path":"objects/obj_door/obj_door.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"RoomDirection.RIGHT",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.0,"scaleY":3.0,"x":320.0,"y":384.0,},
       ],"layers":[],"name":"cam","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":true,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v2","%Name":"inst_623FA3B8","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":true,"inheritedItemId":{"name":"inst_623FA3B8","path":"rooms/base_rom/base_rom.yy",},"inheritItemSettings":true,"isDnd":false,"name":"inst_623FA3B8","objectId":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":63.0,"scaleY":2.0,"x":0.0,"y":480.0,},

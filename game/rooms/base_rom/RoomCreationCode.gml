@@ -9,9 +9,9 @@ if (!variable_global_exists("rooms_map")) {
 			py: 448
         },
 		Room1: {
-            down: noone,
+            down: HUB,
             up: noone,
-            left: HUB,
+            left: noone,
             right: challenge_01,
 			px: 100,
 			py: 200
@@ -20,7 +20,7 @@ if (!variable_global_exists("rooms_map")) {
             up: noone,
             down: noone,
             left: Room1,
-            right: noone,
+            right: challenge_02,
 			px: 64,
 			py: 448
         },
@@ -28,7 +28,7 @@ if (!variable_global_exists("rooms_map")) {
             up: noone,
             down: noone,
             left: challenge_01,
-            right: mini_boss,
+            right: noone,
 			px: 100,
 			py: 200
         }
