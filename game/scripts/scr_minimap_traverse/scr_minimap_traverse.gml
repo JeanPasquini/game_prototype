@@ -11,18 +11,18 @@ function minimap_traverse(room_name, x, y, visited) {
     var rdata = global.rooms_map[$ room_name];
     if (is_undefined(rdata)) return;
 
-    var off = 64;
+    var off = 32;
 
     if (rdata.up != noone) {
-        minimap_traverse(rdata.up, x, y - off, visited);
+        minimap_traverse(room_get_name(rdata.up), x, y - off, visited);
     }
     if (rdata.down != noone) {
-        minimap_traverse(rdata.down, x, y + off, visited);
+        minimap_traverse(room_get_name(rdata.down), x, y + off, visited);
     }
     if (rdata.left != noone) {
-        minimap_traverse(rdata.left, x - off, y, visited);
+        minimap_traverse(room_get_name(rdata.left), x - off, y, visited);
     }
     if (rdata.right != noone) {
-        minimap_traverse(rdata.right, x + off, y, visited);
+        minimap_traverse(room_get_name(rdata.right), x + off, y, visited);
     }
 }
