@@ -35,4 +35,5 @@ if (!variable_global_exists("rooms_map")) {
     };
 	
 	global.current_room_name = "HUB";
+	shuffle_rooms();
 }
