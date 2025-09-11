@@ -8,7 +8,8 @@ enum PlayerState {
     FALL,
 	RUN_FALL,
 	LIGHT_ATTACK,
-	HEAVY_ATTACK
+	HEAVY_ATTACK,
+	TALKING
 }
 state = PlayerState.IDLE;
 
@@ -27,6 +28,9 @@ damage_base = 1;
 damage = damage_base;
 spd = 1.5;
 spd_max = 10;
+run = false;
+
+// Moves Attacks
 
 attack_timer = 0;
 light_attack_duration = 15; // frames
@@ -35,5 +39,8 @@ heavy_attack_duration = 25; // frames
 tap_timer_left = 0;
 tap_timer_right = 0;
 double_tap_threshold = 15; // time for double tap
-run = false;
 
+// Merchant Status
+money = 0;
+
+depth = -10000;

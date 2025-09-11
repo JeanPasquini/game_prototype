@@ -1,7 +1,9 @@
 
 if(life <= 0){
+	for (var i = 0; i < 5; i++) {
+    instance_create_layer(x, y, "drop", obj_coin);
+}
 	instance_destroy();	
-	
 }
 
 // === Enemy Random Moviment ===

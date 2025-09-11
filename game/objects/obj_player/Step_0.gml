@@ -29,5 +29,6 @@ switch (state) {
         if (attack_timer <= 0) {
             state = PlayerState.IDLE;
         }
+	case PlayerState.TALKING:
     break;
 }
