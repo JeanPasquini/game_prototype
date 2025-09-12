@@ -77,6 +77,7 @@
     {"id":{"name":"scr_minimap_traverse","path":"scripts/scr_minimap_traverse/scr_minimap_traverse.yy",},},
     {"id":{"name":"scr_perk_altar","path":"scripts/scr_perk_altar/scr_perk_altar.yy",},},
     {"id":{"name":"scr_shuffle_rooms","path":"scripts/scr_shuffle_rooms/scr_shuffle_rooms.yy",},},
+    {"id":{"name":"src_get_rooms_links_data","path":"scripts/src_get_rooms_links_data/src_get_rooms_links_data.yy",},},
     {"id":{"name":"background","path":"sprites/background/background.yy",},},
     {"id":{"name":"hammer","path":"sprites/hammer/hammer.yy",},},
     {"id":{"name":"player_hitbox_1","path":"sprites/player_hitbox_1/player_hitbox_1.yy",},},

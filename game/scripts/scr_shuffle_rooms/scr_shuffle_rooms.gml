@@ -1,7 +1,7 @@
 function shuffle_rooms() {
-    randomize(); // garante aleatoriedade diferente a cada Run
+    randomize(); // guarantees different randomness in each Run
     var visited = ds_list_create();
-    _shuffle_room(HUB, visited); // começa pelo HUB
+    _shuffle_room(global.first_room_name, visited);
     ds_list_destroy(visited);
 }
 
@@ -30,9 +30,9 @@ function _shuffle_room(room_ref, visited) {
     var linked_rooms = [];
     for (var i = 0; i < array_length(dirs); i++) {
         var dir = dirs[i];
-        if (room_data[$ dir] != noone) {
+        if (room_data[$ dir].link != noone) {
             array_push(filled_dirs, dir);
-            array_push(linked_rooms, room_data[$ dir]);
+            array_push(linked_rooms, room_data[$ dir].link);
         }
     }
 
@@ -43,10 +43,10 @@ function _shuffle_room(room_ref, visited) {
     for (var i = 0; i < array_length(filled_dirs); i++) {
         var dir = filled_dirs[i];
         var new_room = linked_rooms[i];
-        var old_room = room_data[$ dir];
+        var old_room = room_data[$ dir].link;
 
         // seta novo link
-        room_data[$ dir] = new_room;
+        room_data[$ dir].link = new_room;
 
         // atualiza link reverso na room conectada
         _link_back_swap(old_room, new_room, key, dir);
@@ -76,7 +76,8 @@ function _link_back_swap(old_room_id, new_room_id, origin_key, dir) {
         var old_key = _room_key(old_room_id);
         if (variable_struct_exists(global.rooms_map, old_key)) {
             var old_data = global.rooms_map[$ old_key];
-            if (old_data[$ opp] == origin_id) old_data[$ opp] = noone;
+            if (old_data[$ opp].link == origin_id)
+                old_data[$ opp].link = noone;
         }
     }
 
@@ -85,7 +86,7 @@ function _link_back_swap(old_room_id, new_room_id, origin_key, dir) {
         var new_key = _room_key(new_room_id);
         if (variable_struct_exists(global.rooms_map, new_key)) {
             var new_data = global.rooms_map[$ new_key];
-            new_data[$ opp] = origin_id;
+            new_data[$ opp].link = origin_id;
         }
     }
 }
