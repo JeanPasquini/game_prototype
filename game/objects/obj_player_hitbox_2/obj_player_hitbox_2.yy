@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_player_hitbox_1",
+  "%Name":"obj_player_hitbox_2",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_player_hitbox_1",
+  "name":"obj_player_hitbox_2",
   "overriddenProperties":[],
   "parent":{
-    "name":"light",
-    "path":"folders/Objects/hitBox/light.yy",
+    "name":"heavy",
+    "path":"folders/Objects/hitBox/heavy.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"player_hitbox_1",
-    "path":"sprites/player_hitbox_1/player_hitbox_1.yy",
+    "name":"player_hitbox_2",
+    "path":"sprites/player_hitbox_2/player_hitbox_2.yy",
   },
   "spriteMaskId":null,
   "visible":true,

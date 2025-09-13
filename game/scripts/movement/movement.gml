@@ -44,22 +44,27 @@ function movement(){
 	    vsp = jmp;
 	}
 
-	if (place_meeting(x + hsp, y, obj_wall)) {
-	    while (!place_meeting(x + sign(hsp), y, obj_wall)) {
+	// Movimento horizontal
+	if ( place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_enemy_parent) ) {
+	    while ( !place_meeting(x + sign(hsp), y, obj_wall) 
+	         && !place_meeting(x + sign(hsp), y, obj_enemy_parent) ) {
 	        x += sign(hsp);
 	    }
 	    hsp = 0;
 	}
 	x += hsp;
 
+	// Movimento vertical
 	ong = false;
-	if (place_meeting(x, y + vsp, obj_wall)) {
-	    while (!place_meeting(x, y + sign(vsp), obj_wall)) {
+	if ( place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_enemy_parent) ) {
+	    while ( !place_meeting(x, y + sign(vsp), obj_wall) 
+	         && !place_meeting(x, y + sign(vsp), obj_enemy_parent) ) {
 	        y += sign(vsp);
 	    }
 	    if (vsp > 0) ong = true;
 	    vsp = 0;
 	}
+
 	y += vsp;
 
 	image_xscale = face;
