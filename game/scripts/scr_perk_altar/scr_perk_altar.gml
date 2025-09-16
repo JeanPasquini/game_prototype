@@ -6,10 +6,11 @@ function scr_perk_altar(_xpos, _ypos)
 	[
 	obj_perk_speed, 
 	obj_perk_damage, 
-	obj_perk_life
+	obj_perk_life,
+	obj_perk_restoredlife
 	];
     
-    var altar_positions = [_xpos - 30, _xpos, _xpos + 30];
+    var altar_positions = [_xpos - 50, _xpos, _xpos + 50];
     
     var shuffled_perks = [];
     for (var i = 0; i < array_length(perks_types); i++)

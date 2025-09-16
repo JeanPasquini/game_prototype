@@ -1,7 +1,8 @@
-/// STEP EVENT
-if (life <= 0) {
-    instance_destroy();
-    exit;
+if(life <= 0){
+	for (var i = 0; i < 5; i++) {
+    instance_create_layer(x, y, "drop", obj_coin);
+}
+	instance_destroy();	
 }
 
 switch (currentState) {

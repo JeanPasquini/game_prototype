@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"fnt_1",
-  "AntiAlias":0,
+  "AntiAlias":1,
   "applyKerning":0,
   "ascender":8,
   "ascenderOffset":0,
@@ -108,7 +108,7 @@
     "125":{"character":125,"h":9,"offset":1,"shift":8,"w":4,"x":96,"y":13,},
     "126":{"character":126,"h":9,"offset":0,"shift":8,"w":7,"x":87,"y":13,},
     "127":{"character":127,"h":9,"offset":1,"shift":8,"w":5,"x":27,"y":35,},
-    "9647":{"character":9647,"h":9,"offset":2,"shift":8,"w":4,"x":61,"y":68,},
+    "9647":{"character":9647,"h":9,"offset":1,"shift":8,"w":6,"x":61,"y":68,},
   },
   "hinting":0,
   "includeTTF":false,
@@ -135,10 +135,7 @@
   "sdfSpread":2,
   "size":6.0,
   "styleName":"Regular",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"",
   "usesSDF":false,
 }

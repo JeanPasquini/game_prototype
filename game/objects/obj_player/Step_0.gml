@@ -1,9 +1,10 @@
 if (life <= 0){
 	life = life_max; // redefines the player life 
 	// teleports the player to the origin of the room
-	obj_player.x = global.rooms_map[$ room_get_name(room)].px;
-    obj_player.y = global.rooms_map[$ room_get_name(room)].py;
-	room_goto(room); // reload the other objects from the room
+	var directions = getNextRoomPxAndPy(HUB, "up");
+	obj_player.x = directions.px;
+    obj_player.y = directions.py;
+	room_goto(HUB); // reload the other objects from the room
 }
 
 switch (state) {
@@ -29,5 +30,6 @@ switch (state) {
         if (attack_timer <= 0) {
             state = PlayerState.IDLE;
         }
+	case PlayerState.TALKING:
     break;
 }
