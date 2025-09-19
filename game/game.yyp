@@ -90,6 +90,7 @@
     {"id":{"name":"scr_minimap_traverse","path":"scripts/scr_minimap_traverse/scr_minimap_traverse.yy",},},
     {"id":{"name":"scr_perk_altar","path":"scripts/scr_perk_altar/scr_perk_altar.yy",},},
     {"id":{"name":"scr_shuffle_rooms","path":"scripts/scr_shuffle_rooms/scr_shuffle_rooms.yy",},},
+    {"id":{"name":"src_basic_chasing_movements","path":"scripts/src_basic_chasing_movements/src_basic_chasing_movements.yy",},},
     {"id":{"name":"src_get_rooms_links_data","path":"scripts/src_get_rooms_links_data/src_get_rooms_links_data.yy",},},
     {"id":{"name":"src_show_player_damage_received","path":"scripts/src_show_player_damage_received/src_show_player_damage_received.yy",},},
     {"id":{"name":"background","path":"sprites/background/background.yy",},},
