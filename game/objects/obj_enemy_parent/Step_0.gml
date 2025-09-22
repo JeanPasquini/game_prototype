@@ -32,20 +32,24 @@ function state_idle() {
 }
 
 function state_chasing() {	
-	// Melee Enemy Movimentation 
+	var player_distance = distance_to_object(obj_player);
+	
+	// Melee Enemy Controls 
 	if (currentState == EnemyState.CHASING && throwsProjectile == noone) {
 		src_basic_chasing_movements(obj_player, movementSpeed);		
+		// Cooldown for the attack
+		if (player_distance <= meleeRange) {
+			if (currentAttackDelay == 0) {
+				src_show_player_damage_received();
+				currentAttackDelay = baseAttackDelay;
+			} else {
+				currentAttackDelay--;
+			}
+		}
 		return;
 	} 
 	
-	// Checks if the enemy should still chase
-	var player_distance = distance_to_object(obj_player);
-	if (player_distance > detectionRadius ) {
-		currentState = EnemyState.IDLE;
-		return;
-	}		
-	
-	// Check if enemy throws a projectile and create a new object
+	// Projectile Enemy Controls
 	if (throwsProjectile != noone) {
 		// Checks if the enemy can still move
 		direction = point_direction(x, y, obj_player.x, y);
@@ -63,17 +67,11 @@ function state_chasing() {
 				currentAttackDelay--;
 			}
 		}
-	// If the enemy doesn't have a projectile, is a melee 
-	} else {
-		// Cooldown for the attack
-		if (player_distance <= meleeRange) {
-			if (currentAttackDelay == 0) {
-				src_show_player_damage_received();
-				currentAttackDelay = baseAttackDelay;
-			} else {
-				currentAttackDelay--;
-			}
-		}
-	}
+	} 
 	
+	// Checks if the enemy should still chase
+	if (player_distance > detectionRadius ) {
+		currentState = EnemyState.IDLE;
+		return;
+	}	
 }
