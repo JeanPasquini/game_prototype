@@ -1,9 +1,13 @@
 enum EnemyState {
 	IDLE,
-	CHASING
+	CHASING,
+	JUMPING,
+	ONGROUND,
+	FALLING,
 }
 
 currentState = EnemyState.IDLE;
+currentMovement = EnemyState.ONGROUND;
 detectionRadius = 100;
 maxRandomMovement = 100;
 movementSpeed = 0.5;
