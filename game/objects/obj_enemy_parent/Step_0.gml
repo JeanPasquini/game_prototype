@@ -36,6 +36,9 @@ function state_chasing() {
 	
 	// Melee Enemy Controls 
 	if (currentState == EnemyState.CHASING && throwsProjectile == noone) {
+		if (is_outside_room(self)) {
+			instance_destroy();
+		}
 		src_basic_chasing_movements(obj_player, movementSpeed);		
 		// Cooldown for the attack
 		if (player_distance <= meleeRange) {
