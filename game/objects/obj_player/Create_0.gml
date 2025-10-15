@@ -9,7 +9,9 @@ enum PlayerState {
 	RUN_FALL,
 	LIGHT_ATTACK,
 	HEAVY_ATTACK,
-	TALKING
+	TALKING,
+	DOWNED,
+	WAIT_ATTACK
 }
 state = PlayerState.IDLE;
 
@@ -20,6 +22,8 @@ vsp = 0;
 grv = 0.5;
 jmp = -10;
 ong = false;
+knockback_x = 0;
+knockback_y = 0;
 
 // Status
 life_max = 5;
@@ -28,13 +32,20 @@ damage_base = 1;
 damage = damage_base;
 spd = 1.5;
 spd_max = 10;
+kd = 0;
 run = false;
+downed = false;
+downed_time = 0;
+attack_push = 0;
 
 // Moves Attacks
 
 attack_timer = 0;
-light_attack_duration = 15; // frames
-heavy_attack_duration = 25; // frames
+combo_stage = 0;
+combo_timer = 0;
+comboGuide = "";
+//light_attack_duration = 15; // frames
+//heavy_attack_duration = 25; // frames
 
 tap_timer_left = 0;
 tap_timer_right = 0;
