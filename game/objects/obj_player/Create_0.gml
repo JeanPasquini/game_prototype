@@ -44,6 +44,7 @@ attack_timer = 0;
 combo_stage = 0;
 combo_timer = 0;
 comboGuide = "";
+combo_finish = false;
 //light_attack_duration = 15; // frames
 //heavy_attack_duration = 25; // frames
 

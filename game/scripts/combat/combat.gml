@@ -13,7 +13,7 @@ function combat() {
     // --- Light attack (Z) ---
     if (keyboard_check_pressed(ord("Z"))) {
 
-        if (combo_stage == 2 && combo_starter == "X") {
+        if (combo_stage == 2 && combo_starter == "X"  && !combo_finish) {
             state = PlayerState.LIGHT_ATTACK;
             attack_timer = 10;
             damage = damage_base;
@@ -25,6 +25,7 @@ function combat() {
             hb.damage = damage;
             hb.direction = face;
 
+			combo_finish = true;
             combo_timer = 30;
 			comboGuide += ">Z"
 
@@ -102,7 +103,7 @@ function combat() {
             combo_timer = 60;
 			comboGuide += ">X"
         }
-		else if (combo_stage == 2 && combo_starter == "Z") {
+		else if (combo_stage == 2 && combo_starter == "Z" && !combo_finish) {
             state = PlayerState.HEAVY_ATTACK;
             attack_timer = 25;
             damage = damage_base * 2;
@@ -114,6 +115,7 @@ function combat() {
             hb.damage = damage;
             hb.direction = face;
 
+			combo_finish = true;
             combo_timer = 30
 			comboGuide += ">X"
         }
