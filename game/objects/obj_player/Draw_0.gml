@@ -13,6 +13,8 @@ function get_state_name(state_val) {
         case PlayerState.LIGHT_ATTACK: return "LIGHT_ATTACK";
         case PlayerState.HEAVY_ATTACK: return "HEAVY_ATTACK";
         case PlayerState.TALKING:      return "TALKING";
+        case PlayerState.DOWNED:       return "DOWNED";
+        case PlayerState.WAIT_ATTACK:  return "WAIT_ATTACK";
         default:                       return "UNKNOWN";
     }
 }
@@ -26,3 +28,4 @@ draw_set_valign(fa_middle);
 draw_set_color(c_white);
 
 draw_text(texto_x, texto_y, texto);
+draw_text(texto_x, texto_y - 15, comboGuide);

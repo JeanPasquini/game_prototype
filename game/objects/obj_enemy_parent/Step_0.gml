@@ -1,9 +1,15 @@
-if(life <= 0){
-	for (var i = 0; i < 5; i++) {
-    instance_create_layer(x, y, "drop", obj_coin);
+stagger--;
+knockbackSmoothing();
+
+if (life <= 0) {
+    for (var i = 0; i < 5; i++) {
+        instance_create_layer(x, y, "drop", obj_coin);
+    }
+    instance_destroy();
 }
-	instance_destroy();	
-}
+
+if(downed) currentState = EnemyState.DOWNED
+else if (stagger > 0) currentState = EnemyState.STAGGER;
 
 switch (currentState) {
     case EnemyState.IDLE:
@@ -12,34 +18,55 @@ switch (currentState) {
     case EnemyState.CHASING:
         state_chasing();
         break;
+    case EnemyState.STAGGER:
+        state_stagger();
+	case EnemyState.DOWNED:
+        state_stagger();
+        break;
 }
 
-if ( place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player) ) {
-    while ( !place_meeting(x + sign(hsp), y, obj_wall)
-         && !place_meeting(x + sign(hsp), y, obj_player) ) {
+if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
+    while (!place_meeting(x + sign(hsp), y, obj_wall)
+        && !place_meeting(x + sign(hsp), y, obj_player)) {
         x += sign(hsp);
     }
     hsp = 0;
 }
 x += hsp;
 
-ong = false;
-if ( place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player) ) {
-    while ( !place_meeting(x, y + sign(vsp), obj_wall)
-         && !place_meeting(x, y + sign(vsp), obj_player) ) {
+if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)) {
+    while (!place_meeting(x, y + sign(vsp), obj_wall)
+        && !place_meeting(x, y + sign(vsp), obj_player)) {
         y += sign(vsp);
     }
-    if (vsp > 0) ong = true;
     vsp = 0;
 }
 y += vsp;
 
+function knockbackSmoothing(){
+	if (abs(knockback_x) > 0.1 || abs(knockback_y) > 0.1) {
+	    var nx = x + knockback_x * 0.5;
+		var ny = y + knockback_y * 0.5;
+
+	    if (!place_meeting(nx, ny, obj_wall) && !place_meeting(nx, ny, obj_player)) {
+		    x = nx;
+		    y = ny;
+		}
+
+	    knockback_x *= 0.95;
+	    knockback_y *= 0.95;
+	} else {
+	    knockback_x = 0;
+	    knockback_y = 0;
+	}
+}
+
 function state_idle() {
     speed = movementSpeed;
 
-    if (x >= (xstart + maxRandomMovement/2)) {
+    if (x >= (xstart + maxRandomMovement / 2)) {
         direction = 180;
-    } else if (x <= (xstart - maxRandomMovement/2)) {
+    } else if (x <= (xstart - maxRandomMovement / 2)) {
         direction = 0;
     }
 
@@ -50,20 +77,19 @@ function state_idle() {
 
 function state_chasing() {
     if (distance_to_object(obj_player) < detectionRadius) {
-
         if (!place_meeting(x, y, obj_player)) {
 
             direction = point_direction(x, y, obj_player.x, y);
 
-            if ( (direction == 0   && x >= (xstart + maxRandomMovement/2)) ||
-                 (direction == 180 && x <= (xstart - maxRandomMovement/2)) ) {
-                speed = 0; 
+            if ((direction == 0   && x >= (xstart + maxRandomMovement / 2)) ||
+                (direction == 180 && x <= (xstart - maxRandomMovement / 2))) {
+                speed = 0;
             } else {
                 speed = movementSpeed;
             }
 
         } else {
-            speed = 0; 
+            speed = 0;
         }
 
         if (throwsProjectile != noone) {
@@ -76,8 +102,15 @@ function state_chasing() {
                 }
             }
         }
-
     } else {
+        currentState = EnemyState.IDLE;
+    }
+}
+
+function state_stagger() {
+    hsp = 0;
+    speed = 0;
+    if (stagger <= 0) {
         currentState = EnemyState.IDLE;
     }
 }

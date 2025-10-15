@@ -3,8 +3,6 @@
   "%Name":"obj_player_hitbox_4",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_player_hitbox_4",
@@ -13,7 +11,10 @@
     "name":"light",
     "path":"folders/Objects/hitBox/light.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_hitbox_parent",
+    "path":"objects/obj_hitbox_parent/obj_hitbox_parent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

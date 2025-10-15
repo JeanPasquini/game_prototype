@@ -1,5 +1,5 @@
-frametime = obj_player.attack_timer;
-damage = obj_player.damage;
-
-stagger = 1; // time stunned in seconds
-knockback = 3;
+stagger = 30;
+knockback = 1;
+downed = false;
+downed_time = 0;
+event_inherited();
