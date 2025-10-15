@@ -32,8 +32,28 @@ function state_idle() {
 }
 
 function state_chasing() {	
-	// Checks if the enemy should still chase
-	if (distance_to_object(obj_player) < detectionRadius)  {
+	var player_distance = distance_to_object(obj_player);
+	
+	// Melee Enemy Controls 
+	if (currentState == EnemyState.CHASING && throwsProjectile == noone) {
+		if (is_outside_room(self)) {
+			instance_destroy();
+		}
+		src_basic_chasing_movements(obj_player, movementSpeed);		
+		// Cooldown for the attack
+		if (player_distance <= meleeRange) {
+			if (currentAttackDelay == 0) {
+				src_show_player_damage_received();
+				currentAttackDelay = baseAttackDelay;
+			} else {
+				currentAttackDelay--;
+			}
+		}
+		return;
+	} 
+	
+	// Projectile Enemy Controls
+	if (throwsProjectile != noone) {
 		// Checks if the enemy can still move
 		direction = point_direction(x, y, obj_player.x, y);
 		if (direction = 0 && x >= (xstart + maxRandomMovement/2) || direction == 180 && x <= (xstart - maxRandomMovement/2)) {
@@ -41,21 +61,20 @@ function state_chasing() {
 		} else {
 			speed = movementSpeed;	
 		}
-		
-		// Check if enemy throws a projectile and create a new object
-		if (throwsProjectile != noone) {
-			if (!instance_exists(throwsProjectile)) {
-				if (projectileDelay == 0) {
-					instance_create_layer(x, y, "Instances", throwsProjectile);
-					projectileDelay = 1 * 60;
-				} else {
-					projectileDelay--;
-				}
+			
+		if (!instance_exists(throwsProjectile)) {
+			if (currentAttackDelay == 0) {
+				instance_create_layer(x, y, "Instances", throwsProjectile);
+				currentAttackDelay = baseAttackDelay;
+			} else {
+				currentAttackDelay--;
 			}
 		}
-		
-	} else {
-		currentState = EnemyState.IDLE;
-	}
+	} 
 	
+	// Checks if the enemy should still chase
+	if (player_distance > detectionRadius ) {
+		currentState = EnemyState.IDLE;
+		return;
+	}	
 }
