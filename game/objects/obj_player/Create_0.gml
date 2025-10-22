@@ -30,7 +30,7 @@ life_max = 5;
 life = 5;
 damage_base = 1;
 damage = damage_base;
-spd = 1.5;
+spd = 2.5;
 spd_max = 10;
 kd = 0;
 run = false;
@@ -56,3 +56,6 @@ double_tap_threshold = 15; // time for double tap
 money = 0;
 
 depth = -10000;
+
+// Cria o cachecol
+instance_create_layer(x, y, "Instances", obj_scarf);
