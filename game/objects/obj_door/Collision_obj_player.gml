@@ -1,4 +1,6 @@
-var connections = global.rooms_map[$ room_get_name(room)];
+var rdata = global.rooms_map[$ global.current_phase][$ room_get_name(room)];
+var connections = src_struct_merge(rdata.sends, rdata.returns);
+
 var destiny = noone; // data from the next room link
 var position = noone; // set the direction of entry into the next room, reverse of the current door
 
@@ -6,16 +8,16 @@ if (instance_exists(obj_player)) {
     var p = obj_player;
 
     if (room_direction == RoomDirection.LEFT && keyboard_check_pressed(vk_enter)) {
-        destiny = connections.left.link;
+        destiny = connections.left;
         position = "right";
     } else if (room_direction == RoomDirection.RIGHT && keyboard_check_pressed(vk_enter)) {
-        destiny = connections.right.link;
+        destiny = connections.right;
         position = "left";
     } else if (room_direction == RoomDirection.UP && keyboard_check_pressed(vk_enter)) {
-        destiny = connections.up.link;
+        destiny = connections.up;
         position = "down";
     } else if (room_direction == RoomDirection.DOWN && keyboard_check_pressed(vk_enter)) {
-        destiny = connections.down.link;
+        destiny = connections.down;
         position = "up";
     }
 }

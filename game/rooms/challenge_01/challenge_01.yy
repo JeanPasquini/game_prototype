@@ -72,8 +72,8 @@
   ],
   "name":"challenge_01",
   "parent":{
-    "name":"first_boss_rooms",
-    "path":"folders/Rooms/first_boss_rooms.yy",
+    "name":"phase_01",
+    "path":"folders/Rooms/phase_01.yy",
   },
   "parentRoom":{
     "name":"base_rom",
