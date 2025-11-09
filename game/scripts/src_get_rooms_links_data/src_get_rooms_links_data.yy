@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"src_get_rooms_links_data",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"global_rooms_map_scripts",
+    "path":"folders/Scripts/global_rooms_map_scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

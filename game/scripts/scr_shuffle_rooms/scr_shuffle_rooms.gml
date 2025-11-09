@@ -5,15 +5,6 @@ function shuffle_rooms() {
     ds_list_destroy(visited);
 }
 
-function _room_key(room_ref) {
-    if (is_string(room_ref)) return room_ref;
-    return room_get_name(room_ref);
-}
-
-function _room_id_from_key(room_key) {
-    return asset_get_index(room_key);
-}
-
 // Shuffle apenas troca posições das saídas existentes
 function _shuffle_room(room_ref, visited) {
     var key = _room_key(room_ref);
@@ -89,4 +80,13 @@ function _link_back_swap(old_room_id, new_room_id, origin_key, dir) {
             new_data[$ opp].link = origin_id;
         }
     }
+}
+
+function _room_key(room_ref) {
+    if (is_string(room_ref)) return room_ref;
+    return room_get_name(room_ref);
+}
+
+function _room_id_from_key(room_key) {
+    return asset_get_index(room_key);
 }

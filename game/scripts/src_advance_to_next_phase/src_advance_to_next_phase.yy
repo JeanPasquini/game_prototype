@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_advance_to_next_phase",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_advance_to_next_phase",
+  "parent":{
+    "name":"global_rooms_map_scripts",
+    "path":"folders/Scripts/global_rooms_map_scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
