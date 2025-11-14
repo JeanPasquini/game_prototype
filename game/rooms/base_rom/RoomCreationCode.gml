@@ -11,7 +11,7 @@ if (!variable_global_exists("rooms_map")) {
 			},
 			safe_room: {
 				sends: { left: challenge_01 },
-				returns: { down: HUB },
+				returns: { },
 				up:    { px: 704, py: 416 },
 				down:  { px: 832, py: 448 },
 				left:  { px: 224, py: 448 },
@@ -50,7 +50,7 @@ if (!variable_global_exists("rooms_map")) {
 				right: { px: 976, py: 432 },
 			},
 			mini_boss_01: {
-				sends: { },
+				sends: { phase_02: safe_room },
 				returns: { },
 				up:    { px: 419, py: 408 },
 				down:  { px: 687, py: 432 },
@@ -62,17 +62,9 @@ if (!variable_global_exists("rooms_map")) {
 		},
 		
 		phase_02: {
-			HUB: {
-				sends: { up: safe_room },
-				returns: { },
-				up:    { px: 64, py: 448 },
-				down:  { px: 64, py: 448 },
-				left:  { px: 64, py: 448 },
-				right: { px: 64, py: 448 },
-			},
 			safe_room: {
 				sends: { right: challenge_04 },
-				returns: { down: HUB },
+				returns: { },
 				up:    { px: 704, py: 416 },
 				down:  { px: 832, py: 448 },
 				left:  { px: 224, py: 448 },
@@ -111,7 +103,7 @@ if (!variable_global_exists("rooms_map")) {
 				right: { px: 976, py: 432 },
 			},
 			mini_boss_02: {
-				sends: { },
+				sends: { last_phase: final_boss },
 				returns: { },
 				up:    { px: 419, py: 408 },
 				down:  { px: 687, py: 432 },
@@ -124,16 +116,23 @@ if (!variable_global_exists("rooms_map")) {
 		
 		last_phase: {
 			final_boss: {
-				sends: { },
+				sends: { phase_01: HUB },
 				returns: { },
 				up:    { px: 419, py: 408 },
 				down:  { px: 687, py: 432 },
 				left:  { px: 32, py: 432 },
 				right: { px: 976, py: 432 },
 			},
+			
+			next_phase: "phase_01"
 		}
 	};
 	
+	/* 
+	@global.first_room_name
+	Does not change the game's starting room
+	as GameMaker defaults to the room with the highest priority. 
+	*/
 	global.first_room_name = HUB;
 	global.current_phase = "phase_01";
 	//shuffle_rooms();
