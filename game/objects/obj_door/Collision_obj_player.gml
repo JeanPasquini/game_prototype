@@ -8,7 +8,7 @@ if (current_room != noone && current_phase != noone) {
 
 if (is_undefined(rdata)) instance_destroy();
 
-var connections = src_struct_merge(rdata.sends, rdata.returns);
+var connections = rdata.connections;
 var destiny = noone; // data from the next room link
 var position = noone; // set the direction of entry into the next room, reverse of the current door
 

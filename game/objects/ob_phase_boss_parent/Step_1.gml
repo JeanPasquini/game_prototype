@@ -1,7 +1,7 @@
 if (life <= 0) {
 	var _next_phase_room = src_get_next_phase_room();
 	
-	global.rooms_map[$ global.current_phase][$ room_get_name(room)].sends.up = _next_phase_room;
+	global.rooms_map[$ global.current_phase][$ room_get_name(room)].connections.up = _next_phase_room;
 	
 	var _door_scale_y = 3;
 	var _door_y = y - sprite_get_height(sprite_index);

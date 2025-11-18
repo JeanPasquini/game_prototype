@@ -130,6 +130,7 @@ if (!variable_global_exists("rooms_map")) {
 		last_phase: {
 			final_boss: {
 				sends: { phase_01: HUB },
+				connections: { },
 				returns: false,
 				up:    { px: 419, py: 408 },
 				down:  { px: 687, py: 432 },

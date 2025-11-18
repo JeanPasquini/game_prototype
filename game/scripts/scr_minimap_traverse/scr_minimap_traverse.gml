@@ -16,7 +16,7 @@ function minimap_traverse(room_name, x, y, visited) {
 	
     if (is_undefined(rdata)) return;
 	
-	var connections = src_struct_merge(rdata.sends, rdata.returns);
+	var connections = rdata.connections;
 
     var off = 32;
 
