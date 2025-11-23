@@ -120,6 +120,7 @@
     {"id":{"name":"src_basic_chasing_movements","path":"scripts/src_basic_chasing_movements/src_basic_chasing_movements.yy",},},
     {"id":{"name":"src_get_next_phase_room","path":"scripts/src_get_next_phase_room/src_get_next_phase_room.yy",},},
     {"id":{"name":"src_get_next_phase","path":"scripts/src_get_next_phase/src_get_next_phase.yy",},},
+    {"id":{"name":"src_get_room_data","path":"scripts/src_get_room_data/src_get_room_data.yy",},},
     {"id":{"name":"src_get_room_sends_data","path":"scripts/src_get_room_sends_data/src_get_room_sends_data.yy",},},
     {"id":{"name":"src_get_rooms_links_data","path":"scripts/src_get_rooms_links_data/src_get_rooms_links_data.yy",},},
     {"id":{"name":"src_replace_next_phase_room","path":"scripts/src_replace_next_phase_room/src_replace_next_phase_room.yy",},},

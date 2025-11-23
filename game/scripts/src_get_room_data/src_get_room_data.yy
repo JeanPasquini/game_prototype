@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_get_room_data",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_get_room_data",
+  "parent":{
+    "name":"global_rooms_map_scripts",
+    "path":"folders/Scripts/global_rooms_map_scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

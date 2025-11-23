@@ -99,7 +99,7 @@ if (!variable_global_exists("rooms_map")) {
 			challenge_05: {
 				sends: { challenge_06 },
 				connections: { left: challenge_04, right: challenge_06 },
-				returns: false,
+				returns: true,
 				up:    { px: 563, py: 400 },
 				down:  { px: 488, py: 432 },
 				left:  { px: 32, py: 432 },
@@ -149,5 +149,6 @@ if (!variable_global_exists("rooms_map")) {
 	*/
 	global.first_room_name = HUB;
 	global.current_phase = "phase_01";
-	//shuffle_rooms();
+	shuffle_rooms();
+	show_debug_message(json_stringify(global.rooms_map, true));
 }
