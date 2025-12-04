@@ -5,7 +5,9 @@ function get_state_name(state_val) {
     switch (state_val) {
         case PlayerState.IDLE:         return "IDLE";
         case PlayerState.WALK:         return "WALK";
+        case PlayerState.WALK_TURN:         return "WALK_TURN";
         case PlayerState.RUN:          return "RUN";
+        case PlayerState.RUN_TURN:          return "RUN_TURN";
         case PlayerState.JUMP:         return "JUMP";
         case PlayerState.RUN_JUMP:	   return "RUN_JUMP";
         case PlayerState.FALL:         return "FALL";

@@ -13,6 +13,9 @@ attackSmoothing();
 switch (state) {
     case PlayerState.IDLE:
     case PlayerState.WALK:
+    case PlayerState.WALK_TURN:
+    case PlayerState.RUN_TO_IDLE:
+    case PlayerState.RUN_TURN:
     case PlayerState.RUN:
         check_state_transitions(); 
         movement();
