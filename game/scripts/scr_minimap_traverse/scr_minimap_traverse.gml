@@ -6,6 +6,7 @@ function minimap_traverse(room_name, x, y, visited) {
 
 	if (room_name == room_get_name(room)) {
 	    draw_sprite_ext(spr_room_current, 0, x, y, scale, scale, 0, c_white, 1);
+		if (room_name == "HUB") return;
 	} else if (room_name == "safe_room"){
 		draw_sprite_ext(spr_room_safe, 0, x, y, scale, scale, 0, c_white, 1);
 	}else {
