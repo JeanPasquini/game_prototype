@@ -43,7 +43,7 @@ invencible_time = 50;
 timer_attack = 15;
 
 // Merchant Status
-money = 0;
+money = 1000;
 
 // Additions Variables
 
@@ -65,6 +65,8 @@ double_tap_threshold = 15;
 
 previous_state = state;
 smoke_instance = noone;
+
+talking = false;
 
 depth = 0;
 

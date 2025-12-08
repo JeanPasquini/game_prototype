@@ -2,6 +2,7 @@ function scr_movement() {
 
     if (tap_timer_left > 0) tap_timer_left--;
     if (tap_timer_right > 0) tap_timer_right--;
+	
 
     // === GRAVITY ===
     vsp += grv;
@@ -10,6 +11,7 @@ function scr_movement() {
     
 
         // --- RUN ---
+		
         if (keyboard_check_pressed(vk_right)) {
             if (tap_timer_right > 0) run = true;
             else tap_timer_right = double_tap_threshold;
@@ -25,8 +27,10 @@ function scr_movement() {
         var fric  = 0.15;
         var move_input = 0;
 
+if(!talking){
         if (keyboard_check(vk_right)) { move_input = 1; turn_target_dir = move_input;}
         else if (keyboard_check(vk_left)) {move_input = -1; turn_target_dir = move_input;}
+		}
 
         if (move_input != 0 && move_input != face && !turning) {
             turning = true;
@@ -63,17 +67,19 @@ function scr_movement() {
             }
         }
 
-        if (!keyboard_check(vk_right) && !keyboard_check(vk_left)) {
-            if (abs(hsp) < 1 && !turning) run = false;
-        }
+		if(!talking){
+	        if (!keyboard_check(vk_right) && !keyboard_check(vk_left)) {
+	            if (abs(hsp) < 1 && !turning) run = false;
+	        }
 
-        // === JUMP ===
-        if (keyboard_check_pressed(vk_up) && ong) {
-            vsp = jmp;
-        }
-        if (!keyboard_check(vk_up) && vsp < 0) {
-            vsp *= 0.5;
-        }
+	        // === JUMP ===
+	        if (keyboard_check_pressed(vk_up) && ong) {
+	            vsp = jmp;
+	        }
+	        if (!keyboard_check(vk_up) && vsp < 0) {
+	            vsp *= 0.5;
+	        }
+		}
     
 
     // === COLISIONS ===

@@ -7,6 +7,7 @@ if (instance_exists(obj_player)){
 		if (!instance_exists(obj_dialogue)) {
             var dlg_instance = instance_create_layer(x, y, "dialogue", obj_dialogue);
 			obj_player.state = PlayerState.TALKING;
+			obj_player.talking = true;
 			if(obj_player.money >= 2)
 			{
 				obj_player.money = obj_player.money - 2;
@@ -20,3 +21,6 @@ if (instance_exists(obj_player)){
         }
     }
 }
+
+sprite_index = spr_merchant_idle;
+image_speed = 1;
