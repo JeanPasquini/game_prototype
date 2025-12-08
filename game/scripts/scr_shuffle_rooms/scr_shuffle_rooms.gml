@@ -1,65 +1,86 @@
 function shuffle_rooms() {
     randomize(); // guarantees different randomness in each Run
     var visited = ds_list_create();
-    _shuffle_room(global.first_room_name, visited);
+    _shuffle_room(global.first_room_name, global.current_phase, noone, noone, visited);
     ds_list_destroy(visited);
 }
 
-function _room_key(room_ref) {
-    if (is_string(room_ref)) return room_ref;
-    return room_get_name(room_ref);
-}
-
-function _room_id_from_key(room_key) {
-    return asset_get_index(room_key);
-}
-
-// Shuffle apenas troca posições das saídas existentes
-function _shuffle_room(room_ref, visited) {
+// Shuffle simply swaps the positions of the existing outputs.
+function _shuffle_room(room_ref, phase, back_room, back_dir, visited) {
+	
+	// Check if the specified room has already been visited.
     var key = _room_key(room_ref);
     if (ds_list_find_index(visited, key) != -1) return;
     ds_list_add(visited, key);
 
-    if (!variable_struct_exists(global.rooms_map, key)) return;
-    var room_data = global.rooms_map[$ key];
+	// If the room does not exist, return to avoid generating an error.
+    if (!variable_struct_exists(global.rooms_map[$ phase], key)) return;
+	
+	var room_data = src_get_room_data(room_ref, phase);
+	
+	var dirs = ["up", "down", "left", "right"];	
+	var connections = {};
+	
+	// It checks if it should return, ruling out as a possibility the direction already used for that purpose.
+	if (back_room != noone && back_dir != noone && room_data.returns) {
+		connections[$ back_dir] = back_room;
+		
+		var new_dirs = [];
+		for (var i = 0; i < array_length(dirs); i++) {
+			if (dirs[i] != back_dir) {
+			    array_push(new_dirs, dirs[i]);
+			}
+		}
+		dirs = new_dirs;
+	}
 
-    var dirs = ["up", "down", "left", "right"];
+	// retrieves the next rooms from the connection as strings and adds them to an array.
+	var send_rooms = variable_struct_get_names(room_data.sends);
+	
+	show_debug_message(json_stringify(send_rooms, true));
 
-    // cria lista das direções que já têm links
-    var filled_dirs = [];
-    var linked_rooms = [];
-    for (var i = 0; i < array_length(dirs); i++) {
-        var dir = dirs[i];
-        if (room_data[$ dir].link != noone) {
-            array_push(filled_dirs, dir);
-            array_push(linked_rooms, room_data[$ dir].link);
-        }
-    }
+	// loop over each room name ("challenge_01", "challenge_02"...)
+	for (var i = 0; i < array_length(send_rooms); i++)
+	{
+	    var send_room  = send_rooms[i]; // Get the name of the current room or the next phase.
+	    var _room = room_data.sends[$ send_room]; // Get the reference to the room, by string or phase.
+		
+		if (room_get_name(_room) != send_room) {
+			// There is a phase change, with send_room being the new phase.
+			phase = send_room;
+			
+			// If the room has already been visited (as a safe_room), remove it from the list for a new visit in the current phase.
+			var index = ds_list_find_index(visited, _room_key(_room));
+			if (index != -1) {
+			    ds_list_delete(visited, index);
+			}
+			
+			_shuffle_room(_room, phase, noone, noone, visited);
+			return;
+		}
 
-    // embaralha apenas os links existentes
-    linked_rooms = array_shuffle(linked_rooms);
+		show_debug_message(json_stringify(_room, true));
 
-    // reatribui os links embaralhados às mesmas direções
-    for (var i = 0; i < array_length(filled_dirs); i++) {
-        var dir = filled_dirs[i];
-        var new_room = linked_rooms[i];
-        var old_room = room_data[$ dir].link;
+	    // choose a random direction from the remaining options
+	    var idx = irandom(array_length(dirs) - 1);
+	    var dir = dirs[idx];
 
-        // seta novo link
-        room_data[$ dir].link = new_room;
+	    // link in the final result
+	    connections[$ dir] = _room;
 
-        // atualiza link reverso na room conectada
-        _link_back_swap(old_room, new_room, key, dir);
-    }
+	    // remove the direction used
+	    array_delete(dirs, idx, 1);
+		
+		// recursively calls the function for all connections.
+		_shuffle_room(_room, phase, room_ref, _opposite_dir(dir), visited);
+	}
+	// Define the new connections generated.
+    global.rooms_map[$ phase][$ room_get_name(room_ref)].connections = connections;
 
-    // chama recursivo nas salas conectadas
-    for (var i = 0; i < array_length(linked_rooms); i++) {
-        _shuffle_room(linked_rooms[i], visited);
-    }
 }
 
-// Atualiza a ligação reversa quando apenas trocamos links
-function _link_back_swap(old_room_id, new_room_id, origin_key, dir) {
+
+function _opposite_dir(dir) {
     var opp;
     switch (dir) {
         case "up": opp = "down"; break;
@@ -68,25 +89,11 @@ function _link_back_swap(old_room_id, new_room_id, origin_key, dir) {
         case "right": opp = "left"; break;
         default: return;
     }
+	return opp;
+}
 
-    var origin_id = _room_id_from_key(origin_key);
 
-    // Remove ligação antiga, se existir
-    if (old_room_id != noone) {
-        var old_key = _room_key(old_room_id);
-        if (variable_struct_exists(global.rooms_map, old_key)) {
-            var old_data = global.rooms_map[$ old_key];
-            if (old_data[$ opp].link == origin_id)
-                old_data[$ opp].link = noone;
-        }
-    }
-
-    // Seta a ligação reversa nova
-    if (new_room_id != noone) {
-        var new_key = _room_key(new_room_id);
-        if (variable_struct_exists(global.rooms_map, new_key)) {
-            var new_data = global.rooms_map[$ new_key];
-            new_data[$ opp].link = origin_id;
-        }
-    }
+function _room_key(room_ref) {
+    if (is_string(room_ref)) return room_ref;
+    return room_get_name(room_ref);
 }

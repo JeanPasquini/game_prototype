@@ -1,6 +1,7 @@
 if (life <= 0){
 	life = life_max; // redefines the player life 
 	// teleports the player to the origin of the room
+	global.current_phase = "phase_01";
 	var directions = getNextRoomPxAndPy(HUB, "up");
 	obj_player.x = directions.px;
     obj_player.y = directions.py;
