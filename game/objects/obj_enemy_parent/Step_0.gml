@@ -1,4 +1,3 @@
-stagger--;
 knockbackSmoothing();
 
 if (life <= 0) {
@@ -8,20 +7,12 @@ if (life <= 0) {
     instance_destroy();
 }
 
-if(downed) currentState = EnemyState.DOWNED
-else if (stagger > 0) currentState = EnemyState.STAGGER;
-
 switch (currentState) {
     case EnemyState.IDLE:
         state_idle();
         break;
     case EnemyState.CHASING:
         state_chasing();
-        break;
-    case EnemyState.STAGGER:
-        state_stagger();
-	case EnemyState.DOWNED:
-        state_stagger();
         break;
 }
 
@@ -84,15 +75,6 @@ function state_chasing() {
 			instance_destroy();
 		}
 		src_basic_chasing_movements(obj_player, movementSpeed);		
-		// Cooldown for the attack
-		if (player_distance <= meleeRange) {
-			if (currentAttackDelay == 0) {
-				src_show_player_damage_received();
-				currentAttackDelay = baseAttackDelay;
-			} else {
-				currentAttackDelay--;
-			}
-		}
 		return;
 	} 
 	
@@ -162,4 +144,49 @@ function state_stagger() {
         currentState = EnemyState.IDLE;
     }
 }
+
+var damage_amount = 1;
+
+var knockback_strength = 5;
+
+var enemies = [obj_player];
+
+if(obj_player.invencible == false){
+	for (var i = 0; i < array_length(enemies); i++) {
+	    with (enemies[i]) {
+	        if (place_meeting(x, y, other)) { 
+
+	            var dir_x = x - other.x;
+	            var dir_y = y - other.y;
+	            var length = sqrt(sqr(dir_x) + sqr(dir_y));
+	            if (length != 0) {
+	                dir_x /= length;
+	                dir_y /= length;
+	            }
+
+	            knockback_x = dir_x * knockback_strength;
+
+	            if (abs(knockback_x) > 0.1) {
+	                if (place_meeting(x + knockback_x, y, obj_wall) || place_meeting(x + knockback_x, y, obj_player)) {
+	                    while (!place_meeting(x + sign(knockback_x), y, obj_wall) 
+	                        && !place_meeting(x + sign(knockback_x), y, obj_player)) {
+	                        x += sign(knockback_x);
+	                    }
+	                    knockback_x = 0;
+	                } else {
+	                    x += knockback_x;
+	                }
+	                knockback_x *= 0.95; 
+	            }
+
+	            src_show_player_damage_received(other.damage);
+				
+	            stagger = 100;
+	            invencible = true;
+	            obj_player.alarm[0] = obj_player.invencible_time;
+	        }
+	    }
+	}
+}
+
 

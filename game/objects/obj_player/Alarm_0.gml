@@ -1,2 +1,1 @@
-state = PlayerState.IDLE;
-downed = false;
+invencible = false;

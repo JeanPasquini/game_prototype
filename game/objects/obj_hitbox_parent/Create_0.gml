@@ -1,5 +1,3 @@
-frametime = obj_player.attack_timer;
+frametime = 15 - (obj_player.attack_speed * 5);
 damage = obj_player.damage;
-
-//stagger = 0;
-//knockback = 0;
+hit_enemies = ds_list_create();

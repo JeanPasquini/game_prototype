@@ -15,7 +15,6 @@ if (instance_exists(obj_player)) {
 
     part_emitter_burst(particlesystem, emitter, global._ptype1, 1 + irandom(1));
 	
-	// Step Event do obj_dirt
 	image_alpha -= 0.005;
 	if (image_alpha <= 0) instance_destroy();
 }

@@ -3,9 +3,7 @@ enum EnemyState {
 	CHASING,
 	JUMPING,
 	ONGROUND,
-	FALLING,
-	STAGGER,
-	DOWNED
+	FALLING
 }
 
 currentState = EnemyState.IDLE;
@@ -26,8 +24,6 @@ vsp = 0;
 grv = 0.5;
 
 // Status Combat
-stagger = 0;
-downed = false;
 
 
 speed = movementSpeed;
@@ -35,3 +31,5 @@ direction = 0;  // 180 = left, 0 = right
 
 knockback_x = 0;
 knockback_y = 0;
+
+damage = 1;
