@@ -3,8 +3,6 @@ function get_state_name(state_val) {
     switch (state_val) {
         case EnemyState.IDLE:         return "IDLE";
         case EnemyState.CHASING:         return "CHASING";
-        case EnemyState.STAGGER:          return "STAGGER";
-        case EnemyState.DOWNED:         return "DOWNED";
         default:                       return "UNKNOWN";
     }
 }
