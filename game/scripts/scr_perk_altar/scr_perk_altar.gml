@@ -7,7 +7,8 @@ function scr_perk_altar(_xpos, _ypos)
 	obj_perk_speed, 
 	obj_perk_damage, 
 	obj_perk_life,
-	obj_perk_restoredlife
+	obj_perk_restoredlife,
+	obj_perk_attack_speed
 	];
     
     var altar_positions = [_xpos - 50, _xpos, _xpos + 50];

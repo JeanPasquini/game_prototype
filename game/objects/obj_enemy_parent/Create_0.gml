@@ -27,8 +27,9 @@ grv = 0.5;
 speed = movementSpeed;
 direction = 0;  // 180 = left, 0 = right
 
-
 knockback_x = 0;
 knockback_y = 0;
+
+
 
 damage = 1;

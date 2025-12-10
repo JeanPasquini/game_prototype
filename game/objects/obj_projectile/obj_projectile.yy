@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"hammer",
-    "path":"sprites/hammer/hammer.yy",
+    "name":"projectiles_enemy1",
+    "path":"sprites/projectiles_enemy1/projectiles_enemy1.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -145,49 +145,7 @@ function state_stagger() {
     }
 }
 
-var damage_amount = 1;
-
-var knockback_strength = 5;
-
-var enemies = [obj_player];
-
-if(obj_player.invencible == false){
-	for (var i = 0; i < array_length(enemies); i++) {
-	    with (enemies[i]) {
-	        if (place_meeting(x, y, other)) { 
-
-	            var dir_x = x - other.x;
-	            var dir_y = y - other.y;
-	            var length = sqrt(sqr(dir_x) + sqr(dir_y));
-	            if (length != 0) {
-	                dir_x /= length;
-	                dir_y /= length;
-	            }
-
-	            knockback_x = dir_x * knockback_strength;
-
-	            if (abs(knockback_x) > 0.1) {
-	                if (place_meeting(x + knockback_x, y, obj_wall) || place_meeting(x + knockback_x, y, obj_player)) {
-	                    while (!place_meeting(x + sign(knockback_x), y, obj_wall) 
-	                        && !place_meeting(x + sign(knockback_x), y, obj_player)) {
-	                        x += sign(knockback_x);
-	                    }
-	                    knockback_x = 0;
-	                } else {
-	                    x += knockback_x;
-	                }
-	                knockback_x *= 0.95; 
-	            }
-
-	            src_show_player_damage_received(other.damage);
-				
-	            stagger = 100;
-	            invencible = true;
-	            obj_player.alarm[0] = obj_player.invencible_time;
-	        }
-	    }
-	}
-}
+scr_damage_with_knockback();
 
 if (direction == 180) {
     image_xscale = 1;

@@ -25,15 +25,16 @@ jmp = -10;
 ong = false;
 knockback_x = 0;
 knockback_y = 0;
+knockback_strength = 5;
 
 // Status
-life_max = 10;
-life = 10;
+life_max = 5;
+life = 5;
 damage_base = 1;
 damage = damage_base;
 spd = 2.5;
 spd_max = 10;
-attack_speed = 1; // max 2.9
+attack_speed = 0.5; // max 2.5
 attack_recoil = 2;
 attack_knockback = 5;
 invencible_time = 50;
