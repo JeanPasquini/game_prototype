@@ -1,19 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_projectile",
+  "%Name":"obj_parabolic_projectile_parent",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_projectile",
+  "name":"obj_parabolic_projectile_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Parents",
+    "path":"folders/Objects/Parents.yy",
   },
   "parentObjectId":{
-    "name":"obj_parabolic_projectile_parent",
-    "path":"objects/obj_parabolic_projectile_parent/obj_parabolic_projectile_parent.yy",
+    "name":"obj_projectile_parent",
+    "path":"objects/obj_projectile_parent/obj_projectile_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -32,10 +33,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"hammer",
-    "path":"sprites/hammer/hammer.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

@@ -150,5 +150,4 @@ if (!variable_global_exists("rooms_map")) {
 	global.first_room_name = HUB;
 	global.current_phase = "phase_01";
 	shuffle_rooms();
-	show_debug_message(json_stringify(global.rooms_map, true));
 }

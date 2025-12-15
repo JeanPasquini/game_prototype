@@ -1,19 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_projectile",
+  "%Name":"obj_bullet_ricochet",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_projectile",
+  "name":"obj_bullet_ricochet",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"bullets",
+    "path":"folders/Objects/bullets.yy",
   },
   "parentObjectId":{
-    "name":"obj_parabolic_projectile_parent",
-    "path":"objects/obj_parabolic_projectile_parent/obj_parabolic_projectile_parent.yy",
+    "name":"obj_projectile_parent",
+    "path":"objects/obj_projectile_parent/obj_projectile_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"hammer",
-    "path":"sprites/hammer/hammer.yy",
+    "name":"spr_bullet_ricochet",
+    "path":"sprites/spr_bullet_ricochet/spr_bullet_ricochet.yy",
   },
   "spriteMaskId":null,
   "visible":true,

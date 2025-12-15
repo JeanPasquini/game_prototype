@@ -1,19 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"obj_mini_boss_01",
+  "%Name":"obj_bullet_vertical",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_mini_boss_01",
+  "name":"obj_bullet_vertical",
   "overriddenProperties":[],
   "parent":{
-    "name":"phase_01",
-    "path":"folders/Objects/phase_01.yy",
+    "name":"bullets",
+    "path":"folders/Objects/bullets.yy",
   },
   "parentObjectId":{
-    "name":"ob_phase_boss_parent",
-    "path":"objects/ob_phase_boss_parent/ob_phase_boss_parent.yy",
+    "name":"obj_projectile_parent",
+    "path":"objects/obj_projectile_parent/obj_projectile_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_mini_boss_01",
-    "path":"sprites/spr_mini_boss_01/spr_mini_boss_01.yy",
+    "name":"spr_bullet_vertical",
+    "path":"sprites/spr_bullet_vertical/spr_bullet_vertical.yy",
   },
   "spriteMaskId":null,
   "visible":true,

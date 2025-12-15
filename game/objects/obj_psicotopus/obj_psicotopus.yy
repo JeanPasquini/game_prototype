@@ -1,19 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_projectile",
+  "%Name":"obj_psicotopus",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_projectile",
+  "name":"obj_psicotopus",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"phase_01",
+    "path":"folders/Objects/phase_01.yy",
   },
   "parentObjectId":{
-    "name":"obj_parabolic_projectile_parent",
-    "path":"objects/obj_parabolic_projectile_parent/obj_parabolic_projectile_parent.yy",
+    "name":"ob_phase_boss_parent",
+    "path":"objects/ob_phase_boss_parent/ob_phase_boss_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"hammer",
-    "path":"sprites/hammer/hammer.yy",
+    "name":"spr_psicotopus",
+    "path":"sprites/spr_psicotopus/spr_psicotopus.yy",
   },
   "spriteMaskId":null,
   "visible":true,
