@@ -9,8 +9,8 @@
   "name":"obj_parabolic_projectile_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"Parents",
-    "path":"folders/Objects/Parents.yy",
+    "name":"projectile",
+    "path":"folders/Objects/Parents/projectile.yy",
   },
   "parentObjectId":{
     "name":"obj_projectile_parent",

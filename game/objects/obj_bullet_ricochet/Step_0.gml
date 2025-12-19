@@ -1,12 +1,22 @@
 // Inherit the parent event
 event_inherited();
 
-x += lengthdir_x(velocity, direction);
-y += lengthdir_y(velocity, direction);
+// prever a próxima posição
+var nx = x + lengthdir_x(velocity, direction);
+var ny = y + lengthdir_y(velocity, direction) + sign(displacement)*2;
 
-// ricochete simples
-if (position_meeting(x, y, obj_wall)) {
-    direction = 360 - direction; // inverte verticalmente
+// se vai bater, reduzir bounce
+if (place_meeting(nx, ny, obj_wall)) {
     bounces--;
-    if (bounces <= 0) instance_destroy();
+    if (bounces <= 0) {
+        instance_destroy();
+        exit;
+    }
 }
+
+// agora mover
+x = nx;
+y = ny;
+
+// agora ricochetear
+move_bounce_solid(true);

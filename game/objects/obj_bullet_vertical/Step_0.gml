@@ -1,10 +1,28 @@
 // Inherit the parent event
 event_inherited();
 
-var dx = target_x - x;
-var dy = target_y - y;
-var dir = point_direction(x, y, target_x, target_y)
 
-direction = lerp(direction, dir, curvature);
+
+if (upward > 0) {
+	/*
+	// Bala sobe mais rápido
+	var step = min(velocity, upward);
+    upward -= step;	
+	y -= step;
+	*/
+	upward--;
+	y--;
+			
+	if (upward <= 0) {
+		dir = point_direction(x, y, obj_player.x, obj_player.y)
+		direction = dir;	
+	}
+	
+	
+	
+	return;
+} 
+
 x += lengthdir_x(velocity, direction);
 y += lengthdir_y(velocity, direction);
+

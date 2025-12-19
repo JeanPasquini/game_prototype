@@ -10,13 +10,13 @@ enum AttackState {
 	WAITING,
 }
 
-countAttackStates = 1; // Tem que ser -1 para ignorar WAITING
+countAttackStates = 2; // Tem que ser -1 para ignorar WAITING
 currentAttackState = AttackState.WAITING;
 
 attack_cooldown = 0;
 change_attack_cooldown = 0;
 
-range_time_between_attacks = [180, 240]; // 3 a 4 segundos, o mínimo deve ser 3 para ataques de 3 balas
+range_time_between_attacks = [120, 180]; // 3 a 4 segundos
 
 life = 10;
 damage = 1;

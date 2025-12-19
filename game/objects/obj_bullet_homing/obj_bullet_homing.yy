@@ -13,8 +13,8 @@
     "path":"folders/Objects/bullets.yy",
   },
   "parentObjectId":{
-    "name":"obj_projectile_parent",
-    "path":"objects/obj_projectile_parent/obj_projectile_parent.yy",
+    "name":"obj_collision_projectile_parent",
+    "path":"objects/obj_collision_projectile_parent/obj_collision_projectile_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

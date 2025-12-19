@@ -19,7 +19,7 @@ switch (currentAttackState) {
 	
 	case AttackState.WAITING:
 		choose_next_attack();
-
+	break;
 }
 
 
@@ -31,8 +31,6 @@ function attack_triple_vertical() {
 		if (attack_cooldown % 30 == 0) {
 			
 			var inst = instance_create_layer(x, y, "Instances", obj_bullet_vertical);
-			inst.target_x = obj_player.x;
-			inst.target_y = obj_player.y;
 		}
 		
 		attack_cooldown--;
@@ -70,22 +68,29 @@ function attack_homing_single() {
 
 function attack_triple_ricochet() {
 
-    if (attack_cooldown > 0) {
+   if (attack_cooldown > 0) {
         attack_cooldown--;
 		speed = 0;
-        return;
+		
+		if (attack_cooldown == 0) {
+			currentAttackState = AttackState.WAITING;
+			speed = movementSpeed;
+		}
+		
+		return;
     }
 	
 	speed = movementSpeed
 
     attack_cooldown = 12; // dispara rápido
 
-    var angles = [-20, 20, -20]; // alternância
+    var angles = [-5, 0, 5]; // deslocamento entre cada bala
 
     for (var i = 0; i < 3; i++) {
-        var b = instance_create_layer(x, y, "Instances", obj_bullet_ricochet);
-        b.direction = point_direction(x, y, obj_player.x, obj_player.y) + angles[i];
+        var b = instance_create_layer(x, y + (angles[i]), "Instances", obj_bullet_ricochet);
+        b.direction = point_direction(x, y, obj_player.x, obj_player.y);
         b.bounces = 4; // número de ricochetes
+		b.displacement = angles[i];
     }
 }
 
