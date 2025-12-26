@@ -1,12 +1,12 @@
-// Já foi atingido?
+
 if (ds_list_find_index(hit_enemies, other.id) != -1) {
-    exit; // já bateu nesse inimigo
+    exit;
 }
 
-// Marca como atingido
+audio_play_sound(sde_enemy_hit, 1, false);
+
 ds_list_add(hit_enemies, other.id);
 
-// ======= AQUI VAI SEU CÓDIGO DE DANO ===========
 var dmg = instance_create_layer(x, y, "Instances", obj_damage_text);
 dmg.text = "- " + string(damage);
 dmg.color = c_white;
@@ -20,4 +20,3 @@ other.life -= damage;
 
 obj_combo_streak.combo_streak++;
 obj_combo_streak.alarm[0] = 200;
-// ================================================

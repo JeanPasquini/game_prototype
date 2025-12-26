@@ -8,6 +8,10 @@ if (instance_exists(obj_player)) {
 
     if (dist < range && keyboard_check_pressed(ord("E"))) {
         obj_player.damage_base += damage;
+		audio_play_sound(sde_player_get_perk, 1, false);
+		if (!instance_exists(obj_effect_perk)) {
+		    instance_create_layer(obj_player.x, obj_player.y, "Instances", obj_effect_perk);
+		}
 		layer_destroy_instances("perk");
     }
 }

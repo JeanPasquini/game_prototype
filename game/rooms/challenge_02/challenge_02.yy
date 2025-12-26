@@ -12,7 +12,6 @@
     {"name":"inst_27BD7AD3","path":"rooms/challenge_02/challenge_02.yy",},
     {"name":"inst_2AC951E5","path":"rooms/challenge_02/challenge_02.yy",},
     {"name":"inst_2D92BCD1","path":"rooms/challenge_02/challenge_02.yy",},
-    {"name":"inst_45B566E1","path":"rooms/challenge_02/challenge_02.yy",},
     {"name":"inst_6166EFAA","path":"rooms/challenge_02/challenge_02.yy",},
     {"name":"inst_69546F8C","path":"rooms/challenge_02/challenge_02.yy",},
     {"name":"inst_1F2F176","path":"rooms/challenge_02/challenge_02.yy",},
@@ -52,7 +51,6 @@
         {"$GMRInstance":"v4","%Name":"inst_27BD7AD3","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_27BD7AD3","objectId":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},"propertyId":{"name":"room_direction","path":"objects/obj_door/obj_door.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"RoomDirection.UP",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.5,"scaleY":3.0,"x":563.0,"y":400.0,},
-        {"$GMRInstance":"v4","%Name":"inst_45B566E1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":true,"inheritedItemId":{"name":"inst_45B566E1","path":"rooms/base_rom/base_rom.yy",},"inheritItemSettings":true,"isDnd":false,"name":"inst_45B566E1","objectId":{"name":"obj_control","path":"objects/obj_control/obj_control.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-57.0,"y":-83.0,},
         {"$GMRInstance":"v4","%Name":"inst_6166EFAA","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":true,"inheritedItemId":{"name":"inst_6166EFAA","path":"rooms/base_rom/base_rom.yy",},"inheritItemSettings":true,"isDnd":false,"name":"inst_6166EFAA","objectId":{"name":"obj_combo_streak","path":"objects/obj_combo_streak/obj_combo_streak.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-73.0,"y":-83.0,},
         {"$GMRInstance":"v4","%Name":"inst_69546F8C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":true,"inheritedItemId":{"name":"inst_69546F8C","path":"rooms/base_rom/base_rom.yy",},"inheritItemSettings":true,"isDnd":false,"name":"inst_69546F8C","objectId":{"name":"obj_perk","path":"objects/obj_perk/obj_perk.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-89.0,"y":-83.0,},
       ],"layers":[],"name":"cam","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},

@@ -7,5 +7,7 @@ vsp = -random_range(2, 4);
 
 grv = 0.2; 
 
-image_xscale = 0.5;
-image_yscale = 0.5;
+alarm[0] = 30;
+
+image_xscale = 0.35;
+image_yscale = 0.35;

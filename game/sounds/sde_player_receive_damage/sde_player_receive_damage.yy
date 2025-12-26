@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_player_receive_damage",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.1520182,
+  "exportDir":"",
+  "name":"sde_player_receive_damage",
+  "parent":{
+    "name":"player",
+    "path":"folders/Sounds/soundeffect/player.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_player_receive_damage.wav",
+  "volume":1.0,
+}

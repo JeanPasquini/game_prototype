@@ -13,6 +13,10 @@ if (instance_exists(obj_player)) {
 		else{
 			obj_player.attack_speed += attack_speed;
 		}
+		audio_play_sound(sde_player_get_perk, 1, false);
+		if (!instance_exists(obj_effect_perk)) {
+		    instance_create_layer(obj_player.x, obj_player.y, "Instances", obj_effect_perk);
+		}
 		layer_destroy_instances("perk");
     }
 }

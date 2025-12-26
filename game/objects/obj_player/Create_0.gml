@@ -12,7 +12,8 @@ enum PlayerState {
 	RUN_FALL,
 	ATTACK,
 	TALKING,
-	WAIT_ATTACK
+	WAIT_ATTACK,
+	DYING
 }
 state = PlayerState.IDLE;
 
@@ -70,4 +71,9 @@ smoke_instance = noone;
 talking = false;
 
 depth = 0;
+
+footstep_frames_walk = [0, 6]; // frames onde o pé toca o chão
+footstep_frames_run  = [2, 7];
+last_foot_frame = -1; // para evitar tocar repetido
+
 

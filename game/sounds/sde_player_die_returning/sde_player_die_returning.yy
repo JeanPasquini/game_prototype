@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_player_die_returning",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.9364173,
+  "exportDir":"",
+  "name":"sde_player_die_returning",
+  "parent":{
+    "name":"player",
+    "path":"folders/Sounds/soundeffect/player.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_player_die_returning.wav",
+  "volume":1.0,
+}

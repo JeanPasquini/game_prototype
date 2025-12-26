@@ -12,11 +12,11 @@
     {"name":"inst_6709A0B7","path":"rooms/safe_room/safe_room.yy",},
     {"name":"inst_7E151E6D","path":"rooms/safe_room/safe_room.yy",},
     {"name":"inst_2AC951E5","path":"rooms/safe_room/safe_room.yy",},
-    {"name":"inst_45B566E1","path":"rooms/safe_room/safe_room.yy",},
     {"name":"inst_6166EFAA","path":"rooms/safe_room/safe_room.yy",},
     {"name":"inst_7D1034BC","path":"rooms/safe_room/safe_room.yy",},
     {"name":"inst_1912A5DF","path":"rooms/safe_room/safe_room.yy",},
     {"name":"inst_1D957AEC","path":"rooms/safe_room/safe_room.yy",},
+    {"name":"inst_45B566E1","path":"rooms/safe_room/safe_room.yy",},
   ],
   "isDnd":false,
   "layers":[

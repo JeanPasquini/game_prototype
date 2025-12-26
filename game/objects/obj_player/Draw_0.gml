@@ -21,6 +21,7 @@ function get_state_name(state_val) {
         case PlayerState.ATTACK:	   return "ATTACK";
         case PlayerState.TALKING:      return "TALKING";
         case PlayerState.WAIT_ATTACK:  return "WAIT_ATTACK";
+        case PlayerState.DYING:        return "DYING";
         default:                       return "UNKNOWN";
     }
 }

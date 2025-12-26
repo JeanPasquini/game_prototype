@@ -11,7 +11,7 @@ function scr_combat() {
         image_speed = attack_speed;
 		image_xscale = turn_target_dir;
 		
-		audio_play_sound(snd_attack_01, 1, false);
+		audio_play_sound(sde_player_attack, 1, false);
 		
         // HITBOX
         var hitbox_x = x + (turn_target_dir * 25);
