@@ -14,6 +14,8 @@ switch (currentState) {
     case EnemyState.CHASING:
         state_chasing();
         break;
+	case EnemyState.SPECIAL_ATTACK:
+		break;
 }
 
 if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {

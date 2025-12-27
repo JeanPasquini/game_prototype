@@ -1,88 +1,63 @@
 // Inherit the parent event
 event_inherited();
 
-currentState = EnemyState.CHASING;
+if currentState == EnemyState.IDLE return;
 
 switch (currentAttackState) {
 
     case AttackState.TRIPLE_VERTICAL:
         attack_triple_vertical();
-    break;
-
+		break;
     case AttackState.HOMING_SINGLE:
         attack_homing_single();
-    break;
-
+		break;
     case AttackState.TRIPLE_RICOCHET:
         attack_triple_ricochet();
-    break;
-	
+		break;
+	case AttackState.OCTOPUS_ATTACK:
+		octopus_attack();
+		break;
 	case AttackState.WAITING:
 		choose_next_attack();
-	break;
+		break;
 }
 
 
 function attack_triple_vertical() {
-
     if (attack_cooldown > 0) {
 		speed = 0;	
-		
 		if (attack_cooldown % 30 == 0) {
-			
 			var inst = instance_create_layer(x, y, "Instances", obj_bullet_vertical);
 		}
-		
 		attack_cooldown--;
-		
 		if (attack_cooldown == 0) {
-			currentAttackState = AttackState.WAITING;
-			speed = movementSpeed;
+			_reset_attack();
 		}
-		
         return;
     }
 	
     attack_cooldown = 90; // 3 tiros no intervalo
+	is_attacking = true;
+	currentState = EnemyState.SPECIAL_ATTACK;
 }
 
 function attack_homing_single() {
-
-   if (attack_cooldown > 0) {
-        attack_cooldown--;
-		speed = 0;
-		
-		if (attack_cooldown == 0) {
-			currentAttackState = AttackState.WAITING;
-			speed = movementSpeed;
-		}
-		
-		return;
-    }
+   if(_attack_time()) return;
 	
     attack_cooldown = 90; // demora mais para atacar
+	is_attacking = true;
+	currentState = EnemyState.SPECIAL_ATTACK;
 
     var b = instance_create_layer(x, y, "Instances", obj_bullet_homing);
     b.follow_time = 45; // 0.75s seguindo o player
 }
 
 function attack_triple_ricochet() {
-
-   if (attack_cooldown > 0) {
-        attack_cooldown--;
-		speed = 0;
-		
-		if (attack_cooldown == 0) {
-			currentAttackState = AttackState.WAITING;
-			speed = movementSpeed;
-		}
-		
-		return;
-    }
+   if(_attack_time()) return;
 	
-	speed = movementSpeed
-
     attack_cooldown = 12; // dispara rápido
+	is_attacking = true;
+	currentState = EnemyState.SPECIAL_ATTACK;
 
     var angles = [-5, 0, 5]; // deslocamento entre cada bala
 
@@ -94,6 +69,22 @@ function attack_triple_ricochet() {
     }
 }
 
+function octopus_attack() {
+	if(is_attacking == true) {
+		if (!instance_exists(obj_octopus)) {
+			_reset_attack();
+		}
+		return;
+	}
+	
+	sprite_index = spr_psicotopus_headless;
+	image_index = 0;	
+	speed = 0;
+	is_invencible = true;
+	is_attacking = true;
+	currentState = EnemyState.SPECIAL_ATTACK;
+	var oct = instance_create_layer(x, y, "Instances", obj_octopus);
+}
 
 function choose_next_attack() {
 	
@@ -115,3 +106,23 @@ function choose_next_attack() {
 	attack_cooldown = 0;
 }
 
+function _attack_time() {
+	if (attack_cooldown > 0) {
+        attack_cooldown--;
+		speed = 0;
+		if (attack_cooldown == 0) {
+			_reset_attack()
+		}
+		return true;
+    }
+	return false;
+}
+
+function _reset_attack() {
+	currentAttackState = AttackState.WAITING;
+	currentState = EnemyState.CHASING;
+	speed = movementSpeed;
+	sprite_index = spr_psicotopus;
+	is_invencible = false;
+	is_attacking = false;
+}
