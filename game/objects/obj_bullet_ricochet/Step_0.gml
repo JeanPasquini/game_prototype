@@ -1,22 +1,26 @@
-// Inherit the parent event
+// Inherit and execute the parent Step event logic
 event_inherited();
 
-// prever a próxima posição
+// Predict the next position based on current velocity and direction
+// The displacement adds a small vertical offset to influence the bounce behavior
 var nx = x + lengthdir_x(velocity, direction);
-var ny = y + lengthdir_y(velocity, direction) + sign(displacement)*2;
+var ny = y + lengthdir_y(velocity, direction) + sign(displacement) * 2;
 
-// se vai bater, reduzir bounce
+// If the next position will collide with a wall, decrease the bounce counter
 if (place_meeting(nx, ny, obj_wall)) {
     bounces--;
+    
+    // Destroy the bullet once it has no remaining bounces
     if (bounces <= 0) {
         instance_destroy();
         exit;
     }
 }
 
-// agora mover
+// Apply the predicted movement
 x = nx;
 y = ny;
 
-// agora ricochetear
+// Handle ricochet behavior by bouncing off solid objects
+// The 'true' parameter ensures precise collision handling
 move_bounce_solid(true);

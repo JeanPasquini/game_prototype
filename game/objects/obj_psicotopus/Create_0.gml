@@ -1,24 +1,28 @@
-// Inherit the parent event
+// Inherit and execute the parent object's Create event logic
 event_inherited();
 
 enum AttackState {
-	OCTOPUS_ATTACK,
-	TRIPLE_VERTICAL,
-    HOMING_SINGLE,
-    TRIPLE_RICOCHET,
+	OCTOPUS_ATTACK,     // Main octopus attack pattern
+	TRIPLE_VERTICAL,    // Fires three bullets vertically
+    HOMING_SINGLE,      // Fires a single homing projectile
+    TRIPLE_RICOCHET,    // Fires three ricochet bullets
 		
-	FLOOD,	
-	WAITING,
+	FLOOD,              // Area-filling or flooding type attack
+	WAITING,            // Idle state between attacks
 }
 
-countAttackStates = 0; // Tem que ser -1 para ignorar WAITING
+// Index or counter used to cycle through attack states
+// Must be "count(AttackState)-1" to properly ignore the WAITING state when cycling
+countAttackStates = 3;
 currentAttackState = AttackState.WAITING;
-is_attacking = false;
 
+is_attacking = false;
 attack_cooldown = 0;
+
 change_attack_cooldown = 0;
 
-range_time_between_attacks = [180, 240]; // 3 a 4 segundos
+// Randomized time range (in steps) between attacks: 3 to 4 seconds
+range_time_between_attacks = [180, 240];
 
-life = 10;
-damage = 1;
+life = 10;    
+damage = 1;   
