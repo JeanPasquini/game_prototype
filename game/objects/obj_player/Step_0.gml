@@ -25,3 +25,8 @@ switch (state) {
 		scr_movement(); 
     break;
 }
+
+var water_instance = instance_place(x, y, obj_water);
+if (water_instance != noone) {
+    show_debug_message("Player está na água!");
+}

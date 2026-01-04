@@ -26,6 +26,10 @@ switch (currentAttackState) {
 		// Spawns the octopus special attack entity
 		octopus_attack();
 		break;
+		
+	case AttackState.FLOOD:
+		flood_arena_attack();
+		break;
 
 	case AttackState.WAITING:
 		// Chooses the next attack after waiting cooldown
@@ -63,7 +67,19 @@ function attack_triple_vertical() {
 // Handles a single homing projectile attack
 function attack_homing_single() {
    // Handles generic attack timing and early exit
-   if (_attack_time()) return;
+   if (attack_cooldown > 0) {
+		// Stop movement while attacking
+		speed = 0;	
+		// Decrease attack timer
+		attack_cooldown--;
+		
+		// Reset attack state once the sequence is finished
+		if (attack_cooldown == 0) {
+			_reset_attack();
+		}
+        return;
+   }
+		
 	
     // Longer cooldown before the next action
     attack_cooldown = 90;
@@ -78,7 +94,18 @@ function attack_homing_single() {
 // Handles a triple ricochet bullet attack
 function attack_triple_ricochet() {
    // Handles generic attack timing and early exit
-   if (_attack_time()) return;
+   if (attack_cooldown > 0) {
+		// Stop movement while attacking
+		speed = 0;	
+		// Decrease attack timer
+		attack_cooldown--;
+		
+		// Reset attack state once the sequence is finished
+		if (attack_cooldown == 0) {
+			_reset_attack();
+		}
+        return;
+   }
 	
     // Fast firing attack
     attack_cooldown = 12;
@@ -127,6 +154,39 @@ function octopus_attack() {
 	var oct = instance_create_layer(x, y, "Instances", obj_octopus);
 }
 
+//
+function flood_arena_attack() {
+	
+	if (attack_cooldown > 0) {
+		// Stop movement while attacking
+		speed = 0;	
+		// Decrease attack timer
+		attack_cooldown--;
+		
+		// Reset attack state once the sequence is finished
+		if (attack_cooldown == 0) {
+			_reset_attack();
+			instance_destroy(obj_water);
+		}
+        return;
+   }
+	
+	
+
+      
+   attack_cooldown = 90;
+   is_attacking = true;
+   currentState = EnemyState.SPECIAL_ATTACK;
+   
+   var _flood = instance_create_layer(0, 0, "Instances", obj_water);
+   _flood.width = room_width;
+   _flood.height = room_height - obj_player.y;
+   _flood.image_xscale = _flood.width;
+   _flood.image_yscale = _flood.height;
+   _flood.x = 0
+   _flood.y = obj_player.y;
+}
+
 // Selects a new attack state after the waiting period
 function choose_next_attack() {
 	
@@ -154,22 +214,6 @@ function choose_next_attack() {
 	
 	// Reset attack timer
 	attack_cooldown = 0;
-}
-
-// Generic attack timer handler used by multiple attacks
-function _attack_time() {
-	if (attack_cooldown > 0) {
-        // Decrease the attack timer while stopping movement
-        attack_cooldown--;
-		speed = 0;
-		
-		// Reset attack when the timer finishes
-		if (attack_cooldown == 0) {
-			_reset_attack();
-		}
-		return true;
-    }
-	return false;
 }
 
 // Restores default enemy behavior after finishing an attack
