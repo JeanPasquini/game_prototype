@@ -28,5 +28,6 @@ switch (state) {
 
 var water_instance = instance_place(x, y, obj_water);
 if (water_instance != noone) {
-    show_debug_message("Player está na água!");
+    speed *= 0.5;
+	y -= 1;
 }
