@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_trap_spear_done",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.5,
+  "exportDir":"",
+  "name":"sde_trap_spear_done",
+  "parent":{
+    "name":"trap",
+    "path":"folders/Sounds/soundeffect/trap.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_trap_spear_done.wav",
+  "volume":1.0,
+}

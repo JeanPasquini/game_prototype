@@ -1,5 +1,10 @@
 if (alarm[0] <= 0) {
-    instance_create_layer(x, y, "Instances", obj_trap_arrow_projectile);
+	var arrow = instance_create_layer(x, y, "Instances", obj_trap_arrow_projectile);
+	arrow.direction = image_angle + 270;
+	arrow.image_angle = arrow.direction - 270;
+
+	audio_play_sound_on(emitter, sde_trap_arrow, false, 0);
+
 
     // Reset da animação
     image_index = 0;

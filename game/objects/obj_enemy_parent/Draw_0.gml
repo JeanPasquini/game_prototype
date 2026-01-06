@@ -13,9 +13,10 @@ var texto_state = get_state_name(currentState);
 var texto_x = other.x;
 var texto_y = other.y-30;
 
+draw_set_font(fnt_enemy_states);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_set_color(c_white);
 
-draw_text(texto_x, texto_y, texto);
-draw_text(texto_x, texto_y-10, texto_state);
+draw_text_transformed(texto_x, texto_y, texto, 0.5, 0.5, 1);
+draw_text_transformed(texto_x, texto_y-10, texto_state, 0.5, 0.5, 1);

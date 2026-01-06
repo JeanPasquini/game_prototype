@@ -13,62 +13,292 @@ draw_set_color(col_text);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 
-var spr_w = sprite_get_width(spr_status_life);
-var spr_h = sprite_get_height(spr_status_life);
+//var spr_w = sprite_get_width(spr_status_life);
+//var spr_h = sprite_get_height(spr_status_life);
 
 var draw_x = 16;
 var draw_y = 16;
 
-for (var i = 0; i < life_max; i++)
-{
-	if(life > i){
-		draw_sprite_ext(
-        spr_status_life,
-        0,
-        draw_x + (i * (spr_w + 4)),
-        draw_y,
-        1, 1, 0, c_white, 1
-    );
-	}
-	else{
-	    draw_sprite_ext(
-	        spr_status_life,
-	        1,
-	        draw_x + (i * (spr_w + 4)),
-	        draw_y,
-	        1, 1, 0, c_white, 1
-	    );
-	}
-}
+// Life frame
+
+draw_sprite_ext(
+    spr_ui_life_frame,
+    0,
+    draw_x,
+    draw_y,
+    2, 2, 0, c_white, 1
+);
+
+var life_percent = clamp(life / life_max, 0, 1);
+var spr_w = sprite_get_width(spr_ui_life_bar);
+var spr_h = sprite_get_height(spr_ui_life_bar);
+var scale = 2;
+
+var bar_draw_w = spr_w * life_percent * scale;
+var bar_draw_h = spr_h * scale;
+
+var bar_x = draw_x + 82;
+var bar_y = draw_y + 28;
+
+draw_sprite_stretched(spr_ui_life_bar, 0, bar_x, bar_y, bar_draw_w, bar_draw_h);
+
+draw_set_color(c_white);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+
+var text_x = bar_x + spr_w * scale / 2;
+var text_y = bar_y + bar_draw_h / 2;
+
+draw_set_font(fnt_player_life);
+draw_text_transformed(text_x, text_y, string(life) + " / " + string(life_max), 1, 1, 0);
 
 var line_h = 48;
-var icon_x = draw_x;
-var text_x = draw_x + 40;
+var icon_x = draw_x + 55;
+var text_money_x = draw_x + 115;
 
-// === ATTACK DAMAGE ===
-draw_sprite_ext(spr_status_attack_damage, image_index,
-    icon_x, draw_y + line_h * 1, 1, 1, 0, c_white, 1);
+// Money
 
-draw_text(text_x, draw_y + line_h * 1 + 16,
-    string_format(damage_base, 0, 2));
-
-// === ATTACK SPEED ===
-draw_sprite_ext(spr_status_attack_speed, image_index,
-    icon_x, draw_y + line_h * 2, 1, 1, 0, c_white, 1);
-
-draw_text(text_x, draw_y + line_h * 2 + 16,
-    string_format(attack_speed, 0, 2));
-
-// === MOVE SPEED ===
-draw_sprite_ext(spr_status_move_speed, image_index,
-    icon_x, draw_y + line_h * 3, 1, 1, 0, c_white, 1);
-
-draw_text(text_x, draw_y + line_h * 3 + 16,
-    string_format(spd, 0, 2));
-	
-	// === MONEY ===
 draw_sprite_ext(spr_status_money, image_index,
-    icon_x, draw_y + line_h * 4, 1, 1, 0, c_white, 1);
+    icon_x, 50 +  draw_y - 10 + line_h * 1, 2, 2, 0, c_white, 1);
 
-draw_text(text_x, draw_y + line_h * 4 + 16,
-    string_format(money, 0, 2));
+draw_text(text_money_x, 50 + draw_y - 8 + line_h * 1 + 16,
+string_format(money, 0, 2));
+draw_set_font(fnt_player_money);
+
+// Button Status
+
+draw_sprite_ext(spr_ui_button_status, image_index,
+icon_x + 150, 50 +  draw_y - 10 + line_h * 1, 1.5, 1.5, 0, c_white, 1);
+
+
+// Status 
+
+if (keyboard_check(vk_tab)) {
+
+    var center_x = gui_w * 0.5;
+    var center_y = gui_h * 0.5;
+
+    var menu_scale = 2.5;
+
+    var menu_w = sprite_get_width(spr_ui_status_menu)  * menu_scale;
+    var menu_h = sprite_get_height(spr_ui_status_menu) * menu_scale;
+
+    var menu_x = center_x;
+    var menu_y = center_y;
+
+    draw_sprite_ext(
+        spr_ui_status_menu,
+        0,
+        menu_x,
+        menu_y,
+        menu_scale,
+        menu_scale,
+        0,
+        c_white,
+        1
+    );
+
+    var origin_x = menu_x - menu_w * 0.5;
+    var origin_y = menu_y - menu_h * 0.5;
+
+    var padding_left        = (24 + 14) * menu_scale;
+    var padding_top         = (38 + 14) * menu_scale;
+
+    var padding_left_perks  = (221 + 9) * menu_scale;
+    var padding_top_perks   = (27 + 9) * menu_scale;
+
+    var line_h        = 34 * menu_scale;
+    var text_scale    = menu_scale - 0.5;
+    var icon_scale    = menu_scale;
+    var perk_scale    = menu_scale - 0.5;
+
+    var start_x = origin_x + padding_left;
+    var start_y = origin_y + padding_top;
+
+    var start_x_perks = origin_x + padding_left_perks;
+    var start_y_perks = origin_y + padding_top_perks;
+
+    draw_set_font(fnt_player_status);
+    draw_set_color(c_white);
+
+    // =====================
+    // STATUS
+    // =====================
+
+    // ATTACK DAMAGE
+    draw_sprite_ext(
+        spr_status_attack_damage,
+        0,
+        start_x,
+        start_y + line_h * 0,
+        icon_scale,
+        icon_scale,
+        0,
+        c_white,
+        1
+    );
+
+    draw_text_transformed(
+        start_x + 30 * menu_scale,
+        start_y + line_h * 0,
+        string_format(obj_player.damage_base, 0, 2),
+        text_scale,
+        text_scale,
+        0
+    );
+	
+	// LIFE MAX
+    draw_sprite_ext(
+        spr_status_life_max,
+        0,
+        start_x + (96 * menu_scale),
+        start_y + line_h * 0,
+        icon_scale,
+        icon_scale,
+        0,
+        c_white,
+        1
+    );
+
+    draw_text_transformed(
+        start_x + 30 * menu_scale + (96 * menu_scale),
+        start_y + line_h * 0,
+        string_format(obj_player.life_max, 0, 2),
+        text_scale,
+        text_scale,
+        0
+    );
+
+    // ATTACK SPEED
+    draw_sprite_ext(
+        spr_status_attack_speed,
+        0,
+        start_x,
+        start_y + line_h * 1,
+        icon_scale,
+        icon_scale,
+        0,
+        c_white,
+        1
+    );
+
+    draw_text_transformed(
+        start_x + 30 * menu_scale,
+        start_y + line_h * 1,
+        string_format(obj_player.attack_speed, 0, 2),
+        text_scale,
+        text_scale,
+        0
+    );
+	
+	// CRITICAL CHANCE
+    draw_sprite_ext(
+        spr_status_critical,
+        0,
+        start_x + (96 * menu_scale),
+        start_y + line_h * 1,
+        icon_scale,
+        icon_scale,
+        0,
+        c_white,
+        1
+    );
+
+    draw_text_transformed(
+        start_x + 30 * menu_scale + (96 * menu_scale),
+        start_y + line_h * 1,
+        string_format(obj_player.critical_chance, 0, 2),
+        text_scale,
+        text_scale,
+        0
+    );
+
+    // MOVE SPEED
+    draw_sprite_ext(
+        spr_status_move_speed,
+        0,
+        start_x,
+        start_y + line_h * 2,
+        icon_scale,
+        icon_scale,
+        0,
+        c_white,
+        1
+    );
+
+    draw_text_transformed(
+        start_x + 30 * menu_scale,
+        start_y + line_h * 2,
+        string_format(obj_player.spd, 0, 2),
+        text_scale,
+        text_scale,
+        0
+    );
+	
+	// LUCKY
+    draw_sprite_ext(
+        spr_status_lucky,
+        0,
+        start_x + (96 * menu_scale),
+        start_y + line_h * 2,
+        icon_scale,
+        icon_scale,
+        0,
+        c_white,
+        1
+    );
+
+    draw_text_transformed(
+        start_x + 30 * menu_scale + (96 * menu_scale),
+        start_y + line_h * 2,
+        string_format(obj_player.lucky_chance, 0, 2),
+        text_scale,
+        text_scale,
+        0
+    );
+
+    // =====================
+    // PERKS
+    // =====================
+    var cols = 3;
+
+    for (var i = 0; i < array_length(self.perks_obtained_run); i++) {
+        var spr = self.perks_obtained_run[i];
+
+        var col = i mod cols;
+        var row = i div cols;
+
+        draw_sprite_ext(
+            spr,
+            0,
+            start_x_perks + (23 * menu_scale * col),
+            start_y_perks + (22 * menu_scale * row),
+            perk_scale,
+            perk_scale,
+            0,
+            c_white,
+            1
+        );
+    }
+	
+	for (var i = 0; i < perks_limit_max; i++) {
+        var spr = spr_ui_padlock;
+
+        var col = i mod cols;
+        var row = i div cols;
+		
+		if (i >= perks_limit_run){
+	        draw_sprite_ext(
+	            spr,
+	            0,
+	            start_x_perks + (23 * menu_scale * col),
+	            start_y_perks + (22 * menu_scale * row),
+	            perk_scale,
+	            perk_scale,
+	            0,
+	            c_white,
+	            1
+	        );
+		}
+    }
+}

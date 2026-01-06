@@ -30,8 +30,9 @@ var texto = get_state_name(state);
 var texto_x = obj_player.x;
 var texto_y = obj_player.y-50;
 
+draw_set_font(fnt_player_states);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_set_color(c_white);
 
-draw_text(texto_x, texto_y, texto);
+draw_text_transformed(texto_x, texto_y, texto, 0.5, 0.5, 0);

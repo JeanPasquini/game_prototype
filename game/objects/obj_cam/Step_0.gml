@@ -1,8 +1,3 @@
-if (keyboard_check_pressed(vk_tab)) {
-    minimap_state += 1;
-    if (minimap_state > 2) minimap_state = 0;
-}
-
 if (!instance_exists(target_)) exit;
 
 // ===== FOLLOW BASE =====

@@ -30,7 +30,7 @@ function scr_perk_altar(_xpos, _ypos)
     for (var k = 0; k < 3; k++)
     {
         var altar = instance_create_layer(altar_positions[k], _ypos, _layer, obj_perk_altar);
-        var perk  = instance_create_layer(altar_positions[k], _ypos, _layer, shuffled_perks[k]);
+        var perk  = instance_create_layer(altar_positions[k], _ypos - 16, _layer, shuffled_perks[k]);
         
         perk.parent_altar = altar;
     }

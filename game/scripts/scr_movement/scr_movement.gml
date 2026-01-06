@@ -1,7 +1,6 @@
 function scr_movement() {
 if (state == PlayerState.DYING) {
 
-    // MORRENDO
     if (sprite_index != spr_player_dying && sprite_index != spr_player_dying_returning) {
         audio_play_sound(sde_player_die, 1, false);
         sprite_index = spr_player_dying;
@@ -9,7 +8,6 @@ if (state == PlayerState.DYING) {
         image_speed = 1;
     }
 
-    // FIM DA ANIMAÇÃO DE MORTE
     if (sprite_index == spr_player_dying && image_index >= image_number - 1) {
 
         life = life_max;
@@ -28,7 +26,6 @@ if (state == PlayerState.DYING) {
         audio_play_sound(sde_player_die_returning, 1, false);
     }
 
-    // VOLTANDO À VIDA
     if (sprite_index == spr_player_dying_returning) {
         if (image_index >= image_number - 1) {
             state = PlayerState.IDLE;
@@ -138,10 +135,8 @@ else
 		    return false;
 		}
 		
-				/// EMPURRA PARA FORA SE JÁ ESTIVER DENTRO
 		if (col(x, y)) {
 
-		    // tenta empurrar para cima
 		    for (var i = 1; i <= 16; i++) {
 		        if (!col(x, y - i)) {
 		            y -= i;
@@ -149,7 +144,6 @@ else
 		        }
 		    }
 
-		    // se não deu, tenta para baixo
 		    if (col(x, y)) {
 		        for (var i = 1; i <= 16; i++) {
 		            if (!col(x, y + i)) {
@@ -159,7 +153,6 @@ else
 		        }
 		    }
 
-		    // se não deu, tenta esquerda
 		    if (col(x, y)) {
 		        for (var i = 1; i <= 16; i++) {
 		            if (!col(x - i, y)) {
@@ -169,7 +162,6 @@ else
 		        }
 		    }
 
-		    // se não deu, tenta direita
 		    if (col(x, y)) {
 		        for (var i = 1; i <= 16; i++) {
 		            if (!col(x + i, y)) {
@@ -218,11 +210,6 @@ else
 	    }
     
 	    // === SPRITES ===
-		
-		if (sprite_index == spr_player_taking_damage && image_index < image_number - 1) {
-        // A animação de dano ainda não terminou, então não faz nada
-	        return;
-	    }
 		
 	    if (state != PlayerState.ATTACK) {
 
@@ -324,13 +311,19 @@ else
 
 						            // só toca se mudou o frame
 						            if (last_foot_frame != current_frame) {
-						                audio_play_sound(sde_player_step, 1, false);
+						                var steps = [
+										    sde_player_step1,
+										    sde_player_step2,
+										    sde_player_step
+										];
+
+										audio_play_sound(steps[irandom(array_length(steps) - 1)], 1, false);
+
 						                last_foot_frame = current_frame;
 						            }
 						        }
 						    }
 
-						    // se o player saiu dos frames de passo, libera o trigger
 						    if (!array_contains(frames, current_frame)) {
 						        last_foot_frame = -1;
 						    }
