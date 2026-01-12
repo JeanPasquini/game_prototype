@@ -1,12 +1,14 @@
 enum TentacleType {
 	ORBITAL,
 	STATIC,
+	ALIVE,
 }
 
 type = TentacleType.STATIC;
 scale_target = 1.0;
 scale_current = 0.0;
 grow_smoothness = 0.05;
+grow_direction = 1; // 1 up-down, -1 down-up
 
 is_destroyed = false
 damage = 1;

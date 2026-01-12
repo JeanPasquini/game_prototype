@@ -7,8 +7,6 @@ if (is_destroyed) {
 	scr_scale_animation();
 }
 
-
-
 switch (type) {
 	case TentacleType.ORBITAL:
 		_orbitalRotation();

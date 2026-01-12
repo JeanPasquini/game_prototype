@@ -11,29 +11,26 @@
 /// @note The instance is automatically destroyed when the reverse animation completes
 /// @note Uses a 0.01 threshold for snapping to the target value to avoid floating-point precision issues
 function scr_scale_animation(reverse = false) {
-	// Sets the default values for the grow animation
-	var _grow = grow_smoothness;
-	var _scale_targ = scale_target;	
-	
-	if (reverse) {
-		// When reversing, the tentacle shrinks back to zero scale
-		_scale_targ = 0.0;		
-		// Speed up the shrinking animation by 5x
-		_grow *= 5;
-	}
-	
-	// Smoothly interpolate the current scale towards the target scale
-	scale_current = lerp(scale_current, _scale_targ, _grow);
-	image_yscale = scale_current;
-	
-	// Extra smoothing when the scale is very close to the target
-	// Snaps to target to avoid floating-point precision issues
-	if (abs(scale_current - _scale_targ) < 0.01) {
-	    scale_current = _scale_targ;
-		
-		// Once fully shrunk, safely destroy the instance
-		if (reverse) {
-			instance_destroy();
-		}
-	}
+    var _grow = grow_smoothness;
+    var _scale_targ = scale_target;	
+    
+    if (reverse) {
+        _scale_targ = 0.0;		
+        _grow *= 5;
+    }
+    
+    // Smoothly interpolate the current scale towards the target scale
+    scale_current = lerp(scale_current, _scale_targ, _grow);
+    
+    // Aplica a escala na direção correta
+    image_yscale = scale_current * grow_direction;
+    
+    // Extra smoothing when the scale is very close to the target
+    if (abs(scale_current - _scale_targ) < 0.01) {
+        scale_current = _scale_targ;
+        
+        if (reverse) {
+            instance_destroy();
+        }
+    }
 }

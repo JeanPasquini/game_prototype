@@ -18,7 +18,8 @@ if (telegraph_timer > 0) {
 		return;
 	}
 	
-	var _tent =  instance_create_layer(telegraphX, telegraphY-sprite_get_height(spr_tentacles), "Instances", obj_psicotopus_tentacles);
+	var _tent =  instance_create_layer(telegraphX, telegraphY+sprite_get_height(spr_telegraph), "Instances", obj_psicotopus_tentacles);
+	_tent.grow_direction = -1;
 	ds_list_add(tentacles, _tent);
 	
 	telegraphX = obj_player.x;

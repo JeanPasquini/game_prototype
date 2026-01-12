@@ -60,8 +60,7 @@ function attack_triple_vertical() {
 	
     // Initialize attack duration (3 shots over time)
     attack_cooldown = 90;
-	is_attacking = true;
-	currentState = EnemyState.SPECIAL_ATTACK;
+	_start_attack();
 }
 
 // Handles a single homing projectile attack
@@ -83,8 +82,7 @@ function attack_homing_single() {
 	
     // Longer cooldown before the next action
     attack_cooldown = 90;
-	is_attacking = true;
-	currentState = EnemyState.SPECIAL_ATTACK;
+	_start_attack();
 
     // Create a homing bullet that tracks the player for a short duration
     var b = instance_create_layer(x, y, "Instances", obj_bullet_homing);
@@ -109,8 +107,7 @@ function attack_triple_ricochet() {
 	
     // Fast firing attack
     attack_cooldown = 12;
-	is_attacking = true;
-	currentState = EnemyState.SPECIAL_ATTACK;
+	_start_attack();
 
     // Vertical displacement for each bullet
     var angles = [-5, 0, 5];
@@ -145,10 +142,7 @@ function octopus_attack() {
 	image_index = 0;	
 	speed = 0;
 	
-	// Make the enemy temporarily invincible during the attack
-	is_invencible = true;
-	is_attacking = true;
-	currentState = EnemyState.SPECIAL_ATTACK;
+	_start_attack();
 	
 	// Spawn the octopus attack object
 	var oct = instance_create_layer(x, y, "Instances", obj_octopus);
@@ -208,8 +202,7 @@ function flood_arena_attack() {
    }
 	
    attack_cooldown = 240;
-   is_attacking = true;
-   currentState = EnemyState.SPECIAL_ATTACK;
+   _start_attack();
    tentacles = ds_list_create();
    
    // Creates the flood "water" object
@@ -265,4 +258,10 @@ function _reset_attack() {
 	sprite_index = spr_psicotopus;
 	is_invencible = false;
 	is_attacking = false;
+}
+
+function _start_attack() {
+	is_attacking = true;
+	currentState = EnemyState.SPECIAL_ATTACK;
+	is_invencible = true;
 }
