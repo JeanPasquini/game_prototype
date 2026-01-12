@@ -4,7 +4,7 @@ if (currentState == OctopusState.STARTING_ATTACK) {
 	var centro_y = room_height / 2;
 
 	// Check if the instance is not yet exactly at the center of the room
-	if x != centro_x && y != centro_y {
+	if x != centro_x || y != centro_y {
 		// Needs to be centralized in the room
 		// Move towards the center while the remaining distance is greater than the movement speed
 		if (point_distance(x, y, centro_x, centro_y) > movementSpeed) {
@@ -33,11 +33,11 @@ else if (currentState == OctopusState.ENDING_ATTACK) {
 	
 	// If the tentacles list still exists, destroy all remaining tentacles
 	if (ds_exists(tentacles, ds_type_list)) {
-		_destroy_tentacles();
+		scr_destroy_tentacles_ds(tentacles);
 	}
 	
 	// Check if the instance is not yet back at its starting position
-	if (x != xstart && y != ystart) {
+	if (x != obj_psicotopus.x || y != obj_psicotopus.y) {
 		// Needs to be moved back to its initial spawn position
 		if (point_distance(x, y, xstart, ystart) > movementSpeed) {
 			// Move towards the starting position
@@ -84,6 +84,7 @@ function _create_tentacles() {
 		// 0°, 45°, 90°, 135°, 180°, 225°, etc.
 		// The current list size is used to calculate a unique angular offset
 		_tent.angle_offset = (360 / max_tentacles) * ds_list_size(tentacles);
+		_tent.type = TentacleType.ORBITAL;
 		
 		// Store the tentacle reference in the list for later management
 		ds_list_add(tentacles, _tent);
@@ -91,21 +92,4 @@ function _create_tentacles() {
 	
 	// After creating all tentacles, transition to the ending attack state
 	currentState = OctopusState.ENDING_ATTACK;
-}
-
-// Handles the cleanup and destruction of all tentacles
-function _destroy_tentacles() {
-	for (var i = 0; i < ds_list_size(tentacles); i++) {
-	    var tentacle = tentacles[| i];
-    
-	    // Safely mark the tentacle for destruction if it still exists
-	    if (instance_exists(tentacle)) {
-	        tentacle.is_destroyed = true;
-	    }
-	}
-
-	// Clear and destroy the tentacle list to free memory
-	ds_list_clear(tentacles);
-	ds_list_destroy(tentacles);
-	tentacles = -1;
 }

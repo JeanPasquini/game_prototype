@@ -28,6 +28,11 @@ switch (state) {
 
 var water_instance = instance_place(x, y, obj_water);
 if (water_instance != noone) {
-    speed *= 0.5;
-	y -= 1;
+//	state = PlayerState.SWIN;
+	swimming = true
+} else if (state == PlayerState.SWIN) {
+	state = PlayerState.IDLE;
+	
+} else {
+	swimming = false;
 }

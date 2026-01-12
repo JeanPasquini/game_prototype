@@ -1,7 +1,7 @@
 // Inherit and execute the parent object's Create event logic
 event_inherited();
 
-enum AttackState {
+enum AttackState {	
 	FLOOD,              // Area-filling or flooding type attack
 	OCTOPUS_ATTACK,     // Main octopus attack pattern
 	TRIPLE_VERTICAL,    // Fires three bullets vertically
@@ -27,3 +27,5 @@ range_time_between_attacks = [180, 240];
 
 life = 10;    
 damage = 1;   
+
+tentacles = -1

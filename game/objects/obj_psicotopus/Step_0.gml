@@ -157,27 +157,62 @@ function octopus_attack() {
 //
 function flood_arena_attack() {
 	
-	if (attack_cooldown > 0) {
-		// Stop movement while attacking
-		speed = 0;	
+	if (is_attacking == true) {
+		// Centers the object in the room
+		scr_center_obj_in_room(movementSpeed*1.2);
 		// Decrease attack timer
-		attack_cooldown--;
-		
+		attack_cooldown--;		
 		// Reset attack state once the sequence is finished
-		if (attack_cooldown == 0) {
+				
+		var centerX = room_width/2;
+		var centerY = room_height/2;
+	    var is_tent_empty = tentacles == -1 || ( ds_exists(tentacles, ds_type_list) && ds_list_empty(tentacles) );
+		
+		if (x == centerX && y == centerY && is_tent_empty) {
+			var _tent1 = instance_create_layer(centerX - sprite_get_width(spr_tentacles)/2, centerY, "Instances", obj_psicotopus_tentacles);		
+			var _tent2 = instance_create_layer(centerX + sprite_get_width(spr_tentacles)/2, centerY, "Instances", obj_psicotopus_tentacles);	
+			_tent1.type = TentacleType.STATIC;
+			_tent2.type = TentacleType.STATIC;
+	
+			var _height = sprite_get_height(spr_tentacles);	
+			// Calcula altura em pixels até encontrar parede
+			while (!position_meeting(_tent1.x, _tent1.y + _height, obj_wall)) {
+				_height++;
+			}
+	
+			// Calcula a escala necessária
+			var _sprite_height = sprite_get_height(spr_tentacles);
+			var scale_y = _height / _sprite_height; 
+			// Estica o sprite verticalmente
+			_tent1.scale_target = scale_y;
+			_tent2.scale_target = scale_y;
+	
+			ds_list_add(tentacles, _tent1);
+			ds_list_add(tentacles, _tent2);
+		}
+		
+		// Resets the Attack
+		if (keyboard_check(ord("G"))) {
 			_reset_attack();
-			instance_destroy(obj_water);
+			
+			var _flood = instance_find(obj_water, 0);
+			var _tent_tele = instance_find(obj_tentacle_telegraph, 0);
+			if instance_exists(_flood) _flood.is_destroyed = true;
+			if instance_exists(_tent_tele) _tent_tele.is_destroyed = true;
+			
+			if (ds_exists(tentacles, ds_type_list)) {
+				scr_destroy_tentacles_ds(tentacles);
+			}
 		}
         return;
    }
 	
-	
-
-      
-   attack_cooldown = 90;
+   attack_cooldown = 240;
    is_attacking = true;
    currentState = EnemyState.SPECIAL_ATTACK;
+   tentacles = ds_list_create();
    
+   // Creates the flood "water" object
    var _flood = instance_create_layer(0, 0, "Instances", obj_water);
    _flood.width = room_width;
    _flood.height = room_height - obj_player.y;
@@ -186,6 +221,11 @@ function flood_arena_attack() {
    _flood.x = 0
    _flood.y = obj_player.y;
    _flood.depth = -100;
+   
+   // Cria o objeto que controla os ataques com tentáculos
+   instance_create_layer(0, 0, "Instances", obj_tentacle_telegraph);
+   
+   
 }
 
 // Selects a new attack state after the waiting period
