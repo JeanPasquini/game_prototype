@@ -14,7 +14,7 @@ enum AttackState {
 
 // Index or counter used to cycle through attack states
 // Must be "count(AttackState)-1" to properly ignore the WAITING state when cycling
-countAttackStates = 0;
+countAttackStates = 4;
 currentAttackState = AttackState.WAITING;
 
 is_attacking = false;

@@ -186,7 +186,7 @@ function flood_arena_attack() {
 		}
 		
 		// Resets the Attack
-		if (keyboard_check(ord("G"))) {
+		if (!instance_exists(obj_tentacle_telegraph)) {
 			_reset_attack();
 			
 			var _flood = instance_find(obj_water, 0);

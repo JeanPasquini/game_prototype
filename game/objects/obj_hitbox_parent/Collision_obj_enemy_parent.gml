@@ -1,6 +1,6 @@
 // Já foi atingido? Está invulnerável?
 if (
-	ds_list_find_index(hit_enemies, other.id) != -1 ||
+	scr_already_hit_object(hit_enemies, other.id) ||
 	other.is_invencible
 	) {
     exit; // já bateu nesse inimigo
