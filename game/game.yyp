@@ -194,8 +194,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"mini_boss_01","path":"rooms/mini_boss_01/mini_boss_01.yy",},},
     {"roomId":{"name":"HUB","path":"rooms/HUB/HUB.yy",},},
+    {"roomId":{"name":"mini_boss_01","path":"rooms/mini_boss_01/mini_boss_01.yy",},},
     {"roomId":{"name":"base_rom","path":"rooms/base_rom/base_rom.yy",},},
     {"roomId":{"name":"challenge_01","path":"rooms/challenge_01/challenge_01.yy",},},
     {"roomId":{"name":"challenge_02","path":"rooms/challenge_02/challenge_02.yy",},},
