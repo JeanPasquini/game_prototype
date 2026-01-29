@@ -24,7 +24,7 @@
   ],
   "name":"spr_environment_chest",
   "nineSlice":null,
-  "origin":9,
+  "origin":7,
   "parent":{
     "name":"enviroment",
     "path":"folders/Sprites/enviroment.yy",
@@ -80,7 +80,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":8,
-    "yorigin":10,
+    "yorigin":16,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

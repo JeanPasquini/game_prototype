@@ -1,0 +1,1 @@
+audio_play_sound(sde_perk_spawn_2, 1, false);

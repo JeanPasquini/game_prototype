@@ -11,7 +11,7 @@ if (instance_exists(obj_player)){
 			if(obj_player.money >= 2)
 			{
 				obj_player.money = obj_player.money - 2;
-				scr_perk_altar(obj_npc_merchant.x + 150, obj_npc_merchant.y + 28);
+				scr_perk_altar(obj_npc_merchant.x + 150, obj_npc_merchant.y);
 				dlg_instance.dialogue_lines = scr_load_dialogue(-1, 0, "dialogue_npc_merchant.csv");
 			}
             else

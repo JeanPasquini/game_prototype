@@ -1,10 +1,12 @@
 function scr_combat() {
+	damage = damage_base;
+	if(instance_exists(obj_perk_passive_rage)) damage = damage * obj_perk_passive_rage.damage;
+	if(instance_exists(obj_perk_passive_berseker)) damage = damage * obj_perk_passive_berseker.damage_multiplication;
 
     if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
 
         attack_face = face;
         state = PlayerState.ATTACK;
-        damage = damage_base;
 
         sprite_index = spr_player_attacking;
         image_index = 0;
@@ -22,6 +24,12 @@ function scr_combat() {
         hb.direction = attack_face;
 
         alarm[1] = 15 - (attack_speed * 5);
+    }
+	
+	if (keyboard_check_pressed(ord("X")) && !talking && energy == energy_max) {
+		if(instance_exists(obj_perk_active_temporal_jump)) obj_perk_active_temporal_jump.active_perk();
+		if(instance_exists(obj_perk_active_time_prison)) obj_perk_active_time_prison.active_perk();
+        obj_player.energy = 0;
     }
 }
 

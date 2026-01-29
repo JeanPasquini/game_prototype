@@ -6,6 +6,14 @@ enum EnemyState {
 	FALLING
 }
 
+drops = [
+    { item: noone, chance: 10 },
+    { item: obj_drop_coin, chance: 15 },
+    { item: obj_drop_key, chance: 5 },
+    { item: obj_drop_life, chance: 70 }
+];
+
+life = 0;
 currentState = EnemyState.IDLE;
 currentMovement = EnemyState.ONGROUND;
 detectionRadius = 100;
@@ -33,3 +41,12 @@ knockback_y = 0;
 
 
 damage = 1;
+
+//Effects
+
+freeze = false;
+freeze_color = c_aqua;
+freeze_alpha = 0;
+
+poison = false;
+poison_damage = 1;

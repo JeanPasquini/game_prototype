@@ -15,6 +15,30 @@ if (life <= 0){
 	lucky_chance = lucky_chance_initial;
 	perks_limit_run = perks_limit_run_initial;
 	perks_obtained_run = perks_obtained_run_initial;
+	key = key_initial;
+	energy_max = energy_max_initial;
+	energy = energy_initial;
+	perk_activatable = noone;
+	perk_activatable_obj = noone;
+	invencible = true;
+	alarm[0] = 120;
+
+	obj_combo_streak.alarm[0] = 1;
+	var layer_id = layer_get_id("perk_in_run");
+
+	if (layer_id != -1)
+	{
+	    with (all)
+	    {
+	        if (layer == layer_id)
+	        {
+	            instance_destroy();
+	        }
+	    }
+	}
+
+
+
 }
 
 switch (state) {

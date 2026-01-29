@@ -23,7 +23,7 @@
   ],
   "name":"spr_merchant",
   "nineSlice":null,
-  "origin":4,
+  "origin":7,
   "parent":{
     "name":"merchant",
     "path":"folders/Sprites/npc/merchant.yy",
@@ -78,7 +78,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":64,
-    "yorigin":32,
+    "yorigin":64,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

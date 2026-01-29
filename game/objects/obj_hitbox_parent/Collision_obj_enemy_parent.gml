@@ -15,8 +15,24 @@ var dir = point_direction(obj_player.x, obj_player.y, other.x, other.y);
 
 other.knockback_x = lengthdir_x(obj_player.attack_knockback, dir);
 obj_player.knockback_x = -lengthdir_x(obj_player.attack_recoil, dir);
+if(instance_exists(obj_perk_active_temporal_jump)){
+        obj_perk_active_temporal_jump.mark_enemy(other);
+}
+if(instance_exists(obj_perk_passive_thunderbolt)) obj_perk_passive_thunderbolt.scr_perk_thunderbolt(other.x, other.y);
+if(instance_exists(obj_perk_passive_vampirism)){
+	if(obj_player.life + obj_perk_passive_vampirism.total_healed <= obj_player.life_max){
+		var heal = instance_create_layer(obj_player.x, obj_player.y, "Instances", obj_damage_text);
+			heal.text = "+ " + string(obj_perk_passive_vampirism.total_healed);
+			heal.color = c_green;
+		obj_player.life += obj_perk_passive_vampirism.total_healed;
+	}
+	else{
+		obj_player.life = obj_player.life_max;	
+	}
+}
 
 other.life -= damage;
 
-obj_combo_streak.combo_streak++;
-obj_combo_streak.alarm[0] = 200;
+obj_combo_streak.scr_combo_streak();
+
+if (obj_player.energy < obj_player.energy_max && obj_player.perk_activatable != noone) obj_player.energy ++;

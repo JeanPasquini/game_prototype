@@ -20,3 +20,15 @@ draw_set_color(c_white);
 
 draw_text_transformed(texto_x, texto_y, texto, 0.5, 0.5, 1);
 draw_text_transformed(texto_x, texto_y-10, texto_state, 0.5, 0.5, 1);
+
+if (freeze_alpha > 0) {
+    gpu_set_blendmode(bm_add);
+    draw_set_alpha(freeze_alpha);
+    draw_set_color(c_aqua);
+    draw_self();
+
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    gpu_set_blendmode(bm_normal);
+}
+

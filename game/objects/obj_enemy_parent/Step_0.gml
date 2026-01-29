@@ -1,10 +1,7 @@
 knockbackSmoothing();
 
 if (life <= 0) {
-    for (var i = 0; i < 5; i++) {
-        instance_create_layer(x, y, "drop", obj_coin);
-		audio_play_sound(sde_enemy_coin_dropped, 1, false);
-    }
+    scr_drop_roll(drops, x, y, "drop");
     instance_destroy();
 }
 

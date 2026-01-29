@@ -12,13 +12,16 @@ if (instance_exists(obj_player)) {
     var dist = point_distance(x, y, player.x, player.y);
 
     if (dist < range && keyboard_check_pressed(ord("E"))) {
-		if(!open){
+		if(!open && obj_player.key > 0){
+			obj_player.key --;
 			audio_play_sound(sde_environment_chest_open, 1, false);
 			open = true;
-			    for (var i = 0; i < 5; i++) {
-			        instance_create_layer(x, y, "Instances", obj_coin);
-					audio_play_sound(sde_enemy_coin_dropped, 1, false);
-			    }
+				scr_perk_altar(x, y)
+		}
+		else if (obj_player.key == 0 && !open){
+			var _warning = instance_create_layer(obj_player.x, obj_player.y, "Instances", obj_warning);	
+			_warning.alarm[0] = 200;
+			_warning.message_warning = "No keys!"	
 		}
     }
 }

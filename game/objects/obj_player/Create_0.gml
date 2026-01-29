@@ -31,6 +31,8 @@ knockback_strength = 5;
 // Status
 life_max = 5;
 life = 5;
+energy_max = 0;
+energy = 0;
 damage_base = 1;
 damage = damage_base;
 spd = 2.5;
@@ -41,6 +43,7 @@ attack_knockback = 5;
 invencible_time = 50;
 critical_chance = 0;
 lucky_chance = 0;
+key = 10;
 
 // Status Alternable
 
@@ -49,8 +52,12 @@ invencible = false;
 // Perks
 
 perks_limit_max = 18;
-perks_limit_run = 3;
+perks_limit_run = 6;
 perks_obtained_run = [];
+
+perk_activatable = noone;
+perk_activatable_obj = noone;
+perk_activatable_active = noone;
 
 // Moves Attacks
 
@@ -114,4 +121,8 @@ critical_chance_initial = critical_chance;
 lucky_chance_initial = lucky_chance;
 perks_limit_run_initial = perks_limit_run;
 perks_obtained_run_initial = [];
+key_initial = key;
+energy_max_initial = energy_max;
+energy_initial = energy;
+
 

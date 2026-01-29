@@ -40,7 +40,26 @@ var bar_draw_h = spr_h * scale;
 var bar_x = draw_x + 82;
 var bar_y = draw_y + 28;
 
+// PERK
+
+if(perk_activatable != noone){
+	draw_sprite_ext(
+	    perk_activatable,
+	    0,
+	    draw_x + 40,
+	    draw_y + 44,
+	    2, 2, 0, c_white, 1
+	);
+}
+
+// LIFE
+
 draw_sprite_stretched(spr_ui_life_bar, 0, bar_x, bar_y, bar_draw_w, bar_draw_h);
+
+// ENERGY
+var energy_percent = clamp(energy / energy_max, 0, 1);
+var bar_draw_w_energy = spr_w * energy_percent * scale;
+draw_sprite_stretched(spr_ui_energy_bar, 0, bar_x, bar_y + 30, bar_draw_w_energy, spr_h / 2);
 
 draw_set_color(c_white);
 draw_set_halign(fa_center);
@@ -52,23 +71,43 @@ var text_y = bar_y + bar_draw_h / 2;
 draw_set_font(fnt_player_life);
 draw_text_transformed(text_x, text_y, string(life) + " / " + string(life_max), 1, 1, 0);
 
+draw_set_font(fnt_player_life);
+draw_text_transformed(text_x, text_y + 25, string(energy) + " / " + string(energy_max), 1, 1, 0);
+
 var line_h = 48;
 var icon_x = draw_x + 55;
-var text_money_x = draw_x + 115;
+var text_money_x = draw_x + 80;
+
+// Frame Itens
+
+draw_sprite_ext(spr_ui_itens, image_index,
+    draw_x + 8, 50 +  draw_y + line_h * 1, 2, 2, 0, c_white, 1);
+
+
+draw_set_halign(fa_left);
 
 // Money
 
 draw_sprite_ext(spr_status_money, image_index,
-    icon_x, 50 +  draw_y - 10 + line_h * 1, 2, 2, 0, c_white, 1);
+    draw_x + 40, 50 +  draw_y + 27 + line_h * 1, 2, 2, 0, c_white, 1);
 
-draw_text(text_money_x, 50 + draw_y - 8 + line_h * 1 + 16,
+draw_text(text_money_x, 50 + draw_y + 28 + line_h * 1 + 16,
 string_format(money, 0, 2));
-draw_set_font(fnt_player_money);
+draw_set_font(fnt_player_status_itens);
+
+// Key
+
+draw_sprite_ext(spr_status_key, image_index,
+    draw_x + 40, 50 +  draw_y + 58 + line_h * 1, 2, 2, 0, c_white, 1);
+
+draw_text(text_money_x, 50 + draw_y + 56 + line_h * 1 + 16,
+string_format(key, 0, 2));
+draw_set_font(fnt_player_status_itens);
 
 // Button Status
 
-draw_sprite_ext(spr_ui_button_status, image_index,
-icon_x + 150, 50 +  draw_y - 10 + line_h * 1, 1.5, 1.5, 0, c_white, 1);
+//draw_sprite_ext(spr_ui_button_status, image_index,
+//icon_x + 150, 50 +  draw_y - 10 + line_h * 1, 1.5, 1.5, 0, c_white, 1);
 
 
 // Status 
@@ -141,7 +180,7 @@ if (keyboard_check(vk_tab)) {
     draw_text_transformed(
         start_x + 30 * menu_scale,
         start_y + line_h * 0,
-        string_format(obj_player.damage_base, 0, 2),
+        string_format(obj_player.damage, 0, 2),
         text_scale,
         text_scale,
         0
