@@ -3,5 +3,6 @@ event_inherited();
 function on_selected()
 {
 	array_push(obj_player.perks_obtained_run, spr_icon);
+	array_push(obj_player.perks_obtained_run_obj, card_obj);
     var perk = instance_create_layer(obj_player.x, obj_player.y, "perk_in_run", obj_perk_passive_fire_ring);
 }

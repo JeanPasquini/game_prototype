@@ -29,8 +29,8 @@ knockback_y = 0;
 knockback_strength = 5;
 
 // Status
-life_max = 5;
-life = 5;
+life_max = 100;
+life = 60;
 energy_max = 0;
 energy = 0;
 damage_base = 1;
@@ -54,6 +54,7 @@ invencible = false;
 perks_limit_max = 18;
 perks_limit_run = 6;
 perks_obtained_run = [];
+perks_obtained_run_obj = [];
 
 perk_activatable = noone;
 perk_activatable_obj = noone;
@@ -121,6 +122,7 @@ critical_chance_initial = critical_chance;
 lucky_chance_initial = lucky_chance;
 perks_limit_run_initial = perks_limit_run;
 perks_obtained_run_initial = [];
+perks_obtained_run_obj_initial = [];
 key_initial = key;
 energy_max_initial = energy_max;
 energy_initial = energy;

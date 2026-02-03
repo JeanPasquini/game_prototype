@@ -1,3 +1,4 @@
-frametime = 15 - (obj_player.attack_speed * 5);
-damage = obj_player.damage;
+damage = noone;
+damage_total = noone;
 hit_enemies = ds_list_create();
+hit_enemies_bool = true;

@@ -13,17 +13,11 @@ if (len > 0)
 		fx_y = obj_player.y;
 		fx_dir = point_direction(obj_player.x, obj_player.y, enemy.x, enemy.y);
 		fx_frame = 0;
-	
-        obj_player.x = enemy.x;
+		
+		obj_player.x = enemy.x;
         obj_player.y = enemy.y;
 		
-		obj_combo_streak.scr_combo_streak();
-	
-		var dmg = instance_create_layer(enemy.x, enemy.y, "Instances", obj_damage_text);
-		dmg.text = "- " + string(damage);
-		dmg.color = c_white;
-		
-		enemy.life -= obj_player.damage;
+		instance_create_layer(enemy.x, enemy.y, "Instances", obj_perk_active_temporal_jump_2);
     }
 
     array_delete(enemies_marked, last_index, 1);

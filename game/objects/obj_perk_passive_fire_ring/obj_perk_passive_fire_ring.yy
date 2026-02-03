@@ -14,7 +14,10 @@
     "name":"passive_perks",
     "path":"folders/Objects/Perks/passive_perks.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_hitbox_parent",
+    "path":"objects/obj_hitbox_parent/obj_hitbox_parent.yy",
+  },
   "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

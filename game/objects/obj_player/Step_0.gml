@@ -15,6 +15,7 @@ if (life <= 0){
 	lucky_chance = lucky_chance_initial;
 	perks_limit_run = perks_limit_run_initial;
 	perks_obtained_run = perks_obtained_run_initial;
+	perks_obtained_run_obj = perks_obtained_run_obj_initial;
 	key = key_initial;
 	energy_max = energy_max_initial;
 	energy = energy_initial;

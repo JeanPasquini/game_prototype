@@ -19,27 +19,38 @@ function scr_create_cards()
     // TODOS OS PERKS POSSÍVEIS
     // ===============================
     var all_perks = [
-        //obj_perk_card_damage,
-        //obj_perk_card_speed_attack,
-        //obj_perk_card_life,
-        //obj_perk_card_restoredlife,
-		//obj_perk_card_more_perks,
 		obj_perk_card_fire_ring,
 		obj_perk_card_rage,
 		obj_perk_card_berseker,
 		obj_perk_card_thunderbold,
 		obj_perk_card_energy_shield,
 		obj_perk_card_vampirism,
-		obj_perk_card_elemental_ring
+		obj_perk_card_elemental_ring,
+		obj_perk_card_energy_attack
     ];
+	
+    var available_perks = [];
 
-    // embaralha
-    shuffle_array(all_perks);
+    for (var i = 0; i < array_length(all_perks); i++)
+    {
+        var perk = all_perks[i];
+
+        if (!array_contains(obj_player.perks_obtained_run_obj, perk))
+        {
+            array_push(available_perks, perk);
+        }
+    }
+
+    // segurança: se não sobrar perk
+    if (array_length(available_perks) == 0) return;
+
+    // embaralha só os disponíveis
+    shuffle_array(available_perks);
 
     // ===============================
-    // CRIA SOMENTE 3 (SEM REPETIR)
+    // CRIA ATÉ 3 (SEM REPETIR)
     // ===============================
-    var perks_to_show = min(3, array_length(all_perks));
+    var perks_to_show = min(3, array_length(available_perks));
 
     for (var i = 0; i < perks_to_show; i++)
     {
@@ -49,7 +60,7 @@ function scr_create_cards()
             xx,
             cy,
             0,
-            all_perks[i]
+            available_perks[i]
         );
 
         card.index = i;

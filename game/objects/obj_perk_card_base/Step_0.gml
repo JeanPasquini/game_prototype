@@ -16,5 +16,5 @@ if (confirm_select)
 
 function on_selected()
 {
-    
+	
 }

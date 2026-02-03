@@ -15,6 +15,4 @@ obj_perk_passive_elemental_ring.alarm[2] = 200;
 other.alarm[3] = 1;
 other.alarm[2] = 500;
 
-
-// Destroi o círculo
 instance_destroy();

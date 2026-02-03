@@ -1,1 +1,0 @@
-total_healed = obj_player.damage * (10/100)

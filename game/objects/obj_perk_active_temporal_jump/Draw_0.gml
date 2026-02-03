@@ -13,24 +13,3 @@ for (var i = array_length(enemies_marked) - 1; i >= 0; i--)
 
     draw_sprite(spr_perk_active_temporal_jump, 0, draw_x, draw_y);
 }
-
-if (fx_active)
-{
-    var num_copies = 5;
-
-    for (var i = 0; i < num_copies; i++)
-    {
-        var rotation = random(360);
-
-        draw_sprite_ext(
-            fx_sprite,
-            floor(fx_frame),
-            fx_x,
-            fx_y,
-            1, 1,
-            rotation,
-            c_white,
-            1
-        );
-    }
-}

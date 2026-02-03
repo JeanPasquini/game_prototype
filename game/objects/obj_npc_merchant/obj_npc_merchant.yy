@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_merchant",
-    "path":"sprites/spr_merchant/spr_merchant.yy",
+    "name":"spr_merchant_idle",
+    "path":"sprites/spr_merchant_idle/spr_merchant_idle.yy",
   },
   "spriteMaskId":null,
   "visible":true,
