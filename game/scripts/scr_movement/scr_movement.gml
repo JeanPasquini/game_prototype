@@ -75,12 +75,22 @@ if(!talking){
 	        // === JUMP ===
 	        if (keyboard_check_pressed(vk_up) && ong) {
 	            vsp = jmp;
-	        }
+	        } else if (keyboard_check_pressed(vk_up) && swimming) {
+				vsp = jmp;
+			}
+			
+			
 	        if (!keyboard_check(vk_up) && vsp < 0) {
 	            vsp *= 0.5;
 	        }
 		}
     
+	
+	if (swimming) {
+		vsp *= 0.75;
+		hsp *= 0.75;
+	}
+	
 
     // === COLISIONS ===
     // HORIZONTAL
