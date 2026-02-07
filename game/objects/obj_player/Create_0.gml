@@ -10,6 +10,7 @@ enum PlayerState {
 	RUN_JUMP,
     FALL,
 	RUN_FALL,
+	SWIN,
 	ATTACK,
 	TALKING,
 	WAIT_ATTACK,
@@ -89,6 +90,11 @@ previous_state = state;
 smoke_instance = noone;
 
 talking = false;
+
+swimming = false;
+swimming_threshold = 30;
+swimming_timer = swimming_threshold;
+
 
 depth = 0;
 

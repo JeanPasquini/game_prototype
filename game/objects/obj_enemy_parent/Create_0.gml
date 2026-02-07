@@ -3,7 +3,8 @@ enum EnemyState {
 	CHASING,
 	JUMPING,
 	ONGROUND,
-	FALLING
+	FALLING,
+	SPECIAL_ATTACK,
 }
 
 drops = [
@@ -24,6 +25,7 @@ baseAttackDelay = 1 * 60;
 currentAttackDelay = baseAttackDelay;
 meleeRange = 10;
 jump_direction = 1;
+is_invencible = false;
 
 // Movement
 hsp = 0;

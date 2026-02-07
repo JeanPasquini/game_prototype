@@ -10,6 +10,14 @@ else{
 	
 }
 
+// Já foi atingido? Está invulnerável?
+//if (
+//	scr_already_hit_object(hit_enemies, other.id) ||
+//	other.is_invencible
+//	) {
+//    exit; // já bateu nesse inimigo
+//}
+
 damage_total = damage;
 
 //PERKS
