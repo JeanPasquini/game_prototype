@@ -146,6 +146,7 @@ function octopus_attack() {
 	
 	// Spawn the octopus attack object
 	var oct = instance_create_layer(x, y, "Instances", obj_octopus);
+	
 }
 
 //

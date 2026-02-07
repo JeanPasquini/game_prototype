@@ -213,6 +213,11 @@ else
 		
 	    if (state != PlayerState.ATTACK) {
 
+			if (swimming) {
+				vsp *= 0.75;
+				hsp *= 0.75;
+			}
+
 	        if (!ong) {
 	            // --- ON AIR ---
 	            if (vsp < 0) {

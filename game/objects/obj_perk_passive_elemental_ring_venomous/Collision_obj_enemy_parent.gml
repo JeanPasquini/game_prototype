@@ -1,3 +1,5 @@
+if(other.is_invencible == true) return;
+
 if (!other.poison)
 {
     var fx = instance_create_layer(

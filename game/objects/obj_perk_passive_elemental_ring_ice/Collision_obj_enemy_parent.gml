@@ -1,3 +1,5 @@
+if(other.is_invencible == true) return;
+
 other.alarm[1] = 500;
 other.movementSpeed = 0.5;
 other.freeze_alpha = 0.8;
