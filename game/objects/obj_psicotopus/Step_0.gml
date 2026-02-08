@@ -214,7 +214,7 @@ function flood_arena_attack() {
    _flood.image_yscale = _flood.height;
    _flood.x = 0
    _flood.y = obj_player.y;
-   _flood.depth = -100;
+   //_flood.depth = -100;
    
    // Cria o objeto que controla os ataques com tentáculos
    instance_create_layer(0, 0, "Instances", obj_tentacle_telegraph);

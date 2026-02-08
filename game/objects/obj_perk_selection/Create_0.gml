@@ -5,4 +5,4 @@ selected_index = 0;   // <<< ESSENCIAL
 max_selected = 3;
 selected_count = 0;
 
-scr_create_cards();
+scr_perk_create_cards();

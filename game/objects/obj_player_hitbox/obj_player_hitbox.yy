@@ -11,8 +11,8 @@
   "name":"obj_player_hitbox",
   "overriddenProperties":[],
   "parent":{
-    "name":"light",
-    "path":"folders/Objects/hitBox/light.yy",
+    "name":"hitBox",
+    "path":"folders/Objects/hitBox.yy",
   },
   "parentObjectId":{
     "name":"obj_hitbox_parent",

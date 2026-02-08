@@ -5,4 +5,4 @@ alpha = 1;
 y_speed = -1;
 frame = 30; 
 
-depth = -100000;
+//depth = -100000;

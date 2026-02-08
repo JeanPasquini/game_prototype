@@ -96,7 +96,7 @@ swimming_threshold = 30;
 swimming_timer = swimming_threshold;
 
 
-depth = 0;
+//depth = 0;
 
 // Sounds Frames Step
 

@@ -20,4 +20,4 @@ font_desc  = fnt_ui_menu_perk_selection_description;
 // animação de seleção
 select_time = 0;
 
-depth = -1;
+//depth = -1;

@@ -1,3 +1,5 @@
+//exit;
+
 cols = room_width div size;
 rows = room_height div size;
 

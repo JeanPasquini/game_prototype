@@ -56,7 +56,7 @@ function scr_perk_altar(_xpos, _ypos)
             _layer,
             obj_perk_effect_spawn
         );
-        fx.depth = -10000;
+        //fx.depth = -10000;
         fx.altar_group_id = group_id;
     }
 }
@@ -87,7 +87,7 @@ function scr_create_single_perk_altar(_perk_object, _xpos, _ypos)
 
 	perk.parent_altar   = altar;
 	perk.altar_group_id = group_id;
-	perk.depth          = altar.depth - 1;
+	//perk.depth          = altar.depth - 1;
 
     var fx = instance_create_layer(
         _xpos,
@@ -95,7 +95,7 @@ function scr_create_single_perk_altar(_perk_object, _xpos, _ypos)
         _layer,
         obj_perk_effect_spawn
     );
-    fx.depth = -10000;
+    //fx.depth = -10000;
     fx.altar_group_id = group_id;
 }
 

@@ -25,7 +25,7 @@ change_attack_cooldown = 0;
 // Randomized time range (in steps) between attacks: 3 to 4 seconds
 range_time_between_attacks = [180, 240];
 
-life = 10;    
+life = 50;    
 damage = 1;   
 
 tentacles = -1

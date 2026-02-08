@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_perk_altar",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"perk",
+    "path":"folders/Scripts/perk.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

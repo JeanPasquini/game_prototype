@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_create_cards",
+  "%Name":"scr_perk_create_cards",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_create_cards",
+  "name":"scr_perk_create_cards",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"perk",
+    "path":"folders/Scripts/perk.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

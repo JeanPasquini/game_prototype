@@ -1,4 +1,4 @@
-function scr_create_cards()
+function scr_perk_create_cards()
 {
     // impede recriação
     if (cards_created) return;
