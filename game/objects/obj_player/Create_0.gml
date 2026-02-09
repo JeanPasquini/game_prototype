@@ -133,4 +133,3 @@ key_initial = key;
 energy_max_initial = energy_max;
 energy_initial = energy;
 
-
