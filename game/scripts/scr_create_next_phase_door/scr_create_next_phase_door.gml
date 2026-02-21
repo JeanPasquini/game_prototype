@@ -7,13 +7,17 @@ function scr_create_next_phase_door(){
 		var _door_y = y;
 		var _door_height = sprite_get_height(spr_door);
 	
-		while (position_meeting(x, _door_y + (_door_height/2) -1, obj_wall)){
+		while (!position_meeting(x, _door_y + (_door_height/2), obj_wall)){
 			_door_y += 1;
+		}
+		
+		while (position_meeting(x, _door_y, obj_wall)){
+			_door_y -= 1;
 		}
 	
 		// Fazer verificação caso já esteja enterrada
 	
-		var door = instance_create_layer(x, y, "environment", obj_door);
+		var door = instance_create_layer(x, _door_y, "environment", obj_door);
 
 		door.room_direction = RoomDirection.UP;
 		door.current_room = room;

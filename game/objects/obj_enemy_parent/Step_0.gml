@@ -1,8 +1,8 @@
 knockbackSmoothing();
 
-if (life <= 0) {
+if (life <= 0 && !is_destroyed) {
     scr_drop_roll(drops, x, y, "drop");
-    instance_destroy();
+    is_destroyed = true;
 }
 
 switch (currentState) {

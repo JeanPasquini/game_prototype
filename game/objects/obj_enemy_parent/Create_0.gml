@@ -14,7 +14,8 @@ drops = [
     { item: obj_drop_life, chance: 70 }
 ];
 
-life = 0;
+life = 1;
+is_destroyed = false;
 currentState = EnemyState.IDLE;
 currentMovement = EnemyState.ONGROUND;
 detectionRadius = 100;
