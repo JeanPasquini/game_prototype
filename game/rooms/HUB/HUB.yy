@@ -6,11 +6,6 @@
   "inheritCreationOrder":true,
   "inheritLayers":false,
   "instanceCreationOrder":[
-    {"name":"inst_2C7808C5","path":"roomui/RoomUI/RoomUI.yy",},
-    {"name":"inst_38A903C8","path":"roomui/RoomUI/RoomUI.yy",},
-    {"name":"inst_191DED4C","path":"roomui/RoomUI/RoomUI.yy",},
-    {"name":"inst_3F042F","path":"roomui/RoomUI/RoomUI.yy",},
-    {"name":"inst_2047EC05","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_2F4C9F15","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_7F0388CF","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_8FE8895","path":"rooms/HUB/HUB.yy",},
@@ -59,6 +54,11 @@
     {"name":"inst_6E80FD91","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_5E6324B0","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_7C620411","path":"rooms/HUB/HUB.yy",},
+    {"name":"inst_2047EC05","path":"rooms/HUB/HUB.yy",},
+    {"name":"inst_2C7808C5","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_38A903C8","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_191DED4C","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_3F042F","path":"roomui/RoomUI/RoomUI.yy",},
   ],
   "isDnd":false,
   "layers":[

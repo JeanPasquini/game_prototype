@@ -10,3 +10,5 @@ max_tentacles = 8;
 max_bullets = 20;
 
 end_attack_timer = 60 * 8;
+
+is_destroyed = false;

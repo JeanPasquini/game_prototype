@@ -133,6 +133,10 @@ function octopus_attack() {
 		if (!instance_exists(obj_octopus)) {
 			// Reset attack once the octopus entity is destroyed
 			_reset_attack();
+		} else if (is_destroyed) {
+			var oct = instance_find(obj_octopus, 0);
+			if instance_exists(oct) oct.is_destroyed = true;
+			_reset_attack();
 		}
 		return;
 	}
@@ -187,7 +191,7 @@ function flood_arena_attack() {
 		}
 		
 		// Resets the Attack
-		if (!instance_exists(obj_tentacle_telegraph)) {
+		if (!instance_exists(obj_tentacle_telegraph) || is_destroyed) {
 			_reset_attack();
 			
 			var _flood = instance_find(obj_water, 0);

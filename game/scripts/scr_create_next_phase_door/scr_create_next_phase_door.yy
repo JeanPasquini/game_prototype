@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_create_next_phase_door",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_create_next_phase_door",
+  "parent":{
+    "name":"obj_phase_boss_parent",
+    "path":"folders/Scripts/obj_phase_boss_parent.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

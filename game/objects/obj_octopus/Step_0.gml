@@ -1,5 +1,5 @@
 // Check if the octopus is starting its attack behavior
-if (currentState == OctopusState.STARTING_ATTACK) {
+if (currentState == OctopusState.STARTING_ATTACK && !is_destroyed) {
 	var centro_x = room_width / 2;
 	var centro_y = room_height / 2;
 
@@ -23,10 +23,10 @@ if (currentState == OctopusState.STARTING_ATTACK) {
 	}
 }
 // Check if the octopus is finishing its attack behavior
-else if (currentState == OctopusState.ENDING_ATTACK) {
+else if (currentState == OctopusState.ENDING_ATTACK || is_destroyed) {
 	
 	// Wait for the end attack delay timer to finish before proceeding
-	if (end_attack_timer > 0) {
+	if (end_attack_timer > 0 && !is_destroyed) {
 		end_attack_timer--;
 		return;
 	}
@@ -34,6 +34,8 @@ else if (currentState == OctopusState.ENDING_ATTACK) {
 	// If the tentacles list still exists, destroy all remaining tentacles
 	if (ds_exists(tentacles, ds_type_list)) {
 		scr_destroy_tentacles_ds(tentacles);
+		if is_destroyed instance_destroy();
+		return;
 	}
 	
 	// Check if the instance is not yet back at its starting position
