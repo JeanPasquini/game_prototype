@@ -14,25 +14,32 @@ switch (currentState) {
         break;
 	case EnemyState.SPECIAL_ATTACK:
 		break;
+	case EnemyState.CHARGING_ATTACK:
+		break;
 }
 
-if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
-    while (!place_meeting(x + sign(hsp), y, obj_wall)
-        && !place_meeting(x + sign(hsp), y, obj_player)) {
-        x += sign(hsp);
-    }
-    hsp = 0;
-}
-x += hsp;
+if (movementStyle == EnemyMovementStyle.NORMAL) {
+	if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
+	    while (!place_meeting(x + sign(hsp), y, obj_wall)
+	        && !place_meeting(x + sign(hsp), y, obj_player)) {
+	        x += sign(hsp);
+	    }
+	    hsp = 0;
+	}
+	x += hsp;
 
-if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)) {
-    while (!place_meeting(x, y + sign(vsp), obj_wall)
-        && !place_meeting(x, y + sign(vsp), obj_player)) {
-        y += sign(vsp);
-    }
-    vsp = 0;
+	if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)) {
+	    while (!place_meeting(x, y + sign(vsp), obj_wall)
+	        && !place_meeting(x, y + sign(vsp), obj_player)) {
+	        y += sign(vsp);
+	    }
+	    vsp = 0;
+	}
+	y += vsp;
+
+} else if (movementStyle == EnemyMovementStyle.STOPPED) {
+	speed = 0;
 }
-y += vsp;
 
 function knockbackSmoothing(){
 	if (abs(knockback_x) > 0.1 || abs(knockback_y) > 0.1) {
@@ -62,7 +69,11 @@ function state_idle() {
     }
 
     if (distance_to_object(obj_player) < detectionRadius) {
-        currentState = EnemyState.CHASING;
+        if (hasToChargeAttack) {
+			currentState = EnemyState.CHARGING_ATTACK;
+		} else {
+			currentState = EnemyState.CHASING;
+		}		
     }
 }
 

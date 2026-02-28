@@ -5,6 +5,13 @@ enum EnemyState {
 	ONGROUND,
 	FALLING,
 	SPECIAL_ATTACK,
+	CHARGING_ATTACK
+}
+
+enum EnemyMovementStyle {
+	NORMAL,
+	JUMPING,
+	STOPPED
 }
 
 drops = [
@@ -15,6 +22,8 @@ drops = [
 ];
 
 life = 1;
+movementStyle = EnemyMovementStyle.NORMAL
+hasToChargeAttack = false;
 is_destroyed = false;
 currentState = EnemyState.IDLE;
 currentMovement = EnemyState.ONGROUND;
