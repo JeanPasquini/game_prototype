@@ -38,3 +38,4 @@ dmg.text = "- " + string(damage_total);
 dmg.color = c_white;
 other.life -= damage_total;
 obj_combo_streak.scr_combo_streak();
+other.alpha = 1;

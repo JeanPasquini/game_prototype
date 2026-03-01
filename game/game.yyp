@@ -238,6 +238,7 @@
     {"id":{"name":"scr_draw_text_wrap_scaled","path":"scripts/scr_draw_text_wrap_scaled/scr_draw_text_wrap_scaled.yy",},},
     {"id":{"name":"scr_drop_roll","path":"scripts/scr_drop_roll/scr_drop_roll.yy",},},
     {"id":{"name":"scr_get_obj_floor_distance","path":"scripts/scr_get_obj_floor_distance/scr_get_obj_floor_distance.yy",},},
+    {"id":{"name":"scr_hitstop","path":"scripts/scr_hitstop/scr_hitstop.yy",},},
     {"id":{"name":"scr_minimap_traverse","path":"scripts/scr_minimap_traverse/scr_minimap_traverse.yy",},},
     {"id":{"name":"scr_movement","path":"scripts/scr_movement/scr_movement.yy",},},
     {"id":{"name":"scr_music_room","path":"scripts/scr_music_room/scr_music_room.yy",},},

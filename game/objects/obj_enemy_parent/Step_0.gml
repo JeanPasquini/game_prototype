@@ -152,3 +152,5 @@ if (direction == 180) {
 } else {
     image_xscale = -1;
 }
+
+alpha = lerp(alpha, 0, 0.1);
