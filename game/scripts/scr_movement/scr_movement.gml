@@ -40,10 +40,16 @@ else
 
 	    if (tap_timer_left > 0) tap_timer_left--;
 	    if (tap_timer_right > 0) tap_timer_right--;
-	
+    if (dash_cooldown_timer > 0) dash_cooldown_timer--;
 
-	    // === GRAVITY ===
-	    vsp += grv;
+    if (ong) {
+        air_dash_available = true;
+    }
+
+    // === GRAVITY ===
+    if (!is_dashing) {
+        vsp += grv;
+    }
 	
 	    // === MOVEMENT ===
 		
@@ -69,7 +75,26 @@ else
 	        else if (keyboard_check(vk_left)) {move_input = -1; turn_target_dir = move_input;}
 			}
 
-	        if (move_input != 0 && move_input != face && !turning) {
+	        var wants_dash = keyboard_check_pressed(vk_shift);
+	        var can_dash = !talking && !is_dashing && dash_cooldown_timer <= 0 && (ong || air_dash_available);
+
+	        if (wants_dash && can_dash) {
+	            is_dashing = true;
+	            dash_timer = dash_duration;
+	            dash_cooldown_timer = dash_cooldown;
+	            dash_direction = (move_input != 0) ? move_input : face;
+	            face = dash_direction;
+	            run = false;
+	            turning = false;
+	            hsp = dash_direction * dash_speed;
+	            vsp = 0;
+
+	            if (!ong) {
+	                air_dash_available = false;
+	            }
+	        }
+
+	        if (move_input != 0 && move_input != face && !turning && !is_dashing) {
 	            turning = true;
 	            turn_timer = 0;
 	            turn_duration = 10;
@@ -83,7 +108,17 @@ else
             
 	        }
 
-	        if (turning) {
+	        if (is_dashing) {
+            dash_timer--;
+            hsp = dash_direction * dash_speed;
+            vsp = 0;
+
+            if (dash_timer <= 0) {
+                is_dashing = false;
+                hsp = 0;
+            }
+        }
+        else if (turning) {
 	            turn_timer++;
 	            var target_spd = turn_target_dir * (base_spd * 0.5);
 	            hsp = lerp(hsp, target_spd, accel);
@@ -104,7 +139,7 @@ else
 	            }
 	        }
 
-			if(!talking){
+			if(!talking && !is_dashing){
 		        if (!keyboard_check(vk_right) && !keyboard_check(vk_left)) {
 		            if (abs(hsp) < 1 && !turning) run = false;
 		        }
@@ -179,10 +214,15 @@ else
 		        x += sign(hsp);
 		    }
 		    hsp = 0;
+		    if (is_dashing) {
+		        is_dashing = false;
+		        dash_timer = 0;
+		    }
 		}
 		x += hsp;
 
 		// VERTICAL
+		var previous_ong = ong;
 		ong = false;
 		if (col(x, y + vsp)) {
 		    while (!col(x, y + sign(vsp))) {
@@ -191,7 +231,13 @@ else
 		    if (vsp > 0) ong = true;
 		    vsp = 0;
 		}
-		y += vsp;
+		if (!is_dashing) {
+			y += vsp;
+		}
+
+		if (ong && !previous_ong) {
+			air_dash_available = true;
+		}
 
 
 	    // === KNOCKBACK ===
@@ -213,12 +259,18 @@ else
 		
 	    if (state != PlayerState.ATTACK) {
 
-			if (swimming) {
+			if (is_dashing) {
+				state = PlayerState.DASH;
+				sprite_index = spr_player_running;
+				image_speed = 1.5;
+			}
+
+			if (swimming && !is_dashing) {
 				vsp *= 0.75;
 				hsp *= 0.75;
 			}
 
-	        if (!ong) {
+	        if (!is_dashing && !ong) {
 	            // --- ON AIR ---
 	            if (vsp < 0) {
 	                if (state != PlayerState.JUMP && state != PlayerState.RUN_JUMP) {

@@ -55,6 +55,7 @@ switch (state) {
     case PlayerState.FALL:
     case PlayerState.ATTACK:
 	case PlayerState.TALKING:
+	case PlayerState.DASH:
 		scr_combat();
 	case PlayerState.DYING:
 		scr_movement(); 

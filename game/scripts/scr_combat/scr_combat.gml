@@ -1,6 +1,10 @@
 function scr_combat() {
 	damage = damage_base;
 
+	if (is_dashing) {
+		return;
+	}
+
     if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
 
 		if(instance_exists(obj_perk_passive_energy_attack)) obj_perk_passive_energy_attack.count_attack++;

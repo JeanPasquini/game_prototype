@@ -14,6 +14,7 @@ enum PlayerState {
 	ATTACK,
 	TALKING,
 	WAIT_ATTACK,
+	DASH,
 	DYING
 }
 state = PlayerState.IDLE;
@@ -85,6 +86,16 @@ run = false;
 tap_timer_left = 0;
 tap_timer_right = 0;
 double_tap_threshold = 15;
+
+// Dash
+dash_speed = 11;
+dash_duration = 8;
+dash_cooldown = 18;
+dash_timer = 0;
+dash_cooldown_timer = 0;
+dash_direction = 1;
+is_dashing = false;
+air_dash_available = true;
 
 previous_state = state;
 smoke_instance = noone;
