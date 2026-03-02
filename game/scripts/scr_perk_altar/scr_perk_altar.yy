@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_perk_altar",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_perk_altar",
+  "parent":{
+    "name":"perk",
+    "path":"folders/Scripts/perk.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

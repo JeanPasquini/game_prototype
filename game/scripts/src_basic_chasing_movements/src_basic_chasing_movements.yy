@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_basic_chasing_movements",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_basic_chasing_movements",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

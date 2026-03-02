@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sdt_phase1_mini_boss",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":86.64,
+  "exportDir":"",
+  "name":"sdt_phase1_mini_boss",
+  "parent":{
+    "name":"sountrack",
+    "path":"folders/Sounds/sountrack.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sdt_phase1_mini_boss.wav",
+  "volume":1.0,
+}

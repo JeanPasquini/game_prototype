@@ -12,8 +12,8 @@
     "path":"folders/Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_projectile_parent",
-    "path":"objects/obj_projectile_parent/obj_projectile_parent.yy",
+    "name":"obj_parabolic_projectile_parent",
+    "path":"objects/obj_parabolic_projectile_parent/obj_parabolic_projectile_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"hammer",
-    "path":"sprites/hammer/hammer.yy",
+    "name":"projectiles_enemy1",
+    "path":"sprites/projectiles_enemy1/projectiles_enemy1.yy",
   },
   "spriteMaskId":null,
   "visible":true,

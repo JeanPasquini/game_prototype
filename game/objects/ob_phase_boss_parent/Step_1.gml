@@ -1,0 +1,1 @@
+scr_create_next_phase_door();

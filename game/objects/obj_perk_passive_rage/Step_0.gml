@@ -1,0 +1,1 @@
+if(obj_combo_streak > 0) damage = 1 + obj_combo_streak.combo_streak / 20;
