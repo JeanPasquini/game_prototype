@@ -8,12 +8,6 @@ enum EnemyState {
 	CHARGING_ATTACK
 }
 
-enum EnemyMovementStyle {
-	NORMAL,
-	JUMPING,
-	STOPPED
-}
-
 drops = [
     { item: noone, chance: 10 },
     { item: obj_drop_coin, chance: 15 },
@@ -21,12 +15,13 @@ drops = [
     { item: obj_drop_life, chance: 70 }
 ];
 
+idle_movement_script = src_basic_idle_movement();
+chasing_movement_script = src_basic_idle_movement();
+chasing_attack_script = function () {}; // guarantees only damage from contact.
 life = 1;
-movementStyle = EnemyMovementStyle.NORMAL
-hasToChargeAttack = false;
 is_destroyed = false;
-currentState = EnemyState.IDLE;
 currentMovement = EnemyState.ONGROUND;
+currentState = EnemyState.IDLE;
 detectionRadius = 100;
 maxRandomMovement = 100;
 movementSpeed = 1;

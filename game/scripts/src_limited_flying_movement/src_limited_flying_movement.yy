@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_limited_flying_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_limited_flying_movement",
+  "parent":{
+    "name":"movements",
+    "path":"folders/Scripts/enemy/movements.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
