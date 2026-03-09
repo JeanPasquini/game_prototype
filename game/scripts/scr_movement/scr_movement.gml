@@ -321,6 +321,9 @@ else
 										    sde_player_step2,
 										    sde_player_step
 										];
+										if(run){
+											obj_effect_unicle.scr_fx_run_smoke(x, y + 12);
+										}
 
 										audio_play_sound(steps[irandom(array_length(steps) - 1)], 1, false);
 
@@ -348,23 +351,6 @@ else
 	            }
 	        }
 			image_xscale = face;
-	    }
-
-
-		// SMOKE EFFECT
-	    if (state == PlayerState.RUN && ong) {
-	        if (!instance_exists(smoke_instance)) {
-	            smoke_instance = instance_create_layer(x, y, "Instances", obj_dirt);
-	        } else {
-	            smoke_instance.x = x;
-	            smoke_instance.y = y;
-	        }
-	    }
-	    else {
-	        if (instance_exists(smoke_instance)) {
-	            instance_destroy(smoke_instance);
-	            smoke_instance = noone;
-	        }
 	    }
 	}
 }
