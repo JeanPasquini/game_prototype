@@ -1,0 +1,1 @@
+image_xscale = obj_player.energy / obj_player.energy_max;

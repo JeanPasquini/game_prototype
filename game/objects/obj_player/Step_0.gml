@@ -1,5 +1,9 @@
 audio_listener_set_position(0, x, y, 0);
 
+if (global.hitstop > 0) {
+    exit;
+}
+
 if (life <= 0){
 	state = PlayerState.DYING;
 	life_max = life_max_initial;
@@ -54,10 +58,12 @@ switch (state) {
     case PlayerState.JUMP:
     case PlayerState.FALL:
     case PlayerState.ATTACK:
+	case PlayerState.DASH:
 	case PlayerState.TALKING:
 		scr_combat();
 	case PlayerState.DYING:
 		scr_movement(); 
+
     break;
 }
 

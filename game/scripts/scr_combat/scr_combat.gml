@@ -1,30 +1,46 @@
 function scr_combat() {
-	damage = damage_base;
 
-    if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
+damage = damage_base;
 
-		if(instance_exists(obj_perk_passive_energy_attack)) obj_perk_passive_energy_attack.count_attack++;
+if (is_dashing) {
+	return;
+}
 
-        attack_face = face;
-        state = PlayerState.ATTACK;
+if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
 
-        sprite_index = spr_player_attacking;
-        image_index = 0;
-        image_speed = attack_speed;
-		image_xscale = turn_target_dir;
-		
-		audio_play_sound(sde_player_attack, 1, false);
-		
-        // HITBOX
-        var hitbox_x = x + (turn_target_dir * 25);
+	if(instance_exists(obj_perk_passive_energy_attack)) 
+		obj_perk_passive_energy_attack.count_attack++;
+
+	attack_face = face;
+	state = PlayerState.ATTACK;
+
+	attack_dir = turn_target_dir; // GUARDA A DIREÇÃO
+
+	sprite_index = spr_player_attacking;
+	image_index = 0;
+	image_speed = attack_speed;
+	image_xscale = attack_dir;
+
+	audio_play_sound(sde_player_attack, 1, false);
+
+	alarm[1] = (60 / attack_speed);
+}
+
+if (sprite_index == spr_player_attacking) {
+
+    if (floor(image_index) == 1 && !attacked) {
+        attacked = true;
+
+        var hitbox_x = x + (attack_dir * 25);
         var hitbox_y = y - 8;
 
-        var hb = instance_create_layer(hitbox_x, hitbox_y, "instances", obj_player_hitbox);
+        hb = instance_create_layer(hitbox_x, hitbox_y, "Instances", obj_player_hitbox);
         hb.damage = damage;
-        hb.direction = attack_face;
-
-        alarm[1] = 15 - (attack_speed * 5);
+        hb.direction = attack_dir;
+		hb.frametime = (2 * 8) / image_speed;
     }
+
+}
 	
 	if (keyboard_check_pressed(ord("X")) && !talking && energy == energy_max) {
 		if(instance_exists(obj_perk_active_temporal_jump)) obj_perk_active_temporal_jump.active_perk();

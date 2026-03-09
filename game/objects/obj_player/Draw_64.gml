@@ -21,13 +21,13 @@ var draw_y = 16;
 
 // Life frame
 
-draw_sprite_ext(
-    spr_ui_life_frame,
-    0,
-    draw_x,
-    draw_y,
-    2, 2, 0, c_white, 1
-);
+//draw_sprite_ext(
+//    spr_ui_life_frame,
+//    0,
+//    draw_x,
+//    draw_y,
+//    2, 2, 0, c_white, 1
+//);
 
 var life_percent = clamp(life / life_max, 0, 1);
 var spr_w = sprite_get_width(spr_ui_life_bar);
@@ -42,24 +42,24 @@ var bar_y = draw_y + 28;
 
 // PERK
 
-if(perk_activatable != noone){
-	draw_sprite_ext(
-	    perk_activatable,
-	    0,
-	    draw_x + 40,
-	    draw_y + 44,
-	    2, 2, 0, c_white, 1
-	);
-}
+//if(perk_activatable != noone){
+//	draw_sprite_ext(
+//	    perk_activatable,
+//	    0,
+//	    draw_x + 40,
+//	    draw_y + 44,
+//	    2, 2, 0, c_white, 1
+//	);
+//}
 
 // LIFE
 
-draw_sprite_stretched(spr_ui_life_bar, 0, bar_x, bar_y, bar_draw_w, bar_draw_h);
+//draw_sprite_stretched(spr_ui_life_bar, 0, bar_x, bar_y, bar_draw_w, bar_draw_h);
 
 // ENERGY
 var energy_percent = clamp(energy / energy_max, 0, 1);
 var bar_draw_w_energy = spr_w * energy_percent * scale;
-draw_sprite_stretched(spr_ui_energy_bar, 0, bar_x, bar_y + 30, bar_draw_w_energy, spr_h / 2);
+//draw_sprite_stretched(spr_ui_energy_bar, 0, bar_x, bar_y + 30, bar_draw_w_energy, spr_h / 2);
 
 draw_set_color(c_white);
 draw_set_halign(fa_center);
@@ -68,41 +68,41 @@ draw_set_valign(fa_middle);
 var text_x = bar_x + spr_w * scale / 2;
 var text_y = bar_y + bar_draw_h / 2;
 
-draw_set_font(fnt_player_life);
-draw_text_transformed(text_x, text_y, string(life) + " / " + string(life_max), 1, 1, 0);
+//draw_set_font(fnt_player_life);
+//draw_text_transformed(text_x, text_y, string(life) + " / " + string(life_max), 1, 1, 0);
 
-draw_set_font(fnt_player_life);
-draw_text_transformed(text_x, text_y + 25, string(energy) + " / " + string(energy_max), 1, 1, 0);
+//draw_set_font(fnt_player_life);
+//draw_text_transformed(text_x, text_y + 25, string(energy) + " / " + string(energy_max), 1, 1, 0);
 
 var line_h = 48;
 var icon_x = draw_x + 55;
 var text_money_x = draw_x + 80;
 
-// Frame Itens
+//// Frame Itens
 
-draw_sprite_ext(spr_ui_itens, image_index,
-    draw_x + 8, 50 +  draw_y + line_h * 1, 2, 2, 0, c_white, 1);
+//draw_sprite_ext(spr_ui_itens, image_index,
+//    draw_x + 8, 50 +  draw_y + line_h * 1, 2, 2, 0, c_white, 1);
 
 
-draw_set_halign(fa_left);
+//draw_set_halign(fa_left);
 
-// Money
+//// Money
 
-draw_sprite_ext(spr_status_money, image_index,
-    draw_x + 40, 50 +  draw_y + 27 + line_h * 1, 2, 2, 0, c_white, 1);
+//draw_sprite_ext(spr_status_money, image_index,
+//    draw_x + 40, 50 +  draw_y + 27 + line_h * 1, 2, 2, 0, c_white, 1);
 
-draw_text(text_money_x, 50 + draw_y + 28 + line_h * 1 + 16,
-string_format(money, 0, 2));
-draw_set_font(fnt_player_status_itens);
+//draw_text(text_money_x, 50 + draw_y + 28 + line_h * 1 + 16,
+//string_format(money, 0, 2));
+//draw_set_font(fnt_player_status_itens);
 
-// Key
+//// Key
 
-draw_sprite_ext(spr_status_key, image_index,
-    draw_x + 40, 50 +  draw_y + 58 + line_h * 1, 2, 2, 0, c_white, 1);
+//draw_sprite_ext(spr_status_key, image_index,
+//    draw_x + 40, 50 +  draw_y + 58 + line_h * 1, 2, 2, 0, c_white, 1);
 
-draw_text(text_money_x, 50 + draw_y + 56 + line_h * 1 + 16,
-string_format(key, 0, 2));
-draw_set_font(fnt_player_status_itens);
+//draw_text(text_money_x, 50 + draw_y + 56 + line_h * 1 + 16,
+//string_format(key, 0, 2));
+//draw_set_font(fnt_player_status_itens);
 
 // Button Status
 

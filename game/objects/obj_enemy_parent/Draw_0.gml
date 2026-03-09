@@ -1,3 +1,10 @@
+if (global.hitstop > 0) {
+    image_speed = 0;
+	draw_self();
+    exit;
+} else {
+    image_speed = 1;
+}
 
 function get_state_name(state_val) {
     switch (state_val) {
@@ -33,9 +40,8 @@ if (freeze_alpha > 0) {
     gpu_set_blendmode(bm_normal);
 }
 
-if(alpha > 0){
-gpu_set_fog(true, color, 0, 0);	
-draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, 0, c_white, alpha);	
-gpu_set_fog(false, color, 0, 0);	
+if (alpha > 0) {
+    gpu_set_fog(true, color, 0, 0);
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, 1, 0, c_white, alpha);
+    gpu_set_fog(false, color, 0, 0);
 }
-

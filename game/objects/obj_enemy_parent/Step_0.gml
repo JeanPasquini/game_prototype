@@ -1,3 +1,8 @@
+if (global.hitstop > 0) {
+	speed = 0;
+    exit;
+}
+	
 knockbackSmoothing();
 
 if (life <= 0 && !is_destroyed) {
