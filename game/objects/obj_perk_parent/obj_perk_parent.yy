@@ -10,8 +10,8 @@
   "name":"obj_perk_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"Parents",
-    "path":"folders/Objects/Parents.yy",
+    "name":"Perks",
+    "path":"folders/Objects/Perks.yy",
   },
   "parentObjectId":null,
   "persistent":false,

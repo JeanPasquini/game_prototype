@@ -16,7 +16,6 @@ function scr_movement() {
     _resolve_collisions();
     _apply_knockback();
     _update_sprites();
-    _update_smoke();
 }
 
 function _update_dying() {
@@ -411,7 +410,6 @@ function _update_sprites() {
 							    for (var i = 0; i < array_length(frames); i++) {
 
 							        if (current_frame == frames[i]) {
-
 							            // só toca se mudou o frame
 							            if (last_foot_frame != current_frame) {
 							                var steps = [
@@ -419,7 +417,8 @@ function _update_sprites() {
 											    sde_player_step2,
 											    sde_player_step
 											];
-
+											
+											if(run) obj_effect_unicle.scr_fx_run_smoke(x, y + 10);
 											audio_play_sound(steps[irandom(array_length(steps) - 1)], 1, false);
 
 							                last_foot_frame = current_frame;
@@ -452,25 +451,5 @@ function _update_sprites() {
 	        }
 			image_xscale = face;
 	    }
-}
-
-function _update_smoke() {
-
-    if (state == PlayerState.RUN && ong) {
-
-        if (!instance_exists(smoke_instance)) {
-            smoke_instance = instance_create_layer(x, y, "Instances", obj_dirt);
-        }
-        else {
-            smoke_instance.x = x;
-            smoke_instance.y = y;
-        }
-    }
-    else {
-        if (instance_exists(smoke_instance)) {
-            instance_destroy(smoke_instance);
-            smoke_instance = noone;
-        }
-    }
 }
 
