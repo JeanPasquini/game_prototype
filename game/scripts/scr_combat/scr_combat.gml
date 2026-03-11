@@ -43,11 +43,22 @@ if (sprite_index == spr_player_attacking) {
 }
 	
 	if (keyboard_check_pressed(ord("X")) && !talking && energy == energy_max) {
+		
 		if(instance_exists(obj_perk_active_temporal_jump)) obj_perk_active_temporal_jump.active_perk();
 		if(instance_exists(obj_perk_active_space_break)) obj_perk_active_space_break.active_perk();
 		if(instance_exists(obj_perk_active_black_hole)) obj_perk_active_black_hole.active_perk();
-        obj_player.energy = 0;
-    }
+
+		obj_player.energy = 0;
+
+		with(obj_hud_player_energy){
+			if(!playing_energy_used){
+				sprite_index = spr_ui_player_energy_used;
+				image_index = 0;
+				image_speed = 1;
+				playing_energy_used = true;
+			}
+		}
+	}
 }
 
 function scr_damage_with_knockback(){
