@@ -108,6 +108,8 @@ swimming_timer = swimming_threshold;
 
 attacked = false;
 
+air_time = 0;
+
 //depth = 0;
 
 // Sounds Frames Step

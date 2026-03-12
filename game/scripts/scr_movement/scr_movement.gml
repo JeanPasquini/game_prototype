@@ -125,7 +125,10 @@ function _update_dash() {
         hsp = dash_direction * dash_speed;
         vsp = 0;
 
-        if (!ong) air_dash_available = false;
+        if (!ong) {
+		    air_dash_available = false;
+		    air_time = 0;
+		}
     }
 
     if (is_dashing) {
@@ -226,6 +229,10 @@ function _col(xp, yp) {
 
 function _resolve_collisions() {
 
+	if (!ong) {
+	    air_time++;
+	}
+
     // HORIZONTAL
     if (_col(x + hsp, y)) {
 
@@ -259,9 +266,15 @@ function _resolve_collisions() {
 
     if (!is_dashing) y += vsp;
 
-    if (ong && !previous_ong) {
-        air_dash_available = true;
-    }
+	if (ong && !previous_ong) {
+
+	    if (air_time >= 60) {
+	        obj_effect_unicle.scr_fx_fall_smoke(x, y + 13);
+	    }
+
+	    air_time = 0;
+	    air_dash_available = true;
+	}
 	
 		// COYOTE TIME
 	if (ong) {
