@@ -5,21 +5,19 @@ if (life <= 0 && !is_destroyed) {
     is_destroyed = true;
 }
 
-switch (currentState) {
-    case EnemyState.IDLE:
-        idle_movement_script();
-		if (distance_to_object(obj_player) < detectionRadius) {currentState = EnemyState.CHASING}
-        break;
-    case EnemyState.CHASING:
-        chasing_movement_script();
-		chasing_attack_script();
-        break;
-	case EnemyState.SPECIAL_ATTACK:
-		break;
-	case EnemyState.CHARGING_ATTACK:
-		break;
+// Idle State
+if (currentState == EnemyState.IDLE) {
+	idle_movement_script();
+	if (distance_to_object(obj_player) < detectionRadius) {currentState = EnemyState.CHASING}    
+} 
+// Attacking State
+else if (currentState == EnemyState.CHASING || currentState == EnemyState.CHARGING_ATTACK) {
+	chasing_movement_script();
+	chasing_attack_script();
 }
 
+// CAUSA EFITO COLATERAL NOS MOVIMENTOS (DEFINIR COLISÃO EM CADA UM DELES SE NECESSÁRIO)
+/* 
 // Ajusta o movimento para não atravessar a Parede e nem o Player
 if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
 	while (!place_meeting(x + sign(hsp), y, obj_wall)
@@ -38,7 +36,7 @@ if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)
 	vsp = 0;
 }
 y += vsp;
-
+*/
 
 function knockbackSmoothing(){
 	if (abs(knockback_x) > 0.1 || abs(knockback_y) > 0.1) {

@@ -1,10 +1,11 @@
 
 function get_state_name(state_val) {
     switch (state_val) {
-        case EnemyState.IDLE:           return "IDLE";
-        case EnemyState.CHASING:        return "CHASING";
-		case EnemyState.SPECIAL_ATTACK: return "SPECIAL_ATTACK";
-        default:                        return "UNKNOWN";
+        case EnemyState.IDLE:            return "IDLE";
+        case EnemyState.CHASING:         return "CHASING";
+		case EnemyState.SPECIAL_ATTACK:  return "SPECIAL_ATTACK";
+		case EnemyState.CHARGING_ATTACK: return "CHARGING_ATTACK";
+        default:                         return "UNKNOWN";
     }
 }
 
