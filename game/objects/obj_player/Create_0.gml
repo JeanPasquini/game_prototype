@@ -39,7 +39,7 @@ damage_base = 1;
 damage = damage_base;
 spd = 2;
 spd_max = 10;
-attack_speed = 3; // max 2.5
+attack_speed = 3;
 attack_recoil = 2;
 attack_knockback = 5;
 invencible_time = 50;
@@ -50,7 +50,7 @@ key = 10;
 // Dash
 dash_speed = 10;
 dash_duration = 8;
-dash_cooldown = 18;
+dash_cooldown = 30;
 dash_timer = 0;
 dash_cooldown_timer = 0;
 dash_direction = 1;

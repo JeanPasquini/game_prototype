@@ -2,11 +2,7 @@ function scr_combat() {
 
 damage = damage_base;
 
-if (is_dashing) {
-	return;
-}
-
-if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
+if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking && !is_dashing) {
 
 	if(instance_exists(obj_perk_passive_energy_attack)) 
 		obj_perk_passive_energy_attack.count_attack++;
@@ -21,19 +17,23 @@ if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
 	image_speed = attack_speed;
 	image_xscale = attack_dir;
 
-	audio_play_sound(sde_player_attack, 1, false);
 
 	alarm[1] = (60 / attack_speed);
 }
 
 if (sprite_index == spr_player_attacking) {
 
+	if (obj_player.is_dashing){
+		state = PlayerState.DASH;
+		sprite_index = spr_player_dash;	
+	}
     if (floor(image_index) == 1 && !attacked) {
         attacked = true;
 
         var hitbox_x = x + (attack_dir * 25);
         var hitbox_y = y - 8;
-
+		
+		audio_play_sound(sde_player_attack, 1, false);
         hb = instance_create_layer(hitbox_x, hitbox_y, "Instances", obj_player_hitbox);
         hb.damage = damage;
         hb.direction = attack_dir;

@@ -54,6 +54,11 @@ function _update_dying() {
 
 function _update_timers() {
 
+	if(state = PlayerState.DASH){
+		var _dir = dash_direction; // ou face
+		obj_effect_unicle.scr_fx_dash_smoke2(x, y, _dir);	
+	}
+
 	if (keyboard_check_pressed(vk_right)) {
 	    if (tap_timer_right > 0) run = true;
 	    else tap_timer_right = double_tap_threshold;
@@ -115,11 +120,15 @@ function _update_dash() {
     if (wants_dash && can_dash) {
 
         is_dashing = true;
+
         dash_timer = dash_duration;
         alarm[2] = dash_cooldown;
 
         dash_direction = (move_input != 0) ? move_input : face;
         face = dash_direction;
+		var _dir = dash_direction; // ou face
+		obj_effect_unicle.scr_fx_dash_smoke(x, y, _dir);
+		
 
         turning = false;
         hsp = dash_direction * dash_speed;
@@ -318,7 +327,7 @@ function _update_sprites() {
 
 			if (is_dashing) {
 				state = PlayerState.DASH;
-				sprite_index = spr_player_running;
+				sprite_index = spr_player_dash;
 				image_speed = 1;
 			}
 

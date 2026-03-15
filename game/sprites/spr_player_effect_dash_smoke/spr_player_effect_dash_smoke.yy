@@ -31,7 +31,7 @@
   ],
   "name":"spr_player_effect_dash_smoke",
   "nineSlice":null,
-  "origin":0,
+  "origin":9,
   "parent":{
     "name":"effects",
     "path":"folders/Sprites/player/effects.yy",
@@ -108,7 +108,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":0,
-    "yorigin":0,
+    "yorigin":28,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

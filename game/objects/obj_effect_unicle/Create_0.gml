@@ -36,7 +36,7 @@ part_type_alpha3(global.PT_HIT_IMPACT, 1, 1, 1);
 part_type_blend(global.PT_HIT_IMPACT, false);
 part_type_life(global.PT_HIT_IMPACT, 10, 10);
 
-//HIT IMPACT
+//FALL SMOKE
 
 global.PT_FALL_SMOKE = part_type_create();
 part_type_sprite(global.PT_FALL_SMOKE, spr_player_effect_fall_smoke, true, true, false)
@@ -50,6 +50,36 @@ part_type_colour3(global.PT_FALL_SMOKE, $FFFFFF, $FFFFFF, $FFFFFF);
 part_type_alpha3(global.PT_FALL_SMOKE, 1, 1, 1);
 part_type_blend(global.PT_FALL_SMOKE, false);
 part_type_life(global.PT_FALL_SMOKE, 20, 20);
+
+//DASH SMOKE
+
+global.PT_DASH_SMOKE = part_type_create();
+part_type_sprite(global.PT_DASH_SMOKE, spr_player_effect_dash_smoke, true, true, false)
+part_type_size(global.PT_DASH_SMOKE, 1, 1, 0, 0);
+part_type_scale(global.PT_DASH_SMOKE, 1, 1);
+part_type_speed(global.PT_DASH_SMOKE, 0, 0, 0, 0);
+part_type_direction(global.PT_DASH_SMOKE, 80, 100, 0, 0);
+part_type_gravity(global.PT_DASH_SMOKE, 0, 270);
+part_type_orientation(global.PT_DASH_SMOKE, 180, 0, 0, 0, false);
+part_type_colour3(global.PT_DASH_SMOKE, $FFFFFF, $FFFFFF, $FFFFFF);
+part_type_alpha3(global.PT_DASH_SMOKE, 0.5, 0.5, 0);
+part_type_blend(global.PT_DASH_SMOKE, false);
+part_type_life(global.PT_DASH_SMOKE, 15, 15);
+
+//DASH SMOKE 2
+
+global.PT_DASH_SMOKE2 = part_type_create();
+part_type_sprite(global.PT_DASH_SMOKE2, spr_player_effect_dash, false, false, false)
+part_type_size(global.PT_DASH_SMOKE2, 1, 1, 0, 0);
+part_type_scale(global.PT_DASH_SMOKE2, 1, 1);
+part_type_speed(global.PT_DASH_SMOKE2, 0, 0, 0, 0);
+part_type_direction(global.PT_DASH_SMOKE2, 0, 0, 0, 0);
+part_type_gravity(global.PT_DASH_SMOKE2, 0, 270);
+part_type_orientation(global.PT_DASH_SMOKE2, 0, 0, 0, 0, false);
+part_type_colour3(global.PT_DASH_SMOKE2, $FFFFFF, $FFFFFF, $FFFFFF);
+part_type_alpha3(global.PT_DASH_SMOKE2, 0.2, 0.1, 0);
+part_type_blend(global.PT_DASH_SMOKE2, false);
+part_type_life(global.PT_DASH_SMOKE2, 30, 30);
 
 
 // =======================
@@ -66,4 +96,20 @@ scr_fx_hit_impact = function(_x, _y) {
 
 scr_fx_fall_smoke = function(_x, _y) {
     part_particles_create(global.PS, _x, _y, global.PT_FALL_SMOKE, 1);
+}
+
+scr_fx_dash_smoke = function(_x, _y, _dir) {
+	if(_dir < 0){
+		_dir = 0;	
+	}
+	else{
+		_dir = 180;	
+	}
+    part_type_orientation(global.PT_DASH_SMOKE, _dir, _dir, 0, 0, 0); // se quiser inverter a direção das partículas
+	part_particles_create(global.PS, _x, _y, global.PT_DASH_SMOKE, 1);
+}
+
+scr_fx_dash_smoke2 = function(_x, _y, _dir) {
+	part_type_scale(global.PT_DASH_SMOKE2, _dir, 1);
+	part_particles_create(global.PS, _x, _y, global.PT_DASH_SMOKE2, 1);
 }
