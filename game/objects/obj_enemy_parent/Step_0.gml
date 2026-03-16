@@ -17,7 +17,7 @@ else if (currentState == EnemyState.CHASING || currentState == EnemyState.CHARGI
 }
 
 // CAUSA EFITO COLATERAL NOS MOVIMENTOS (DEFINIR COLISÃO EM CADA UM DELES SE NECESSÁRIO)
-/* 
+
 // Ajusta o movimento para não atravessar a Parede e nem o Player
 if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
 	while (!place_meeting(x + sign(hsp), y, obj_wall)
@@ -26,7 +26,7 @@ if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)
 	}
 	hsp = 0;
 }
-x += hsp;
+//x += hsp;
 
 if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)) {
 	while (!place_meeting(x, y + sign(vsp), obj_wall)
@@ -35,8 +35,8 @@ if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)
 	}
 	vsp = 0;
 }
-y += vsp;
-*/
+//y += vsp;
+
 
 function knockbackSmoothing(){
 	if (abs(knockback_x) > 0.1 || abs(knockback_y) > 0.1) {

@@ -1,17 +1,20 @@
-function src_jumping_idle_movement() {
-    
-    return function () {
+function src_jumping_chasing_movement(){
+
+	 return function () {
 
         // pausa entre saltos
-        if (pause_timer > 0 || currentState == EnemyState.CHARGING_ATTACK) {
+        if (pause_timer > 0) {
             pause_timer--;
             return;
         }
 
         // verifica se está no chão
-        var on_ground = (place_meeting(x, y, obj_wall));
+        var on_ground = (y >= ystart);
 
         if (on_ground) {
+			currentMovement = EnemyState.ONGROUND;
+            y = ystart;
+            vsp = 0;
 
             // decide movimento horizontal
             switch (jump_state) {
@@ -43,19 +46,11 @@ function src_jumping_idle_movement() {
 			
             // inicia salto
             vsp = -jump_force;
-			currentMovement = EnemyState.JUMPING;
         }
         else {
-			show_debug_message(place_meeting(x, y + vsp, obj_wall));
-            // fase aérea (soma vsp até que seja positivo e volte ao on_ground)
-			if (place_meeting(x, y + vsp, obj_wall)) {
-				while (!place_meeting(x, y + sign(vsp), obj_wall)) {
-				    y += sign(vsp);
-				}
-				vsp = 0;
-			} else {
-				vsp += grv;
-			}
+            // fase aérea
+            vsp += grv;
+			currentMovement = EnemyState.JUMPING;
         }
 
         // aplica movimento
@@ -63,9 +58,10 @@ function src_jumping_idle_movement() {
         y += vsp;
 
         // aterrissagem
-        if (place_meeting(x, y, obj_wall)) {
+        if (y >= ystart) {
+            y = ystart;
+            vsp = 0;
             pause_timer = jump_pause;
-			currentMovement = EnemyState.ONGROUND;
         }
     }
 
