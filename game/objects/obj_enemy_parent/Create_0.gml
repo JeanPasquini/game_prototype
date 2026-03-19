@@ -15,10 +15,7 @@ drops = [
     { item: obj_drop_life, chance: 70 }
 ];
 
-jump_direction = 1; // talvez possa ser removido
-
 // Attack
-
 life = 1;
 is_destroyed = false;
 currentState = EnemyState.IDLE;

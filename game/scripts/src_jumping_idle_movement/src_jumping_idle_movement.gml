@@ -1,72 +1,76 @@
 function src_jumping_idle_movement() {
     
-    return function () {
+	return function () {
 
-        // pausa entre saltos
-        if (pause_timer > 0 || currentState == EnemyState.CHARGING_ATTACK) {
-            pause_timer--;
-            return;
-        }
+	    // Handle delay between jumps to avoid continuous hopping
+	    if (pause_timer > 0) {
+	        pause_timer--;
+	        return;
+	    }
 
-        // verifica se está no chão
-        var on_ground = (place_meeting(x, y, obj_wall));
+	    // Check if the enemy is currently on the ground
+	    var on_ground = (place_meeting(x, y, obj_wall));
 
-        if (on_ground) {
+	    if (on_ground) {
 
-            // decide movimento horizontal
-            switch (jump_state) {
-                case JumpState.LEFT:
-                    hsp = -jump_speed;
-                    if (x <= xstart - maxRandomMovement)
-                        jump_state = JumpState.LEFT_MIDDLE;
-                break;
+	        // Define horizontal movement boundaries relative to the spawn position
+	        var min_x = xstart - maxRandomMovement;
+			var max_x = xstart + maxRandomMovement;
 
-                case JumpState.LEFT_MIDDLE:
-                    hsp = jump_speed;
-                    if (x >= xstart)
-                        jump_state = JumpState.RIGHT;
-                break;
+			// Enforce boundary limits before choosing movement direction
+			if (x <= min_x)
+			    jump_state = JumpState.LEFT_MIDDLE;
 
-                case JumpState.RIGHT:
-                    hsp = jump_speed;
-                    if (x >= xstart + maxRandomMovement)
-                        jump_state = JumpState.RIGHT_MIDDLE;
-                break;
+			if (x >= max_x)
+			    jump_state = JumpState.RIGHT_MIDDLE;
 
-                case JumpState.RIGHT_MIDDLE:
-                    hsp = -jump_speed;
+			// Determine horizontal movement based on the current jump state
+			switch (jump_state) {
+			    case JumpState.LEFT:
+			        hsp = -jump_speed;
+			    break;
 
-                    if (x <= xstart)
-                        jump_state = JumpState.LEFT;
-                break;
-            }
-			
-            // inicia salto
-            vsp = -jump_force;
+			    case JumpState.LEFT_MIDDLE:
+			        hsp = jump_speed;
+			    break;
+
+			    case JumpState.RIGHT:
+			        hsp = jump_speed;
+			    break;
+
+			    case JumpState.RIGHT_MIDDLE:
+			        hsp = -jump_speed;
+			    break;
+			}
+		
+	        // Initiate jump by applying upward vertical speed
+	        vsp = -jump_force;
 			currentMovement = EnemyState.JUMPING;
-        }
-        else {
-			show_debug_message(place_meeting(x, y + vsp, obj_wall));
-            // fase aérea (soma vsp até que seja positivo e volte ao on_ground)
+	    }
+	    else {
+	        // Airborne phase: apply gravity and resolve vertical collisions
 			if (place_meeting(x, y + vsp, obj_wall)) {
+			
+				// Snap the instance to the nearest valid position before collision
 				while (!place_meeting(x, y + sign(vsp), obj_wall)) {
 				    y += sign(vsp);
 				}
-				vsp = 0;
+			
+				vsp = 0; // Stop vertical movement on collision
 			} else {
-				vsp += grv;
+				vsp += grv; // Apply gravity over time
 			}
-        }
+	    }
 
-        // aplica movimento
-        x += hsp;
-        y += vsp;
+	    // Apply horizontal and vertical movement
+	    x += hsp;
+	    y += vsp;
 
-        // aterrissagem
-        if (place_meeting(x, y, obj_wall)) {
-            pause_timer = jump_pause;
+	    // Detect landing and trigger jump cooldown
+	    if (vsp > 0 && place_meeting(x, y + vsp, obj_wall)) {
+	        pause_timer = jump_pause;
 			currentMovement = EnemyState.ONGROUND;
-        }
-    }
+	    }
+	}
 
 }

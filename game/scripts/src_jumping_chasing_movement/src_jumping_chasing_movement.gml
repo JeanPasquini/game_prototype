@@ -1,68 +1,85 @@
 function src_jumping_chasing_movement(){
 
-	 return function () {
+	return function () {
 
-        // pausa entre saltos
-        if (pause_timer > 0) {
-            pause_timer--;
-            return;
-        }
+	    // Handle jump cooldown and prevent movement during charging attack state
+	    if (pause_timer > 0 || currentState == EnemyState.CHARGING_ATTACK) {
+	        pause_timer--;
+	        return;
+	    }
 
-        // verifica se está no chão
-        var on_ground = (y >= ystart);
+	    // Check if the enemy is currently on the ground
+	    var on_ground = (place_meeting(x, y, obj_wall));
 
-        if (on_ground) {
-			currentMovement = EnemyState.ONGROUND;
-            y = ystart;
-            vsp = 0;
-
-            // decide movimento horizontal
-            switch (jump_state) {
-                case JumpState.LEFT:
-                    hsp = -jump_speed;
-                    if (x <= xstart - maxRandomMovement)
-                        jump_state = JumpState.LEFT_MIDDLE;
-                break;
-
-                case JumpState.LEFT_MIDDLE:
-                    hsp = jump_speed;
-                    if (x >= xstart)
-                        jump_state = JumpState.RIGHT;
-                break;
-
-                case JumpState.RIGHT:
-                    hsp = jump_speed;
-                    if (x >= xstart + maxRandomMovement)
-                        jump_state = JumpState.RIGHT_MIDDLE;
-                break;
-
-                case JumpState.RIGHT_MIDDLE:
-                    hsp = -jump_speed;
-
-                    if (x <= xstart)
-                        jump_state = JumpState.LEFT;
-                break;
-            }
+	    if (on_ground) {
 			
-            // inicia salto
-            vsp = -jump_force;
-        }
-        else {
-            // fase aérea
-            vsp += grv;
-			currentMovement = EnemyState.JUMPING;
-        }
+			// Get horizontal distance to the player
+			var target = obj_player.x;
+			var dist = target - x;
 
-        // aplica movimento
-        x += hsp;
-        y += vsp;
+			// Define a "deadzone" where the enemy should not attempt to jump
+			var deadzone = maxRandomMovement;
 
-        // aterrissagem
-        if (y >= ystart) {
-            y = ystart;
-            vsp = 0;
-            pause_timer = jump_pause;
-        }
-    }
+			// Determine desired movement direction toward the player
+			var dir = sign(dist);
+
+			// Estimate total air time based on jump physics
+			var air_time = (jump_force * 2) / grv;
+
+			// Predict horizontal displacement during the jump
+			var projected_move = dir * jump_speed * air_time;
+
+			// Predict future X position after completing the jump
+			var projected_x = x + projected_move;
+
+			// Calculate future distance to the player after the jump
+			var future_dist = target - projected_x;
+
+			// Decide whether to perform the jump based on current and predicted distances
+			if (abs(dist) > deadzone) {
+			
+			    // Only jump if it will not overshoot the target excessively
+			    if (abs(future_dist) >= deadzone) {
+			        hsp = dir * jump_speed;
+			    }
+			    else {
+			        hsp = 0; // Cancel movement to avoid overshooting
+			    }
+			}
+			else {
+			    hsp = 0; // Stay idle if already within the deadzone
+			}
+		
+			// Initiate jump only if horizontal movement was approved
+			if (hsp != 0) {
+	            vsp = -jump_force;
+				currentMovement = EnemyState.JUMPING;
+			}
+	    }
+	    else {
+	        // Airborne phase: apply gravity and resolve vertical collisions
+			if (place_meeting(x, y + vsp, obj_wall)) {
+			
+				// Snap to the nearest valid position before collision
+				while (!place_meeting(x, y + sign(vsp), obj_wall)) {
+				    y += sign(vsp);
+				}
+			
+				vsp = 0;
+			} else {
+				vsp += grv;
+			}
+	    }
+
+	    // Apply movement
+	    x += hsp;
+	    y += vsp;
+
+	    // Detect landing and trigger jump cooldown
+	    if (vsp > 0 && place_meeting(x, y + vsp, obj_wall)) {
+	        pause_timer = jump_pause;
+			currentMovement = EnemyState.ONGROUND;
+	    }
+	}
 
 }
