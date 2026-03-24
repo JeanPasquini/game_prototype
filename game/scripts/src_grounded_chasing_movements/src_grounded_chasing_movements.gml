@@ -26,10 +26,6 @@ function src_grounded_chasing_movements() {
 				currentMovement = EnemyState.JUMPING;
 			} else {
 				currentMovement = EnemyState.ONGROUND;
-				if (place_meeting(x + (sprite_width/2*_dir*-1), y, obj_player)) {
-					speed = 0;
-					return;
-				}
 			}
 		}
 		/* 
