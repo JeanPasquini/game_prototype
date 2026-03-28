@@ -32,7 +32,7 @@ knockback_strength = 5;
 
 // Status
 life_max = 5;
-life = 4;
+life = 5;
 energy_max = 0;
 energy = 0;
 damage_base = 1;

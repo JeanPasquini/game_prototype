@@ -56,5 +56,6 @@ if (telegraph_timer > 0) {
 	telegraphY += (_height - sprite_get_height(spr_telegraph));	
 	
 	// Reset telegraph cooldown
+	created = false;
 	telegraph_timer = telegraph_timer_base;
 }

@@ -1,3 +1,5 @@
+
+
 enum OctopusState {
 	STARTING_ATTACK,
 	ENDING_ATTACK
@@ -12,3 +14,5 @@ max_bullets = 20;
 end_attack_timer = 60 * 8;
 
 is_destroyed = false;
+
+dir = noone;

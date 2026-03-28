@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_psicotopus",
-    "path":"sprites/spr_psicotopus/spr_psicotopus.yy",
+    "name":"spr_psicotopus_idle",
+    "path":"sprites/spr_psicotopus_idle/spr_psicotopus_idle.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -1,4 +1,5 @@
 is_destroyed = false
+created = false;
 
 tentacles = ds_list_create();
 max_tentacles = 6;

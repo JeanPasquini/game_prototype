@@ -1,10 +1,10 @@
-if (global.hitstop > 0) {
-    image_speed = 0;
-	draw_self();
-    exit;
-} else {
-    image_speed = 1;
-}
+//if (global.hitstop > 0) {
+//    image_speed = 0;
+//	draw_self();
+//    exit;
+//} else {
+//    image_speed = 1;
+//}
 
 function get_state_name(state_val) {
     switch (state_val) {

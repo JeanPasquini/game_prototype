@@ -1,8 +1,9 @@
 // Check if the octopus is starting its attack behavior
 if (currentState == OctopusState.STARTING_ATTACK && !is_destroyed) {
+	
 	var centro_x = room_width / 2;
 	var centro_y = room_height / 2;
-
+	dir = point_direction(x, y, centro_x, centro_y);
 	// Check if the instance is not yet exactly at the center of the room
 	if x != centro_x || y != centro_y {
 		// Needs to be centralized in the room
@@ -24,6 +25,8 @@ if (currentState == OctopusState.STARTING_ATTACK && !is_destroyed) {
 }
 // Check if the octopus is finishing its attack behavior
 else if (currentState == OctopusState.ENDING_ATTACK || is_destroyed) {
+	
+	dir = point_direction(x, y, xstart, ystart);
 	
 	// Wait for the end attack delay timer to finish before proceeding
 	if (end_attack_timer > 0 && !is_destroyed) {
@@ -69,7 +72,7 @@ function _create_bullets() {
 	    _b.direction = angle_start + (angle_step * i);
 	    
 	    // Define how many times the bullet can bounce
-	    _b.bounces = 3;
+	    _b.bounces = 0;
 	    
 	    // Set bullet movement speed
 	    _b.velocity = 5; 
