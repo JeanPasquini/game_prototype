@@ -1,4 +1,7 @@
 // Inherit and execute the parent object's Create event logic
+name = "PSICOTOPUS";
+
+
 event_inherited();
 
 enum AttackState {	
@@ -29,3 +32,5 @@ life = 50;
 damage = 1;   
 
 tentacles = -1
+
+attack_mount = 0;

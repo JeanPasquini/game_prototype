@@ -1,0 +1,1 @@
+sprite_index = obj_player.perk_activatable

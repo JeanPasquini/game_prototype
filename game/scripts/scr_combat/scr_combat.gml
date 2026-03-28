@@ -1,37 +1,64 @@
 function scr_combat() {
-	damage = damage_base;
 
-    if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking) {
+damage = damage_base;
 
-		if(instance_exists(obj_perk_passive_energy_attack)) obj_perk_passive_energy_attack.count_attack++;
+if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking && !is_dashing) {
 
-        attack_face = face;
-        state = PlayerState.ATTACK;
+	if(instance_exists(obj_perk_passive_energy_attack)) 
+		obj_perk_passive_energy_attack.count_attack++;
 
-        sprite_index = spr_player_attacking;
-        image_index = 0;
-        image_speed = attack_speed;
-		image_xscale = turn_target_dir;
+	attack_face = face;
+	state = PlayerState.ATTACK;
+
+	attack_dir = turn_target_dir; // GUARDA A DIREÇÃO
+
+	sprite_index = spr_player_attacking;
+	image_index = 0;
+	image_speed = attack_speed;
+	image_xscale = attack_dir;
+
+
+	alarm[1] = (60 / attack_speed);
+}
+
+if (sprite_index == spr_player_attacking) {
+
+	if (obj_player.is_dashing){
+		state = PlayerState.DASH;
+		sprite_index = spr_player_dash;	
+	}
+    if (floor(image_index) == 1 && !attacked) {
+        attacked = true;
+
+        var hitbox_x = x + (attack_dir * 25);
+        var hitbox_y = y - 8;
 		
 		audio_play_sound(sde_player_attack, 1, false);
-		
-        // HITBOX
-        var hitbox_x = x + (turn_target_dir * 25);
-        var hitbox_y = y - 8;
-
-        var hb = instance_create_layer(hitbox_x, hitbox_y, "instances", obj_player_hitbox);
+        hb = instance_create_layer(hitbox_x, hitbox_y, "Instances", obj_player_hitbox);
         hb.damage = damage;
-        hb.direction = attack_face;
-
-        alarm[1] = 15 - (attack_speed * 5);
+        hb.direction = attack_dir;
+		hb.frametime = (2 * 8) / image_speed;
     }
+
+}
 	
 	if (keyboard_check_pressed(ord("X")) && !talking && energy == energy_max) {
+		
 		if(instance_exists(obj_perk_active_temporal_jump)) obj_perk_active_temporal_jump.active_perk();
 		if(instance_exists(obj_perk_active_space_break)) obj_perk_active_space_break.active_perk();
 		if(instance_exists(obj_perk_active_black_hole)) obj_perk_active_black_hole.active_perk();
-        obj_player.energy = 0;
-    }
+
+		obj_player.energy = 0;
+
+		with(obj_hud_player_energy){
+			if(!playing_energy_used){
+				sprite_index = spr_ui_player_energy_used;
+				image_index = 0;
+				image_speed = 1;
+				playing_energy_used = true;
+			}
+		}
+	}
 }
 
 function scr_damage_with_knockback(){

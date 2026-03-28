@@ -24,3 +24,5 @@ movementSpeed = 2;
 is_attacking = false;
 player_angle_dir = 0;
 attack_range = sprite_height; // alcance máximo = altura do sprite
+alpha = 0;
+color = c_white;

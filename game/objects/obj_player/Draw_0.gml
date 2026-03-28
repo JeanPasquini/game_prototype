@@ -1,3 +1,9 @@
+if (global.hitstop > 0) {
+    image_speed = 0;
+	draw_self();
+    exit;
+}
+
 if (invencible) {
     if ((irandom_range(0,10)) < 6) {
         draw_self();
@@ -22,6 +28,7 @@ function get_state_name(state_val) {
         case PlayerState.TALKING:      return "TALKING";
         case PlayerState.WAIT_ATTACK:  return "WAIT_ATTACK";
         case PlayerState.DYING:        return "DYING";
+        case PlayerState.DASH:         return "DASH";
         default:                       return "UNKNOWN";
     }
 }

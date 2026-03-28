@@ -14,7 +14,8 @@ enum PlayerState {
 	ATTACK,
 	TALKING,
 	WAIT_ATTACK,
-	DYING
+	DYING,
+	DASH
 }
 state = PlayerState.IDLE;
 
@@ -30,21 +31,31 @@ knockback_y = 0;
 knockback_strength = 5;
 
 // Status
-life_max = 100;
-life = 60;
+life_max = 5;
+life = 5;
 energy_max = 0;
 energy = 0;
 damage_base = 1;
 damage = damage_base;
-spd = 2.5;
+spd = 2;
 spd_max = 10;
-attack_speed = 0.5; // max 2.5
+attack_speed = 3;
 attack_recoil = 2;
 attack_knockback = 5;
 invencible_time = 50;
 critical_chance = 0;
 lucky_chance = 0;
 key = 10;
+
+// Dash
+dash_speed = 10;
+dash_duration = 8;
+dash_cooldown = 30;
+dash_timer = 0;
+dash_cooldown_timer = 0;
+dash_direction = 1;
+is_dashing = false;
+air_dash_available = true;
 
 // Status Alternable
 
@@ -75,7 +86,7 @@ money = 1000;
 move_input = 0;
 
 face = 1;
-turn_target_dir = 0;
+turn_target_dir = 1;
 turning = false;
 turn_timer = 0;
 turn_duration = 0;
@@ -95,6 +106,9 @@ swimming = false;
 swimming_threshold = 30;
 swimming_timer = swimming_threshold;
 
+attacked = false;
+
+air_time = 0;
 
 //depth = 0;
 
@@ -133,3 +147,13 @@ key_initial = key;
 energy_max_initial = energy_max;
 energy_initial = energy;
 
+// Jump Buffer
+jump_buffer_timer = 0;
+jump_buffer_max   = 8;   // 6~10 frames é ideal
+
+// Coyote Time
+coyote_timer      = 0;
+coyote_max        = 8;   // 6~10 frames também
+
+// Controle interno
+jump_pressed = false;

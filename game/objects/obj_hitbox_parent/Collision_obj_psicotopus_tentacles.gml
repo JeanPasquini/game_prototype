@@ -1,15 +1,18 @@
+attack_hit_confirmed = false;
 
 
-if(hit_enemies_bool){
-	if (ds_list_find_index(hit_enemies, other.id) != -1) {
-    exit;
-	}
+if (hit_enemies_bool)
+{
+    if (ds_exists(hit_enemies, ds_type_list))
+    {
+        if (ds_list_find_index(hit_enemies, other.id) != -1)
+            exit;
 
-	ds_list_add(hit_enemies, other.id);
+        ds_list_add(hit_enemies, other.id);
+    }
 }
-else{
-	
-}
+
+attack_hit_confirmed = true;
 
 damage_total = damage;
 
@@ -26,5 +29,6 @@ dmg.text = "- " + string(damage_total);
 dmg.color = c_white;
 other.life -= damage_total;
 obj_combo_streak.scr_combo_streak();
+other.alpha = 1;
 
 if (other.life <= 0) other.is_destroyed = true;

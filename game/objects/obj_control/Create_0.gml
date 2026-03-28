@@ -6,3 +6,4 @@ audio_target  = noone;
 needs_music_update = true;
 
 randomize();
+global.hitstop = 0;

@@ -1,4 +1,5 @@
 // Inherit and execute the parent Step event logic
+// Inherit and execute the parent Step event logic
 event_inherited();
 
 // If the enemy is idle, skip all attack processing
@@ -39,28 +40,55 @@ switch (currentAttackState) {
 
 // Handles a triple vertical bullet attack over a short time window
 function attack_triple_vertical() {
-    if (attack_cooldown > 0) {
-		// Stop movement while attacking
-		speed = 0;	
+
+    static shot_1 = false;
+	static shot_2 = false;
+	static shot_3 = false;
+
+    if (!is_attacking) {
+        is_attacking = true;
+        image_index = 0;
 		
-		// Fire a bullet every 30 steps
-		if (attack_cooldown % 30 == 0) {
-			var inst = instance_create_layer(x, y, "Instances", obj_bullet_vertical);
-		}
-		
-		// Decrease attack timer
-		attack_cooldown--;
-		
-		// Reset attack state once the sequence is finished
-		if (attack_cooldown == 0) {
-			_reset_attack();
-		}
-        return;
+		shot_1 = false;
+        shot_2 = false;
+        shot_3 = false;
+
+        _start_attack();
     }
+
+    speed = 0;
+
+    var frame = floor(image_index);
 	
-    // Initialize attack duration (3 shots over time)
-    attack_cooldown = 90;
-	_start_attack();
+	function spawn_bullet_offset(_off_x, _off_y) {
+
+		var dir = (image_xscale < 0) ? -1 : 1;
+
+	    var xx = x + (_off_x * dir);
+	    var yy = y + _off_y;
+
+	    instance_create_layer(xx, yy, "Instances", obj_bullet_vertical);
+	}
+
+    if (frame >= 3 && !shot_1) {
+	    shot_1 = true;
+	    spawn_bullet_offset(-2, -66);
+	}
+
+	if (frame >= 6 && !shot_2) {
+	    shot_2 = true;
+	    spawn_bullet_offset(27, -76);
+	}
+
+	if (frame >= 10 && !shot_3) {
+	    shot_3 = true;
+	    spawn_bullet_offset(-13, -74);
+	}
+
+    if (image_index >= image_number - 1) {
+        is_attacking = false;
+        _reset_attack();
+    }
 }
 
 // Handles a single homing projectile attack
@@ -210,15 +238,18 @@ function flood_arena_attack() {
    _start_attack();
    tentacles = ds_list_create();
    
-   // Creates the flood "water" object
-   var _flood = instance_create_layer(0, 0, "Instances", obj_water);
-   _flood.width = room_width;
-   _flood.height = room_height - obj_player.y;
-   _flood.image_xscale = _flood.width;
-   _flood.image_yscale = _flood.height;
-   _flood.x = 0
-   _flood.y = obj_player.y;
+   //// Creates the flood "water" object
+   //var _flood = instance_create_layer(0, 0, "Instances", obj_water);
+   //_flood.width = room_width;
+   //_flood.height = room_height - obj_player.y;
+   //_flood.image_xscale = _flood.width;
+   //_flood.image_yscale = _flood.height;
+   //_flood.x = 0
+   //_flood.y = obj_player.y;
    //_flood.depth = -100;
+   
+   obj_water.state = waterState.ATTACK;
+   
    
    // Cria o objeto que controla os ataques com tentáculos
    instance_create_layer(0, 0, "Instances", obj_tentacle_telegraph);
@@ -243,6 +274,7 @@ function choose_next_attack() {
 	}
 
 	// Apply the newly chosen attack state
+	//currentAttackState = AttackState.OCTOPUS_ATTACK;
 	currentAttackState = next_state;
 
 	// Set a random delay before the next attack sequence
@@ -260,7 +292,7 @@ function _reset_attack() {
 	currentAttackState = AttackState.WAITING;
 	currentState = EnemyState.CHASING;
 	speed = movementSpeed;
-	sprite_index = spr_psicotopus;
+	sprite_index = spr_psicotopus_idle;
 	is_invencible = false;
 	is_attacking = false;
 }

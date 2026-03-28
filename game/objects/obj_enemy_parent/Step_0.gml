@@ -1,3 +1,8 @@
+if (global.hitstop > 0) {
+	speed = 0;
+    exit;
+}
+	
 knockbackSmoothing();
 
 if (life <= 0 && !is_destroyed) {
@@ -67,3 +72,5 @@ if (direction == 180) {
 } else {
     image_xscale = -1;
 }
+
+alpha = lerp(alpha, 0, 0.1);

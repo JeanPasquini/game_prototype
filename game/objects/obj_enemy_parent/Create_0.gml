@@ -50,3 +50,6 @@ freeze_alpha = 0;
 
 poison = false;
 poison_damage = 1;
+
+alpha = 0;
+color = c_white;

@@ -4,7 +4,7 @@ if (is_destroyed) {
 	scr_scale_animation(true);
 } else {
 	// Play the normal scale animation (grow or remain visible)
-	scr_scale_animation();
+	//scr_scale_animation();
 }
 
 // Execute behavior based on the current tentacle type
@@ -42,32 +42,41 @@ function _orbitalRotation() {
 
 
 function _tentacleAttack() {
-	// Detect player proximity and initiate the attack state
+	if(sprite_index == spr_psicotopus_tentacle_spawning) return;
 	if (!is_attacking) {
 		if (point_distance(x, y, obj_player.x, obj_player.y) <= attack_range) {
 			is_attacking = true;
-			
+			image_index = 0;
+			sprite_index = spr_psicotopus_tentacle_attacking;
 			// Decide attack direction based on player's horizontal position
 			if (obj_player.x > x) {
+				image_xscale = -1;
 				player_angle_dir = -90;
 			} else {
+				image_xscale = 1;
 				player_angle_dir = 90;
 			}
 		} else {
+			sprite_index = spr_psicotopus_tentacle_idle;
 			return; // Abort if the player is out of range
 		}
 	} else {
 		// End the attack once the tentacle returns to its neutral angle
-		if (round(image_angle) == 0) {
-			is_attacking = false;
-		}
+		//if (round(image_angle) == 0) {
+		//	is_attacking = false;
+		//	//sprite_index = spr_psicotopus_tentacle_idle;
+		//}
 	}
 	
+	
+	
     // Smoothly interpolate the tentacle angle toward the target direction
-    image_angle = lerp(image_angle, player_angle_dir, 0.03);
+    //image_angle = lerp(image_angle, player_angle_dir, 0.03);
 	
 	// Reset target angle after reaching the maximum swing
 	if (round(image_angle) >= 90 || round(image_angle) <= -90) {
 		player_angle_dir = 0;
 	}
 }
+
+alpha = lerp(alpha, 0, 0.1);
