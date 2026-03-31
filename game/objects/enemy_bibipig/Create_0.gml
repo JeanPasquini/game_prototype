@@ -1,6 +1,10 @@
 // Inherit the parent event
 event_inherited();
 
-idle_movement_script = src_basic_idle_movement();
-chasing_movement_script = src_basic_idle_movement();
-chasing_attack_script = function () {}; // guarantees only damage from contact.
+baseAttackDelay = 120; 
+currentChargingDelay = baseAttackDelay;
+currentAttackDelay = baseAttackDelay;
+
+idle_movement_script = src_grounded_idle_movement();
+chasing_movement_script = src_grounded_sprint_chasing_movement();
+chasing_attack_script = src_charging_sprint_attack(); // guarantees only damage from contact.

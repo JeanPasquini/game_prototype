@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"src_grounded_chasing_movements",
   "parent":{
-    "name":"movements",
-    "path":"folders/Scripts/enemy/movements.yy",
+    "name":"grounded",
+    "path":"folders/Scripts/enemy/movements/grounded.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

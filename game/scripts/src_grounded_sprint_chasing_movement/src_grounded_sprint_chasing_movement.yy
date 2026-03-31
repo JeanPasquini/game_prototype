@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"src_grounded_idle_movement",
+  "%Name":"src_grounded_sprint_chasing_movement",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"src_grounded_idle_movement",
+  "name":"src_grounded_sprint_chasing_movement",
   "parent":{
     "name":"grounded",
     "path":"folders/Scripts/enemy/movements/grounded.yy",

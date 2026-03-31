@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_charging_sprint_attack",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_charging_sprint_attack",
+  "parent":{
+    "name":"attacks",
+    "path":"folders/Scripts/enemy/attacks.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

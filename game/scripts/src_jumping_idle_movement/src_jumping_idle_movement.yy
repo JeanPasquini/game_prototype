@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"src_jumping_idle_movement",
   "parent":{
-    "name":"movements",
-    "path":"folders/Scripts/enemy/movements.yy",
+    "name":"jumping",
+    "path":"folders/Scripts/enemy/movements/jumping.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
