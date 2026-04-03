@@ -73,6 +73,10 @@ function _update_timers() {
 
     // JUMP BUFFER
     if (keyboard_check_pressed(vk_up)) {
+		var sfx = [
+			jump
+		];						
+		scr_audio_play(sfx);
         jump_buffer_timer = jump_buffer_max;
     }
 
@@ -118,7 +122,11 @@ function _update_dash() {
     var can_dash = !talking && !is_dashing && alarm[2] <= 0 && (ong || air_dash_available);
 
     if (wants_dash && can_dash) {
-
+		var sfx = [
+			dash_1,
+			dash_2
+		];						
+		scr_audio_play(sfx);
         is_dashing = true;
 
         dash_timer = dash_duration;
@@ -138,6 +146,7 @@ function _update_dash() {
 		    air_dash_available = false;
 		    air_time = 0;
 		}
+		
     }
 
     if (is_dashing) {
@@ -145,6 +154,7 @@ function _update_dash() {
         dash_timer--;
         hsp = dash_direction * dash_speed;
         vsp = 0;
+				
 
         if (dash_timer <= 0) {
             is_dashing = false;
@@ -283,6 +293,10 @@ function _resolve_collisions() {
 
 	    air_time = 0;
 	    air_dash_available = true;
+		var sfx = [
+			fall
+		];						
+		scr_audio_play(sfx);
 	}
 	
 		// COYOTE TIME
@@ -435,13 +449,13 @@ function _update_sprites() {
 							            // só toca se mudou o frame
 							            if (last_foot_frame != current_frame) {
 							                var steps = [
-											    sde_player_step1,
-											    sde_player_step2,
-											    sde_player_step
+											    footstep_1,
+											    footstep_2,
+											    footstep_3
 											];
 											
 											if(run) obj_effect_unicle.scr_fx_run_smoke(x, y + 10);
-											audio_play_sound(steps[irandom(array_length(steps) - 1)], 1, false);
+											scr_audio_play(steps);
 
 							                last_foot_frame = current_frame;
 							            }

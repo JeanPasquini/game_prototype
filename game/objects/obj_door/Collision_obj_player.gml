@@ -28,22 +28,28 @@ if (instance_exists(obj_player)) {
         destiny = connections.down;
         position = "up";
     }
+	
+	
 }
 
 if (destiny != noone && position != noone) {
+    
     var directions = getNextRoomPxAndPy(destiny, position);
-	
+
     if (!is_undefined(directions)) {
-        obj_player.x = directions.px;
-        obj_player.y = directions.py;
-        room_goto(destiny);
-		
-		if (is_boss_door) {
-			var _sends = src_get_room_sends_data(current_phase, current_room);
-			var _next_phase = src_get_next_phase(current_phase);
-			var _next_phase_room = _sends[$ _next_phase];
-			src_replace_next_phase_room(current_phase, current_room, _next_phase, _next_phase_room);
-			instance_destroy();
-		}
+
+        if (obj_player.state != PlayerState.WAIT) {
+
+            var transition = instance_create_layer(0, 0, "Instances", obj_transiction);
+
+            // 🔥 passa os dados pra transição
+            transition.destiny = destiny;
+            transition.px = directions.px;
+            transition.py = directions.py;
+            transition.is_boss_door = is_boss_door;
+
+            // trava o player
+            obj_player.state = PlayerState.WAIT;
+        }
     }
 }

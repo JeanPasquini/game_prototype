@@ -2,7 +2,11 @@ event_inherited();
 
 if (!attack_hit_confirmed) exit;
 
-audio_play_sound(sde_enemy_hit, 1, false);
+var sfx = [
+	attack_1,
+	attack_2
+];						
+scr_audio_play(sfx);
 
 
 var dir = point_direction(obj_player.x, obj_player.y, other.x, other.y);

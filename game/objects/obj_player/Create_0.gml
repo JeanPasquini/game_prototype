@@ -13,6 +13,7 @@ enum PlayerState {
 	SWIN,
 	ATTACK,
 	TALKING,
+	WAIT,
 	WAIT_ATTACK,
 	DYING,
 	DASH

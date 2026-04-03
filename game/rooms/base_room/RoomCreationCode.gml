@@ -65,10 +65,10 @@ if (!variable_global_exists("rooms_map")) {
 				connections: { },
 				returns: false,
 				music: sdt_phase1_mini_boss,
-				up:    { px: 150, py: 357 },
-				down:  { px: 576, py: 453 },
-				left:  { px: 64, py: 453 },
-				right: { px: 976, py: 453 },
+				up:    { px: 200, py: 350 },
+				down:  { px: 200, py: 350 },
+				left:  { px: 200, py: 350 },
+				right: { px: 200, py: 350 },
 			},
 			
 			next_phase: "phase_02"

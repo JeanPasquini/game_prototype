@@ -33,7 +33,10 @@ if (sprite_index == spr_player_attacking) {
         var hitbox_x = x + (attack_dir * 25);
         var hitbox_y = y - 8;
 		
-		audio_play_sound(sde_player_attack, 1, false);
+		var sfx = [
+			sde_player_attack
+		];					
+		scr_audio_play(sfx);
         hb = instance_create_layer(hitbox_x, hitbox_y, "Instances", obj_player_hitbox);
         hb.damage = damage;
         hb.direction = attack_dir;
