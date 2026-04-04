@@ -1,16 +1,15 @@
 function src_charging_sprint_attack(){
 	return function () {
-		if (currentAttackDelay <= 0) {
-			if (currentState == EnemyState.CHARGING_ATTACK && currentChargingDelay < 0) {
-				// increases the enemy speed? Just set a special state?
-				currentAttackDelay = baseAttackDelay;
-				currentChargingDelay = baseAttackDelay;
-				currentState = EnemyState.CHASING;
-			} else if (currentState == EnemyState.CHARGING_ATTACK && currentChargingDelay >= 0) {
-				currentChargingDelay--;
-			} else if (currentState == EnemyState.CHASING) {
-				currentState = EnemyState.CHARGING_ATTACK;
-			}
+		
+		if (currentState == EnemyState.CHARGING_ATTACK && currentChargingDelay < 0) {
+			// increases the enemy speed? Just set a special state?
+			currentAttackDelay = baseAttackDelay;
+			currentChargingDelay = baseAttackDelay;
+			currentState = EnemyState.CHASING;
+		} else if (currentState == EnemyState.CHARGING_ATTACK && currentChargingDelay >= 0) {
+			currentChargingDelay--;
+		} else if (currentState == EnemyState.CHASING && currentAttackDelay <= 0) {
+			currentState = EnemyState.CHARGING_ATTACK;
 		} else {
 			currentAttackDelay--;
 		}

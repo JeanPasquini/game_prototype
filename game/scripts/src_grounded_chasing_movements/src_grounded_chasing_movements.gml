@@ -34,12 +34,11 @@ function src_grounded_chasing_movements() {
 		if (currentMovement == EnemyState.JUMPING) {
 				enemy_jumping_movement(2, jump_direction);
 		} else if (currentMovement == EnemyState.FALLING) {
-				hspeed = 0;
 				enemy_falling_movement(2.2);
 		} else {
 			currentMovement = EnemyState.ONGROUND;
 			enemy_falling_movement(movementSpeed);		
-			speed = movementSpeed;
+			x += movementSpeed * _dir;
 		}
 	}
 }
