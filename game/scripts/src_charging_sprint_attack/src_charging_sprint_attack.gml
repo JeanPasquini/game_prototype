@@ -8,7 +8,10 @@ function src_charging_sprint_attack(){
 			currentState = EnemyState.CHASING;
 		} else if (currentState == EnemyState.CHARGING_ATTACK && currentChargingDelay >= 0) {
 			currentChargingDelay--;
-		} else if (currentState == EnemyState.CHASING && currentAttackDelay <= 0) {
+		} else if (
+			currentState == EnemyState.CHASING 
+			&& currentAttackDelay <= 0 
+			&& currentMovement == EnemyState.ONGROUND) {
 			currentState = EnemyState.CHARGING_ATTACK;
 		} else {
 			currentAttackDelay--;

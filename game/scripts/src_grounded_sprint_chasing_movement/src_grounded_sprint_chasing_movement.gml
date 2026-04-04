@@ -1,11 +1,10 @@
 function src_grounded_sprint_chasing_movement(){
 	return function () {
 		
-		if (is_outside_room(self)) {
-			instance_destroy();
-		}
 	
 		var _dir = 0;
+		var _movSpd = movementSpeed * 2;
+		
 		if (!place_meeting(x, obj_player.y, obj_player)) {
 			direction = point_direction(x, y, obj_player.x, y);	
 		}	
@@ -20,7 +19,7 @@ function src_grounded_sprint_chasing_movement(){
 				!position_meeting(x + (sprite_width/2*_dir), y + (sprite_height/2)+1, obj_wall)) { // Check if it will be without ground
 				currentMovement = EnemyState.FALLING;
 					
-			} else if (place_meeting(x + _dir, y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
+			} else if (place_meeting(x + (_dir*_movSpd), y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
 				jump_direction = _dir;
 				currentMovement = EnemyState.JUMPING;
 			} else {
@@ -36,7 +35,6 @@ function src_grounded_sprint_chasing_movement(){
 			enemy_falling_movement(2.2);
 		} else if (currentState == EnemyState.CHASING) {
 			currentMovement = EnemyState.ONGROUND;
-			var _movSpd = movementSpeed * 2;
 			
 			enemy_falling_movement(_movSpd);		
 			x += _movSpd * _dir;

@@ -1,33 +1,49 @@
 function src_grounded_idle_movement(){
 	return function () {
 		
-		// determinates the horizontal speed
+		// determinates the direction
+		var _dir = 0;
 		
-		if (direction == 0) hsp = 1;
-		else if (direction == 180) hsp = -1;
+		if (direction == 0) _dir = 1;
+		else if (direction == 180) _dir = -1;
 		
 		
 	    if (x >= (xstart + maxRandomMovement / 2)) {
-	       hsp = -1;
+	       _dir = -1;
 		   direction = 180;
 	    } else if (x < (xstart - maxRandomMovement / 2)) {
-	        hsp = 1;
+	        _dir = 1;
 			direction = 0;
 	    }
 		
-		if (place_meeting(x + hsp, y, obj_wall)) {
-			hsp = hsp * -1;
-			if (direction == 180) direction = 0; else direction = 180;
+		 
+		/* 
+		* Checks for what movement to execute
+		*/
+		if (currentMovement != EnemyState.JUMPING) {
+			if (!position_meeting(x + (sprite_width/2*_dir*-1), y + (sprite_height/2)+1, obj_wall) &&
+				!position_meeting(x + (sprite_width/2*_dir), y + (sprite_height/2)+1, obj_wall)) { // Check if it will be without ground
+				currentMovement = EnemyState.FALLING;
+			} else if (place_meeting(x + _dir, y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
+				jump_direction = _dir;
+				currentMovement = EnemyState.JUMPING;
+			} else {
+				currentMovement = EnemyState.ONGROUND;
+			}
 		}
-		
-		// determinates the vertical speed
-		if (place_meeting(x, y+1, obj_wall)) {
-			vsp = 0;
+		/* 
+		* Executes the enemy movement by the current state
+		*/
+		if (currentMovement == EnemyState.JUMPING) {
+				enemy_jumping_movement(2, jump_direction);
+		} else if (currentMovement == EnemyState.FALLING) {
+				enemy_falling_movement(2.2);
 		} else {
-			vsp = 1;
+			currentMovement = EnemyState.ONGROUND;
+			enemy_falling_movement(movementSpeed);		
+			x += movementSpeed * _dir;
 		}
-		
-		x += hsp;
-		y += vsp;
+	
+		 
 	}
 }
