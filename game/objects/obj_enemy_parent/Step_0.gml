@@ -13,7 +13,9 @@ if (life <= 0 && !is_destroyed) {
 // Idle State
 if (currentState == EnemyState.IDLE) {
 	idle_movement_script();
-	if (distance_to_object(obj_player) < detectionRadius) {currentState = EnemyState.CHASING}    
+	if (distance_to_object(obj_player) < detectionRadius) {
+		if (hasToCharge) currentState = EnemyState.CHARGING_ATTACK; else currentState = EnemyState.CHASING;
+	}    
 } 
 // Attacking State
 else if (currentState == EnemyState.CHASING || currentState == EnemyState.CHARGING_ATTACK) {

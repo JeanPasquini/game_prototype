@@ -2,6 +2,7 @@
 event_inherited();
 
 baseAttackDelay = 120; 
+hasToCharge = true;
 currentChargingDelay = baseAttackDelay;
 currentAttackDelay = baseAttackDelay;
 

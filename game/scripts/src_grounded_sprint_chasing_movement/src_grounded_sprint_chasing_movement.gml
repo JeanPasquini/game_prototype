@@ -5,7 +5,8 @@ function src_grounded_sprint_chasing_movement(){
 		var _dir = 0;
 		var _movSpd = movementSpeed * 2;
 		
-		if (!place_meeting(x, obj_player.y, obj_player)) {
+		if (!place_meeting(x, obj_player.y, obj_player) &&
+			currentState != EnemyState.CHASING) {
 			direction = point_direction(x, y, obj_player.x, y);	
 		}	
 		if (direction == 180) _dir = -1  else if (direction == 0) _dir = 1

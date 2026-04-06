@@ -25,6 +25,7 @@ baseAttackDelay = 1 * 60;
 currentAttackDelay = baseAttackDelay;
 is_invencible = false;
 damage = 1;
+hasToCharge = false;
 
 // Movement
 hsp = 0;
