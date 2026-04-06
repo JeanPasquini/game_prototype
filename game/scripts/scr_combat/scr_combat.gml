@@ -68,7 +68,7 @@ if(obj_player.invencible == false){
 	for (var i = 0; i < array_length(enemies); i++) {
 	    with (enemies[i]) {
 	        if (place_meeting(x, y, other)) { 
-
+				
 	            var dir_x = x - other.x;
 	            var dir_y = y - other.y;
 	            var length = sqrt(sqr(dir_x) + sqr(dir_y));
@@ -77,7 +77,11 @@ if(obj_player.invencible == false){
 	                dir_y /= length;
 	            }
 
-	            knockback_x = dir_x * knockback_strength;
+				knockback_x = dir_x * knockback_strength;
+
+				if (other.knockback_strength > knockback_strength) {
+					knockback_x = dir_x * other.knockback_strength;
+				}
 
 	            if (abs(knockback_x) > 0.1) {
 	                if (place_meeting(x + knockback_x, y, obj_wall) || place_meeting(x + knockback_x, y, obj_player)) {
