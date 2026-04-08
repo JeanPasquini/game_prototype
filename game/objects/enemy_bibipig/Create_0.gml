@@ -1,7 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
-baseAttackDelay = 120; 
+baseAttackDelay = 90; 
+detectionRadius = 120;
 hasToCharge = true;
 currentChargingDelay = baseAttackDelay;
 currentAttackDelay = baseAttackDelay;

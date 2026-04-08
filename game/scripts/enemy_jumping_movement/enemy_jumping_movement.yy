@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"enemy_jumping_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"enemy_jumping_movement",
+  "parent":{
+    "name":"helper_scripts",
+    "path":"folders/Scripts/enemy/helper_scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

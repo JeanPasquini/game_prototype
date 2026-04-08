@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"enemy_falling_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"enemy_falling_movement",
+  "parent":{
+    "name":"helper_scripts",
+    "path":"folders/Scripts/enemy/helper_scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
