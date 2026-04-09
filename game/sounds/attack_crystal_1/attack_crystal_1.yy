@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"attack_crystal_1",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.3955783,
+  "exportDir":"",
+  "name":"attack_crystal_1",
+  "parent":{
+    "name":"player",
+    "path":"folders/Sounds/soundeffect/player.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"attack_crystal_1.wav",
+  "volume":1.0,
+}

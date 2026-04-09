@@ -14,7 +14,7 @@ if (!has_talked)
     {
         if (!instance_exists(obj_dialogue))
         {
-            var dlg_instance = instance_create_layer(x, y, "dialogue", obj_dialogue);
+            var dlg_instance = instance_create_layer(x, y, "controls", obj_dialogue);
 
             obj_player.state = PlayerState.TALKING;
             obj_player.talking = true;
@@ -54,7 +54,7 @@ if (!has_talked)
         if (spawn_perk_after_dialogue)
         {
             spawn_perk_after_dialogue = false;
-            instance_create_layer(x, y, "perk", obj_perk_selection);
+            instance_create_layer(x, y, "controls", obj_perk_selection);
         }
 
         obj_player.state = PlayerState.IDLE;

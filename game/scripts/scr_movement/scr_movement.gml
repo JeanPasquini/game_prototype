@@ -287,8 +287,8 @@ function _resolve_collisions() {
 
 	if (ong && !previous_ong) {
 
-	    if (air_time >= 60) {
-	        obj_effect_unicle.scr_fx_fall_smoke(x, y + 13);
+	    if (air_time >= 30) {
+	        obj_effect_unicle.scr_fx_fall_smoke(x, y + 14);
 	    }
 
 	    air_time = 0;

@@ -15,7 +15,8 @@ if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking && !is_dashing
 	sprite_index = spr_player_attacking;
 	image_index = 0;
 	image_speed = attack_speed;
-	image_xscale = attack_dir;
+	var _scale = 1.15;
+	image_xscale = attack_dir * _scale;
 
 
 	alarm[1] = (60 / attack_speed);
@@ -40,7 +41,7 @@ if (sprite_index == spr_player_attacking) {
         hb = instance_create_layer(hitbox_x, hitbox_y, "Instances", obj_player_hitbox);
         hb.damage = damage;
         hb.direction = attack_dir;
-		hb.frametime = (2 * 8) / image_speed;
+		hb.frametime = (2 * 20) / image_speed;
     }
 
 }

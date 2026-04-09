@@ -1,0 +1,40 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"ts_background",
+  "autoTileSets":[
+    {"$GMAutoTileSet":"","%Name":"wall","closed_edge":false,"name":"wall","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[24,16,18,10,30,22,0,15,32,0,26,19,38,37,39,48,],},
+  ],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"ts_background",
+  "out_columns":7,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Tile Sets",
+    "path":"folders/Tile Sets.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"spr_tile_background",
+    "path":"sprites/spr_tile_background/spr_tile_background.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":16,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":16,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":49,
+}

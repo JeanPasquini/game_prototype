@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sdt_environment",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":64.12501,
+  "exportDir":"",
+  "name":"sdt_environment",
+  "parent":{
+    "name":"environment",
+    "path":"folders/Sounds/sountrack/environment.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sdt_environment.wav",
+  "volume":0.25,
+}

@@ -1,3 +1,6 @@
+image_xscale = 1.15;
+image_yscale = 1.15;
+
 // States
 enum PlayerState {
     IDLE,
@@ -40,7 +43,7 @@ damage_base = 1;
 damage = damage_base;
 spd = 2;
 spd_max = 10;
-attack_speed = 3;
+attack_speed = 4;
 attack_recoil = 2;
 attack_knockback = 5;
 invencible_time = 50;
@@ -115,8 +118,8 @@ air_time = 0;
 
 // Sounds Frames Step
 
-footstep_frames_walk = [0, 6];
-footstep_frames_run  = [2, 7];
+footstep_frames_walk = [5, 0];
+footstep_frames_run  = [3, 7];
 last_foot_frame = -1;
 
 // Config Sound Orientation

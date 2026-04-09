@@ -1,0 +1,44 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"ts_plants_environment",
+  "autoTileSets":[
+    {"$GMAutoTileSet":"","%Name":"floor","closed_edge":false,"name":"floor","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[
+        48,34,36,0,62,0,0,0,60,0,0,0,0,0,0,0,46,0,0,0,22,0,0,0,50,0,0,0,74,0,0,0,0,0,33,0,37,0,63,0,59,0,0,0,
+        0,0,0,
+      ],},
+    {"$GMAutoTileSet":"","%Name":"wall","closed_edge":false,"name":"wall","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[42,28,30,16,54,40,0,15,56,0,44,17,68,67,69,0,],},
+  ],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"ts_plants_environment",
+  "out_columns":13,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Tile Sets",
+    "path":"folders/Tile Sets.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"spr_tile_plants_environment",
+    "path":"sprites/spr_tile_plants_environment/spr_tile_plants_environment.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":16,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":16,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":162,
+}

@@ -98,7 +98,18 @@ part_type_alpha3(global.PT_PSICOTOPUS_BUBBLE_FLOATING, 1, 1, 1);
 part_type_blend(global.PT_PSICOTOPUS_BUBBLE_FLOATING, true);
 part_type_life(global.PT_PSICOTOPUS_BUBBLE_FLOATING, 30, 60);
 
-
+global.PT_CRYSTAL_HIT = part_type_create();
+part_type_shape(global.PT_CRYSTAL_HIT, pt_shape_square);
+part_type_size(global.PT_CRYSTAL_HIT, 0.02, 0.1, 0, 0.5);
+part_type_scale(global.PT_CRYSTAL_HIT, 0.1, 0.1);
+part_type_speed(global.PT_CRYSTAL_HIT, 1, 1.5, -0.01, 0);
+part_type_direction(global.PT_CRYSTAL_HIT, 82, 102, 0, 0);
+part_type_gravity(global.PT_CRYSTAL_HIT, 0.02, 270);
+part_type_orientation(global.PT_CRYSTAL_HIT, 0, 0, 0, 100, false);
+part_type_colour3(global.PT_CRYSTAL_HIT, $6A3CD5, $6A3CD5, $6A3CD5);
+part_type_alpha3(global.PT_CRYSTAL_HIT, 1, 1, 1);
+part_type_blend(global.PT_CRYSTAL_HIT, true);
+part_type_life(global.PT_CRYSTAL_HIT, 50, 100);
 
 // =======================
 // FUNÇÃO
@@ -106,6 +117,10 @@ part_type_life(global.PT_PSICOTOPUS_BUBBLE_FLOATING, 30, 60);
 
 scr_fx_run_smoke = function(_x, _y) {
     part_particles_create(global.PS, _x, _y, global.PT_SMOKE, 1);
+}
+
+scr_fx_crystal_hit = function(_x, _y) {
+    part_particles_create(global.PS, _x, _y, global.PT_CRYSTAL_HIT, 4);
 }
 
 scr_fx_hit_impact = function(_x, _y) {

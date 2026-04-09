@@ -9,5 +9,5 @@ grv = 0.2;
 
 alarm[0] = 30;
 
-image_xscale = 0.35;
-image_yscale = 0.35;
+image_xscale = 1;
+image_yscale = 1;
