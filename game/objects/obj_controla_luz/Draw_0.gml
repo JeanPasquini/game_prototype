@@ -49,6 +49,11 @@ with (obj_drop_life) {
     draw_sprite_ext(spr_light, 0, x, y, 1, 1, 0, c_green, 1);
 }
 
+// training dummy
+with (obj_training_dummy) {
+    draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(255, 220, 120), 1);
+}
+
 // volta ao normal
 gpu_set_blendmode(bm_normal);
 
