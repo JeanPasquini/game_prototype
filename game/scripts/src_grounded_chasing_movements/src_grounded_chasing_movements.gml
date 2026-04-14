@@ -16,16 +16,36 @@ function src_grounded_chasing_movements() {
 		* Checks for what movement to execute
 		*/
 		if (currentMovement != EnemyState.JUMPING) {
-		
-			if (!position_meeting(x + (sprite_width/2*_dir*-1), y + (sprite_height/2)+1, obj_wall) &&
-				!position_meeting(x + (sprite_width/2*_dir), y + (sprite_height/2)+1, obj_wall)) {
-				currentMovement = EnemyState.ONGROUND;
-				// fazer variável ou coisa assim que "fixe" a direção oposta como correta
-				// provavelmente irá afetar até que o inimigo volte para idle
-			}
-			else if (!position_meeting(x + (sprite_width/2*_dir*-1), y + (sprite_height/2)+1, obj_wall) &&
-				!position_meeting(x + (sprite_width/2*_dir), y + (sprite_height/2)+1, obj_wall)) { // Check if it will be without ground
-				currentMovement = EnemyState.FALLING;
+			
+			// Detecta se está perto de cair (primiero vértice sem chão)
+			show_debug_message(sprite_width/2*-1 + _dir);
+			
+			
+			if (!position_meeting(x + (sprite_width/2*-1) + _dir, y + (sprite_height/2)+1, obj_wall)) {
+				// Verficar se existe chão em até no máximo 3x a altura do player
+				var _can_fall = false
+				for (var i = 0; i < sprite_height*2; i += sprite_height/2) {
+					if (position_meeting(x + (sprite_width/2*-1) + _dir, y + (sprite_height/2)+i, obj_wall)) {
+						_can_fall = true
+					}
+				}
+					
+				if (_can_fall) {
+						
+					// Sim -> poderá cair, seguir com a execução do algoritmo
+					if (!position_meeting(x + (sprite_width/2*_dir*-1), y + (sprite_height/2)+1, obj_wall) &&
+						!position_meeting(x + (sprite_width/2*_dir), y + (sprite_height/2)+1, obj_wall)) { // Check if it will be without ground
+						currentMovement = EnemyState.FALLING;
+					} else {
+						currentMovement = EnemyState.ONGROUND;
+					}
+						
+				} else {
+					// Não -> estado de returning
+					currentMovement = EnemyState.RETURNING;
+					returningPoint = { xp: x, yp: y };
+					exit;
+				}
 					
 			} else if (place_meeting(x + _dir, y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
 				jump_direction = _dir;

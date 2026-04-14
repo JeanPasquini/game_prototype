@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_enemy_melee",
-    "path":"sprites/spr_enemy_melee/spr_enemy_melee.yy",
+    "name":"spr_enemy_02_running",
+    "path":"sprites/spr_enemy_02_running/spr_enemy_02_running.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -19,5 +19,5 @@ function enemy_jumping_movement(movementSpeed, _dir) {
 	}
 	y -= _yspd;
 	
-	if (!position_meeting(x + (sprite_width/2*_dir)+_dir, y+sprite_height, obj_wall)) currentMovement = EnemyState.ONGROUND;
+	if (!place_meeting(x +_dir, y, obj_wall)) currentMovement = EnemyState.ONGROUND;
 }
