@@ -15,7 +15,9 @@ if (currentState == EnemyState.IDLE) {
 	idle_movement_script();
 	if (distance_to_object(obj_player) < detectionRadius) {
 		if (hasToCharge) currentState = EnemyState.CHARGING_ATTACK; else currentState = EnemyState.CHASING;
-	}    
+	} else if (detectionRadius < maxDetectionRadius && alarm[4] < 0) {
+		alarm[4] = 60;
+	}
 } 
 // Attacking State
 else if (currentState == EnemyState.CHASING || currentState == EnemyState.CHARGING_ATTACK) {

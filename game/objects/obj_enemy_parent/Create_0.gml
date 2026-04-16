@@ -4,7 +4,6 @@ enum EnemyState {
 	JUMPING,
 	ONGROUND,
 	FALLING,
-	RETURNING,
 	SPECIAL_ATTACK,
 	CHARGING_ATTACK
 }
@@ -34,7 +33,8 @@ face = 1;
 vsp = 0;
 grv = 0.5;
 direction = 0;  // 180 = left, 0 = right
-detectionRadius = 100;
+maxDetectionRadius = 100;
+detectionRadius = maxDetectionRadius;
 maxRandomMovement = 100;
 movementSpeed = 1;
 currentMovement = EnemyState.ONGROUND;

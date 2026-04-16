@@ -1,8 +1,11 @@
 // Inherit the parent event
 event_inherited();
 
-baseAttackDelay = 90; 
-detectionRadius = 120;
+baseAttackDelay = 90;
+
+maxDetectionRadius = 120;
+detectionRadius = maxDetectionRadius;
+
 hasToCharge = true;
 currentChargingDelay = baseAttackDelay;
 currentAttackDelay = baseAttackDelay;
