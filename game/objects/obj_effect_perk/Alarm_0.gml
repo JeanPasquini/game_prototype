@@ -1,1 +1,1 @@
-part_emitter_destroy(ps, em);
+part_emitter_destroy(_ps, _pemit1);

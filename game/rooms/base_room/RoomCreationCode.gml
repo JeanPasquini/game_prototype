@@ -5,6 +5,7 @@ if (!variable_global_exists("rooms_map")) {
 				sends: { safe_room },
 				connections: { up: safe_room },
 				returns: false,
+				music: sdt_hub,
 				up:    { px: 45, py: 336 },
 				down:  { px: 45, py: 336 },
 				left:  { px: 45, py: 336 },

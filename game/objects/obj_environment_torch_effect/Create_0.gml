@@ -6,6 +6,7 @@ y_add = -5;
 
 //pt_environment_torch
 _ps = part_system_create();
+part_system_layer(_ps, "drop");
 part_system_draw_order(_ps, true);
 
 //Emitter
