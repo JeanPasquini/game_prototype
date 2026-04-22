@@ -111,9 +111,27 @@ part_type_alpha3(global.PT_CRYSTAL_HIT, 1, 1, 1);
 part_type_blend(global.PT_CRYSTAL_HIT, true);
 part_type_life(global.PT_CRYSTAL_HIT, 50, 100);
 
+global.PT_perk_elemental_ring = part_type_create();
+part_type_shape(global.PT_perk_elemental_ring, pt_shape_square);
+part_type_size(global.PT_perk_elemental_ring, 0.5, 0.75, -0.01, 0.1);
+part_type_scale(global.PT_perk_elemental_ring, 0.1, 0.1);
+part_type_speed(global.PT_perk_elemental_ring, 0, 0, 0, 0);
+part_type_direction(global.PT_perk_elemental_ring, 82, 102, 0, 0);
+part_type_gravity(global.PT_perk_elemental_ring, 0, 0);
+part_type_orientation(global.PT_perk_elemental_ring, 0, 0, 0, 0, false);
+part_type_alpha3(global.PT_perk_elemental_ring, 1, 1, 1);
+part_type_blend(global.PT_perk_elemental_ring, true);
+part_type_life(global.PT_perk_elemental_ring, 10, 30);
+
+
 // =======================
 // FUNÇÃO
 // =======================
+
+scr_fx_perk_elemental_ring = function(_x, _y, color1, color2, color3) {
+	part_type_colour3(global.PT_perk_elemental_ring, color1, color2, color3);
+    part_particles_create(global.PS, _x, _y, global.PT_perk_elemental_ring, 1);
+}
 
 scr_fx_run_smoke = function(_x, _y) {
     part_particles_create(global.PS, _x, _y, global.PT_SMOKE, 1);

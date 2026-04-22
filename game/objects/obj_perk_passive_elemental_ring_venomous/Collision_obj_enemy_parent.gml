@@ -1,20 +1,29 @@
-if(other.is_invencible == true) return;
+if(sprite_index != spr_perk_passive_elemental_ring_venomous_hitting){
+	if(other.is_invencible == true) return;
 
-if (!other.poison)
-{
-    var fx = instance_create_layer(
-        other.x,
-        other.y,
-        "perk_in_run",
-        obj_effect_poison
-    );
+	if (!other.poison)
+	{
+	    var fx = instance_create_layer(
+	        other.x,
+	        other.y,
+	        "perk_in_run",
+	        obj_effect_poison
+	    );
 
-    fx.target = other;
-	other.poison = true;
+	    fx.target = other;
+		other.poison = true;
+	}
+
+	sprite_index = spr_perk_passive_elemental_ring_venomous_hitting;
+	image_speed = 1;
+	image_index = 0;
+	obj_perk_passive_elemental_ring.alarm[2] = 200;
+	other.alarm[3] = 1;
+	other.alarm[2] = 500;
+	var sfx = [
+		sde_perk_elemental_ring_hitting
+		];					
+	scr_audio_play(sfx);
+
 }
 
-obj_perk_passive_elemental_ring.alarm[2] = 200;
-other.alarm[3] = 1;
-other.alarm[2] = 500;
-
-instance_destroy();

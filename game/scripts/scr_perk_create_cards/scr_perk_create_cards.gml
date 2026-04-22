@@ -19,14 +19,14 @@ function scr_perk_create_cards()
     // TODOS OS PERKS POSSÍVEIS
     // ===============================
     var all_perks = [
-		obj_perk_card_fire_ring,
-		obj_perk_card_rage,
-		obj_perk_card_berseker,
+		//obj_perk_card_fire_ring,
+		//obj_perk_card_rage,
+		//obj_perk_card_berseker,
 		obj_perk_card_thunderbold,
 		obj_perk_card_energy_shield,
-		obj_perk_card_vampirism,
+		//obj_perk_card_vampirism,
 		obj_perk_card_elemental_ring,
-		obj_perk_card_energy_attack
+		//obj_perk_card_energy_attack
     ];
 	
     var available_perks = [];

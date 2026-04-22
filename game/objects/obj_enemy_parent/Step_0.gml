@@ -2,6 +2,15 @@ if (global.hitstop > 0) {
 	speed = 0;
     exit;
 }
+
+if(freeze){
+	shake_x = random_range(-0.3, 0.3);
+	shake_y = random_range(-0.3, 0.3);
+}
+else{
+	shake_x = 0;
+	shake_y = 0;
+}
 	
 knockbackSmoothing();
 

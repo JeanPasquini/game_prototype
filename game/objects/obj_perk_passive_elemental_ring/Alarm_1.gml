@@ -5,5 +5,5 @@ var inst = instance_create_layer(
     obj_perk_passive_elemental_ring_ice
 );
 
-inst.image_speed = 0;
-inst.image_index = obj_perk_passive_elemental_ring.ring_frame;
+
+inst.orbit_slot = 1;

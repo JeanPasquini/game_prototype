@@ -30,7 +30,6 @@ damage_total = damage;
 if(instance_exists(obj_perk_passive_berseker)) damage_total = damage * obj_perk_passive_berseker.damage_multiplication;
 if(instance_exists(obj_perk_passive_rage)) damage_total = damage_total * obj_perk_passive_rage.damage;
 if(instance_exists(obj_perk_active_temporal_jump)){if(!obj_perk_active_temporal_jump.fx_active)obj_perk_active_temporal_jump.mark_enemy(other);}
-if(instance_exists(obj_perk_passive_thunderbolt)) obj_perk_passive_thunderbolt.scr_perk_thunderbolt(other.x, other.y);
 if(instance_exists(obj_perk_passive_vampirism))obj_perk_passive_vampirism.healed(damage_total);
 
 var dmg = instance_create_layer(other.x, other.y, "Instances", obj_damage_text);

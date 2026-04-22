@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_perk_thunderbolt",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.6571655,
+  "exportDir":"",
+  "name":"sde_perk_thunderbolt",
+  "parent":{
+    "name":"perks",
+    "path":"folders/Sounds/soundeffect/perks.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_perk_thunderbolt.wav",
+  "volume":1.0,
+}

@@ -19,4 +19,8 @@ if (obj_player.energy < obj_player.energy_max && obj_player.perk_activatable != 
 
 scr_camera_shake(5, 5)
 
+//PERKS
+
+if(instance_exists(obj_perk_passive_thunderbolt)) obj_perk_passive_thunderbolt.scr_perk_thunderbolt(other.x, other.y);
+
 obj_effect_unicle.scr_fx_hit_impact(other.x, other.y);

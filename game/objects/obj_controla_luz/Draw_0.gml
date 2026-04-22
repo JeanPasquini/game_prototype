@@ -54,6 +54,21 @@ with (obj_training_dummy) {
     draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(255, 220, 120), 1);
 }
 
+// elemental ring fire
+with (obj_perk_passive_elemental_ring_fire) {
+    draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(255, 120, 60), 1);
+}
+
+// elemental ring ice
+with (obj_perk_passive_elemental_ring_ice) {
+    draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(120, 220, 255), 1);
+}
+
+// elemental ring venomous
+with (obj_perk_passive_elemental_ring_venomous) {
+    draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(120, 255, 80), 1);
+}
+
 // volta ao normal
 gpu_set_blendmode(bm_normal);
 

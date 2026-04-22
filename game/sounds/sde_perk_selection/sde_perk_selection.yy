@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":2.0052154,
+  "duration":0.79183674,
   "exportDir":"",
   "name":"sde_perk_selection",
   "parent":{
