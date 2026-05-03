@@ -124,9 +124,50 @@ part_type_blend(global.PT_perk_elemental_ring, true);
 part_type_life(global.PT_perk_elemental_ring, 10, 30);
 
 
+global.PT_projectil_hitting = part_type_create();
+part_type_sprite(global.PT_projectil_hitting, projectile_hitting, false, true, true)
+part_type_size(global.PT_projectil_hitting, 1, 1, 0, 0);
+part_type_scale(global.PT_projectil_hitting, 1, 1);
+part_type_speed(global.PT_projectil_hitting, 0.1, 0.2, 0, 0);
+part_type_direction(global.PT_projectil_hitting, 0, 360, 0, 0);
+part_type_gravity(global.PT_projectil_hitting, 0, 270);
+part_type_orientation(global.PT_projectil_hitting, 0, 360, 1, 5, false);
+part_type_colour3(global.PT_projectil_hitting, $FFFFFF, $FFFFFF, $FFFFFF);
+part_type_alpha3(global.PT_projectil_hitting, 1, 0.7, 0);
+part_type_blend(global.PT_projectil_hitting, true);
+part_type_life(global.PT_projectil_hitting, 50, 100);
+
+
+
 // =======================
 // FUNÇÃO
 // =======================
+
+scr_fx_projectil_hitting = 
+
+function (_x, _y,
+    _sprite = projectile_hitting,
+    _color_start = $FFFFFF, _color_mid = $FFFFFF, _color_end =$FFFFFF,
+    _force = 1,
+    _alpha_start = 1, _alpha_mid = 0.7, _alpha_end = 0) 
+{
+    // SPRITE
+    part_type_sprite(global.PT_projectil_hitting, _sprite, false, true, true);
+
+    // VELOCIDADE (FORÇA DO IMPACTO)
+    part_type_speed(global.PT_projectil_hitting, _force * 0.5, _force, 0, 0);
+
+    // CORES
+    part_type_colour3(global.PT_projectil_hitting, _color_start, _color_mid, _color_end);
+
+    // FADE (ALPHA)
+    part_type_alpha3(global.PT_projectil_hitting, _alpha_start, _alpha_mid, _alpha_end);
+
+    // VIDA baseada na força
+    part_type_life(global.PT_projectil_hitting, 20 * _force, 40 * _force);
+	
+	part_particles_create(global.PS, _x, _y, global.PT_projectil_hitting, 10);
+}
 
 scr_fx_perk_elemental_ring = function(_x, _y, color1, color2, color3) {
 	part_type_colour3(global.PT_perk_elemental_ring, color1, color2, color3);

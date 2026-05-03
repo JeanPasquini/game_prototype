@@ -42,10 +42,15 @@ function src_jumping_idle_movement() {
 			        hsp = -jump_speed;
 			    break;
 			}
+			
+			if (hsp != 0) {
+			    face = sign(hsp);
+			}
 		
 	        // Initiate jump by applying upward vertical speed
 	        vsp = -jump_force;
 			currentMovement = EnemyState.JUMPING;
+			scr_audio_play([sde_enemy_cururu_jump], emitterAudio);
 	    }
 	    else {
 	        // Airborne phase: apply gravity and resolve vertical collisions

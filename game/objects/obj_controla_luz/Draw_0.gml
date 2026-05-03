@@ -69,6 +69,22 @@ with (obj_perk_passive_elemental_ring_venomous) {
     draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(120, 255, 80), 1);
 }
 
+// cururu enemy
+with (obj_enemy_cururu) {
+    draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(80, 255, 120), 1);
+}
+
+// air projectile made by cururu
+with (obj_air_projectile) {
+    draw_sprite_ext(spr_light, 0, x, y, 1, 1, 0, make_color_rgb(120, 255, 200), 0.5);
+}
+
+
+// bibipig enemy
+with (obj_enemy_bibipig) {
+    draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(200, 100, 255), 0.5);
+}
+
 // volta ao normal
 gpu_set_blendmode(bm_normal);
 

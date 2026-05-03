@@ -124,13 +124,6 @@ last_foot_frame = -1;
 
 // Config Sound Orientation
 
-audio_listener_set_position(0, x, y, 0);
-audio_listener_set_orientation(
-    0,
-    0, 0, -1, 
-    0, 1, 0    
-);
-
 // Initial Status
 
 life_max_initial = life_max;

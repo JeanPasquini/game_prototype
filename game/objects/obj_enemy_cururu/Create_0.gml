@@ -3,7 +3,7 @@ event_inherited();
 
 // Enemy detection and basic stats
 detectionRadius = 180;
-life = 10;
+life = 100;
 
 // Attack state control
 isCharging = false;
@@ -27,7 +27,7 @@ enum JumpState {
 // Attack cooldown control
 currentAttackDelay = 0;
 currentChargingDelay = 0;
-baseAttackDelay = 60;
+baseAttackDelay = 0.5 * 100;
 
 
 // Current jump state used by the movement state machine
@@ -49,3 +49,9 @@ maxRandomMovement = 40;
 // Horizontal and vertical speed
 hsp = 0;
 vsp = 0;
+
+alarm[5] = irandom_range(150, 300);
+
+emitterAudio = audio_emitter_create();
+audio_falloff_set_model(audio_falloff_linear_distance)
+audio_emitter_falloff(emitterAudio, 150, obj_cam.width_, 1);

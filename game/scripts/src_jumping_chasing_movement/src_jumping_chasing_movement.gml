@@ -22,6 +22,7 @@ function src_jumping_chasing_movement(){
 
 			// Determine desired movement direction toward the player
 			var dir = sign(dist);
+			face = dir;
 
 			// Estimate total air time based on jump physics
 			var air_time = (jump_force * 2) / grv;
@@ -53,6 +54,7 @@ function src_jumping_chasing_movement(){
 			// Initiate jump only if horizontal movement was approved
 			if (hsp != 0) {
 	            vsp = -jump_force;
+				scr_audio_play([sde_enemy_cururu_jump], emitterAudio);
 				currentMovement = EnemyState.JUMPING;
 			}
 	    }

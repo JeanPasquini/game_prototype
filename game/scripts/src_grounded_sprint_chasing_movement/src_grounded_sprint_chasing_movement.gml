@@ -2,7 +2,7 @@ function src_grounded_sprint_chasing_movement(){
 	return function () {
 	
 		var _dir = 0;
-		var _movSpd = movementSpeed * 2;
+		var _movSpd = movementSpeed * 4;
 		
 		if (!place_meeting(x, obj_player.y, obj_player) &&
 			currentState != EnemyState.CHASING) {

@@ -16,7 +16,7 @@ drops = [
 ];
 
 // Attack
-life = 1;
+life = 10;
 is_destroyed = false;
 currentState = EnemyState.IDLE;
 throwsProjectile = noone;

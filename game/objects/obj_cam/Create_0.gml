@@ -17,3 +17,9 @@ shake_y = 0;
 shake_decay_force = 0.92;
 shake_decay_pos   = 0.85;
 
+audio_listener_set_position(0, x, y, 0);
+audio_listener_set_orientation(
+    0,
+    0, 0, -1, 
+    0, 1, 0    
+);

@@ -1,4 +1,10 @@
+audio_listener_set_position(0, camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) * 0.5,
+                               camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) * 0.5,
+                               0);
+
 if (!instance_exists(target_)) exit;
+
+
 
 // ===== FOLLOW BASE =====
 x = lerp(x, target_.x, 0.1);

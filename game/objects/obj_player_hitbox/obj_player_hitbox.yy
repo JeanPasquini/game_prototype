@@ -41,5 +41,5 @@
     "path":"sprites/player_hitbox/player_hitbox.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_enemy_cururu_croak_3",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.64863944,
+  "exportDir":"",
+  "name":"sde_enemy_cururu_croak_3",
+  "parent":{
+    "name":"cururu",
+    "path":"folders/Sounds/soundeffect/enemies/cururu.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_enemy_cururu_croak_3.wav",
+  "volume":0.6,
+}
