@@ -2,7 +2,11 @@ event_inherited();
 
 if (!attack_hit_confirmed) exit;
 
-audio_play_sound(sde_enemy_hit, 1, false);
+var sfx = [
+	attack_1,
+	attack_2
+];						
+scr_audio_play(sfx);
 
 
 var dir = point_direction(obj_player.x, obj_player.y, other.x, other.y);
@@ -14,5 +18,9 @@ if (obj_player.energy < obj_player.energy_max && obj_player.perk_activatable != 
     obj_player.energy++;
 
 scr_camera_shake(5, 5)
+
+//PERKS
+
+if(instance_exists(obj_perk_passive_thunderbolt)) obj_perk_passive_thunderbolt.scr_perk_thunderbolt(other.x, other.y);
 
 obj_effect_unicle.scr_fx_hit_impact(other.x, other.y);

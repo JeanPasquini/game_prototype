@@ -7,3 +7,8 @@ needs_music_update = true;
 
 randomize();
 global.hitstop = 0;
+
+
+layer_set_visible(layer_get_id("ui_vignette"), true);
+layer_set_visible(layer_get_id("ui_hud_player"), true);
+layer_set_visible(layer_get_id("ui_pause_layer"), false);

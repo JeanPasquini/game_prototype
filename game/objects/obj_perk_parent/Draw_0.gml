@@ -39,14 +39,14 @@ if (instance_exists(obj_player)) {
 		
 		var height_menu_perk = sprite_get_height(spr_ui_perk_menu);
 		var width_menu_perk  = sprite_get_width(spr_ui_perk_menu);
-		var padding = 17;
+		var padding = 25;
 
 		draw_sprite(spr_ui_perk_menu, 0, xx, yy - height_menu_perk);
 
 		draw_sprite_ext(
 		    name, 0, 
-		    xx - (width_menu_perk / 2) + padding + 12, 
-		    yy - height_menu_perk - (height_menu_perk / 2) + 28 + 12, 
+		    xx - (width_menu_perk / 2) + 29, 
+		    yy - height_menu_perk - (height_menu_perk / 2) + 42, 
 		    1, 1, 0, c_white, 1
 		);
 
@@ -55,8 +55,8 @@ if (instance_exists(obj_player)) {
 		draw_set_alpha(1);
 		
 		draw_text_transformed(
-		    xx - (width_menu_perk / 2) + padding + 23 + 4, 
-		    yy - height_menu_perk - (height_menu_perk / 2) + 28 + 4, 
+		    xx - (width_menu_perk / 2) + 52, 
+		    yy - height_menu_perk - (height_menu_perk / 2) + 36, 
 		    prompt_text, 0.5, 0.5, 0
 		);
 
@@ -68,7 +68,7 @@ if (instance_exists(obj_player)) {
 		var max_width  = (width_menu_perk - (padding * 2)) / text_scale;
 
 		var text_x = xx - (width_menu_perk / 2) + padding;
-		var text_y = yy - height_menu_perk - (height_menu_perk / 2) + 56;
+		var text_y = yy - height_menu_perk - (height_menu_perk / 2) + 70;
 
 		scr_draw_text_wrap_scaled(
 		    prompt_text_description,

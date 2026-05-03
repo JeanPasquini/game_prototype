@@ -10,10 +10,10 @@ if (count_attack >= count_attack_need) {
     );
 
     // define lado corretamente
-    inst.image_xscale = obj_player.image_xscale;
+    inst.image_xscale = obj_player.face;
 
     // define direção em graus
-    inst.direction = (obj_player.image_xscale == 1) ? 0 : 180;
+    inst.direction = (obj_player.face == 1) ? 0 : 180;
     inst.speed = speed_attack;
 
     count_attack = 0;

@@ -1,4 +1,3 @@
-if(alarm[0] == 1){
-	event_inherited();
-}
+event_inherited();
+
 

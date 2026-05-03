@@ -1,2 +1,2 @@
-image_speed = 0;
-image_index = obj_perk_passive_elemental_ring.ring_frame;
+image_index = 1;
+image_speed = 1;

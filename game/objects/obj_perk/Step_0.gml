@@ -3,6 +3,6 @@ if(number_enemy > 0){
 	{
 		created = true;
 	    //scr_perk_altar(obj_player.x, obj_player.y + 8);
-		if (array_length(obj_player.perks_obtained_run) < obj_player.perks_limit_run) instance_create_layer(x, y, "perk", obj_perk_selection);
+		if (array_length(obj_player.perks_obtained_run) < obj_player.perks_limit_run) instance_create_layer(x, y, "controls", obj_perk_selection);
 	}
 }

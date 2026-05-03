@@ -16,3 +16,4 @@ shake_y = 0;
 
 shake_decay_force = 0.92;
 shake_decay_pos   = 0.85;
+

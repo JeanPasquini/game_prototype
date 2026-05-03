@@ -1,3 +1,8 @@
+var _scale = 1.15;
+
+image_xscale = face * _scale;
+image_yscale = _scale;
+
 if (global.hitstop > 0) {
     image_speed = 0;
 	draw_self();

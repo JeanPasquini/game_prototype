@@ -1,2 +1,3 @@
 movementSpeed = 1;
 freeze_alpha = 0;
+freeze = false;

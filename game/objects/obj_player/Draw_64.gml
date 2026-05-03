@@ -1,4 +1,3 @@
-           
 var pad   = 12;
 var box_w = 100;
 var box_h = 110;

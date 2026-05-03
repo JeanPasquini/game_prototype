@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"footstep_3",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.3798186,
+  "exportDir":"",
+  "name":"footstep_3",
+  "parent":{
+    "name":"player",
+    "path":"folders/Sounds/soundeffect/player.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"footstep_3.wav",
+  "volume":0.5,
+}

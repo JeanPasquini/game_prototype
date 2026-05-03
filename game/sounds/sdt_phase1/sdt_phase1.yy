@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":120.44,
+  "duration":79.50921,
   "exportDir":"",
   "name":"sdt_phase1",
   "parent":{

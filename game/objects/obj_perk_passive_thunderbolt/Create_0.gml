@@ -1,4 +1,4 @@
-chance = 10;
+chance = 5;
 damage = obj_player.damage * 5;
 
 scr_perk_thunderbolt = function(_x, _y)

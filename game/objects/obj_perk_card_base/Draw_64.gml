@@ -67,13 +67,13 @@ if (selected && spr_ui_perk_select != noone)
 // =================================================
 // LAYOUT INTERNO (ESTÁTICO)
 // =================================================
-var pad = 17;
+var pad = 20;
 
 var icon_x = 17 + size_frame_icon * 0.5;
 var icon_y = 28 + size_frame_icon * 0.5;
 
 var title_x = size_frame_icon * ui_scale - (size_frame_icon * 0.5);
-var title_y = icon_y;
+var title_y = icon_y - 6;
 
 var desc_x = pad;
 var desc_y = icon_y + size_frame_icon;
@@ -123,15 +123,30 @@ draw_text_ext(
 );
 
 if (selected){
-draw_sprite_ext(
+    draw_sprite_ext(
         spr_ui_press_e_menu,
         0,
         fx + frame_w / 2,
-        fy + frame_h - (ui_scale * 8),
+        fy + frame_h - (ui_scale * 3),
         ui_scale,
         ui_scale,
         0,
         c_white,
         1
+    );
+
+    // Texto
+	draw_set_font(font_desc);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_set_color(c_white);
+
+    draw_text_transformed(
+        fx + frame_w / 2,
+        fy + frame_h - (ui_scale * 3),
+        "SELECTED",
+        1,
+        1,
+        0
     );
 }
