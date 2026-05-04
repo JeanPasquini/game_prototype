@@ -1,5 +1,12 @@
 scr_music_room();
 
+if(room_get_name(room) != "HUB"){
+	time_run += delta_time / 1000000;
+}
+else{
+	time_run = 0;	
+}
+
 var _cam = view_camera[0];
 
 var _cam_x = camera_get_view_x(_cam);

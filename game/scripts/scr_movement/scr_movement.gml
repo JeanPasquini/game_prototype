@@ -243,6 +243,9 @@ function _col(xp, yp) {
     var door = instance_place(xp, yp, obj_parent_enviroment_door);
     if (door != noone) return !door.open;
 
+    var gate = instance_place(xp, yp, obj_environment_gate);
+    if (gate != noone) return !gate.open;
+
     return false;
 }
 

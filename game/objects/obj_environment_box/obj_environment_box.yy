@@ -8,7 +8,10 @@
   ],
   "managed":true,
   "name":"obj_environment_box",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_parent_enviroment_object","path":"objects/obj_parent_enviroment_object/obj_parent_enviroment_object.yy",},"propertyId":{"name":"key_porcentage","path":"objects/obj_parent_enviroment_object/obj_parent_enviroment_object.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"10",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_parent_enviroment_object","path":"objects/obj_parent_enviroment_object/obj_parent_enviroment_object.yy",},"propertyId":{"name":"life_porcentage","path":"objects/obj_parent_enviroment_object/obj_parent_enviroment_object.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"90",},
+  ],
   "parent":{
     "name":"environment",
     "path":"folders/Objects/environment.yy",

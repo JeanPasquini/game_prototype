@@ -10,3 +10,7 @@ else{
 	shake_y = 0;
 }
 alpha = lerp(alpha, 0, 0.1);
+
+if(life <= 0){
+	instance_destroy();	
+}

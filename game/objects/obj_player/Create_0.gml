@@ -49,7 +49,7 @@ attack_knockback = 5;
 invencible_time = 50;
 critical_chance = 0;
 lucky_chance = 0;
-key = 10;
+key = 0;
 
 // Dash
 dash_speed = 10;
@@ -82,7 +82,7 @@ timer_attack = 15;
 
 // Merchant Status
 
-money = 1000;
+money = 0;
 
 
 // Additions Variables

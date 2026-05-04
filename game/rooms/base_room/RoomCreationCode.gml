@@ -2,8 +2,8 @@ if (!variable_global_exists("rooms_map")) {
     global.rooms_map = {
 	    phase_01: {
 			HUB: {
-				sends: { safe_room },
-				connections: { up: safe_room },
+				sends: { tutorial_room },
+				connections: { up: tutorial_room },
 				returns: false,
 				music: sdt_hub,
 				up:    { px: 45, py: 336 },
@@ -11,15 +11,15 @@ if (!variable_global_exists("rooms_map")) {
 				left:  { px: 45, py: 336 },
 				right: { px: 45, py: 336 },
 			},
-			safe_room: {
+			tutorial_room: {
 				sends: { challenge_01 },
 				connections: { left: challenge_01 },
 				returns: false,
 				music: sdt_phase1,
-				up:    { px: 800, py: 480 },
-				down:  { px: 800, py: 480 },
-				left:  { px: 800, py: 480 },
-				right: { px: 800, py: 480 },
+				up:    { px: 150, py: 240 },
+				down:  { px: 150, py: 240 },
+				left:  { px: 150, py: 240 },
+				right: { px: 150, py: 240 },
 			},
 			store_room: {
 				sends: { },
@@ -34,7 +34,7 @@ if (!variable_global_exists("rooms_map")) {
 			challenge_01: {
 				sends: { challenge_02 },
 				connections: { left: challenge_02, right: safe_room },
-				returns: true,
+				returns: false,
 				music: sdt_phase1,
 				up:    { px: 1088, py: 293 },
 				down:  { px: 576, py: 741 },

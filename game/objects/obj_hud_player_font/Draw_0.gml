@@ -11,5 +11,9 @@ if (type_info == 2) {
     draw_text(x, y, obj_player.key);
 }
 
+if (type_info == 3 && room_get_name(room) != "HUB") {
+    draw_text_transformed(x, y, obj_control.time_run, 0.75, 0.75, 0);
+}
+
 // voltar ao padrão
 draw_set_halign(fa_left);

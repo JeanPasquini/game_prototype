@@ -24,6 +24,8 @@ if (life <= 0){
 	perk_activatable = noone;
 	perk_activatable_obj = noone;
 	invencible = true;
+	money = 0;
+	key = key_initial;
 	alarm[0] = 120;
 
 	obj_combo_streak.alarm[0] = 1;

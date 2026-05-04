@@ -24,15 +24,15 @@
   "name":"spr_ui_player_energy",
   "nineSlice":{
     "$GMNineSliceData":"",
-    "bottom":6,
+    "bottom":0,
     "enabled":true,
     "guideColour":[4294902015,4294902015,4294902015,4294902015,],
     "highlightColour":1728023040,
     "highlightStyle":1,
-    "left":42,
+    "left":22,
     "resourceType":"GMNineSliceData",
     "resourceVersion":"2.0",
-    "right":42,
+    "right":22,
     "tileMode":[
       0,
       0,
@@ -40,7 +40,7 @@
       0,
       0,
     ],
-    "top":6,
+    "top":0,
   },
   "origin":0,
   "parent":{
