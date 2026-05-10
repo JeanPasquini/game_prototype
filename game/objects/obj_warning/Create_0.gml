@@ -9,4 +9,4 @@ menu_scale = 0.8;
 text_scale = 0.5;
 
 warning_font = fnt_ui_menu_perk_description;
-
+persistent_warning = false;

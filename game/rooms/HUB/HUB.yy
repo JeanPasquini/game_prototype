@@ -73,6 +73,7 @@
     {"name":"inst_27543965","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_6953746C","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_6A0A6498","path":"rooms/HUB/HUB.yy",},
+    {"name":"inst_51536842","path":"rooms/HUB/HUB.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -194,6 +195,9 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_gate","path":"objects/obj_environment_gate/obj_environment_gate.yy",},"propertyId":{"name":"id_gate","path":"objects/obj_environment_gate/obj_environment_gate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_gate","path":"objects/obj_environment_gate/obj_environment_gate.yy",},"propertyId":{"name":"type","path":"objects/obj_environment_gate/obj_environment_gate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"1",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":480.0,"y":256.0,},
+        {"$GMRInstance":"v4","%Name":"inst_51536842","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_51536842","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Testando [JUMP_BUTTON] ver se ele pega certinho",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":145.0,"y":349.0,},
       ],"layers":[],"name":"environment","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"tl_back_environment_plants","depth":1300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":true,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":false,"layers":[],"name":"tl_back_environment_plants","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":46,"SerialiseWidth":64,"TileCompressedData":[
           -805,-2147483648,1,117,-42,-2147483648,1,94,-20,-2147483648,1,135,-36,-2147483648,2,114,115,-39,-2147483648,
