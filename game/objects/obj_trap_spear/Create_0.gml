@@ -4,6 +4,7 @@ enum TrapSpearState {
 }
 state = TrapSpearState.NOT_DAMAGE;
 damage = 1;
+knockback_strength = 4;
 image_speed = 1;
 
 emitter = audio_emitter_create();

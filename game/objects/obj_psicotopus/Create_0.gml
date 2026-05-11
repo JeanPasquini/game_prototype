@@ -9,16 +9,14 @@ enum AttackState {
 	OCTOPUS_ATTACK,     // Main octopus attack pattern
 	TRIPLE_VERTICAL,    // Fires three bullets vertically
     HOMING_SINGLE,      // Fires a single homing projectile
-    TRIPLE_RICOCHET,    // Fires three ricochet bullets
-	
-	
+    //TRIPLE_RICOCHET,    // Fires three ricochet bullets
 	WAITING,            // Idle state between attacks
 }
 
 // Index or counter used to cycle through attack states
 // Must be "count(AttackState)-1" to properly ignore the WAITING state when cycling
 countAttackStates = 4;
-currentAttackState = AttackState.WAITING;
+currentAttackState = AttackState.OCTOPUS_ATTACK;
 
 is_attacking = false;
 attack_cooldown = 0;

@@ -1,7 +1,7 @@
 // Check if the octopus is starting its attack behavior
 if (currentState == OctopusState.STARTING_ATTACK && !is_destroyed) {
 	
-	var centro_x = room_width / 2;
+	var centro_x = 880;
 	var centro_y = room_height / 2;
 	dir = point_direction(x, y, centro_x, centro_y);
 	// Check if the instance is not yet exactly at the center of the room

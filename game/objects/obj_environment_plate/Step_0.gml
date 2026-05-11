@@ -14,7 +14,7 @@ if (instance_exists(obj_player))
 			warning_instance = instance_create_layer(
 			    player.x,
 			    player.y,
-			    "Instances",
+			    "controls",
 			    obj_warning
 			);
 

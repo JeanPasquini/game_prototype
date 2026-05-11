@@ -85,6 +85,11 @@ with (obj_enemy_bibipig) {
     draw_sprite_ext(spr_light, 0, x, y, 1.5, 1.5, 0, make_color_rgb(200, 100, 255), 0.5);
 }
 
+// bibipig enemy
+with (obj_psicotopus) {
+    draw_sprite_ext(spr_light, 0, x, y, 3, 3, 0, make_color_rgb(120, 255, 200), 1);
+}
+
 // volta ao normal
 gpu_set_blendmode(bm_normal);
 

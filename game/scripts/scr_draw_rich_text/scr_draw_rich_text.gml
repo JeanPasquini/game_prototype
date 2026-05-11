@@ -10,10 +10,22 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha)
     while (i <= string_length(_text))
     {
         var ch = string_char_at(_text, i);
+		
+		if (ch == "\\" && i < string_length(_text))
+			{
+			    var next_ch = string_char_at(_text, i + 1);
 
-        // =====================================
-        // TAG
-        // =====================================
+			    if (next_ch == "n")
+			    {
+			        current_x = _x;
+
+			        _y += string_height("A") * _scale * 1.5;
+
+			        i += 2;
+
+			        continue;
+			    }
+			}
 
         if (ch == "[")
         {
@@ -37,18 +49,18 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha)
                         spr = spr_btn_move;
                     break;
 
-                    case "KEY_E":
-                        spr = spr_key_e;
+                    case "ATTACK_BUTTON":
+                        spr = spr_btn_z;
                     break;
 
-                    case "KEY_F":
-                        spr = spr_key_f;
+                    case "DASH_BUTTON":
+                        spr = spr_btn_c;
+                    break;
+					
+					case "INTERACT_BUTTON":
+                        spr = spr_btn_e;
                     break;
                 }
-
-                // =====================================
-                // DESENHA ÍCONE
-                // =====================================
 
                 if (spr != noone)
                 {
@@ -61,7 +73,6 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha)
 
                     var total_icon_w = icon_w + (visual_padding * 2);
 
-                    // draw_sprite_ext usa centro
                     var draw_x = current_x + visual_padding + (icon_w * 0.5);
 
                     draw_sprite_ext(
@@ -76,7 +87,6 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha)
                         _alpha
                     );
 
-                    // avança corretamente
                     current_x += total_icon_w;
 
                     i = end_pos + 1;
@@ -85,10 +95,6 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha)
                 }
             }
         }
-
-        // =====================================
-        // TEXTO NORMAL
-        // =====================================
 
         draw_text_transformed(
             current_x,
@@ -107,7 +113,8 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha)
 
 function scr_rich_text_width(_text, _scale)
 {
-    var total_w = 0;
+    var current_w = 0;
+    var max_w = 0;
 
     var i = 1;
 
@@ -115,9 +122,21 @@ function scr_rich_text_width(_text, _scale)
     {
         var ch = string_char_at(_text, i);
 
-        // =====================================
-        // TAG
-        // =====================================
+        if (ch == "\\" && i < string_length(_text))
+        {
+            var next_ch = string_char_at(_text, i + 1);
+
+            if (next_ch == "n")
+            {
+                max_w = max(max_w, current_w);
+
+                current_w = 0;
+
+                i += 2;
+
+                continue;
+            }
+        }
 
         if (ch == "[")
         {
@@ -141,18 +160,18 @@ function scr_rich_text_width(_text, _scale)
                         spr = spr_btn_move;
                     break;
 
-                    case "KEY_E":
-                        spr = spr_key_e;
+                    case "ATTACK_BUTTON":
+                        spr = spr_btn_z;
                     break;
 
-                    case "KEY_F":
-                        spr = spr_key_f;
+                    case "DASH_BUTTON":
+                        spr = spr_btn_c;
+                    break;
+
+                    case "INTERACT_BUTTON":
+                        spr = spr_btn_e;
                     break;
                 }
-
-                // =====================================
-                // WIDTH DO ÍCONE
-                // =====================================
 
                 if (spr != noone)
                 {
@@ -162,7 +181,7 @@ function scr_rich_text_width(_text, _scale)
 
                     var visual_padding = _scale;
 
-                    total_w += icon_w + (visual_padding * 2);
+                    current_w += icon_w + (visual_padding * 2);
 
                     i = end_pos + 1;
 
@@ -171,14 +190,12 @@ function scr_rich_text_width(_text, _scale)
             }
         }
 
-        // =====================================
-        // TEXTO NORMAL
-        // =====================================
-
-        total_w += string_width(ch) * _scale;
+        current_w += string_width(ch) * _scale;
 
         i++;
     }
 
-    return total_w;
+    max_w = max(max_w, current_w);
+
+    return max_w;
 }

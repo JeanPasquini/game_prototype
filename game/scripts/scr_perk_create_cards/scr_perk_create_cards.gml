@@ -15,18 +15,15 @@ function scr_perk_create_cards()
     var cx = sw * 0.5;
     var cy = sh * 0.5;
 
-    // ===============================
-    // TODOS OS PERKS POSSÍVEIS
-    // ===============================
     var all_perks = [
-		//obj_perk_card_fire_ring,
-		//obj_perk_card_rage,
-		//obj_perk_card_berseker,
+		obj_perk_card_fire_ring,
+		obj_perk_card_rage,
+		obj_perk_card_berseker,
 		obj_perk_card_thunderbold,
 		obj_perk_card_energy_shield,
-		//obj_perk_card_vampirism,
+		obj_perk_card_vampirism,
 		obj_perk_card_elemental_ring,
-		//obj_perk_card_energy_attack
+		obj_perk_card_energy_attack
     ];
 	
     var available_perks = [];
@@ -41,15 +38,10 @@ function scr_perk_create_cards()
         }
     }
 
-    // segurança: se não sobrar perk
     if (array_length(available_perks) == 0) return;
 
-    // embaralha só os disponíveis
     shuffle_array(available_perks);
 
-    // ===============================
-    // CRIA ATÉ 3 (SEM REPETIR)
-    // ===============================
     var perks_to_show = min(3, array_length(available_perks));
 
     for (var i = 0; i < perks_to_show; i++)

@@ -6,6 +6,8 @@ else{
 	draw_set_alpha(0);
 }
 
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
 var hits_text = "HITS " + string(combo_streak) + "x";
 
 var text_w = string_width(hits_text);

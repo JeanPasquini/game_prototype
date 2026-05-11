@@ -1,5 +1,5 @@
 function scr_center_obj_in_room(_movementSpeed){
-	var centro_x = room_width / 2;
+	var centro_x = 880;
 	var centro_y = room_height / 2;
 
 	// Check if the instance is not yet exactly at the center of the room

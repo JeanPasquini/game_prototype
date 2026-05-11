@@ -19,7 +19,7 @@ if (instance_exists(obj_player)) {
 				scr_perk_altar(x, y)
 		}
 		else if (obj_player.key == 0 && !open){
-			var _warning = instance_create_layer(obj_player.x, obj_player.y, "Instances", obj_warning);	
+			var _warning = instance_create_layer(obj_player.x, obj_player.y, "controls", obj_warning);	
 			_warning.alarm[0] = 200;
 			_warning.message_warning = "No keys!"	
 		}

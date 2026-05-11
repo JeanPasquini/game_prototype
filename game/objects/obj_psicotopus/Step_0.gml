@@ -18,10 +18,10 @@ switch (currentAttackState) {
         attack_homing_single();
 		break;
 
-    case AttackState.TRIPLE_RICOCHET:
-        // Executes a triple ricochet projectile attack
-        attack_triple_ricochet();
-		break;
+    //case AttackState.TRIPLE_RICOCHET:
+    //    // Executes a triple ricochet projectile attack
+    //    attack_triple_ricochet();
+	//	break;
 
 	case AttackState.OCTOPUS_ATTACK:
 		// Spawns the octopus special attack entity
@@ -191,7 +191,7 @@ function flood_arena_attack() {
 		attack_cooldown--;		
 		// Reset attack state once the sequence is finished
 				
-		var centerX = room_width/2;
+		var centerX = 880;
 		var centerY = room_height/2;
 	    var is_tent_empty = tentacles == -1 || ( ds_exists(tentacles, ds_type_list) && ds_list_empty(tentacles) );
 		

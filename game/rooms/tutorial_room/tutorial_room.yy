@@ -91,18 +91,16 @@
   ],
   "isDnd":false,
   "layers":[
-    {"$GMRTileLayer":"","%Name":"tl_level","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":false,"layers":[],"name":"tl_level","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":48,"SerialiseWidth":128,"TileCompressedData":[
-          -50,0,-78,-2147483648,-50,0,-78,-2147483648,-50,0,-78,-2147483648,-3,0,-44,1,-3,0,-78,-2147483648,-3,
-          0,1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-42,0,1,1,-3,0,
-          -78,-2147483648,-3,0,1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,
-          1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-15,0,-12,3,-15,
-          0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-15,0,-12,3,-15,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-9,0,-3,3,-18,
-          0,-3,3,-9,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-8,0,1,1,-3,3,-18,0,-3,3,1,1,-8,0,1,1,-3,0,-78,-2147483648,
-          -3,0,1,1,-42,0,1,1,-3,0,-78,-2147483648,-3,0,1,1,-18,0,-6,1,-18,0,1,1,-3,0,-78,-2147483648,-3,0,-7,1,
-          -30,0,-7,1,-3,0,-78,-2147483648,-4,0,-6,1,-30,0,-6,1,-4,0,-78,-2147483648,-4,0,-8,1,-26,0,-8,1,-4,0,
-          -78,-2147483648,-4,0,-8,1,-26,0,-8,1,-4,0,-78,-2147483648,-4,0,-42,1,-4,0,-78,-2147483648,-50,0,-78,
-          -2147483648,-50,0,-78,-2147483648,-50,0,-3022,-2147483648,
-        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_background","path":"tilesets/ts_background/ts_background.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
+    {"$GMRTileLayer":"","%Name":"tl_level","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":false,"layers":[],"name":"tl_level","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":24,"SerialiseWidth":64,"TileCompressedData":[
+          -153,1,-4,0,1,1,-20,0,-4,1,-8,-2147483648,-4,1,-22,0,1,1,-4,0,1,1,-20,0,-4,1,-8,-2147483648,-4,1,-22,
+          0,1,1,-4,0,1,1,-21,0,-2,1,-9,-2147483648,-4,1,-51,0,-9,-2147483648,-4,1,-38,0,-6,1,-7,0,-9,-2147483648,
+          -4,1,-10,0,-37,1,-4,0,-2,-2147483648,-5,1,-2,-2147483648,-10,1,-10,0,-31,1,-4,0,-2,-2147483648,-4,1,
+          -3,-2147483648,-10,1,-10,0,-41,1,-3,-2147483648,-10,1,-9,0,-42,1,-2,-2147483648,-17,1,-4,0,-41,1,-3,
+          -2147483648,-16,1,-4,0,-41,1,-3,-2147483648,-17,1,-3,0,-42,1,-2,-2147483648,-16,1,-4,0,-6,1,-29,0,-9,
+          -2147483648,-16,1,-4,0,1,1,-4,0,1,1,-29,0,-9,-2147483648,-16,1,-3,0,-2,1,-4,0,1,1,-4,0,-2,1,-23,0,-8,
+          -2147483648,-17,1,-14,0,-2,1,-23,0,-9,-2147483648,-16,1,-14,0,-2,1,-23,0,-9,-2147483648,-38,1,-4,0,-6,
+          1,-7,0,-47,1,-4,0,-6,1,-7,0,-48,1,-3,0,-7,1,-6,0,-48,1,-3,0,-7,1,-6,0,-75,1,
+        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_level_map","path":"tilesets/ts_level_map/ts_level_map.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
     {"$GMREffectLayer":"","%Name":"colour","depth":100,"effectEnabled":true,"effectType":"_filter_colour_balance","gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":false,"layers":[],"name":"colour","properties":[
         {"name":"g_ColourBalanceShadows","type":0,"value":"0",},
         {"name":"g_ColourBalanceShadows","type":0,"value":"0",},
@@ -114,7 +112,7 @@
         {"name":"g_ColourBalanceHighlights","type":0,"value":"0",},
         {"name":"g_ColourBalanceHighlights","type":0,"value":"0",},
       ],"resourceType":"GMREffectLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRInstanceLayer":"","%Name":"controls","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"controls","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRInstanceLayer":"","%Name":"controls","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":false,"instances":[],"layers":[],"name":"controls","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"dialogue","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"dialogue","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"perk","depth":400,"effectEnabled":true,"effectType":"none","gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"perk","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"ilumination","depth":500,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
@@ -304,14 +302,14 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Double-tap the [MOVE_BUTTON] in sequence to run",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1120.0,"y":608.0,},
         {"$GMRInstance":"v4","%Name":"inst_185349AC","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_185349AC","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"properties":[
-            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Press the dash button to reach farther places",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Press the [DASH_BUTTON] to reach farther places",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1440.0,"y":608.0,},
         {"$GMRInstance":"v4","%Name":"inst_5C564128","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5C564128","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Proceed to the next instructions",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1856.0,"y":608.0,},
         {"$GMRInstance":"v4","%Name":"inst_67CF8DD7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_67CF8DD7","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"properties":[
-            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Break crates to get keys for chests",},
-          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1888.0,"y":224.0,},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Break crates with [ATTACK_BUTTON] to get keys for chests.\\\\nInteract with chest using [INTERACT_BUTTON]",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1844.0,"y":224.0,},
         {"$GMRInstance":"v4","%Name":"inst_1B7528D7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1B7528D7","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_environment_plate","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"propertyId":{"name":"plate_message","path":"objects/obj_environment_plate/obj_environment_plate.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Eliminate all enemies in the room to choose 1 of 3 perks",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1440.0,"y":192.0,},

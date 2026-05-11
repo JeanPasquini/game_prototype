@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":86.64,
+  "duration":59.075012,
   "exportDir":"",
   "name":"sdt_phase1_mini_boss",
   "parent":{

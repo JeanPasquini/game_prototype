@@ -2,14 +2,8 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_colour(c_white);
 
-// =================================================
-// SEGURANÇA
-// =================================================
 if (spr_frame == noone) exit;
 
-// =================================================
-// ANIMAÇÃO DA BORDA
-// =================================================
 var border_scale = ui_scale;
 var border_alpha = 1;
 
@@ -19,18 +13,12 @@ if (selected)
     border_alpha = 0.6 + sin(select_time * 0.2) * 0.4;
 }
 
-// =================================================
-// MEDIDAS
-// =================================================
 var frame_w = sprite_get_width(spr_frame) * ui_scale;
 var frame_h = sprite_get_height(spr_frame) * ui_scale;
 
 var fx = x - frame_w * 0.5;
 var fy = y - frame_h * 0.5;
 
-// =================================================
-// FRAME BASE (ESTÁTICO)
-// =================================================
 draw_set_alpha(1);
 draw_sprite_ext(
     spr_frame,
@@ -44,9 +32,6 @@ draw_sprite_ext(
     1
 );
 
-// =================================================
-// BORDA DE SELEÇÃO (ÚNICO ELEMENTO ANIMADO)
-// =================================================
 if (selected && spr_ui_perk_select != noone)
 {
     draw_set_alpha(border_alpha);
@@ -64,9 +49,6 @@ if (selected && spr_ui_perk_select != noone)
     draw_set_alpha(1);
 }
 
-// =================================================
-// LAYOUT INTERNO (ESTÁTICO)
-// =================================================
 var pad = 20;
 
 var icon_x = 17 + size_frame_icon * 0.5;
@@ -78,9 +60,6 @@ var title_y = icon_y - 6;
 var desc_x = pad;
 var desc_y = icon_y + size_frame_icon;
 
-// =================================================
-// ÍCONE
-// =================================================
 if (spr_icon != noone)
 {
     draw_sprite_ext(
@@ -96,9 +75,6 @@ if (spr_icon != noone)
     );
 }
 
-// =================================================
-// TEXTO — TÍTULO
-// =================================================
 if (font_title != noone) draw_set_font(font_title);
 
 draw_text(
@@ -107,9 +83,6 @@ draw_text(
     title_text
 );
 
-// =================================================
-// TEXTO — DESCRIÇÃO
-// =================================================
 var desc_max_w = frame_w - (pad * 2 * ui_scale);
 
 if (font_desc != noone) draw_set_font(font_desc);
@@ -135,7 +108,6 @@ if (selected){
         1
     );
 
-    // Texto
 	draw_set_font(font_desc);
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);

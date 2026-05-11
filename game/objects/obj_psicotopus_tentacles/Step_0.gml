@@ -24,7 +24,7 @@ switch (type) {
 
 function _orbitalRotation() {
 	// Calculate the room center as the rotation pivot
-	var centro_x = room_width / 2;
+	var centro_x = 880;
 	var centro_y = room_height / 2;
 	
 	// Position the tentacle using polar coordinates around the room center

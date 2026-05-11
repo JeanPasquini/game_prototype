@@ -5,19 +5,29 @@ var yy = obj_player.y - offset_y;
 
 draw_set_font(warning_font);
 
-// TAMANHO
 var text_w = scr_rich_text_width(message_warning, text_scale);
-var text_h = string_height("A") * text_scale;
 
-// PADDING
+var line_count = 1;
+
+for (var i = 1; i < string_length(message_warning); i++)
+{
+    if (string_char_at(message_warning, i) == "\\" &&
+        string_char_at(message_warning, i + 1) == "n")
+    {
+        line_count++;
+    }
+}
+
+var line_h = string_height("A") * text_scale * 1.5;
+
+var text_h = line_h * line_count;
+
 var padding_x = 20;
 var padding_y = 25;
 
-// BOX
 var box_w = text_w + padding_x;
 var box_h = text_h + padding_y;
 
-// NINE SLICE
 draw_sprite_stretched(
     spr_ui_warning,
     0,
@@ -27,17 +37,15 @@ draw_sprite_stretched(
     box_h
 );
 
-// DRAW
 draw_set_color(c_white);
 draw_set_alpha(alpha_warning);
 
 scr_draw_rich_text(
     xx - text_w * 0.5,
-    yy,
+    yy - text_h * 0.5 + line_h * 0.5,
     message_warning,
     text_scale,
     alpha_warning
 );
 
-// RESET
 draw_set_alpha(1);
