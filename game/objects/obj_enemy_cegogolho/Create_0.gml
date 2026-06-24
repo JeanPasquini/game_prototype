@@ -3,8 +3,8 @@ event_inherited();
 life = 10;
 throwsProjectile = obj_projectile;
 idle_movement_script = src_random_flying_idle_movement();
-chasing_attack_script = function(){};
-chasing_movement_script = src_limited_flying_movement();
+chasing_attack_script = src_lunge_attack();
+chasing_movement_script = src_random_flying_chasing_movement();
 damage = 1;
 knockback_strength = 5;
 

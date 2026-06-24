@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_lunge_attack",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_lunge_attack",
+  "parent":{
+    "name":"attacks",
+    "path":"folders/Scripts/enemy/attacks.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

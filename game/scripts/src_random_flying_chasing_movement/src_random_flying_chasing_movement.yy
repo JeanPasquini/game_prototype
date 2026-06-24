@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"src_random_flying_chasing_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"src_random_flying_chasing_movement",
+  "parent":{
+    "name":"flying",
+    "path":"folders/Scripts/enemy/movements/flying.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
