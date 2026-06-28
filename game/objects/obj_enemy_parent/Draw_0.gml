@@ -42,6 +42,7 @@ function get_state_name(state_val)
         case EnemyState.CHASING:         return "CHASING";
         case EnemyState.SPECIAL_ATTACK:  return "SPECIAL_ATTACK";
         case EnemyState.CHARGING_ATTACK: return "CHARGING_ATTACK";
+		case EnemyState.RETREAT:		 return "RETREATING";
         default:                         return "UNKNOWN";
     }
 }

@@ -15,3 +15,7 @@ thrustCooldown = 0; // contagem até o próximo esforço pra subir
 yOffset = 0;        // deslocamento atual em relação ao baseY
 maxOffsetUp   = 16;  // até onde pode subir em relação ao ystart
 maxOffsetDown = 16;  // até onde pode "afundar" em relação ao ystart
+
+baseAttackDelay = 1 * 60;
+currentAttackDelay = baseAttackDelay;
+retreatTimer = 0;
