@@ -4,7 +4,7 @@ function src_lunge_attack(){
 			currentState = EnemyState.IDLE;
 			return;
 		}
-		
+/*		
 		if (currentState == EnemyState.CHASING) {
 	        currentAttackDelay--;
 
@@ -12,7 +12,9 @@ function src_lunge_attack(){
 	            retreatTimer = 30;
 	            currentState = EnemyState.RETREAT;
 	        }
-	    } else if (currentState == EnemyState.RETREAT) {
+	    } else 
+*/		
+		if (currentState == EnemyState.RETREAT) {
 	        retreatTimer--;
 	        if (retreatTimer <= 0) {
 				currentState = EnemyState.CHASING;

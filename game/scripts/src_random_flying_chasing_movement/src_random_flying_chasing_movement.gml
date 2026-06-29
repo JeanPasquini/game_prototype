@@ -1,69 +1,60 @@
 function src_random_flying_chasing_movement(){
 	return function () {
 
-	    // ==========================
 	    // MOVIMENTO HORIZONTAL
-	    // ==========================
-
-		var _dir = (x - obj_player.x < 0) ? 1 : -1;
-
-		if (currentState == EnemyState.RETREAT) _dir = _dir * -1;
-
-	    var _dx = abs(x - obj_player.x);
+		var _dir = sign(obj_player.x - x)	
+		
+		// Evita troca muito rápida de direção caso em cima do player
+		if (!place_meeting(x, obj_player.y, obj_player)) {
+			
+			if (_dir == -1) direction = 180 else direction = 0;
+			if (currentState == EnemyState.RETREAT) {
+				 direction = (direction == 0) ? 180 : 0;
+				 show_debug_message(direction);
+			}
+			
+		}
+		
+		
+		
+		// --- Movimento horizontal com verificação de colisão ---
+	    var _dx = lengthdir_x(movementSpeed, direction); // deslocamento pretendido neste step
 
 	    // colisão horizontal
-	    if(place_meeting(x + _dx,y,obj_wall)) {
-	        while(!place_meeting(x + sign(_dx),y,obj_wall)) {
+	     if (place_meeting(x + _dx, y, obj_wall)) {
+	        while (!place_meeting(x + sign(_dx), y, obj_wall)) {
 	            x += sign(_dx);
 	        }
-			
-	        // se estava atacando ou recuando inverte e entra em recuo
-	        if(currentState == EnemyState.CHASING) {
-	            direction += 180;
-	            retreatTimer = 20;
-	            currentState = EnemyState.RETREAT;
-	        } else {
-	            direction = (direction == 0) ? 180 : 0;
-	        }
+	        direction = (direction == 0) ? 180 : 0; // bate na parede e vira pro outro lado
+			currentState = EnemyState.RETREAT;
+			retreatTimer = .6 * 60;
 	        speed = 0;
 	    } else {
-	        x += movementSpeed;
+	        speed = movementSpeed;
 	    }
 
-	    // ==========================
 	    // EFEITO DE MOVIMENTO Y
-	    // ==========================
 	    var _gravity     = 0.08;
 	    var _thrustForce = -1.4;
-	    var _maxDrop     = 10;
 
 	    fallSpeed += _gravity;
 
-	    if(yOffset >= _maxDrop || thrustCooldown <= 0) {
-	        fallSpeed = _thrustForce + random_range(-0.3,0.3);
+	    if(thrustCooldown <= 0) {
+	        fallSpeed = _thrustForce + random_range(-0.2,0.2);
 	        thrustCooldown = irandom_range(20,40);
 	    }
 	    thrustCooldown--;
 
-	    var _randomY = (random(1)-0.5)*0.4;
-		var _dy = fallSpeed + _randomY;
+	   var _dy = fallSpeed;
 
 		// Correção vertical durante perseguição
 		if(currentState == EnemyState.CHASING) {
-			var _player = instance_nearest(x,y,obj_player);
-
-			var _directionY = sign(_player.y - y);
-			var _chaseYForce = 0.15;
+			var _directionY = sign((obj_player.y-sprite_get_height(spr_player)) - y);
+			var _chaseYForce = 0.45;
 			_dy += _directionY * _chaseYForce;
+		} else if (currentState == EnemyState.RETREAT) {
+			_dy += _thrustForce;
 		}
-
-	    if(yOffset + _dy > maxOffsetDown) {
-	        _dy = maxOffsetDown-yOffset;
-	        fallSpeed = 0;
-	    } else if(yOffset + _dy < -maxOffsetUp) {
-	        _dy = -maxOffsetUp-yOffset;
-	        fallSpeed = 0;
-	    }
 
 	    // colisão vertical
 	    if(_dy != 0) {
@@ -79,15 +70,13 @@ function src_random_flying_chasing_movement(){
 	        }
 	    }
 
-	    // ==========================
 	    // COLISÃO COM PLAYER
-	    // ==========================
 	    if(currentState == EnemyState.CHASING) {
 
-	        if(place_meeting(x,y,obj_player)) {
-	            direction += 180;
-	            retreatTimer = 30;
+	        if(place_meeting(x,y,obj_player)) {            
+	            retreatTimer = .5 * 60;
 	            currentState = EnemyState.RETREAT;
+				
 	        }
 	    }
 	}
