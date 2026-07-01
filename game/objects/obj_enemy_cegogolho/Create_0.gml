@@ -8,14 +8,12 @@ chasing_attack_script = src_lunge_attack();
 chasing_movement_script = src_random_flying_chasing_movement();
 damage = 1;
 knockback_strength = 5;
+baseAttackDelay = 1 * 60;
+currentAttackDelay = baseAttackDelay;
 
 // --- Controle de voo
 fallSpeed = 0;      // velocidade atual com que o peso o puxa pra baixo
 thrustCooldown = 0; // contagem até o próximo esforço pra subir
-yOffset = 0;        // deslocamento atual
-maxOffsetUp   = 16;  // até onde pode subir em relação ao ystart
-maxOffsetDown = 16;  // até onde pode "afundar" em relação ao ystart
-
-baseAttackDelay = 1 * 60;
-currentAttackDelay = baseAttackDelay;
-retreatTimer = 0;
+maxOffsetUp   = 0;  // até onde pode subir em relação ao ystart
+maxOffsetDown = 0;  // até onde pode "afundar" em relação ao ystart
+retreatTimer = 0;	// contagem do intervalo de recúo pós ataque

@@ -6,17 +6,13 @@ function src_random_flying_chasing_movement(){
 		
 		// Evita troca muito rápida de direção caso em cima do player
 		if (!place_meeting(x, obj_player.y, obj_player)) {
-			
 			if (_dir == -1) direction = 180 else direction = 0;
+			
 			if (currentState == EnemyState.RETREAT) {
 				 direction = (direction == 0) ? 180 : 0;
-				 show_debug_message(direction);
 			}
-			
 		}
-		
-		
-		
+				
 		// --- Movimento horizontal com verificação de colisão ---
 	    var _dx = lengthdir_x(movementSpeed, direction); // deslocamento pretendido neste step
 
@@ -25,9 +21,6 @@ function src_random_flying_chasing_movement(){
 	        while (!place_meeting(x + sign(_dx), y, obj_wall)) {
 	            x += sign(_dx);
 	        }
-	        direction = (direction == 0) ? 180 : 0; // bate na parede e vira pro outro lado
-			currentState = EnemyState.RETREAT;
-			retreatTimer = .6 * 60;
 	        speed = 0;
 	    } else {
 	        speed = movementSpeed;
@@ -61,22 +54,18 @@ function src_random_flying_chasing_movement(){
 	        if(place_meeting(x,y+_dy,obj_wall)) {
 	            while(!place_meeting(x,y+sign(_dy),obj_wall)) {
 	                y += sign(_dy);
-	                yOffset += sign(_dy);
 	            }
 	            fallSpeed = 0;
 	        } else {
 	            y += _dy;
-	            yOffset += _dy;
 	        }
 	    }
 
 	    // COLISÃO COM PLAYER
 	    if(currentState == EnemyState.CHASING) {
-
 	        if(place_meeting(x,y,obj_player)) {            
 	            retreatTimer = .5 * 60;
 	            currentState = EnemyState.RETREAT;
-				
 	        }
 	    }
 	}

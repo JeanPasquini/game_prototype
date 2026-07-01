@@ -26,35 +26,35 @@ function src_random_flying_idle_movement(){
 	    var _maxDrop     = 10;
 
 	    fallSpeed += _gravity;
-
-	    if (yOffset >= _maxDrop || thrustCooldown <= 0) {
-	        fallSpeed = _thrustForce + random_range(-0.3, 0.3);
+		
+		if (maxOffsetUp == 0 &&	maxOffsetDown == 0) {
+			maxOffsetUp = y - _maxDrop;
+			maxOffsetDown = y + _maxDrop;
+		}
+		
+	    if (thrustCooldown <= 0) {
+	        fallSpeed = _thrustForce + random_range(-0.2, 0.2);
 	        thrustCooldown = irandom_range(20, 40);
+			
+			if (y <= maxOffsetUp) {
+				fallSpeed += .5;
+			} else if (y >= maxOffsetDown) {
+				fallSpeed -= .5;
+			}
 	    }
 	    thrustCooldown--;
 
-	    var _dy = fallSpeed + (random(1) - 0.5) * 0.4;
-
-	    // --- Limite de altura (idle) em relação a ystart ---
-	    if (yOffset + _dy > maxOffsetDown) {
-	        _dy = maxOffsetDown - yOffset;
-	        fallSpeed = 0;
-	    } else if (yOffset + _dy < -maxOffsetUp) {
-	        _dy = -maxOffsetUp - yOffset;
-	        fallSpeed = 0;
-	    }
-
+	    var _dy = fallSpeed;
+		
 	    // --- Colisão vertical com paredes/chão ---
 	    if (_dy != 0) {
 	        if (place_meeting(x, y + _dy, obj_wall)) {
 	            while (!place_meeting(x, y + sign(_dy), obj_wall)) {
 	                y += sign(_dy);
-	                yOffset += sign(_dy);
 	            }
 	            fallSpeed = 0;
 	        } else {
 	            y += _dy;
-	            yOffset += _dy;
 	        }
 	    }
 	}
