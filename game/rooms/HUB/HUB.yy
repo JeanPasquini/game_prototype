@@ -73,7 +73,6 @@
     {"name":"inst_4E44C6ED","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_6AC123A3","path":"rooms/HUB/HUB.yy",},
     {"name":"inst_17F36275","path":"rooms/HUB/HUB.yy",},
-    {"name":"inst_65F14C66","path":"rooms/HUB/HUB.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -169,7 +168,6 @@
         {"$GMRInstance":"v4","%Name":"inst_18120593","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_18120593","objectId":{"name":"obj_training_dummy","path":"objects/obj_training_dummy/obj_training_dummy.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_training_dummy","path":"objects/obj_training_dummy/obj_training_dummy.yy",},"propertyId":{"name":"life_variable","path":"objects/obj_training_dummy/obj_training_dummy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"5",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":511.0,"y":657.0,},
-        {"$GMRInstance":"v4","%Name":"inst_65F14C66","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_65F14C66","objectId":{"name":"obj_enemy_cegogolho","path":"objects/obj_enemy_cegogolho/obj_enemy_cegogolho.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":296.0,"y":312.0,},
       ],"layers":[],"name":"enemy","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"drop","depth":1100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":true,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":false,"instances":[],"layers":[],"name":"drop","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"environment","depth":1200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":true,"inheritLayerSettings":true,"inheritSubLayers":true,"inheritVisibility":false,"instances":[
