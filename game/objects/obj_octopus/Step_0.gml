@@ -2,7 +2,7 @@
 if (currentState == OctopusState.STARTING_ATTACK && !is_destroyed) {
 	
 	var centro_x = 880;
-	var centro_y = room_height / 2;
+	var centro_y = (room_height / 2) - 50;
 	dir = point_direction(x, y, centro_x, centro_y);
 	// Check if the instance is not yet exactly at the center of the room
 	if x != centro_x || y != centro_y {
@@ -18,6 +18,7 @@ if (currentState == OctopusState.STARTING_ATTACK && !is_destroyed) {
 			y = centro_y;
 			
 			// Once centralized, spawn tentacles and bullets to start the attack phase
+			scr_set_sprite_once(spr_octopus_octopus_attack_mid_start, "flag_octopus_octopus_attack_mid_start");
 			_create_tentacles();
 			_create_bullets();
 		}
@@ -46,6 +47,7 @@ else if (currentState == OctopusState.ENDING_ATTACK || is_destroyed) {
 		// Needs to be moved back to its initial spawn position
 		if (point_distance(x, y, xstart, ystart) > movementSpeed) {
 			// Move towards the starting position
+			scr_set_sprite_once(spr_octopus_octopus_attack_start_loop, "flag_octopus_attack_start_loop");
 			motion_set(point_direction(x, y, xstart, ystart), movementSpeed);
 		} else {
 			// Perform the final snap movement to the exact starting position
@@ -67,15 +69,8 @@ function _create_bullets() {
 	// Create bullets evenly distributed across a 180-degree arc
 	for (var i = 0; i < max_bullets; i++) {
 	    var _b = instance_create_layer(x, y, "Instances", obj_bullet_ricochet);
-	    
-	    // Assign a unique direction for each bullet
-	    _b.direction = angle_start + (angle_step * i);
-	    
-	    // Define how many times the bullet can bounce
-	    _b.bounces = 0;
-	    
-	    // Set bullet movement speed
-	    _b.velocity = 5; 
+	   _b.direction = angle_start + (angle_step * i);
+        _b.speed = 5;
 	}
 }
 

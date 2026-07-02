@@ -15,6 +15,8 @@ enum AttackState {
 
 // Index or counter used to cycle through attack states
 // Must be "count(AttackState)-1" to properly ignore the WAITING state when cycling
+idle_movement_script = src_grounded_idle_movement();
+chasing_movement_script = src_grounded_chasing_movements();
 countAttackStates = 4;
 currentAttackState = AttackState.OCTOPUS_ATTACK;
 

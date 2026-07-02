@@ -40,54 +40,29 @@ switch (currentAttackState) {
 
 // Handles a triple vertical bullet attack over a short time window
 function attack_triple_vertical() {
-
-    static shot_1 = false;
-	static shot_2 = false;
-	static shot_3 = false;
-
-    if (!is_attacking) {
-        is_attacking = true;
-        image_index = 0;
-		
-		shot_1 = false;
-        shot_2 = false;
-        shot_3 = false;
-
-        _start_attack();
-    }
-
-    speed = 0;
-
-    var frame = floor(image_index);
+	_start_attack();
+	var fire_count_max = 3;
+	var time_milesecond = 120;
+	speed = 0;	
 	
-	function spawn_bullet_offset(_off_x, _off_y) {
-
+	function spawn_bullet_offset(_x, _y) {
 		var dir = (image_xscale < 0) ? -1 : 1;
-
-	    var xx = x + (_off_x * dir);
-	    var yy = y + _off_y;
-
-	    instance_create_layer(xx, yy, "Instances", obj_bullet_vertical);
+	    instance_create_layer(_x, _y, "Instances", obj_psicotopus_sword);
+	}
+	
+	
+	
+	if (sprite_index == spr_psicotopus_triple_vertical_mid){
+		if(alarm[5] <= 0 && attack_mount + 1 <= fire_count_max){
+			attack_mount++;
+			spawn_bullet_offset(880, + 378);
+			alarm[5] = time_milesecond;
+		}
 	}
 
-    if (frame >= 3 && !shot_1) {
-	    shot_1 = true;
-	    spawn_bullet_offset(-2, -66);
-	}
-
-	if (frame >= 6 && !shot_2) {
-	    shot_2 = true;
-	    spawn_bullet_offset(27, -76);
-	}
-
-	if (frame >= 10 && !shot_3) {
-	    shot_3 = true;
-	    spawn_bullet_offset(-13, -74);
-	}
-
-    if (image_index >= image_number - 1) {
-        is_attacking = false;
-        _reset_attack();
+    if (attack_mount == fire_count_max && alarm[5] <= 0) {
+		attack_mount = 0;
+        scr_set_sprite_once(spr_psicotopus_triple_vertical_end, "flag_triple_vertical_end_sprite");
     }
 }
 
@@ -186,41 +161,40 @@ function flood_arena_attack() {
 	
 	if (is_attacking == true) {
 		// Centers the object in the room
-		scr_center_obj_in_room(movementSpeed*1.2);
+		scr_center_psicotopus_in_room(movementSpeed*1.2);
 		// Decrease attack timer
 		attack_cooldown--;		
 		// Reset attack state once the sequence is finished
 				
 		var centerX = 880;
 		var centerY = room_height/2;
-	    var is_tent_empty = tentacles == -1 || ( ds_exists(tentacles, ds_type_list) && ds_list_empty(tentacles) );
+	    //var is_tent_empty = tentacles == -1 || ( ds_exists(tentacles, ds_type_list) && ds_list_empty(tentacles) );
 		
-		if (x == centerX && y == centerY && is_tent_empty) {
-			var _tent1 = instance_create_layer(centerX - sprite_get_width(spr_tentacles)/2, centerY, "Instances", obj_psicotopus_tentacles);		
-			var _tent2 = instance_create_layer(centerX + sprite_get_width(spr_tentacles)/2, centerY, "Instances", obj_psicotopus_tentacles);	
-			_tent1.type = TentacleType.STATIC;
-			_tent2.type = TentacleType.STATIC;
+		//if (x == centerX && y == centerY && is_tent_empty) {
+		//	var _tent1 = instance_create_layer(centerX - sprite_get_width(spr_tentacles)/2, centerY, "Instances", obj_psicotopus_tentacles);		
+		//	var _tent2 = instance_create_layer(centerX + sprite_get_width(spr_tentacles)/2, centerY, "Instances", obj_psicotopus_tentacles);	
+		//	_tent1.type = TentacleType.STATIC;
+		//	_tent2.type = TentacleType.STATIC;
 	
-			var _height = sprite_get_height(spr_tentacles);	
-			// Calcula altura em pixels até encontrar parede
-			while (!position_meeting(_tent1.x, _tent1.y + _height, obj_wall)) {
-				_height++;
-			}
+		//	var _height = sprite_get_height(spr_tentacles);	
+		//	while (!position_meeting(_tent1.x, _tent1.y + _height, obj_wall)) {
+		//		_height++;
+		//	}
 	
-			// Calcula a escala necessária
-			var _sprite_height = sprite_get_height(spr_tentacles);
-			var scale_y = _height / _sprite_height; 
-			// Estica o sprite verticalmente
-			_tent1.scale_target = scale_y;
-			_tent2.scale_target = scale_y;
+		//	var _sprite_height = sprite_get_height(spr_tentacles);
+		//	var scale_y = _height / _sprite_height; 
+			
+		//	_tent1.scale_target = scale_y;
+		//	_tent2.scale_target = scale_y;
 	
-			ds_list_add(tentacles, _tent1);
-			ds_list_add(tentacles, _tent2);
-		}
+		//	ds_list_add(tentacles, _tent1);
+		//	ds_list_add(tentacles, _tent2);
+		//}
 		
 		// Resets the Attack
 		if (!instance_exists(obj_tentacle_telegraph) || is_destroyed) {
 			_reset_attack();
+			flag_flood_sprite = false;
 			
 			var _flood = instance_find(obj_water, 0);
 			var _tent_tele = instance_find(obj_tentacle_telegraph, 0);

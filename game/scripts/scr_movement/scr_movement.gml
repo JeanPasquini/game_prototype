@@ -239,6 +239,8 @@ function _update_jump() {
 function _col(xp, yp) {
 
     if (place_meeting(xp, yp, obj_wall)) return true;
+	
+    if (place_meeting(xp, yp, obj_wall_block)) return true;
 
     var door = instance_place(xp, yp, obj_parent_enviroment_door);
     if (door != noone) return !door.open;
@@ -316,6 +318,11 @@ function _apply_knockback() {
         var ny = y + knockback_y * 0.5;
 
         if (!place_meeting(nx, ny, obj_wall)) {
+            x = nx;
+            y = ny;
+        }
+		
+		if (!place_meeting(nx, ny, obj_wall_block)) {
             x = nx;
             y = ny;
         }

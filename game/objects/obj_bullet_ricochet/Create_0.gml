@@ -1,7 +1,5 @@
 // Inherit the parent event
 event_inherited();
-
 damage = 1;
-velocity = 9;
-displacement = 0;
-bounces = 0;
+speed = 5;
+count_ricochet_max = 5;

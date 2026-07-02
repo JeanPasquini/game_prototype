@@ -138,6 +138,21 @@ part_type_blend(global.PT_projectil_hitting, true);
 part_type_life(global.PT_projectil_hitting, 50, 100);
 
 
+//PSICOTOPUS SWORD 
+ 
+global.PT_PSICOTOPUS_SWORD = part_type_create();
+part_type_shape(global.PT_PSICOTOPUS_SWORD, pt_shape_square);
+part_type_size(global.PT_PSICOTOPUS_SWORD, 0.1, 0.1, 0, 0.1);
+part_type_scale(global.PT_PSICOTOPUS_SWORD, 0.25, 0.25);
+part_type_speed(global.PT_PSICOTOPUS_SWORD, 0, 0, 0, 0);
+part_type_direction(global.PT_PSICOTOPUS_SWORD, 0, 0, 0, 0);
+part_type_gravity(global.PT_PSICOTOPUS_SWORD, 0, 0);
+part_type_orientation(global.PT_PSICOTOPUS_SWORD, 0, 0, 0, 100, false);
+part_type_colour3(global.PT_PSICOTOPUS_SWORD, $6A3CD5, $6A3CD5, $6A3CD5);
+part_type_alpha3(global.PT_PSICOTOPUS_SWORD, 1, 1, 1);
+part_type_blend(global.PT_PSICOTOPUS_SWORD, true);
+part_type_life(global.PT_PSICOTOPUS_SWORD, 10, 50);
+
 
 // =======================
 // FUNÇÃO
@@ -167,6 +182,13 @@ function (_x, _y,
     part_type_life(global.PT_projectil_hitting, 20 * _force, 40 * _force);
 	
 	part_particles_create(global.PS, _x, _y, global.PT_projectil_hitting, 10);
+}
+
+scr_fx_psicotopus_sword = function(_x, _y) {
+    var _offset = 8;
+    var _px = _x + irandom_range(-_offset, _offset);
+    var _py = _y + irandom_range(-_offset, _offset);
+    part_particles_create(global.PS, _px, _py, global.PT_PSICOTOPUS_SWORD, 1);
 }
 
 scr_fx_perk_elemental_ring = function(_x, _y, color1, color2, color3) {

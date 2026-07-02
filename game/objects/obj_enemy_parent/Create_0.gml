@@ -59,3 +59,7 @@ color = c_white;
 
 shake_x = 0;
 shake_y = 0;
+
+// Animations Variables
+
+sprite_changed = false;
