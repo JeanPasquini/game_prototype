@@ -1,5 +1,6 @@
 attack_hit_confirmed = false;
 
+if (other.is_invencible) exit;
 
 if (hit_enemies_bool)
 {

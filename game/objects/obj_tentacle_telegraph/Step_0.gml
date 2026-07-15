@@ -35,17 +35,22 @@ if (telegraph_timer > 0) {
 	}
 	
 	// Spawn a new tentacle at the telegraphed position
-	var _tent = instance_create_layer(
-		telegraphX,
-		telegraphY + sprite_get_height(spr_telegraph),
-		"Instances",
-		obj_psicotopus_tentacles
-	);
 	
-	// Initialize tentacle behavior
-	_tent.type = TentacleType.ALIVE;
-	_tent.grow_direction = -1;
-	ds_list_add(tentacles, _tent);
+	if(telegraphX != 0 && telegraphY != 0){
+		var _tent = instance_create_layer(
+			telegraphX,
+			telegraphY + sprite_get_height(spr_telegraph),
+			"Instances",
+			obj_psicotopus_tentacles
+		);
+		_tent.image_xscale = choose(-1, 1);
+	
+		// Initialize tentacle behavior
+		_tent.type = TentacleType.ALIVE;
+		_tent.grow_direction = -1;
+		obj_effect_unicle.scr_fx_water_impact(_tent.x, _tent.y, 32, 32);
+		ds_list_add(tentacles, _tent);
+	}
 	
 	// Update telegraph position to follow the player
 	telegraphX = obj_player.x;

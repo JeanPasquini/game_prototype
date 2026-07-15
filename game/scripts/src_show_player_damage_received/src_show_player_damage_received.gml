@@ -1,5 +1,8 @@
 function src_show_player_damage_received(damage){
 	if(!obj_player.invencible && obj_player.life > 0){
+		
+		obj_control.damage_taken ++;
+		
 		scr_camera_shake(10,10);
 
 		if(instance_exists(obj_perk_passive_energy_shield))

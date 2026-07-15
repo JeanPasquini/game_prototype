@@ -1,7 +1,14 @@
 // Check whether this tentacle is flagged for destruction
+
+scr_audio_emitter(x, y, emitterAudio);
+
+alpha = lerp(alpha, 0, 0.1);
+
 if (is_destroyed) {
 	// Play the scale animation in reverse to visually retract the tentacle
+	is_invencible = true;
 	scr_scale_animation(true);
+	return;
 } else {
 	// Play the normal scale animation (grow or remain visible)
 	//scr_scale_animation();
@@ -23,22 +30,19 @@ switch (type) {
 
 
 function _orbitalRotation() {
-	// Calculate the room center as the rotation pivot
 	var centro_x = 880;
 	var centro_y = room_height / 2 - 50;
-	
-	// Position the tentacle using polar coordinates around the room center
-	x = centro_x + lengthdir_x(radius, angle_offset + angle_rotation);
-	y = centro_y + lengthdir_y(radius, angle_offset + angle_rotation);
 
-	// Align the sprite tangentially to the orbit (perpendicular to the radius)
-	image_angle = angle_offset + angle_rotation + 90; 
+	x = center_x + lengthdir_x(0, angle_rotation + 180);
+	y = center_y + lengthdir_y(0, angle_rotation + 180);
 
-	// Start rotating only after the scale animation has fully reached its target size
-	if (scale_current >= scale_target) {
-		angle_rotation += movementSpeed; // Advance orbital rotation
-	}
+    image_angle = angle_offset + angle_rotation + 90;
+
+    if (scale_current >= scale_target) {
+        angle_rotation += movementSpeed;
+    }
 }
+
 
 
 function _tentacleAttack() {
@@ -78,5 +82,3 @@ function _tentacleAttack() {
 		player_angle_dir = 0;
 	}
 }
-
-alpha = lerp(alpha, 0, 0.1);

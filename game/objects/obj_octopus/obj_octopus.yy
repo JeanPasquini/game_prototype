@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_octopus_octopus_attack_start_loop",
-    "path":"sprites/spr_octopus_octopus_attack_start_loop/spr_octopus_octopus_attack_start_loop.yy",
+    "name":"spr_octopus_octopus_attack_swiming",
+    "path":"sprites/spr_octopus_octopus_attack_swiming/spr_octopus_octopus_attack_swiming.yy",
   },
   "spriteMaskId":null,
   "visible":true,

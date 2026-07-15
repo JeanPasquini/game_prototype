@@ -63,7 +63,7 @@ air_dash_available = true;
 
 // Status Alternable
 
-invencible = true;
+invencible = false;
 
 // Perks
 

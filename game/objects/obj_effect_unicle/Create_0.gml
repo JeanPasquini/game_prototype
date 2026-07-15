@@ -1,9 +1,13 @@
 persistent = true;
 
-global.PS = part_system_create();
 var layer_id = layer_get_id("drop");
+var layer_id1 = layer_get_id("Instances");
+
+global.PS = part_system_create();
 part_system_layer(global.PS, layer_id);
-//part_system_depth(global.PS, -1000);
+
+global.PS1 = part_system_create();
+part_system_layer(global.PS1, layer_id1);
 
 // =======================
 // SMOKE
@@ -153,6 +157,36 @@ part_type_alpha3(global.PT_PSICOTOPUS_SWORD, 1, 1, 1);
 part_type_blend(global.PT_PSICOTOPUS_SWORD, true);
 part_type_life(global.PT_PSICOTOPUS_SWORD, 10, 50);
 
+// PSICOTOPUS FLYING
+
+global.PT_PSICOTOPUS_FLYING = part_type_create();
+part_type_sprite(global.PT_PSICOTOPUS_FLYING, spr_psicotopus_apresentation_flying, false, false, false)
+part_type_size(global.PT_PSICOTOPUS_FLYING, 1, 1, 0, 0);
+part_type_scale(global.PT_PSICOTOPUS_FLYING, 1, 1);
+part_type_speed(global.PT_PSICOTOPUS_FLYING, 0, 0, 0, 0);
+part_type_direction(global.PT_PSICOTOPUS_FLYING, 0, 0, 0, 0);
+part_type_gravity(global.PT_PSICOTOPUS_FLYING, 0, 270);
+part_type_orientation(global.PT_PSICOTOPUS_FLYING, 0, 0, 0, 0, false);
+part_type_colour3(global.PT_PSICOTOPUS_FLYING, $FFFFFF, $FFFFFF, $FFFFFF);
+part_type_alpha3(global.PT_PSICOTOPUS_FLYING, 0.25, 0.15, 0);
+part_type_blend(global.PT_PSICOTOPUS_FLYING, false);
+part_type_life(global.PT_PSICOTOPUS_FLYING, 10, 10);
+
+// WATER IMPACT
+
+global.PT_WATER_IMPACT = part_type_create();
+part_type_shape(global.PT_WATER_IMPACT, pt_shape_square);
+part_type_size(global.PT_WATER_IMPACT, 0.5, 1.5, 0, 0);
+part_type_scale(global.PT_WATER_IMPACT, 0.05, 0.05);
+part_type_speed(global.PT_WATER_IMPACT, 4, 4, 0, 0);
+part_type_direction(global.PT_WATER_IMPACT, 80, 100, 0, 5);
+part_type_gravity(global.PT_WATER_IMPACT, 0.1, 270);
+part_type_orientation(global.PT_WATER_IMPACT, 0, 0, 5, 5, false);
+part_type_colour3(global.PT_WATER_IMPACT, $996322, $996322, $996322);
+part_type_alpha3(global.PT_WATER_IMPACT, 1, 1, 0);
+part_type_blend(global.PT_WATER_IMPACT, false);
+part_type_life(global.PT_WATER_IMPACT, 80, 100);
+
 
 // =======================
 // FUNÇÃO
@@ -188,12 +222,25 @@ scr_fx_psicotopus_sword = function(_x, _y) {
     var _offset = 8;
     var _px = _x + irandom_range(-_offset, _offset);
     var _py = _y + irandom_range(-_offset, _offset);
-    part_particles_create(global.PS, _px, _py, global.PT_PSICOTOPUS_SWORD, 1);
+    part_particles_create(global.PS1, _px, _py, global.PT_PSICOTOPUS_SWORD, 1);
 }
 
 scr_fx_perk_elemental_ring = function(_x, _y, color1, color2, color3) {
 	part_type_colour3(global.PT_perk_elemental_ring, color1, color2, color3);
     part_particles_create(global.PS, _x, _y, global.PT_perk_elemental_ring, 1);
+}
+
+scr_fx_water_impact = function(_x, _y, _range_x, _range_y) {
+	repeat (30) {
+        var _px = _x + random_range(-_range_x/2, _range_x/2);
+        var _py = _y + random_range(-_range_y/2, _range_y/2);
+        part_particles_create(global.PS, _px, _py, global.PT_WATER_IMPACT, 1);
+    }
+    repeat (10) {
+        var _px = _x + random_range(-_range_x/2, _range_x/2);
+        var _py = _y + random_range(-_range_y/2, _range_y/2);
+        part_particles_create(global.PS1, _px, _py, global.PT_WATER_IMPACT, 1);
+    }
 }
 
 scr_fx_run_smoke = function(_x, _y) {
@@ -226,6 +273,10 @@ scr_fx_dash_smoke = function(_x, _y, _dir) {
 scr_fx_dash_smoke2 = function(_x, _y, _dir) {
 	part_type_scale(global.PT_DASH_SMOKE2, _dir, 1);
 	part_particles_create(global.PS, _x, _y, global.PT_DASH_SMOKE2, 1);
+}
+
+scr_fx_psicotopus_flying = function(_x, _y) {
+	part_particles_create(global.PS, _x, _y, global.PT_PSICOTOPUS_FLYING, 1);
 }
 
 scr_fx_psicotopus_bubble_floating = function(_x, _y, _dir) {

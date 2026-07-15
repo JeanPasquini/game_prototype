@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_enemy_psicotopus_apresentation_flying",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.55201817,
+  "exportDir":"",
+  "name":"sde_enemy_psicotopus_apresentation_flying",
+  "parent":{
+    "name":"psicotopus",
+    "path":"folders/Sounds/soundeffect/enemies/psicotopus.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_enemy_psicotopus_apresentation_flying.mp3",
+  "volume":1.0,
+}

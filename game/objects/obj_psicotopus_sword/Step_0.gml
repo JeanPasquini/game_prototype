@@ -7,3 +7,5 @@ if (upward > 0) {
 else{
 	velocity = 8;
 }
+
+if(!instance_exists(obj_psicotopus))instance_destroy();

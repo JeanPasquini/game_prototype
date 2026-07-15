@@ -1,5 +1,5 @@
 if(object_exists(obj_octopus)){
-	instance_create_layer(960, 320, "enemy", obj_psicotopus);	
+	instance_create_layer(800, 480, "enemy", obj_psicotopus);	
 }
 
 obj_environment_gate.actived = true;

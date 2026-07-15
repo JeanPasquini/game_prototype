@@ -1,4 +1,5 @@
 enum EnemyState {
+	APRESENTATION,
 	IDLE,
 	CHASING,
 	JUMPING,
@@ -63,3 +64,8 @@ shake_y = 0;
 // Animations Variables
 
 sprite_changed = false;
+
+emitterAudio = audio_emitter_create();
+audio_falloff_set_model(audio_falloff_linear_distance)
+audio_emitter_falloff(emitterAudio, 150, obj_cam.width_, 1);
+

@@ -32,7 +32,7 @@ function src_grounded_chasing_movements() {
 				} else {
 					// No -> returning state.
 					currentState = EnemyState.IDLE;
-					detectionRadius = 10;
+					detectionRadius = maxDetectionRadius;
 					exit;
 				}
 			} else if (place_meeting(x + _dir, y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision

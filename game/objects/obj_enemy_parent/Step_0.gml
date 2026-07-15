@@ -3,6 +3,8 @@ if (global.hitstop > 0) {
     exit;
 }
 
+scr_audio_emitter(x, y, emitterAudio);
+
 if(freeze){
 	shake_x = random_range(-0.3, 0.3);
 	shake_y = random_range(-0.3, 0.3);
@@ -15,6 +17,8 @@ else{
 knockbackSmoothing();
 
 if (life <= 0 && !is_destroyed) {
+	global.force_music = noone;
+	obj_control.enemy_killed ++;
     scr_drop_roll(drops, x, y, "drop");
     is_destroyed = true;
 }
@@ -24,7 +28,7 @@ if (currentState == EnemyState.IDLE) {
 	idle_movement_script();
 	if (distance_to_object(obj_player) < detectionRadius) {
 		if (hasToCharge) currentState = EnemyState.CHARGING_ATTACK; else currentState = EnemyState.CHASING;
-	} else if (detectionRadius < maxDetectionRadius && alarm[4] < 0) {
+	} else if (detectionRadius < maxDetectionRadius && alarm[4] <= 0) {
 		alarm[4] = 60;
 	}
 } 

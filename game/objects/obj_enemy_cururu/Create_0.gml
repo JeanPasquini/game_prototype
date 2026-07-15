@@ -51,7 +51,3 @@ hsp = 0;
 vsp = 0;
 
 alarm[5] = irandom_range(150, 300);
-
-emitterAudio = audio_emitter_create();
-audio_falloff_set_model(audio_falloff_linear_distance)
-audio_emitter_falloff(emitterAudio, 150, obj_cam.width_, 1);

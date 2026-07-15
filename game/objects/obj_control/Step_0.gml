@@ -1,11 +1,24 @@
 scr_music_room();
 
-if(room_get_name(room) != "HUB"){
-	time_run += delta_time / 1000000;
+if (layer_get_visible(layer_get_id("ui_run_finish"))) {
+    obj_player.state = PlayerState.TALKING;
+    obj_player.talking = true;
+	obj_player.invencible = true;
+    layer_set_visible(layer_get_id("ui_pause_layer"), false);
+	layer_set_visible(layer_get_id("ui_hud_player"), false);
+    layer_set_visible(layer_get_id("ui_vignette"), true);
 }
-else{
-	time_run = 0;	
+else {
+    layer_set_visible(layer_get_id("ui_hud_player"), true);
+    if (room_get_name(room) != "HUB") {
+        time_run += delta_time / 1000000;
+    }
+    else {
+        time_run = 0;   
+    }
 }
+
+perk_adquired = array_length(obj_player.perks_obtained_run);
 
 var _cam = view_camera[0];
 

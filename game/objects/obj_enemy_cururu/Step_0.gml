@@ -1,6 +1,6 @@
 // Inherit the parent event
 event_inherited();
-scr_audio_emitter(x, y, emitterAudio);
+
 
 image_xscale = face;
 

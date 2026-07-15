@@ -38,10 +38,14 @@ function get_state_name(state_val)
 {
     switch (state_val)
     {
+        case EnemyState.APRESENTATION:   return "APRESENTATION";
         case EnemyState.IDLE:            return "IDLE";
         case EnemyState.CHASING:         return "CHASING";
         case EnemyState.SPECIAL_ATTACK:  return "SPECIAL_ATTACK";
         case EnemyState.CHARGING_ATTACK: return "CHARGING_ATTACK";
+		case EnemyState.JUMPING:		 return "JUMPING";
+		case EnemyState.ONGROUND:		 return "ONGROUND";
+		case EnemyState.FALLING:		 return "FALLING";
         default:                         return "UNKNOWN";
     }
 }
@@ -60,6 +64,8 @@ draw_set_color(c_white);
 
 draw_text_transformed(texto_x, texto_y, texto, 0.5, 0.5, 0);
 draw_text_transformed(texto_x, texto_y - 10, texto_state, 0.5, 0.5, 0);
+
+
 
 
 //======================================

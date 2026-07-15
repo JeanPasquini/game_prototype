@@ -65,7 +65,7 @@ if (!variable_global_exists("rooms_map")) {
 				sends: { phase_02: safe_room },
 				connections: { },
 				returns: false,
-				music: sdt_phase1_mini_boss,
+				music: sdt_phase1_mini_boss1,
 				up:    { px: 160, py: 320 },
 				down:  { px: 160, py: 320 },
 				left:  { px: 160, py: 320 },

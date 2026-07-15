@@ -4,6 +4,16 @@ function scr_movement() {
         _update_dying();
         return;
     }
+	
+	if (instance_exists(obj_menu_boss_introduction) && obj_menu_boss_introduction.boss_introduction) {
+	    hsp = 0;
+		is_dashing = false;
+		dash_timer = 0;
+	    _apply_gravity();
+	    _resolve_collisions();
+	    _update_sprites();
+	    return;
+	}
 
     _update_timers();
     _update_air_states();
@@ -28,21 +38,10 @@ function _update_dying() {
     }
 
     if (sprite_index == spr_player_dying && image_index >= image_number - 1) {
-
-        life = life_max;
-        global.current_phase = "phase_01";
-
-        var directions = getNextRoomPxAndPy(HUB, "up");
-        x = directions.px;
-        y = directions.py;
-
-        room_goto(HUB);
-
-        sprite_index = spr_player_dying_returning;
+		sprite_index = spr_player_dying_returning;
         image_index = 0;
         image_speed = 1;
-
-        audio_play_sound(sde_player_die_returning, 1, false);
+        scr_reset_run();
     }
 
     if (sprite_index == spr_player_dying_returning) {
@@ -53,6 +52,8 @@ function _update_dying() {
 }
 
 function _update_timers() {
+
+	if (talking) return;
 
 	if(state = PlayerState.DASH){
 		var _dir = dash_direction; // ou face
@@ -73,10 +74,12 @@ function _update_timers() {
 
     // JUMP BUFFER
     if (keyboard_check_pressed(vk_up)) {
-		var sfx = [
-			jump
-		];						
-		scr_audio_play(sfx);
+		if(ong){
+			var sfx = [
+				jump
+			];						
+			scr_audio_play(sfx);
+		}
         jump_buffer_timer = jump_buffer_max;
     }
 

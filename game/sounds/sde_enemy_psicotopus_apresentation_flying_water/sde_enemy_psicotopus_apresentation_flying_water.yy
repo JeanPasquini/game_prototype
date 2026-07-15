@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_enemy_psicotopus_apresentation_flying_water",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.3475057,
+  "exportDir":"",
+  "name":"sde_enemy_psicotopus_apresentation_flying_water",
+  "parent":{
+    "name":"psicotopus",
+    "path":"folders/Sounds/soundeffect/enemies/psicotopus.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_enemy_psicotopus_apresentation_flying_water.wav",
+  "volume":0.1,
+}

@@ -3,6 +3,44 @@
 event_inherited();
 
 // If the enemy is idle, skip all attack processing
+if (currentState == EnemyState.APRESENTATION) {
+	
+    var _speed = 20;
+    var _local_x = 800;
+    var _target_y = 338;
+    
+    if (!has_reached_top) {
+		obj_effect_unicle.scr_fx_psicotopus_flying(x, y);
+        x += lengthdir_x(_speed, point_direction(x, y, _local_x, -32));
+        y += lengthdir_y(_speed, point_direction(x, y, _local_x, -32));
+        if (point_distance(x, y, _local_x, -32) < _speed) {
+            x = 960;
+            y = -32;
+            has_reached_top = true;
+			alarm[6] = 60;
+			
+        }
+    } else if (!has_landed && alarm[6] <= 0) {
+        y += _speed;
+        if (y >= _target_y) {
+            y = _target_y;
+            has_landed = true;
+        }
+    }
+	
+	if(sprite_index == spr_psicotopus_apresentation_falling && scr_is_last_sprite()){
+
+	}
+	
+	if(obj_menu_boss_introduction.alarm[0] <= 0){
+		obj_cam.point_y = 230;
+		currentState = EnemyState.CHASING;	
+		has_landed = false;
+		has_reached_top = false;
+	}
+    return;
+}
+
 if currentState == EnemyState.IDLE return;
 
 // Execute logic based on the currently selected attack state
@@ -13,15 +51,15 @@ switch (currentAttackState) {
         attack_triple_vertical();
 		break;
 
-    case AttackState.HOMING_SINGLE:
-        // Executes a single homing projectile attack
-        attack_homing_single();
-		break;
-
-    //case AttackState.TRIPLE_RICOCHET:
-    //    // Executes a triple ricochet projectile attack
-    //    attack_triple_ricochet();
+    //case AttackState.HOMING_SINGLE:
+    //    // Executes a single homing projectile attack
+    //    attack_homing_single();
 	//	break;
+
+    case AttackState.TRIPLE_RICOCHET:
+        // Executes a triple ricochet projectile attack
+        attack_triple_ricochet();
+		break;
 
 	case AttackState.OCTOPUS_ATTACK:
 		// Spawns the octopus special attack entity
@@ -40,30 +78,24 @@ switch (currentAttackState) {
 
 // Handles a triple vertical bullet attack over a short time window
 function attack_triple_vertical() {
-	_start_attack();
-	var fire_count_max = 3;
-	var time_milesecond = 120;
-	speed = 0;	
+	if(sprite_index != spr_psicotopus_triple_vertical_end){
+		_start_attack();
+		time_milesecond = 120; // se essa também precisar ser lida em outro lugar, tire o "var" também
+		speed = 0;	
 	
-	function spawn_bullet_offset(_x, _y) {
-		var dir = (image_xscale < 0) ? -1 : 1;
-	    instance_create_layer(_x, _y, "Instances", obj_psicotopus_sword);
-	}
+		function spawn_bullet_offset(_x, _y) {
+			var dir = (image_xscale < 0) ? -1 : 1;
+			instance_create_layer(_x, _y, "Instances", obj_psicotopus_sword);
+		}
 	
-	
-	
-	if (sprite_index == spr_psicotopus_triple_vertical_mid){
-		if(alarm[5] <= 0 && attack_mount + 1 <= fire_count_max){
-			attack_mount++;
-			spawn_bullet_offset(880, + 378);
-			alarm[5] = time_milesecond;
+		if (sprite_index == spr_psicotopus_triple_vertical_mid){
+			if(alarm[5] <= 0 && attack_mount + 1 <= fire_count_max){
+				attack_mount++;
+				spawn_bullet_offset(880, + 378);
+				alarm[5] = time_milesecond;
+			}
 		}
 	}
-
-    if (attack_mount == fire_count_max && alarm[5] <= 0) {
-		attack_mount = 0;
-        scr_set_sprite_once(spr_psicotopus_triple_vertical_end, "flag_triple_vertical_end_sprite");
-    }
 }
 
 // Handles a single homing projectile attack
@@ -94,39 +126,62 @@ function attack_homing_single() {
 
 // Handles a triple ricochet bullet attack
 function attack_triple_ricochet() {
-   // Handles generic attack timing and early exit
-   if (attack_cooldown > 0) {
-		// Stop movement while attacking
-		speed = 0;	
-		// Decrease attack timer
-		attack_cooldown--;
+   //// Handles generic attack timing and early exit
+   //if (attack_cooldown > 0) {
+	//	// Stop movement while attacking
+	//	speed = 0;	
+	//	// Decrease attack timer
+	//	attack_cooldown--;
 		
-		// Reset attack state once the sequence is finished
-		if (attack_cooldown == 0) {
-			_reset_attack();
-		}
-        return;
-   }
+	//	// Reset attack state once the sequence is finished
+	//	if (attack_cooldown == 0) {
+	//		_reset_attack();
+	//	}
+   //     return;
+   //}
 	
-    // Fast firing attack
-    attack_cooldown = 12;
-	_start_attack();
-
-    // Vertical displacement for each bullet
-    var angles = [-5, 0, 5];
-
-    for (var i = 0; i < 3; i++) {
-        var b = instance_create_layer(x, y + (angles[i]), "Instances", obj_bullet_ricochet);
-        
-        // Aim each bullet towards the player
-        b.direction = point_direction(x, y, obj_player.x, obj_player.y);
-        
-        // Number of allowed ricochets
-        b.bounces = 4;
+   // // Fast firing attack
+   // attack_cooldown = 12;
+   if(sprite_index != spr_psicotopus_triple_ricochet_end){
+		_start_attack();
+		speed = 0;
+	
+		if (!instance_exists(obj_psicotopus_ship)) {
+			var _ship = noone;
 		
-		// Store vertical offset for bounce behavior
-		b.displacement = angles[i];
-    }
+			if (irandom(1) == 0) {
+				_ship = instance_create_layer(1516, 256, "enemy", obj_psicotopus_ship);
+				_ship.orientation = -1;
+			} else {
+				_ship = instance_create_layer(244, 256, "enemy", obj_psicotopus_ship);
+				_ship.orientation = 1;
+			}
+		}
+		else {
+			// Busca a instância que já existe na sala
+			var _existing_ship = instance_find(obj_psicotopus_ship, 0);
+		
+			if (_existing_ship != noone && _existing_ship.has_arrived_finishing) {
+				instance_destroy(_existing_ship.id);
+			}
+		}
+   }
+
+   // // Vertical displacement for each bullet
+   // var angles = [-5, 0, 5];
+
+   // for (var i = 0; i < 3; i++) {
+   //     var b = instance_create_layer(x, y + (angles[i]), "Instances", obj_bullet_ricochet);
+        
+   //     // Aim each bullet towards the player
+   //     b.direction = point_direction(x, y, obj_player.x, obj_player.y);
+        
+   //     // Number of allowed ricochets
+   //     b.bounces = 4;
+		
+	//	// Store vertical offset for bounce behavior
+	//	b.displacement = angles[i];
+   // }
 }
 
 // Handles the special octopus attack sequence
@@ -152,22 +207,21 @@ function octopus_attack() {
 	_start_attack();
 	
 	// Spawn the octopus attack object
-	var oct = instance_create_layer(x, y, "Instances", obj_octopus);
+	var oct = instance_create_layer(x, y, "enemy", obj_octopus);
 	
 }
 
 //
 function flood_arena_attack() {
-	
 	if (is_attacking == true) {
 		// Centers the object in the room
-		scr_center_psicotopus_in_room(movementSpeed*1.2);
+		scr_center_psicotopus_in_room(2);
 		// Decrease attack timer
 		attack_cooldown--;		
 		// Reset attack state once the sequence is finished
 				
-		var centerX = 880;
-		var centerY = room_height/2;
+		//var centerX = 880;
+		//var centerY = room_height/2;
 	    //var is_tent_empty = tentacles == -1 || ( ds_exists(tentacles, ds_type_list) && ds_list_empty(tentacles) );
 		
 		//if (x == centerX && y == centerY && is_tent_empty) {
@@ -193,8 +247,6 @@ function flood_arena_attack() {
 		
 		// Resets the Attack
 		if (!instance_exists(obj_tentacle_telegraph) || is_destroyed) {
-			_reset_attack();
-			flag_flood_sprite = false;
 			
 			var _flood = instance_find(obj_water, 0);
 			var _tent_tele = instance_find(obj_tentacle_telegraph, 0);
@@ -212,23 +264,9 @@ function flood_arena_attack() {
    _start_attack();
    tentacles = ds_list_create();
    
-   //// Creates the flood "water" object
-   //var _flood = instance_create_layer(0, 0, "Instances", obj_water);
-   //_flood.width = room_width;
-   //_flood.height = room_height - obj_player.y;
-   //_flood.image_xscale = _flood.width;
-   //_flood.image_yscale = _flood.height;
-   //_flood.x = 0
-   //_flood.y = obj_player.y;
-   //_flood.depth = -100;
-   
    obj_water.state = waterState.ATTACK;
-   
-   
-   // Cria o objeto que controla os ataques com tentáculos
+
    instance_create_layer(0, 0, "Instances", obj_tentacle_telegraph);
-   
-   
 }
 
 // Selects a new attack state after the waiting period
@@ -269,6 +307,7 @@ function _reset_attack() {
 	sprite_index = spr_psicotopus_idle;
 	is_invencible = false;
 	is_attacking = false;
+	attack_mount = 0;
 }
 
 function _start_attack() {
