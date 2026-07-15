@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"src_basic_idle_movement",
   "parent":{
-    "name":"movements",
-    "path":"folders/Scripts/enemy/movements.yy",
+    "name":"flying",
+    "path":"folders/Scripts/enemy/movements/flying.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

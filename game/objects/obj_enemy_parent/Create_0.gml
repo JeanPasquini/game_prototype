@@ -6,7 +6,8 @@ enum EnemyState {
 	ONGROUND,
 	FALLING,
 	SPECIAL_ATTACK,
-	CHARGING_ATTACK
+	CHARGING_ATTACK,
+	RETREAT
 }
 
 drops = [

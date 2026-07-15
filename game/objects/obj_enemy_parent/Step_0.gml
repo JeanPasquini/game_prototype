@@ -33,7 +33,11 @@ if (currentState == EnemyState.IDLE) {
 	}
 } 
 // Attacking State
-else if (currentState == EnemyState.CHASING || currentState == EnemyState.CHARGING_ATTACK) {
+else if (
+	currentState == EnemyState.CHASING || 
+	currentState == EnemyState.CHARGING_ATTACK || 
+	currentState == EnemyState.RETREAT
+) {
 	chasing_movement_script();
 	chasing_attack_script();
 }
