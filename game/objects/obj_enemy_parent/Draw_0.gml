@@ -47,6 +47,7 @@ function get_state_name(state_val)
 		case EnemyState.ONGROUND:		 return "ONGROUND";
 		case EnemyState.FALLING:		 return "FALLING";
 		case EnemyState.RETREAT:		 return "RETREATING";
+		case EnemyState.DYING:		 return "DYING";
         default:                         return "UNKNOWN";
     }
 }

@@ -11,9 +11,16 @@ knockback_strength = 5;
 baseAttackDelay = 1 * 60;
 currentAttackDelay = baseAttackDelay;
 
-// --- Controle de voo
-fallSpeed = 0;      // velocidade atual com que o peso o puxa pra baixo
-thrustCooldown = 0; // contagem até o próximo esforço pra subir
-maxOffsetUp   = 0;  // até onde pode subir em relação ao ystart
-maxOffsetDown = 0;  // até onde pode "afundar" em relação ao ystart
-retreatTimer = 0;	// contagem do intervalo de recúo pós ataque
+// FLYING CONTROL
+fallSpeed = 0;     
+thrustCooldown = 0;
+maxOffsetUp   = 0; 
+maxOffsetDown = 0;  
+retreatTimer = 0;	
+
+
+// AUDIO VARIABLES
+
+last_step_frame = -1;
+
+audio_dying = scr_make_onetime_sound([sde_enemy_cegogolho_dying], emitterAudio);

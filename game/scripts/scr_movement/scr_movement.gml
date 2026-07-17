@@ -42,6 +42,7 @@ function _update_dying() {
         image_index = 0;
         image_speed = 1;
         scr_reset_run();
+		scr_reset_character();
     }
 
     if (sprite_index == spr_player_dying_returning) {

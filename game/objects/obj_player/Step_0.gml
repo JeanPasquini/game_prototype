@@ -2,14 +2,8 @@ if (global.hitstop > 0) {
     exit;
 }
 
-
-
 if (life <= 0){
 	state = PlayerState.DYING;
-	scr_reset_character();
-
-
-
 }
 
 switch (state) {

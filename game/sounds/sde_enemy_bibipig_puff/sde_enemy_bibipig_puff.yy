@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_enemy_bibipig_puff",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.0503402,
+  "exportDir":"",
+  "name":"sde_enemy_bibipig_puff",
+  "parent":{
+    "name":"bibipig",
+    "path":"folders/Sounds/soundeffect/enemies/bibipig.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_enemy_bibipig_puff.wav",
+  "volume":0.6,
+}

@@ -3,7 +3,7 @@ event_inherited();
 
 // Enemy detection and basic stats
 detectionRadius = 180;
-life = 100;
+life = 5;
 
 // Attack state control
 isCharging = false;
@@ -51,3 +51,7 @@ hsp = 0;
 vsp = 0;
 
 alarm[5] = irandom_range(150, 300);
+
+//AUDIO VARIABLES
+
+audio_dying = scr_make_onetime_sound([sde_enemy_cururu_dying], emitterAudio);

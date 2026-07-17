@@ -56,6 +56,7 @@ function src_jumping_chasing_movement(){
 	            vsp = -jump_force;
 				scr_audio_play([sde_enemy_cururu_jump], emitterAudio);
 				currentMovement = EnemyState.JUMPING;
+				currentChargingDelay = baseAttackDelay;
 			}
 	    }
 	    else {
