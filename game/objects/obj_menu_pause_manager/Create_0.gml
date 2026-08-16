@@ -1,18 +1,19 @@
 paused = false;
-layer_name = "ui_pause_layer"
+layer_name = "ui_menu_pause"
 button_id = 1;
 
 update_pause = function(){
-	if(paused){
-		instance_deactivate_all(true);
-		layer_set_visible(layer_name, true);
+	if(!layer_get_visible(layer_name)){
 		button_id = 1;
+		layer_set_visible(layer_name, true);
+		obj_player.state = PlayerState.TALKING;
+		obj_player.talking = true;
 	}
 	else{
-		instance_activate_all();
 		layer_set_visible(layer_name, false);
+		obj_player.state = PlayerState.IDLE;
+		obj_player.talking = false;
 	}
-}
 
-update_pause();
+}
 

@@ -9,8 +9,8 @@
   "name":"obj_menu_pause_manager",
   "overriddenProperties":[],
   "parent":{
-    "name":"menu",
-    "path":"folders/Objects/menu.yy",
+    "name":"pause",
+    "path":"folders/Objects/menu/pause.yy",
   },
   "parentObjectId":null,
   "persistent":true,

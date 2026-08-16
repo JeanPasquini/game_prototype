@@ -1,10 +1,12 @@
-var manager = obj_menu_pause_manager;
-
-if (manager.button_id == 1 && keyboard_check_pressed(vk_enter))
-{
-	manager.paused = !manager.paused;
-	manager.update_pause();
+if(layer_get_visible("ui_run_finish")){
+	if(keyboard_check_pressed(ord("E"))){
+		scr_reset_character();
+		scr_reset_run();
+	}
 }
-else if (manager.button_id == 2 && keyboard_check_pressed(vk_enter)){
-	game_end();
+else if(layer_get_visible("ui_menu_pause")){
+	if(keyboard_check_pressed(ord("E"))){
+		//scr_reset_character();
+		//scr_reset_run();
+	}
 }
