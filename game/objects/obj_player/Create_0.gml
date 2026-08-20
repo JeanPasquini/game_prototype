@@ -154,3 +154,6 @@ coyote_max        = 8;   // 6~10 frames também
 
 // Controle interno
 jump_pressed = false;
+
+text_perk = "Perks";
+text_status = "Status";

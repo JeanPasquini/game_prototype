@@ -156,6 +156,36 @@ if (keyboard_check(vk_tab)) {
     var start_x_perks = origin_x + padding_left_perks;
     var start_y_perks = origin_y + padding_top_perks;
 
+    // =====================
+    // TITLES (Status / Perks headers, sitting in the pills at the top)
+    // =====================
+    draw_set_font(fnt_ui_menu_perk_selection_description);
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+
+    draw_text_transformed(
+        origin_x + 108.5 * menu_scale,
+        origin_y + 9.5 * menu_scale,
+        text_status,
+        text_scale,
+        text_scale,
+        0
+    );
+
+    draw_text_transformed(
+        origin_x + 252.5 * menu_scale,
+        origin_y + 12.5 * menu_scale,
+        text_perk,
+        text_scale,
+        text_scale,
+        0
+    );
+
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+
     draw_set_font(fnt_player_status);
     draw_set_color(c_white);
 
