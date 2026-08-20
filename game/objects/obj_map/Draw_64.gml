@@ -1,4 +1,8 @@
 //exit;
+if(layer_get_visible("ui_menu_main")){
+	exit;	
+}
+
 
 cols = room_width div size;
 rows = room_height div size;

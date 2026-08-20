@@ -1,6 +1,9 @@
 target_ = obj_player;
 width_ = camera_get_view_width(view_camera[0]);
 height_ = camera_get_view_height(view_camera[0]);
+base_width_ = width_;
+base_height_ = height_;
+zoom_target = 1;
 minimap_state = 0;
 persistent = true;
 shake_force = 0;

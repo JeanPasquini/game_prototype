@@ -38,7 +38,7 @@ if (destiny != noone && position != noone) {
 
     if (!is_undefined(directions)) {
 
-        if (obj_player.state != PlayerState.WAIT) {
+        if (obj_player.state != PlayerState.WAIT && obj_player.state != PlayerState.INTRODUCTION) {
 
             var transition = instance_create_layer(0, 0, "Instances", obj_transiction);
 

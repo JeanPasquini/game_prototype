@@ -21,8 +21,9 @@ switch (state) {
 	case PlayerState.DASH:
 	case PlayerState.TALKING:
 		scr_combat();
+	case PlayerState.INTRODUCTION:
 	case PlayerState.DYING:
-		scr_movement(); 
+		scr_movement();
 
     break;
 }

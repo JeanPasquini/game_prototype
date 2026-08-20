@@ -31,6 +31,11 @@ if (shake_time > 0) {
     shake_y = lerp(shake_y, 0, shake_decay_pos);
 }
 
+// ===== UPDATE ZOOM =====
+width_  = lerp(width_,  base_width_  * zoom_target, 0.08);
+height_ = lerp(height_, base_height_ * zoom_target, 0.08);
+camera_set_view_size(view_camera[0], width_, height_);
+
 camera_set_view_pos(
     view_camera[0],
     (x - width_  / 2) + shake_x,

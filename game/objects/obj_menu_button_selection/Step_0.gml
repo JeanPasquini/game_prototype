@@ -1,6 +1,7 @@
-var manager = obj_menu_pause_manager;
+var manager_obj = asset_get_index(manager_object_name);
+var manager = (manager_obj != -1) ? instance_find(manager_obj, 0) : noone;
 
-if (manager.button_id == my_id)
+if (manager != noone && manager.button_id == my_id)
 {
 	image_alpha = 1;
 }

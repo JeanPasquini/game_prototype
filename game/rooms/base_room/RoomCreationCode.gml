@@ -2,14 +2,14 @@ if (!variable_global_exists("rooms_map")) {
     global.rooms_map = {
 	    phase_01: {
 			HUB: {
-				sends: { tutorial_room },
-				connections: { up: tutorial_room },
+				sends: { mini_boss_01 },
+				connections: { up: mini_boss_01 },
 				returns: false,
 				music: sdt_hub,
-				up:    { px: 45, py: 336 },
-				down:  { px: 45, py: 336 },
-				left:  { px: 45, py: 336 },
-				right: { px: 45, py: 336 },
+				up:    { px: 471, py: 401 },
+				down:  { px: 471, py: 401 },
+				left:  { px: 471, py: 401 },
+				right: { px: 471, py: 401 },
 			},
 			tutorial_room: {
 				sends: { challenge_01 },
