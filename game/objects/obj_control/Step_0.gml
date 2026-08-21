@@ -11,6 +11,9 @@ else if (layer_get_visible(layer_get_id("ui_run_finish"))) {
 	layer_set_visible(layer_get_id("ui_hud_player"), false);
     layer_set_visible(layer_get_id("ui_vignette"), true);
 }
+else if (scr_menu_lock_blocks_world()) {
+    layer_set_visible(layer_get_id("ui_hud_player"), false);
+}
 else {
     layer_set_visible(layer_get_id("ui_hud_player"), true);
     if (room_get_name(room) != "HUB") {

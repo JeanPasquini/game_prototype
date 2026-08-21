@@ -1,6 +1,9 @@
 //exit;
 if(layer_get_visible("ui_menu_main")){
-	exit;	
+	exit;
+}
+if (scr_menu_lock_blocks_world()) {
+	exit;
 }
 
 

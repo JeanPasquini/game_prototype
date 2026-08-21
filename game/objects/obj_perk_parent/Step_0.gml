@@ -12,7 +12,7 @@ if (!instance_exists(obj_player)) exit;
 var player = obj_player;
 var dist = point_distance(x, y, player.x, player.y);
 
-if (dist < range && keyboard_check_pressed(ord("E")))
+if (dist < range && keyboard_check_pressed(ord("E")) && scr_menu_lock_is_free())
 {
     var _new_perk = name;
 

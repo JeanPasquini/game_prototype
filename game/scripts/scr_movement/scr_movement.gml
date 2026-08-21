@@ -36,6 +36,7 @@ function scr_movement() {
 function _update_dying() {
 
     if (sprite_index != spr_player_dying && sprite_index != spr_player_dying_returning) {
+        scr_menu_lock_try("dying");
         audio_play_sound(sde_player_die, 1, false);
         sprite_index = spr_player_dying;
         image_index = 0;

@@ -11,7 +11,7 @@ if (instance_exists(obj_player)) {
     var player = instance_find(obj_player, 0);
     var dist = point_distance(x, y, player.x, player.y);
 
-    if (dist < range && keyboard_check_pressed(ord("E"))) {
+    if (dist < range && keyboard_check_pressed(ord("E")) && scr_menu_lock_is_free()) {
 		if(open){
 			audio_play_sound(sde_environment_door_close, 1, false);
 			open = false;

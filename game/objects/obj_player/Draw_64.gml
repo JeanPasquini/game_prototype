@@ -111,7 +111,7 @@ var text_money_x = draw_x + 80;
 
 // Status 
 
-if (keyboard_check(vk_tab)) {
+if (keyboard_check(vk_tab) && scr_menu_lock_try("status")) {
 
     var center_x = gui_w * 0.5;
     var center_y = gui_h * 0.5;
@@ -339,4 +339,7 @@ if (keyboard_check(vk_tab)) {
 	        );
 		}
     }
+}
+else if (!keyboard_check(vk_tab)) {
+    scr_menu_lock_release("status");
 }

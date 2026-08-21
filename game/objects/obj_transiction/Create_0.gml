@@ -1,6 +1,8 @@
 join = true;
 next = false;
 
+scr_menu_lock_force("transition");
+
 // dados
 destiny = noone;
 px = 0;

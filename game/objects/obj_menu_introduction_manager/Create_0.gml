@@ -2,6 +2,8 @@ layer_name = "ui_menu_main";
 button_id = 1; // 1 = Play, 2 = Exit
 playing = false;
 
+scr_menu_lock_try("introduction");
+
 var _campfire = instance_exists(obj_environment_campfire) ? obj_environment_campfire : obj_player;
 
 obj_player.state = PlayerState.INTRODUCTION;

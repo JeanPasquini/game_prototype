@@ -22,5 +22,6 @@ else if (obj_player.state == PlayerState.IDLE) {
     layer_set_visible(layer_get_id("ui_hud_player"), true);
     layer_set_visible(layer_get_id("ui_vignette"), true);
 
+    scr_menu_lock_release("introduction");
     instance_destroy();
 }
