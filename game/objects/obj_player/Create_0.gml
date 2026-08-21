@@ -157,3 +157,9 @@ jump_pressed = false;
 
 text_perk = "Perks";
 text_status = "Status";
+
+// Status menu open/close animation
+status_anim_t = 0;
+status_menu_surface = -1;
+status_menu_surface_w = 0;
+status_menu_surface_h = 0;

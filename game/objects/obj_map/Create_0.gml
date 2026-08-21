@@ -9,6 +9,9 @@ icon_scale_player = 1.0;
 
 minimap_state = 0;
 
+// 0 -> 1 progress of the "just switched map state" animation
+state_anim_t = 1;
+
 cols = room_width div size;
 rows = room_height div size;
 
@@ -17,5 +20,9 @@ level = 0;
 map_surface = -1;
 map_surface_w = 0;
 map_surface_h = 0;
+
+map_compose_surface   = -1;
+map_compose_surface_w = 0;
+map_compose_surface_h = 0;
 
 //show_message(level);

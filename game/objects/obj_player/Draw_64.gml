@@ -109,14 +109,34 @@ var text_money_x = draw_x + 80;
 //icon_x + 150, 50 +  draw_y - 10 + line_h * 1, 1.5, 1.5, 0, c_white, 1);
 
 
-// Status 
+// Status
 
-if (keyboard_check(vk_tab)) {
+var tab_held = keyboard_check(vk_tab);
+status_anim_t = clamp(status_anim_t + (tab_held ? 1 : -1) * (1 / 10), 0, 1);
+
+if (status_anim_t > 0) {
+
+    // cubic ease-out for the fade, "back" ease (slight overshoot) for the pop scale
+    var status_fade = 1 - power(1 - status_anim_t, 3);
+
+    var back_c1 = 1.70158;
+    var back_c3 = back_c1 + 1;
+    var status_pop = 1 + back_c3 * power(status_anim_t - 1, 3) + back_c1 * power(status_anim_t - 1, 2);
+
+    if (!surface_exists(status_menu_surface) || status_menu_surface_w != gui_w || status_menu_surface_h != gui_h) {
+        if (surface_exists(status_menu_surface)) surface_free(status_menu_surface);
+        status_menu_surface   = surface_create(gui_w, gui_h);
+        status_menu_surface_w = gui_w;
+        status_menu_surface_h = gui_h;
+    }
+
+    surface_set_target(status_menu_surface);
+    draw_clear_alpha(c_black, 0);
 
     var center_x = gui_w * 0.5;
     var center_y = gui_h * 0.5;
 
-    var menu_scale = 2.5;
+    var menu_scale = 2.5 * lerp(0.85, 1, status_pop);
 
     var menu_w = sprite_get_width(spr_ui_status_menu)  * menu_scale;
     var menu_h = sprite_get_height(spr_ui_status_menu) * menu_scale;
@@ -369,4 +389,10 @@ if (keyboard_check(vk_tab)) {
 	        );
 		}
     }
+
+    surface_reset_target();
+
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_surface_ext(status_menu_surface, 0, 0, 1, 1, 0, c_white, status_fade);
 }

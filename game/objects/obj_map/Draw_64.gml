@@ -52,6 +52,9 @@ switch (minimap_state) {
     case 3: alpha_map = 1;   break;
 }
 
+// eases from 0 (the instant the state just changed) to 1 (settled)
+var t_ease = 1 - power(1 - state_anim_t, 3);
+
 if (alpha_map > 0) {
 
     // =================================================
@@ -59,7 +62,7 @@ if (alpha_map > 0) {
     // =================================================
     if (minimap_state == 3) {
 
-        var full_scale = 0.4;
+        var full_scale = 0.4 * lerp(0.7, 1, t_ease);
         var tile_size = size * full_scale;
 
         var map_w = cols * tile_size;
@@ -92,7 +95,7 @@ if (alpha_map > 0) {
                         tile_icon_scale * icon_scale_wall,
                         0,
                         c_white,
-                        1
+                        t_ease
                     );
                 }
             }
@@ -111,7 +114,7 @@ if (alpha_map > 0) {
                 enemy_icon_scale, enemy_icon_scale,
                 0,
                 c_red,
-                1
+                t_ease
             );
         }
 
@@ -128,7 +131,7 @@ if (alpha_map > 0) {
                 door_icon_scale, door_icon_scale,
                 0,
                 c_lime,
-                1
+                t_ease
             );
         }
 
@@ -159,7 +162,7 @@ if (alpha_map > 0) {
                 player_icon_scale, player_icon_scale,
                 0,
                 c_aqua,
-                1
+                t_ease
             );
         }
 
@@ -171,6 +174,24 @@ if (alpha_map > 0) {
     // STATE 1 / 2 - CORNER MAP
     // =================================================
     else {
+
+        // -----------------------------
+        // (re)create the compose surface: the whole corner-map panel
+        // (frame + title + tiles/icons + player) gets drawn into this at
+        // its normal, fully-open look. We then blit THAT as one image with
+        // a scale/position transform that makes it grow out of the little
+        // map button and settle into its corner spot - like the button
+        // itself is opening up into the panel.
+        // -----------------------------
+        if (!surface_exists(map_compose_surface) || map_compose_surface_w != screen_w || map_compose_surface_h != screen_h) {
+            if (surface_exists(map_compose_surface)) surface_free(map_compose_surface);
+            map_compose_surface   = surface_create(screen_w, screen_h);
+            map_compose_surface_w = screen_w;
+            map_compose_surface_h = screen_h;
+        }
+
+        surface_set_target(map_compose_surface);
+        draw_clear_alpha(c_black, 0);
 
         draw_sprite_ext(
             spr_minimap, 0,
@@ -331,7 +352,7 @@ if (alpha_map > 0) {
             pad / spr_h
         );
 
-        draw_set_alpha(1);
+        draw_set_alpha(alpha_map);
         draw_set_color(c_white);
         draw_surface(map_surface, origin_x, origin_y);
 
@@ -362,11 +383,42 @@ if (alpha_map > 0) {
             tile_icon_scale * icon_scale_player,
             0,
             c_aqua,
-            1
+            alpha_map
         );
 
         draw_set_alpha(1);
         draw_set_color(c_white);
+
+        surface_reset_target();
+
+        // -----------------------------
+        // blit the composed panel, growing out of the map button
+        // (minimap_state == 1 = just opened from hidden) or, for state 2,
+        // just fading in place (no movement/scale change).
+        // -----------------------------
+        var morphing = (minimap_state == 1);
+
+        var anchor_x = morphing ? (cx_button + spr_btn_w * 0.5) : cx;
+        var anchor_y = morphing ? (cy_button + spr_btn_h * 0.5) : cy;
+        var scale_from = morphing ? 0.12 : 1;
+
+        var panel_scale = lerp(scale_from, 1, t_ease);
+        var pivot_x     = lerp(anchor_x, cx, t_ease);
+        var pivot_y     = lerp(anchor_y, cy, t_ease);
+
+        var blit_x = pivot_x - cx * panel_scale;
+        var blit_y = pivot_y - cy * panel_scale;
+
+        draw_set_alpha(1);
+        draw_set_color(c_white);
+        draw_surface_ext(
+            map_compose_surface,
+            blit_x, blit_y,
+            panel_scale, panel_scale,
+            0,
+            c_white,
+            t_ease
+        );
     }
 }
 else {
