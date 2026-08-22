@@ -2,6 +2,7 @@ function scr_reset_run(){
 	
 	audio_stop_all();
 	global.current_phase = "phase_01";
+	global.menu_lock = noone;
 
     var directions = getNextRoomPxAndPy(HUB, "up");
     obj_player.x = directions.px;

@@ -1,12 +1,18 @@
 scr_music_room();
-
-if (layer_get_visible(layer_get_id("ui_run_finish"))) {
+if(layer_get_visible(layer_get_id("ui_menu_main"))){
+    layer_set_visible(layer_get_id("ui_pause_layer"), false);
+	layer_set_visible(layer_get_id("ui_hud_player"), false);
+}
+else if (layer_get_visible(layer_get_id("ui_run_finish"))) {
     obj_player.state = PlayerState.TALKING;
     obj_player.talking = true;
 	obj_player.invencible = true;
     layer_set_visible(layer_get_id("ui_pause_layer"), false);
 	layer_set_visible(layer_get_id("ui_hud_player"), false);
     layer_set_visible(layer_get_id("ui_vignette"), true);
+}
+else if (scr_menu_lock_blocks_world()) {
+    layer_set_visible(layer_get_id("ui_hud_player"), false);
 }
 else {
     layer_set_visible(layer_get_id("ui_hud_player"), true);

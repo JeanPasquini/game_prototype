@@ -38,7 +38,7 @@ if (destiny != noone && position != noone) {
 
     if (!is_undefined(directions)) {
 
-        if (obj_player.state != PlayerState.WAIT) {
+        if (obj_player.state != PlayerState.WAIT && obj_player.state != PlayerState.INTRODUCTION && !scr_menu_lock_blocks_world()) {
 
             var transition = instance_create_layer(0, 0, "Instances", obj_transiction);
 
@@ -47,6 +47,13 @@ if (destiny != noone && position != noone) {
             transition.px = directions.px;
             transition.py = directions.py;
             transition.is_boss_door = is_boss_door;
+
+            // vinheta descendo, sem nome (mesma UI da introdução de boss)
+            obj_menu_boss_introduction.boss_name = "";
+            obj_menu_boss_introduction.boss_introduction = true;
+
+            // fecha o mapa se estiver aberto
+            obj_map.minimap_state = 0;
 
             // trava o player
             obj_player.state = PlayerState.WAIT;

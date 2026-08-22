@@ -39,7 +39,9 @@ if (keyboard_check_pressed(ord("E")))
 	obj_player.state = PlayerState.IDLE;
 	obj_player.talking = false;
 
-    instance_destroy(); 
+    layer_set_visible(layer_get_id("ui_hud_player"), true);
+    scr_menu_lock_release("perk_selection");
+    instance_destroy();
 }
 
 

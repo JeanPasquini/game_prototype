@@ -111,8 +111,17 @@ var text_money_x = draw_x + 80;
 
 // Status
 
+// only try to (re)acquire the "status" lock while TAB is held; this also
+// keeps the menu from opening at all if some other lock (pause, transition,
+// boss vignette...) is currently active
 var tab_held = keyboard_check(vk_tab);
-status_anim_t = clamp(status_anim_t + (tab_held ? 1 : -1) * (1 / 10), 0, 1);
+var status_open_allowed = tab_held && scr_menu_lock_try("status");
+
+status_anim_t = clamp(status_anim_t + (status_open_allowed ? 1 : -1) * (1 / 10), 0, 1);
+
+if (status_anim_t <= 0) {
+    scr_menu_lock_release("status");
+}
 
 if (status_anim_t > 0) {
 

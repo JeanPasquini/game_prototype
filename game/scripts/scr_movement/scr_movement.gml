@@ -4,7 +4,12 @@ function scr_movement() {
         _update_dying();
         return;
     }
-	
+
+    if (state == PlayerState.INTRODUCTION) {
+        _update_introduction();
+        return;
+    }
+
 	if (instance_exists(obj_menu_boss_introduction) && obj_menu_boss_introduction.boss_introduction) {
 	    hsp = 0;
 		is_dashing = false;
@@ -31,6 +36,7 @@ function scr_movement() {
 function _update_dying() {
 
     if (sprite_index != spr_player_dying && sprite_index != spr_player_dying_returning) {
+        scr_menu_lock_try("dying");
         audio_play_sound(sde_player_die, 1, false);
         sprite_index = spr_player_dying;
         image_index = 0;
@@ -49,6 +55,29 @@ function _update_dying() {
         if (image_index >= image_number - 1) {
             state = PlayerState.IDLE;
         }
+    }
+}
+
+function _update_introduction() {
+
+	face = 1;
+
+    if (sprite_index != spr_player_introduction_idle && sprite_index != spr_player_introduction_start) {
+        sprite_index = spr_player_introduction_idle;
+        image_index = 0;
+        image_speed = 1;
+    }
+
+    if (introduction_start && sprite_index == spr_player_introduction_idle) {
+        sprite_index = spr_player_introduction_start;
+        image_index = 0;
+        image_speed = 1;
+    }
+
+    if (sprite_index == spr_player_introduction_start && image_index >= image_number - 1) {
+        introduction_start = false;
+        talking = false;
+        state = PlayerState.IDLE;
     }
 }
 

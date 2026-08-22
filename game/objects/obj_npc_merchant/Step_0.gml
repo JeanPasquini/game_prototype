@@ -8,7 +8,8 @@ if (!has_talked)
     // ===== INICIAR DIÁLOGO =====
     if (dist < range_interaction
     && keyboard_check_pressed(ord("E"))
-    && obj_player.state != PlayerState.TALKING)
+    && obj_player.state != PlayerState.TALKING
+    && scr_menu_lock_is_free())
     {
         //var dlg_instance = instance_create_layer(x, y, "controls", obj_dialogue);
 

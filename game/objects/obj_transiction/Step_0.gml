@@ -34,6 +34,8 @@ else {
     if (img < 0) {
 
         obj_player.state = PlayerState.IDLE;
+        obj_menu_boss_introduction.boss_introduction = false;
+        scr_menu_lock_release("transition");
         instance_destroy();
     }
 }

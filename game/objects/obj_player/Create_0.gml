@@ -19,7 +19,8 @@ enum PlayerState {
 	WAIT,
 	WAIT_ATTACK,
 	DYING,
-	DASH
+	DASH,
+	INTRODUCTION
 }
 state = PlayerState.IDLE;
 
@@ -105,6 +106,7 @@ previous_state = state;
 smoke_instance = noone;
 
 talking = false;
+introduction_start = false;
 
 swimming = false;
 swimming_threshold = 30;

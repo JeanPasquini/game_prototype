@@ -1,3 +1,6 @@
+scr_menu_lock_try("perk_selection");
+layer_set_visible(layer_get_id("ui_hud_player"), false);
+
 cards = [];
 cards_created = false;
 
