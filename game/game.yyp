@@ -619,6 +619,7 @@
     {"id":{"name":"spr_player_running_turn","path":"sprites/spr_player_running_turn/spr_player_running_turn.yy",},},
     {"id":{"name":"spr_player_running","path":"sprites/spr_player_running/spr_player_running.yy",},},
     {"id":{"name":"spr_player_taking_damage","path":"sprites/spr_player_taking_damage/spr_player_taking_damage.yy",},},
+    {"id":{"name":"spr_player_transition","path":"sprites/spr_player_transition/spr_player_transition.yy",},},
     {"id":{"name":"spr_player_walking_turn","path":"sprites/spr_player_walking_turn/spr_player_walking_turn.yy",},},
     {"id":{"name":"spr_player_walking","path":"sprites/spr_player_walking/spr_player_walking.yy",},},
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},

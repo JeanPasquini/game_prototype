@@ -10,6 +10,11 @@ function scr_movement() {
         return;
     }
 
+    if (state == PlayerState.TRANSITION) {
+        _update_transition();
+        return;
+    }
+
 	if (instance_exists(obj_menu_boss_introduction) && obj_menu_boss_introduction.boss_introduction) {
 	    hsp = 0;
 		is_dashing = false;
@@ -79,6 +84,70 @@ function _update_introduction() {
         talking = false;
         state = PlayerState.IDLE;
     }
+}
+
+function _update_transition() {
+
+    is_dashing = false;
+    dash_timer = 0;
+
+    if (transition_phase == 0) {
+
+        // anda sozinho até centralizar com a porta, ignorando input
+        var _dir = sign(transition_target_x - x);
+        var _dist = abs(transition_target_x - x);
+
+        if (_dist > 1) {
+
+            if (_dir != 0) face = _dir;
+
+            hsp = lerp(hsp, _dir * (run ? spd * 2 : spd), 0.3);
+
+            var _spr = run ? spr_player_running : spr_player_walking;
+            if (sprite_index != _spr) {
+                sprite_index = _spr;
+                image_speed = 1;
+            }
+        }
+        else {
+            // centralizado: trava a posição e começa a animação de transição
+            x = transition_target_x;
+            hsp = 0;
+
+            transition_phase = 1;
+
+            sprite_index = spr_player_transition;
+            image_index = 0;
+            image_speed = 1;
+        }
+    }
+    else if (transition_phase == 1) {
+
+        hsp = 0;
+
+        // segura no último frame até então criar a troca de sala
+        if (image_index >= image_number - 1) {
+
+            image_index = image_number - 1;
+            image_speed = 0;
+
+            if (!transition_room_started) {
+
+                transition_room_started = true;
+
+                var _t = instance_create_layer(0, 0, "Instances", obj_transiction);
+                _t.destiny = transition_destiny;
+                _t.px = transition_px;
+                _t.py = transition_py;
+                _t.is_boss_door = transition_is_boss_door;
+            }
+        }
+    }
+
+    image_xscale = face;
+
+    _apply_gravity();
+    _resolve_collisions();
 }
 
 function _update_timers() {

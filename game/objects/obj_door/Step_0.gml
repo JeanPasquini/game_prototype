@@ -1,11 +1,18 @@
 if (variable_global_exists("rooms_map")) {
-    var room_key = room_get_name(room);
-	
+
+	// mesma resolução de sala/fase usada em Collision_obj_player: usa as
+	// propriedades da própria instância quando definidas, senão cai pra
+	// fase/sala atuais (senão o preview podia ler a conexão errada e nunca
+	// bater com o mini_boss/store/normal de verdade)
+	var _phase = (current_room != noone && current_phase != noone) ? current_phase : global.current_phase;
+	var _room_ref = (current_room != noone && current_phase != noone) ? current_room : room;
+    var room_key = room_get_name(_room_ref);
+
 	 // sala não existe, para troca de fases
-    if (!variable_struct_exists(global.rooms_map[$ global.current_phase], room_key)) return;
-    var dir_str = RoomDirectionToString(room_direction);	
-	var room_data = global.rooms_map[$ global.current_phase][$ room_get_name(room)];
-	
+    if (!variable_struct_exists(global.rooms_map[$ _phase], room_key)) return;
+    var dir_str = RoomDirectionToString(room_direction);
+	var room_data = global.rooms_map[$ _phase][$ room_key];
+
 	// Checks if this door sends or returns to any room, based on it's direction (left, right...)
     if (!variable_struct_exists(room_data.connections, dir_str)) {
 		instance_destroy();
@@ -16,12 +23,33 @@ if (variable_global_exists("rooms_map")) {
 	var target_name = room_get_name(target_room);
 	
 	if (string_pos("mini_boss", target_name) > 0) {
-		image_index = 0;
+		trans_base_frame = 13;
+		
 	}
 	else if (string_pos("store", target_name) > 0) {
-		image_index = 1;
-	} 
-	else {
-		image_index = 2;
+		trans_base_frame = 26;
 	}
+	else {
+		trans_base_frame = 0;
+	}
+}
+
+// ==========================
+// ANIMAÇÃO DA PORTA
+// ==========================
+if (trans_state == "opening") {
+
+	// enquanto o player não estiver tocando o spr_player_transition (ainda
+	// andando até o centro da porta), fica parada no primeiro frame do set
+	var _anim = 0;
+
+	if (instance_exists(obj_player) && obj_player.sprite_index == spr_player_transition) {
+		_anim = floor(obj_player.image_index);
+	}
+
+	// segura no último frame (12) até o sincronismo com o player acontecer
+	image_index = trans_base_frame + clamp(_anim, 0, 12);
+}
+else {
+	image_index = trans_base_frame;
 }

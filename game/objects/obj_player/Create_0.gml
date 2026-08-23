@@ -20,7 +20,8 @@ enum PlayerState {
 	WAIT_ATTACK,
 	DYING,
 	DASH,
-	INTRODUCTION
+	INTRODUCTION,
+	TRANSITION
 }
 state = PlayerState.IDLE;
 
@@ -107,6 +108,15 @@ smoke_instance = noone;
 
 talking = false;
 introduction_start = false;
+
+// Door transition (walk to door center -> spr_player_transition -> room change)
+transition_phase = 0; // 0 = andando até o centro da porta, 1 = tocando spr_player_transition
+transition_target_x = 0;
+transition_destiny = noone;
+transition_px = 0;
+transition_py = 0;
+transition_is_boss_door = false;
+transition_room_started = false;
 
 swimming = false;
 swimming_threshold = 30;

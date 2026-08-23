@@ -35,6 +35,7 @@ function get_state_name(state_val) {
         case PlayerState.DYING:        return "DYING";
         case PlayerState.DASH:         return "DASH";
         case PlayerState.INTRODUCTION: return "INTRODUCTION";
+        case PlayerState.TRANSITION:   return "TRANSITION";
         default:                       return "UNKNOWN";
     }
 }

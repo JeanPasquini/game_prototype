@@ -19,3 +19,7 @@ function RoomDirectionToString(room_dir) {
 		return noone;
 	}
 }
+
+// Animação da porta sincronizada com o spr_player_transition
+trans_state = "idle"; // "idle" | "opening"
+trans_base_frame = 0; // primeiro frame do conjunto de 13 (normal / mini_boss / store)
