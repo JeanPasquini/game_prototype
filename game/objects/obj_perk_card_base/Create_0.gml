@@ -20,4 +20,10 @@ font_desc  = fnt_ui_menu_perk_selection_description;
 // animação de seleção
 select_time = 0;
 
+// animação de entrada/saída (igual ao menu de status do obj_player)
+spawn_anim_t   = 0; // 0 -> 1 ao aparecer
+despawning     = false;
+despawn_anim_t = 1; // 1 -> 0 ao sumir
+despawn_speed  = 1 / 10;
+
 //depth = -1;

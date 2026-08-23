@@ -9,7 +9,7 @@ if (!has_talked)
     if (dist < range_interaction
     && keyboard_check_pressed(ord("E"))
     && obj_player.state != PlayerState.TALKING
-    && scr_menu_lock_is_free())
+    && !scr_menu_lock_blocks_world())
     {
         //var dlg_instance = instance_create_layer(x, y, "controls", obj_dialogue);
 

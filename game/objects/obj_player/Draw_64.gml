@@ -111,17 +111,14 @@ var text_money_x = draw_x + 80;
 
 // Status
 
-// only try to (re)acquire the "status" lock while TAB is held; this also
-// keeps the menu from opening at all if some other lock (pause, transition,
-// boss vignette...) is currently active
+// "status" is a light info overlay, same as "map": it doesn't hold the
+// shared menu lock, so both can be shown together (status draws in front,
+// see obj_map's depth). It's still blocked while a real blocking menu
+// (pause, transition, boss vignette, perk selection...) is active.
 var tab_held = keyboard_check(vk_tab);
-var status_open_allowed = tab_held && scr_menu_lock_try("status");
+var status_open_allowed = tab_held && !scr_menu_lock_blocks_world();
 
 status_anim_t = clamp(status_anim_t + (status_open_allowed ? 1 : -1) * (1 / 10), 0, 1);
-
-if (status_anim_t <= 0) {
-    scr_menu_lock_release("status");
-}
 
 if (status_anim_t > 0) {
 

@@ -2,6 +2,10 @@ size = 32;
 scale = 0.3;
 text = "Map"
 
+// desenha atrás do menu de status do obj_player (GUI: menor depth = na frente).
+// obj_player fica na layer "Instances" (depth 1000+); precisa ser bem maior que isso.
+depth = 1000000;
+
 icon_scale_wall   = 1.0;
 icon_scale_enemy  = 1.5;
 icon_scale_door   = 1.5;
