@@ -14,6 +14,8 @@ function scr_reset_run(){
 	obj_control.damage_caused = 0;
 	obj_control.perk_adquired = 0;
 	global.force_music = noone;
+
+	obj_map.explored_data = {}; // reseta o fog of war do mapa para a nova run
 	
     room_goto(HUB);
 

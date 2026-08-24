@@ -1,4 +1,8 @@
-scr_menu_lock_try("perk_selection");
+// seleção de perk é um menu bloqueante de verdade: precisa vencer a trava
+// mesmo se "map" ou "status" já estiverem segurando ela (são leves e
+// "try" não tomaria a trava deles) - senão o mapa/status continuam
+// desenhando por cima dos cards. Mesmo padrão usado pela transição de sala.
+scr_menu_lock_force("perk_selection");
 layer_set_visible(layer_get_id("ui_hud_player"), false);
 
 cards = [];

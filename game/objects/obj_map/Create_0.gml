@@ -21,6 +21,14 @@ rows = room_height div size;
 
 level = 0;
 
+// fog of war: struct { [nome_da_room]: grid[j][i] de bool } - persiste
+// durante a run inteira (obj_map é persistent), é limpo em scr_reset_run.
+explored_data  = {};
+explored       = 0;
+reveal_radius  = 4;    // raio de revelação ao redor do player, em tiles
+reveal_speed   = 0.08; // quanto cada tile "acende" por frame (0 a 1) - menor = fade mais lento
+border_width   = 2;    // espessura (em px de tela) do contorno dos tiles no mapa
+
 map_surface = -1;
 map_surface_w = 0;
 map_surface_h = 0;

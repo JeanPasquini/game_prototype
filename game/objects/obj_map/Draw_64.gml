@@ -30,6 +30,40 @@ for (var i = 0; i < rows; i++) {
     }
 }
 
+// -----------------------------
+// fog of war: pega (ou cria) o grid de tiles já explorados desta sala.
+// fica guardado em explored_data pelo nome da room, então se o player
+// sair e voltar dentro da mesma run o que já foi visto continua visível.
+// -----------------------------
+var _room_key = room_get_name(room);
+
+if (!variable_struct_exists(explored_data, _room_key)) {
+    var _grid = array_create(cols);
+    for (var j = 0; j < cols; j++) {
+        _grid[j] = array_create(rows, 0);
+    }
+    variable_struct_set(explored_data, _room_key, _grid);
+}
+
+explored = variable_struct_get(explored_data, _room_key);
+
+// revela em um raio circular ao redor do player, subindo de 0 a 1 aos
+// poucos (em vez de acender o tile inteiro de uma vez) para dar um fade
+// suave por tile enquanto o player anda
+var _pcol = clamp(obj_player.x div size, 0, cols - 1);
+var _prow = clamp(obj_player.y div size, 0, rows - 1);
+
+var _r = reveal_radius;
+var _r_sqr = _r * _r;
+
+for (var i = max(0, _prow - _r); i <= min(rows - 1, _prow + _r); i++) {
+    for (var j = max(0, _pcol - _r); j <= min(cols - 1, _pcol + _r); j++) {
+        if (explored[j][i] < 1 && (sqr(j - _pcol) + sqr(i - _prow)) <= _r_sqr) {
+            explored[j][i] = min(1, explored[j][i] + reveal_speed);
+        }
+    }
+}
+
 var _scale       = 2;
 var scale_button = 2;
 var margem       = 16;
@@ -89,24 +123,34 @@ if (alpha_map > 0) {
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < cols; j++) {
 
-                if (level[j][i] != 0) {
+                if (level[j][i] != 0 && explored[j][i] > 0) {
 
                     var x1 = map_x + j * tile_size;
                     var y1 = map_y + i * tile_size;
+                    var x2 = x1 + tile_size;
+                    var y2 = y1 + tile_size;
 
-                    draw_sprite_ext(
-                        spr_map_icon_tile, 0,
-                        x1 + tile_size * 0.5,
-                        y1 + tile_size * 0.5,
-                        tile_icon_scale * icon_scale_wall,
-                        tile_icon_scale * icon_scale_wall,
-                        0,
-                        c_white,
-                        t_ease
-                    );
+                    // só desenha a borda do lado que NÃO tem um tile vizinho
+                    // já revelado - assim tiles grudados formam um bloco só,
+                    // sem linha no meio, em vez de cada um ficar preenchido
+                    var _has_up    = (i > 0)        && level[j][i - 1] != 0 && explored[j][i - 1] > 0;
+                    var _has_down  = (i < rows - 1) && level[j][i + 1] != 0 && explored[j][i + 1] > 0;
+                    var _has_left  = (j > 0)        && level[j - 1][i] != 0 && explored[j - 1][i] > 0;
+                    var _has_right = (j < cols - 1) && level[j + 1][i] != 0 && explored[j + 1][i] > 0;
+
+                    draw_set_color(c_white);
+                    draw_set_alpha(t_ease * explored[j][i]);
+
+                    if (!_has_up)    draw_line_width(x1, y1, x2, y1, border_width);
+                    if (!_has_down)  draw_line_width(x1, y2, x2, y2, border_width);
+                    if (!_has_left)  draw_line_width(x1, y1, x1, y2, border_width);
+                    if (!_has_right) draw_line_width(x2, y1, x2, y2, border_width);
                 }
             }
         }
+
+        draw_set_alpha(1);
+        draw_set_color(c_white);
 
         // -----------------------------
         // ENEMIES
@@ -114,15 +158,21 @@ if (alpha_map > 0) {
         var enemy_icon_scale = tile_icon_scale * icon_scale_enemy;
 
         with (obj_enemy_parent) {
-            draw_sprite_ext(
-                spr_map_icon_enemy, 0,
-                map_x + (x * full_scale),
-                map_y + (y * full_scale),
-                enemy_icon_scale, enemy_icon_scale,
-                0,
-                c_red,
-                t_ease
-            );
+            var _ecol = clamp(x div other.size, 0, other.cols - 1);
+            var _erow = clamp(y div other.size, 0, other.rows - 1);
+            var _eexplored = other.explored[_ecol][_erow];
+
+            if (_eexplored > 0) {
+                draw_sprite_ext(
+                    spr_map_icon_enemy, 0,
+                    map_x + (x * full_scale),
+                    map_y + (y * full_scale),
+                    enemy_icon_scale, enemy_icon_scale,
+                    0,
+                    c_red,
+                    t_ease * _eexplored
+                );
+            }
         }
 
         // -----------------------------
@@ -131,15 +181,21 @@ if (alpha_map > 0) {
         var door_icon_scale = tile_icon_scale * icon_scale_door;
 
         with (obj_door) {
-            draw_sprite_ext(
-                spr_map_icon_door, 0,
-                map_x + (x * full_scale),
-                map_y + (y * full_scale),
-                door_icon_scale, door_icon_scale,
-                0,
-                c_lime,
-                t_ease
-            );
+            var _dcol = clamp(x div other.size, 0, other.cols - 1);
+            var _drow = clamp(y div other.size, 0, other.rows - 1);
+            var _dexplored = other.explored[_dcol][_drow];
+
+            if (_dexplored > 0) {
+                draw_sprite_ext(
+                    spr_map_icon_door, 0,
+                    map_x + (x * full_scale),
+                    map_y + (y * full_scale),
+                    door_icon_scale, door_icon_scale,
+                    0,
+                    c_lime,
+                    t_ease * _dexplored
+                );
+            }
         }
 
         // -----------------------------
@@ -271,7 +327,7 @@ if (alpha_map > 0) {
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < cols; j++) {
 
-                if (level[j][i] != 0) {
+                if (level[j][i] != 0 && explored[j][i] > 0) {
 
                     var lx = map_x_local + j * tile_size + tile_size * 0.5;
                     var ly = map_y_local + i * tile_size + tile_size * 0.5;
@@ -279,19 +335,30 @@ if (alpha_map > 0) {
                     if (lx >= local_left - pad && lx <= local_right + pad
                     &&  ly >= local_top  - pad && ly <= local_bottom + pad) {
 
-                        draw_sprite_ext(
-                            spr_map_icon_tile, 0,
-                            lx, ly,
-                            tile_icon_scale * icon_scale_wall,
-                            tile_icon_scale * icon_scale_wall,
-                            0,
-                            c_white,
-                            1
-                        );
+                        var x1 = map_x_local + j * tile_size;
+                        var y1 = map_y_local + i * tile_size;
+                        var x2 = x1 + tile_size;
+                        var y2 = y1 + tile_size;
+
+                        var _has_up    = (i > 0)        && level[j][i - 1] != 0 && explored[j][i - 1] > 0;
+                        var _has_down  = (i < rows - 1) && level[j][i + 1] != 0 && explored[j][i + 1] > 0;
+                        var _has_left  = (j > 0)        && level[j - 1][i] != 0 && explored[j - 1][i] > 0;
+                        var _has_right = (j < cols - 1) && level[j + 1][i] != 0 && explored[j + 1][i] > 0;
+
+                        draw_set_color(c_white);
+                        draw_set_alpha(explored[j][i]);
+
+                        if (!_has_up)    draw_line_width(x1, y1, x2, y1, border_width);
+                        if (!_has_down)  draw_line_width(x1, y2, x2, y2, border_width);
+                        if (!_has_left)  draw_line_width(x1, y1, x1, y2, border_width);
+                        if (!_has_right) draw_line_width(x2, y1, x2, y2, border_width);
                     }
                 }
             }
         }
+
+        draw_set_alpha(1);
+        draw_set_color(c_white);
 
         // -----------------------------
         // ENEMIES
@@ -303,7 +370,12 @@ if (alpha_map > 0) {
             var mini_x = map_x_local + (x * map_scale);
             var mini_y = map_y_local + (y * map_scale);
 
-            if (mini_x >= local_left - pad && mini_x <= local_right + pad
+            var _ecol = clamp(x div other.size, 0, other.cols - 1);
+            var _erow = clamp(y div other.size, 0, other.rows - 1);
+            var _eexplored = other.explored[_ecol][_erow];
+
+            if (_eexplored > 0
+            &&  mini_x >= local_left - pad && mini_x <= local_right + pad
             &&  mini_y >= local_top  - pad && mini_y <= local_bottom + pad) {
 
                 draw_sprite_ext(
@@ -312,7 +384,7 @@ if (alpha_map > 0) {
                     enemy_icon_scale, enemy_icon_scale,
                     0,
                     c_red,
-                    1
+                    _eexplored
                 );
             }
         }
@@ -327,7 +399,12 @@ if (alpha_map > 0) {
             var mini_x = map_x_local + (x * map_scale);
             var mini_y = map_y_local + (y * map_scale);
 
-            if (mini_x >= local_left - pad && mini_x <= local_right + pad
+            var _dcol = clamp(x div other.size, 0, other.cols - 1);
+            var _drow = clamp(y div other.size, 0, other.rows - 1);
+            var _dexplored = other.explored[_dcol][_drow];
+
+            if (_dexplored > 0
+            &&  mini_x >= local_left - pad && mini_x <= local_right + pad
             &&  mini_y >= local_top  - pad && mini_y <= local_bottom + pad) {
 
                 draw_sprite_ext(
@@ -336,7 +413,7 @@ if (alpha_map > 0) {
                     door_icon_scale, door_icon_scale,
                     0,
                     c_lime,
-                    1
+                    _dexplored
                 );
             }
         }
