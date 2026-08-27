@@ -1,0 +1,44 @@
+// recalcula o total de hordas todo frame: o manager é criado pelo primeiro
+// obj_spawn_enemy da sala e pode não "enxergar" os demais no momento do Create.
+if (state != WaveState.COMPLETE) {
+    with (obj_spawn_enemy) {
+        if (wave_number > other.total_waves) other.total_waves = wave_number;
+    }
+}
+
+switch (state) {
+    case WaveState.INTRO:
+        timer--;
+        if (timer <= 0) start_next_wave();
+        break;
+
+    case WaveState.WARNING:
+        // espera todos os spawners da horda atual terminarem o aviso e gerarem o inimigo
+        var pending = 0;
+        with (obj_spawn_enemy) {
+            if (wave_number == other.current_wave && !has_spawned) pending++;
+        }
+        if (pending == 0) state = WaveState.FIGHTING;
+        break;
+
+    case WaveState.FIGHTING:
+        // horda só termina quando todos os inimigos foram eliminados
+        if (instance_number(obj_enemy_parent) == 0) {
+            if (current_wave >= total_waves) {
+                state = WaveState.COMPLETE;
+            } else {
+                state = WaveState.BETWEEN;
+                timer = between_delay;
+            }
+        }
+        break;
+
+    case WaveState.BETWEEN:
+        timer--;
+        if (timer <= 0) start_next_wave();
+        break;
+
+    case WaveState.COMPLETE:
+        // fim: obj_perk detecta esse estado e libera os cards de perk
+        break;
+}
