@@ -175,3 +175,42 @@ status_anim_t = 0;
 status_menu_surface = -1;
 status_menu_surface_w = 0;
 status_menu_surface_h = 0;
+
+// =====================================================================
+// Squash & Stretch (juice) — escala dinâmica aplicada por cima do sprite
+// =====================================================================
+base_scale     = 1.15;   // escala "de repouso" do sprite (era o 1.15 fixo)
+sns_x          = 1;      // multiplicador horizontal atual (converge p/ 1)
+sns_y          = 1;      // multiplicador vertical atual (converge p/ 1)
+sns_xspd       = 0;      // velocidade da mola no eixo X
+sns_yspd       = 0;      // velocidade da mola no eixo Y
+sns_stiffness  = 0.35;   // rigidez da mola: maior = volta mais rápido
+sns_damping    = 0.60;   // amortecimento (0-1): maior = oscila menos
+sns_breath_t   = 0;      // fase da "respiração" no idle
+
+// =====================================================================
+// Queda / gravidade com mais peso
+// =====================================================================
+grv_rise      = grv;     // gravidade na subida (mantém o pulo atual)
+fall_grv_mult = 1.35;    // cai mais pesado do que sobe (gravidade assimétrica)
+fast_fall_mult = 1.7;    // segurar "baixo" no ar acelera a queda
+vsp_max_fall  = 15;      // velocidade terminal de queda
+hard_land_vsp = 12;      // a partir daqui a aterrissagem "treme a tela"
+
+// =====================================================================
+// Ataque com mais fluidez (avanço/lunge no golpe)
+// =====================================================================
+attack_lunge       = 4.5; // impulso pra frente no frame do golpe
+attack_lunge_timer = 0;   // frames restantes de deslize do golpe
+attack_lunged      = false;
+attack_is_air      = false; // golpe iniciado no ar (recuperação diferente)
+attack_hitbox_spawned = false; // garante 1 hitbox por golpe (só reseta em novo ataque)
+
+// =====================================================================
+// Feedback ao levar dano
+// =====================================================================
+hit_flash     = 0;   // frames restantes de flash branco
+hit_flash_max = 8;
+
+// anti-flicker: atraso pra virar IDLE ao parar de andar
+idle_delay = 0;

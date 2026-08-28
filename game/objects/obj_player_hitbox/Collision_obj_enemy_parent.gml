@@ -19,6 +19,9 @@ if (obj_player.energy < obj_player.energy_max && obj_player.perk_activatable != 
 
 scr_camera_shake(5, 5)
 
+// hitstop: congela player + inimigos por alguns frames pra dar "peso" ao golpe
+global.hitstop = max(global.hitstop, 3);
+
 //PERKS
 
 if(instance_exists(obj_perk_passive_thunderbolt)) obj_perk_passive_thunderbolt.scr_perk_thunderbolt(other.x, other.y);

@@ -31,5 +31,16 @@ function src_show_player_damage_received(damage){
 		obj_player.invencible = true;
 		obj_player.alarm[0] = obj_player.invencible_time;
 		obj_combo_streak.combo_streak = 0;
+
+		// ===== FEEDBACK DE DANO =====
+		if (damage > 0) {
+			with (obj_player) {
+				hit_flash = hit_flash_max;
+				// encolhe no impacto (a mola devolve pra 1)
+				player_add_squash(-0.30, 0.22);
+			}
+			global.hitstop = max(global.hitstop, 5);
+			scr_camera_zoom_punch(0.05);
+		}
 	}
 }

@@ -2,6 +2,8 @@ if (global.hitstop > 0) {
     exit;
 }
 
+if (hit_flash > 0) hit_flash--;
+
 if (life <= 0){
 	state = PlayerState.DYING;
 }
