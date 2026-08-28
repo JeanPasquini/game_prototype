@@ -107,6 +107,8 @@
     {"name":"inst_A0000005","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_A0000006","path":"roomui/RoomUI/RoomUI.yy",},
     {"name":"inst_A0000007","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_5EE0A002","path":"roomui/RoomUI/RoomUI.yy",},
+    {"name":"inst_5EE0B004","path":"roomui/RoomUI/RoomUI.yy",},
   ],
   "isDnd":false,
   "layers":[
