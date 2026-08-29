@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_generate_run",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_generate_run",
+  "parent":{
+    "name":"global_rooms_map_scripts",
+    "path":"folders/Scripts/global_rooms_map_scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,99 +1,79 @@
+/*
+	Randomiza as DIRECOES das portas do mapa da RUN (sensacao de labirinto),
+	mantendo:
+	  - o caminho de volta SEMPRE presente: toda sala tem uma porta de retorno
+	    para a sala anterior, na direcao oposta a que o player usou para entrar
+	    (e portanto no mesmo ponto onde ele spawnou).
+	  - o sistema de portas cima/baixo/esquerda/direita.
+
+	O mapa e indexado por CHAVE DE SLOT (string: "HUB", "s0", "s1", ...), nao por
+	nome de sala, para permitir que a mesma sala apareca varias vezes na RUN
+	(ex.: so existe room_challenge_01, mas a RUN tem 3 desafios).
+
+	No de mapa:
+	  global.rooms_map[fase][slot] = {
+	      room:        <asset da room>,
+	      sends:       { slot_destino: slot_destino, ... },
+	      connections: { dir: slot_destino, ... },   // preenchido aqui
+	      returns, music, up/down/left/right
+	  }
+*/
+
 function shuffle_rooms() {
-    randomize(); // guarantees different randomness in each Run
-    var visited = ds_list_create();
-    _shuffle_room(global.first_room_name, global.current_phase, noone, noone, visited);
-    ds_list_destroy(visited);
+	randomize();
+	var visited = ds_map_create();
+	_shuffle_node("HUB", noone, noone, visited);
+	ds_map_destroy(visited);
 }
 
-// Shuffle simply swaps the positions of the existing outputs.
-function _shuffle_room(room_ref, phase, back_room, back_dir, visited) {
-	
-	// Check if the specified room has already been visited.
-    var key = _room_key(room_ref);
-    if (ds_list_find_index(visited, key) != -1) return;
-    ds_list_add(visited, key);
+function _shuffle_node(key, back_key, back_dir, visited) {
+	if (ds_map_exists(visited, key)) return;
+	ds_map_add(visited, key, true);
 
-	// If the room does not exist, return to avoid generating an error.
-    if (!variable_struct_exists(global.rooms_map[$ phase], key)) return;
-	
-	var room_data = src_get_room_data(room_ref, phase);
-	
-	var dirs = ["up", "down", "left", "right"];	
-	var connections = {};
-	
-	// It checks if it should return, ruling out as a possibility the direction already used for that purpose.
-	if (back_room != noone && back_dir != noone && room_data.returns) {
-		connections[$ back_dir] = back_room;
-		
-		var new_dirs = [];
+	var node = global.rooms_map[$ global.current_phase][$ key];
+	if (is_undefined(node)) return;
+
+	var dirs = ["up", "down", "left", "right"];
+	var conn = {};
+
+	// caminho de volta: reservado quando o no permite retorno (node.returns).
+	// Ex.: a room_safe (1a sala da RUN) tem returns=false -> sem porta de volta pro HUB.
+	if (back_key != noone && back_dir != noone && node.returns) {
+		conn[$ back_dir] = back_key;
+
+		var kept = [];
 		for (var i = 0; i < array_length(dirs); i++) {
-			if (dirs[i] != back_dir) {
-			    array_push(new_dirs, dirs[i]);
-			}
+			if (dirs[i] != back_dir) array_push(kept, dirs[i]);
 		}
-		dirs = new_dirs;
+		dirs = kept;
 	}
 
-	// retrieves the next rooms from the connection as strings and adds them to an array.
-	var send_rooms = variable_struct_get_names(room_data.sends);
-	
-	show_debug_message(json_stringify(send_rooms, true));
+	// distribui as saidas ("sends") em direcoes aleatorias das que sobraram
+	var targets = variable_struct_get_names(node.sends);
+	for (var i = 0; i < array_length(targets); i++) {
+		if (array_length(dirs) == 0) break; // seguranca: no maximo 4 conexoes
 
-	// loop over each room name ("challenge_01", "challenge_02"...)
-	for (var i = 0; i < array_length(send_rooms); i++)
-	{
-	    var send_room  = send_rooms[i]; // Get the name of the current room or the next phase.
-	    var _room = room_data.sends[$ send_room]; // Get the reference to the room, by string or phase.
-		
-		if (room_get_name(_room) != send_room) {
-			// There is a phase change, with send_room being the new phase.
-			phase = send_room;
-			
-			// If the room has already been visited (as a safe_room), remove it from the list for a new visit in the current phase.
-			var index = ds_list_find_index(visited, _room_key(_room));
-			if (index != -1) {
-			    ds_list_delete(visited, index);
-			}
-			
-			_shuffle_room(_room, phase, noone, noone, visited);
-			return;
-		}
+		var tkey = node.sends[$ targets[i]];
 
-		show_debug_message(json_stringify(_room, true));
+		var di = irandom(array_length(dirs) - 1);
+		var d  = dirs[di];
+		array_delete(dirs, di, 1);
 
-	    // choose a random direction from the remaining options
-	    var idx = irandom(array_length(dirs) - 1);
-	    var dir = dirs[idx];
+		conn[$ d] = tkey;
 
-	    // link in the final result
-	    connections[$ dir] = _room;
-
-	    // remove the direction used
-	    array_delete(dirs, idx, 1);
-		
-		// recursively calls the function for all connections.
-		_shuffle_room(_room, phase, room_ref, _opposite_dir(dir), visited);
+		_shuffle_node(tkey, key, _opposite_dir(d), visited);
 	}
-	// Define the new connections generated.
-    global.rooms_map[$ phase][$ room_get_name(room_ref)].connections = connections;
 
+	node.connections = conn;
 }
 
 
 function _opposite_dir(dir) {
-    var opp;
-    switch (dir) {
-        case "up": opp = "down"; break;
-        case "down": opp = "up"; break;
-        case "left": opp = "right"; break;
-        case "right": opp = "left"; break;
-        default: return;
-    }
-	return opp;
-}
-
-
-function _room_key(room_ref) {
-    if (is_string(room_ref)) return room_ref;
-    return room_get_name(room_ref);
+	switch (dir) {
+		case "up":    return "down";
+		case "down":  return "up";
+		case "left":  return "right";
+		case "right": return "left";
+	}
+	return noone;
 }

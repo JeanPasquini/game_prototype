@@ -29,6 +29,11 @@ if (join) {
         obj_player.transition_phase = 0;
         obj_player.transition_room_started = false;
 
+        // avanca a posicao do player no mapa da RUN antes de carregar a sala nova
+        // (scr_room_init da sala nova ja le global.run_pos)
+        if (destiny_slot != noone) global.run_pos = destiny_slot;
+        global.run_entry_dir = entry_dir; // scr_room_init da sala nova usa p/ nascer na porta
+
         room_goto(destiny);
     }
 }

@@ -17,7 +17,7 @@ if (type_info == 3 && room_get_name(room) != "HUB") {
 
 // HUD de sala de horda: só aparece em salas "challenge_*" com wave manager ativo.
 // Fora dessas salas não desenha nem o quadrado nem a contagem.
-var _is_challenge_room = (string_pos("challenge", room_get_name(room)) == 1) && instance_exists(obj_wave_manager);
+var _is_challenge_room = (string_pos("challenge", room_get_name(room)) > 0) && instance_exists(obj_wave_manager);
 
 // quantidade de inimigos vivos na room
 if (type_info == 4 && _is_challenge_room) {

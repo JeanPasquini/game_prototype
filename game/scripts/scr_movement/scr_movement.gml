@@ -137,6 +137,8 @@ function _update_transition() {
 
                 var _t = instance_create_layer(0, 0, "Instances", obj_transiction);
                 _t.destiny = transition_destiny;
+                _t.destiny_slot = transition_destiny_slot;
+                _t.entry_dir = transition_entry_dir;
                 _t.px = transition_px;
                 _t.py = transition_py;
                 _t.is_boss_door = transition_is_boss_door;

@@ -4,7 +4,9 @@ next = false;
 scr_menu_lock_force("transition");
 
 // dados
-destiny = noone;
+destiny = noone;       // asset da room de destino (room_goto)
+destiny_slot = noone;  // chave de slot no mapa da RUN (global.run_pos)
+entry_dir = noone;     // "up"/"down"/"left"/"right": porta de entrada (global.run_entry_dir)
 px = 0;
 py = 0;
 is_boss_door = false;

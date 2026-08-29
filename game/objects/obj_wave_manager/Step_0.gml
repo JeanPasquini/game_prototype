@@ -6,6 +6,13 @@ if (state != WaveState.COMPLETE) {
     }
 }
 
+// sala de anomalia: segura TUDO enquanto o aviso de anomalia estiver na tela.
+// so quando o aviso some as hordas comecam (com o intro_delay normal depois).
+if (variable_global_exists("anomaly_block_waves") && global.anomaly_block_waves) {
+    if (state == WaveState.INTRO) timer = intro_delay;
+    exit;
+}
+
 switch (state) {
     case WaveState.INTRO:
         timer--;
@@ -26,6 +33,8 @@ switch (state) {
         if (instance_number(obj_enemy_parent) == 0) {
             if (current_wave >= total_waves) {
                 state = WaveState.COMPLETE;
+                // persistencia da run: slot concluido nao recria hordas ao revisitar
+                if (variable_global_exists("run_pos")) run_state_mark_cleared(global.run_pos);
             } else {
                 state = WaveState.BETWEEN;
                 timer = between_delay;
