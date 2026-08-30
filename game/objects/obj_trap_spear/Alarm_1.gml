@@ -1,2 +1,2 @@
-image_index = 7;
+image_index = 9;
 image_speed = 1;

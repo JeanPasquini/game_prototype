@@ -6,9 +6,9 @@
 	Titulo/descricao ficam aqui para facilitar a escrita e a traducao depois.
 */
 
-global.room_anomaly_enabled = true;
-global.room_anomaly_id      = "1";
-global.room_anomaly_title   = "Traps 01";
-global.room_anomaly_desc    = "Watch your step!!!";
+global.room_anomaly_enabled = false;
+global.room_anomaly_id      = "";
+global.room_anomaly_title   = "";
+global.room_anomaly_desc    = "";
 
 scr_room_init();

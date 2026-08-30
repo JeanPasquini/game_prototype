@@ -7,8 +7,8 @@
 */
 
 global.room_anomaly_enabled = true;
-global.room_anomaly_id      = "1";
-global.room_anomaly_title   = "Traps 01";
-global.room_anomaly_desc    = "Watch your step!!!";
+global.room_anomaly_id      = "3";
+global.room_anomaly_title   = "No limits 01";
+global.room_anomaly_desc    = "";
 
 scr_room_init();
