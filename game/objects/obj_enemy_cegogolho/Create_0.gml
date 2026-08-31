@@ -1,6 +1,6 @@
 // Inherit the parent event
 event_inherited();
-life = 10;
+life = 5;
 maxDetectionRadius = 180;
 throwsProjectile = obj_projectile;
 idle_movement_script = src_random_flying_idle_movement();

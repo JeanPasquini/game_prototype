@@ -275,6 +275,7 @@
     {"id":{"name":"obj_psicotopus_tentacles","path":"objects/obj_psicotopus_tentacles/obj_psicotopus_tentacles.yy",},},
     {"id":{"name":"obj_psicotopus","path":"objects/obj_psicotopus/obj_psicotopus.yy",},},
     {"id":{"name":"obj_ricochet_projectile_parent","path":"objects/obj_ricochet_projectile_parent/obj_ricochet_projectile_parent.yy",},},
+    {"id":{"name":"obj_room_wrap","path":"objects/obj_room_wrap/obj_room_wrap.yy",},},
     {"id":{"name":"obj_spawn_enemy","path":"objects/obj_spawn_enemy/obj_spawn_enemy.yy",},},
     {"id":{"name":"obj_spike","path":"objects/obj_spike/obj_spike.yy",},},
     {"id":{"name":"obj_tentacle_telegraph","path":"objects/obj_tentacle_telegraph/obj_tentacle_telegraph.yy",},},

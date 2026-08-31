@@ -11,4 +11,6 @@ global.room_anomaly_id      = "";
 global.room_anomaly_title   = "";
 global.room_anomaly_desc    = "";
 
+global.room_wrap_enabled = false;   // wrap de tela (quem sai por uma borda volta pela oposta)
+
 scr_room_init();

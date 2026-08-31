@@ -5,6 +5,7 @@
 		visited:       bool,   // player ja entrou nesta sala nesta run
 		cleared:       bool,   // hordas / desafio da sala ja concluidos
 		merchant_used: bool,   // store_room: o npc_merchant ja vendeu nesta run
+		env:           {},     // estado de objetos de environment: { key: "gone"|"on" }
 	}
 
 	Nao usamos a flag nativa "persistent" das rooms: o GameMaker recarrega o .yy
@@ -24,10 +25,13 @@ function run_state_get(room_name) {
 			visited:       false,
 			cleared:       false,
 			merchant_used: false,
+			env:           {},
 		};
 	}
 
-	return global.run_state[$ room_name];
+	var _st = global.run_state[$ room_name];
+	if (!variable_struct_exists(_st, "env") || !is_struct(_st.env)) _st.env = {};
+	return _st;
 }
 
 /// @description Marca uma sala como concluida (hordas / desafio terminados).
@@ -46,4 +50,28 @@ function run_state_reset() {
 function run_room_has_active_horde() {
 	return instance_exists(obj_wave_manager)
 		&& obj_wave_manager.state != WaveState.COMPLETE;
+}
+
+// ===== Persistencia de objetos de environment (caixas, cristais, baus, lever/gate) =====
+// Chave estavel por instancia: tipo do objeto + posicao ONDE FOI COLOCADO no editor.
+// (xstart/ystart nao mudam entre recargas da mesma sala).
+
+/// @description Chave de persistencia de uma instancia de environment.
+function run_env_key(_inst) {
+	return object_get_name(_inst.object_index) + "#"
+		+ string(_inst.xstart) + "," + string(_inst.ystart);
+}
+
+/// @description Estado guardado dessa instancia nesta RUN ("gone" / "on") ou undefined.
+function run_env_get(_key) {
+	if (!variable_global_exists("run_pos")) return undefined;
+	var st = run_state_get(global.run_pos);
+	return variable_struct_exists(st.env, _key) ? st.env[$ _key] : undefined;
+}
+
+/// @description Grava o estado dessa instancia nesta RUN.
+function run_env_set(_key, _val) {
+	if (!variable_global_exists("run_pos")) return;
+	var st = run_state_get(global.run_pos);
+	st.env[$ _key] = _val;
 }

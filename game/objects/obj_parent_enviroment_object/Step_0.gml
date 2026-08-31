@@ -9,6 +9,7 @@ else
 }
 
 if(life <= 0 ){
+	run_env_set(run_env_key(id), "gone"); // persiste destruido durante a RUN
 	scr_drop_roll(drops, x, y-16, "drop");
-	instance_destroy();	
+	instance_destroy();
 }

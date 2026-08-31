@@ -16,6 +16,7 @@ if (instance_exists(obj_player)) {
 			obj_player.key --;
 			audio_play_sound(sde_environment_chest_open, 1, false);
 			open = true;
+			run_env_set(run_env_key(id), "on"); // persiste aberto durante a RUN
 				scr_perk_altar(x, y)
 		}
 		else if (obj_player.key == 0 && !open){

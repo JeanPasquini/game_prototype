@@ -11,4 +11,6 @@ global.room_anomaly_id      = "1";
 global.room_anomaly_title   = "Traps 01";
 global.room_anomaly_desc    = "Watch your step!!!";
 
+global.room_wrap_enabled = false;   // wrap de tela (quem sai por uma borda volta pela oposta)
+
 scr_room_init();

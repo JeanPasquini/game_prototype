@@ -53,13 +53,24 @@ function run_pick_rooms(pool, _n, _fallback) {
 	return out;
 }
 
+/// @description TESTE: forca TODOS os desafios da RUN a serem uma sala especifica.
+/// Troque o "return noone" por, ex.: "return room_challenge_05;" para testar uma
+/// sala. Volte pra noone para o sorteio normal.
+function run_debug_forced_challenge() {
+	return noone // room_challenge_05;
+}
+
 /// @description (Re)gera global.rooms_map para uma nova RUN.
 function generate_run() {
 	randomize();
 
 	var pools = run_build_pools();
 
-	var ch = run_pick_rooms(pools.challenge, 3, room_challenge_01);
+	var _forced = run_debug_forced_challenge();
+	var ch = (_forced != noone)
+		? [_forced, _forced, _forced]
+		: run_pick_rooms(pools.challenge, 3, room_challenge_01);
+
 	var mb_arr = pool_pick_n(pools.miniboss, 1);
 	var mb = (array_length(mb_arr) > 0) ? mb_arr[0] : room_miniboss_01;
 

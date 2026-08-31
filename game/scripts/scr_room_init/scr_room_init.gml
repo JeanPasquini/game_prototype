@@ -71,6 +71,36 @@ function scr_room_init() {
 		with (obj_enemy_parent) instance_destroy();
 	}
 
+	// -------- 2b. persistencia de objetos de environment (dentro da RUN) --------
+	// Caixas/cristais/vasos destruidos ficam destruidos; lever/gate ficam
+	// acionados; baus ficam abertos. Tudo volta ao normal ao resetar a RUN
+	// (scr_reset_run limpa global.run_state).
+	with (obj_parent_enviroment_object) {
+		if (run_env_get(run_env_key(id)) == "gone") instance_destroy();
+	}
+	with (obj_environment_vase) {
+		if (run_env_get(run_env_key(id)) == "gone") instance_destroy();
+	}
+	with (obj_environment_lever) {
+		if (run_env_get(run_env_key(id)) == "on") {
+			activated = true;
+			image_speed = 0;
+			image_index = image_number - 1;
+		}
+	}
+	with (obj_environment_gate) {
+		if (run_env_get(run_env_key(id)) == "on") {
+			actived = true;
+			played_sound = true;
+			image_speed = 0;
+			image_index = image_number - 1;
+			open = (type == 1);
+		}
+	}
+	with (obj_parent_enviroment_chest) {
+		if (run_env_get(run_env_key(id)) == "on") open = true;
+	}
+
 	// -------- 3. aviso de anomalia --------
 	var _an_enabled = variable_global_exists("room_anomaly_enabled") && global.room_anomaly_enabled;
 	var _an_id      = variable_global_exists("room_anomaly_id")    ? global.room_anomaly_id    : "";
@@ -101,6 +131,18 @@ function scr_room_init() {
 
 	show_debug_message("[anomaly] sala=" + _room_name + " enabled=" + string(_an_enabled)
 		+ " title='" + string(_an_title) + "'");
+
+	// -------- 4. wrap de tela (opcional, por sala) --------
+	// No creation code da room: global.room_wrap_enabled = true;  (antes de scr_room_init)
+	var _wrap = variable_global_exists("room_wrap_enabled") && global.room_wrap_enabled;
+	global.room_wrap_enabled = false; // nao herda pra proxima sala
+
+	if (_wrap && !instance_exists(obj_room_wrap)) {
+		var _lay = layer_exists("controls") ? "controls"
+			: (layer_exists("Instances") ? "Instances" : "");
+		if (_lay != "") instance_create_layer(0, 0, _lay, obj_room_wrap);
+		else instance_create_depth(0, 0, 0, obj_room_wrap);
+	}
 }
 
 /// @description "left"/"right"/"up"/"down" -> RoomDirection.*  (ou noone)

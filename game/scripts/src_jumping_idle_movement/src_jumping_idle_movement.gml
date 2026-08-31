@@ -64,6 +64,7 @@ function src_jumping_idle_movement() {
 				vsp = 0; // Stop vertical movement on collision
 			} else {
 				vsp += grv; // Apply gravity over time
+				if (vsp > GRV_MAX_FALL) vsp = GRV_MAX_FALL;
 			}
 	    }
 

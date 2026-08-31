@@ -1,3 +1,6 @@
+// Velocidade de queda maxima (terminal) — aplicada ao player e a tudo que cai.
+#macro GRV_MAX_FALL 18
+
 function scr_movement() {
 
     if (state == PlayerState.DYING) {
@@ -201,6 +204,7 @@ function _update_air_states() {
 function _apply_gravity() {
     if (!is_dashing) {
         vsp += grv;
+        if (vsp > GRV_MAX_FALL) vsp = GRV_MAX_FALL; // limite de velocidade de queda
     }
 }
 

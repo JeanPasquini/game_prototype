@@ -4,4 +4,5 @@ for (var i = 0; i < 8; i++) {
     w.image_index = i mod sprite_get_number(spr_environment_vase_wreckage);
 }
 
+run_env_set(run_env_key(id), "gone"); // persiste destruido durante a RUN
 instance_destroy();

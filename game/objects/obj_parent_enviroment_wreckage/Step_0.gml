@@ -8,6 +8,7 @@ rot_spd *= rot_friction;
 
 
 vsp += grv;
+if (vsp > GRV_MAX_FALL) vsp = GRV_MAX_FALL;
 
 
 if (abs(hsp) > 0.1) {

@@ -11,4 +11,6 @@ global.room_anomaly_id      = "2";
 global.room_anomaly_title   = "Blank Room 01";
 global.room_anomaly_desc    = "Look the MINIMAP";
 
+global.room_wrap_enabled = false;   // wrap de tela (quem sai por uma borda volta pela oposta)
+
 scr_room_init();
