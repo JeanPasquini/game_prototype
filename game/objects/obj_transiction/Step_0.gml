@@ -49,6 +49,7 @@ else {
 
         obj_menu_boss_introduction.boss_introduction = false;
         obj_cam.zoom_target = 1;
+        obj_cam.center_on_target = false; // volta ao enquadramento normal na sala nova
         scr_menu_lock_release("transition");
         instance_destroy();
     }

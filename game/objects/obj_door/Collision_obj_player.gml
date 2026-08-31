@@ -47,6 +47,7 @@ if (destiny_slot != noone && position != noone) {
             obj_menu_boss_introduction.boss_name = "";
             obj_menu_boss_introduction.boss_introduction = true;
             obj_cam.zoom_target = 0.85;
+            obj_cam.center_on_target = true; // player no centro da tela durante a animação
 
             trans_state = "opening";
 

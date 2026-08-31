@@ -18,6 +18,12 @@ fixed_point = false;
 point_x = 0;
 point_y = 0;
 
+// ===== NOVO: centraliza exatamente no alvo (transição de porta) =====
+// enquanto true, o player fica no centro exato da tela (sem o offset vertical
+// normal do follow). obj_door liga; obj_transiction desliga ao abrir a sala nova.
+center_on_target = false;
+center_lerp = 0.15;
+
 audio_listener_set_position(0, x, y, 0);
 audio_listener_set_orientation(
     0,
