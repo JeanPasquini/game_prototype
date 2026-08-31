@@ -3,7 +3,7 @@ if (instance_exists(obj_player)) {
     var offset_x = 0;
     var offset_y = 10; 
 
-    if (obj_player.image_xscale < 0) {
+    if (obj_player.face < 0) {
         x = obj_player.x + offset_x;
     } else {
         x = obj_player.x - offset_x;

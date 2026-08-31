@@ -20,6 +20,10 @@ fixed_point = false;
 point_x = 0;
 point_y = 0;
 
+// ===== Trava temporária ao levar dano (Hollow Knight "focus") =====
+hurt_hold     = 0;   // frames restantes com a câmera congelada no lugar
+hurt_hold_max = 18;
+
 audio_listener_set_position(0, x, y, 0);
 audio_listener_set_orientation(
     0,

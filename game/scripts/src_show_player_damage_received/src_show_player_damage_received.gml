@@ -38,6 +38,37 @@ function src_show_player_damage_received(damage){
 				hit_flash = hit_flash_max;
 				// encolhe no impacto (a mola devolve pra 1)
 				player_add_squash(-0.30, 0.22);
+
+				// "focus" estilo Hollow Knight — só durante gameplay ativo
+				var _hurt_fx_ok =
+					   state != PlayerState.DYING
+					&& state != PlayerState.TRANSITION
+					&& state != PlayerState.INTRODUCTION
+					&& !instance_exists(obj_transiction)
+					&& !(instance_exists(obj_menu_boss_introduction) && obj_menu_boss_introduction.boss_introduction);
+
+				if (_hurt_fx_ok) {
+					// vinheta circular fechando/escurecendo a tela
+					hurt_fx_timer = hurt_fx_duration;
+
+					// recuo em direção a um dos cantos: pra trás (oposto ao rosto) e pra cima.
+					// Aplicado como IMPULSO de velocidade (hsp/vsp) — _resolve_collisions()
+					// trata as paredes, então não atravessa obj_wall nem trava dentro dela.
+					hurt_recoil_timer = hurt_recoil_max;
+					hsp = -face * hurt_knock_h;
+
+					// hit no ar: "pop" pra cima + gravidade que volta suave
+					// (hurt_grav_timer), pra não despencar com força total no começo
+					if (!ong) {
+						vsp = -hurt_knock_v;
+						hurt_grav_timer = hurt_grav_max;
+					}
+
+					// trava a câmera por um instante pra valorizar o efeito
+					if (instance_exists(obj_cam)) {
+						obj_cam.hurt_hold = max(obj_cam.hurt_hold, obj_cam.hurt_hold_max);
+					}
+				}
 			}
 			global.hitstop = max(global.hitstop, 5);
 			scr_camera_zoom_punch(0.05);

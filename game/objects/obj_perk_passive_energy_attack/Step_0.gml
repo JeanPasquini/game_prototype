@@ -1,4 +1,4 @@
-spawn_x = obj_player.x + (obj_player.image_xscale * offset);
+spawn_x = obj_player.x + (obj_player.face * offset);
 
 if (count_attack >= count_attack_need) {
 

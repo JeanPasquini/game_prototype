@@ -151,8 +151,6 @@ function _update_transition() {
         }
     }
 
-    image_xscale = face;
-
     _apply_gravity();
     _resolve_collisions();
 }
@@ -212,8 +210,14 @@ function _apply_gravity() {
     // gravidade assimétrica: a queda "pesa" mais do que a subida
     if (vsp > 0) _g *= fall_grv_mult;
 
-    // fast-fall: segurar pra baixo no ar mergulha o personagem
-    if (!ong && vsp > -2 && keyboard_check(vk_down) && !talking) {
+    if (hurt_grav_timer > 0) {
+        // retomada SUAVE da gravidade logo após um hit no ar:
+        // ~0 no instante do golpe -> 100% ao fim da janela (não despenca de uma vez).
+        // (o timer decrementa no Step)
+        _g *= max(1 - (hurt_grav_timer / hurt_grav_max), 0.05);
+    }
+    else if (!ong && vsp > -2 && keyboard_check(vk_down) && !talking) {
+        // fast-fall: segurar pra baixo no ar mergulha o personagem
         _g *= fast_fall_mult;
     }
 
@@ -293,7 +297,7 @@ function _update_turning() {
     var base_spd = run ? spd * 2 : spd;
     var accel = 0.3;
 
-    if (move_input != 0 && move_input != face && !turning && !is_dashing) {
+    if (move_input != 0 && move_input != face && !turning && !is_dashing && hurt_recoil_timer <= 0) {
 
         turning = true;
         turn_timer = 0;
@@ -326,6 +330,13 @@ function _update_turning() {
 
 function _apply_horizontal_movement() {
 
+    // recuo ao levar dano: vence qualquer controle horizontal, ignora input
+    // e desacelera até parar (timer decrementa no Step).
+    if (hurt_recoil_timer > 0) {
+        hsp = lerp(hsp, 0, 0.15);
+        return;
+    }
+
     if (is_dashing || turning) return;
 
     // deslize pra frente logo após o golpe (dá "peso" e fluidez ao ataque)
@@ -353,7 +364,7 @@ function _apply_horizontal_movement() {
 
 function _update_jump() {
 
-    if (talking || is_dashing) return;
+    if (talking || is_dashing || hurt_recoil_timer > 0) return;
 
     var can_jump = (ong || coyote_timer > 0);
 
@@ -377,7 +388,7 @@ function _update_jump() {
 function _col(xp, yp) {
 
     if (place_meeting(xp, yp, obj_wall)) return true;
-	
+
     if (place_meeting(xp, yp, obj_wall_block)) return true;
 
     var door = instance_place(xp, yp, obj_parent_enviroment_door);
@@ -389,7 +400,54 @@ function _col(xp, yp) {
     return false;
 }
 
+/// @function _unstick()
+/// @description Se o player está sobreposto a uma parede na posição ATUAL,
+///              busca em anel (raio 1..max) o ponto livre mais próximo e
+///              reposiciona ali. Prioriza sair pra cima, depois pelos lados,
+///              depois pra baixo, e só então nas diagonais.
+///              Barato: sai de imediato quando não há sobreposição.
+function _unstick() {
+
+    if (!_col(x, y)) return;
+
+    // Só encostar/pisar no chão também acusa colisão na posição atual, mas isso
+    // NÃO é ficar preso — o resolver normal cuida. Se dá pra "subir" 1px e sair
+    // da sobreposição, então é só contato de chão: ignora.
+    if (!_col(x, y - 1)) return;
+
+    var _max  = 24;   // alcance máximo da busca, em pixels
+    var _dirs = [
+        [  0, -1 ], [ -1,  0 ], [  1,  0 ], [  0,  1 ],
+        [ -1, -1 ], [  1, -1 ], [ -1,  1 ], [  1,  1 ]
+    ];
+
+    for (var _r = 1; _r <= _max; _r++) {
+        for (var _i = 0; _i < array_length(_dirs); _i++) {
+
+            var _nx = x + _dirs[_i][0] * _r;
+            var _ny = y + _dirs[_i][1] * _r;
+
+            if (!_col(_nx, _ny)) {
+                x = _nx;
+                y = _ny;
+
+                // zera a velocidade no(s) eixo(s) em que empurramos pra fora,
+                // pra não voltar a entrar na parede no mesmo frame
+                if (_dirs[_i][0] != 0) hsp = 0;
+                if (_dirs[_i][1] != 0) { vsp = 0; is_dashing = false; }
+
+                return;
+            }
+        }
+    }
+}
+
 function _resolve_collisions() {
+
+    // rede de segurança: se por qualquer motivo o player terminou DENTRO de
+    // uma parede (spawn, porta/portão fechando, empurrão, tunelamento…),
+    // procura o ponto livre mais próximo e reposiciona ali.
+    _unstick();
 
 	if (!ong) {
 	    air_time++;
@@ -498,7 +556,11 @@ function _update_sprites() {
 	return;
 	}
 
-    image_xscale = face;
+    // durante o recuo do dano, congela a animação atual: evita o "flicker"
+    // de trocar pra pulo/queda no instante do hit (não existe sprite de dano).
+    if (hurt_recoil_timer > 0) {
+        return;
+    }
 
 // === SPRITES ===
 		
@@ -663,7 +725,6 @@ function _update_sprites() {
 	                }
 	            }
 	        }
-			image_xscale = face;
 	    }
 }
 

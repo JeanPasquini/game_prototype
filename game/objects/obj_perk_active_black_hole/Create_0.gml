@@ -1,6 +1,6 @@
 damage = 0;
 offset = 30;
-spawn_x = obj_player.x + (obj_player.image_xscale * offset);
+spawn_x = obj_player.x + (obj_player.face * offset);
 
 
 active_perk = function(){

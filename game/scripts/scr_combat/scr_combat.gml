@@ -15,8 +15,7 @@ if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking && !is_dashing
 	sprite_index = spr_player_attacking;
 	image_index = 0;
 	image_speed = attack_speed;
-	var _scale = 1.15;
-	image_xscale = attack_dir * _scale;
+	// (o lado do golpe é 100% visual no draw_sprite_ext via "face"; a máscara é fixa)
 
 	// antecipação: comprime um pouco antes do golpe sair
 	player_add_squash(-0.16, 0.12);

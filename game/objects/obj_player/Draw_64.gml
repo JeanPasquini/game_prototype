@@ -402,3 +402,49 @@ if (status_anim_t > 0) {
     draw_set_color(c_white);
     draw_surface_ext(status_menu_surface, 0, 0, 1, 1, 0, c_white, status_fade);
 }
+
+// =====================================================================
+// "Focus" ao levar dano (estilo Hollow Knight)
+// Vinheta circular preta que fecha em direção ao centro e escurece as
+// bordas da tela, segura um instante e volta suave. Desenhada como um
+// anel (trianglestrip entre dois raios) — não precisa de textura, então
+// independe do conteúdo de spr_vignette.
+// =====================================================================
+if (hurt_fx_timer > 0) {
+
+    var _gw   = display_get_gui_width();
+    var _gh   = display_get_gui_height();
+    var _cx   = _gw * 0.5;
+    var _cy   = _gh * 0.5;
+    var _diag = point_distance(0, 0, _gw, _gh);
+
+    // intensidade 0..1: sobe rápido, segura no pico, cai suave
+    var _dur  = hurt_fx_duration;
+    var _left = hurt_fx_timer;
+    var _ramp = 6;
+    var _ti   = (_left > _dur - _ramp)
+        ? (_dur - _left) / _ramp
+        : _left / max(1, _dur - _ramp);
+    _ti = clamp(_ti, 0, 1);
+    _ti = _ti * _ti * (3 - _ti - _ti);          // smoothstep
+
+    // raio "limpo" no centro: começa largo e fecha conforme a intensidade sobe
+    var _inner = lerp(_diag * 0.72, _diag * hurt_fx_close, _ti);
+    var _outer = _diag * 1.20;                    // passa de todos os cantos da tela
+    var _a     = hurt_fx_alpha * _ti;
+
+    draw_set_alpha(1);
+    var _seg = 64;
+    draw_primitive_begin(pr_trianglestrip);
+    for (var _i = 0; _i <= _seg; _i++) {
+        var _ang = (_i / _seg) * 2 * pi;
+        var _co  = cos(_ang);
+        var _si  = sin(_ang);
+        draw_vertex_color(_cx + _co * _inner, _cy + _si * _inner, c_black, 0);
+        draw_vertex_color(_cx + _co * _outer, _cy + _si * _outer, c_black, _a);
+    }
+    draw_primitive_end();
+
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+}

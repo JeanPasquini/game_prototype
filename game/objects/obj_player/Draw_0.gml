@@ -1,10 +1,8 @@
 var _scale = base_scale;
 
-// IMPORTANTE: image_xscale / image_yscale afetam a MÁSCARA DE COLISÃO.
-// Mantemos eles fixos (como antes) pra não afundar no chão; o squash & stretch
-// é 100% visual e vai só no draw_sprite_ext abaixo.
-image_xscale = face * _scale;
-image_yscale = _scale;
+// A MÁSCARA DE COLISÃO é fixa (definida no Create: mask_index = spr_player_idle,
+// image_xscale = 1, image_yscale = 1.15 constantes). Tudo daqui pra baixo — flip
+// pelo "face", squash & stretch, foot_lift — é 100% VISUAL, só no draw_sprite_ext.
 
 // Estados onde o squash & stretch NÃO deve aparecer:
 // morte (ar/chão), indo pra porta / transição de room, carregando a próxima
@@ -27,9 +25,10 @@ if (_no_squash) {
 var _vis_sx = face * _scale * sns_x;
 var _vis_sy = _scale * sns_y;
 
-// compensa a origem do sprite pra os "pés" ficarem plantados durante o squash
-var _below  = sprite_height - sprite_get_yoffset(sprite_index);
-var _draw_y = y - _below * (_vis_sy - _scale);
+// compensa a origem do sprite pra os "pés" ficarem plantados durante o squash;
+// foot_lift levanta o desenho alguns px pra não afundar no chão
+var _below  = (sprite_get_height(sprite_index) * _scale) - sprite_get_yoffset(sprite_index);
+var _draw_y = y - _below * (_vis_sy - _scale) - foot_lift;
 
 // desenha o sprite + overlay branco quando levou dano (hit flash)
 var _draw_player = function(_dy, _sx, _sy) {

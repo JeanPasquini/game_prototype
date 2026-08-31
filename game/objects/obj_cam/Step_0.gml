@@ -6,6 +6,10 @@ audio_listener_set_position(0, camera_get_view_x(view_camera[0]) + camera_get_vi
 if (fixed_point) {
     x = lerp(x, point_x, 0.1);
     y = lerp(y, point_y, 0.1);
+} else if (hurt_hold > 0) {
+    // câmera congelada no lugar durante o "focus" de dano;
+    // o hitstop não conta como tempo de trava
+    if (global.hitstop <= 0) hurt_hold--;
 } else if (instance_exists(target_)) {
 
     // ===== LOOK-AHEAD DE QUEDA =====
