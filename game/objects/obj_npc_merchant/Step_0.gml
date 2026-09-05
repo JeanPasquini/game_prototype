@@ -26,6 +26,7 @@ if (!has_talked)
                 obj_player.money -= 2;
 				instance_create_layer(x, y, "controls", obj_perk_selection);
 				has_talked = true;
+				if (variable_global_exists("run_pos")) run_state_get(global.run_pos).merchant_used = true;
                 //spawn_perk_after_dialogue = true;
 
                 //dlg_instance.dialogue_lines =

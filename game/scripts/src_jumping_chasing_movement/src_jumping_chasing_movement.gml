@@ -71,6 +71,7 @@ function src_jumping_chasing_movement(){
 				vsp = 0;
 			} else {
 				vsp += grv;
+				if (vsp > GRV_MAX_FALL) vsp = GRV_MAX_FALL;
 			}
 	    }
 

@@ -7,8 +7,14 @@ if (fixed_point) {
     x = lerp(x, point_x, 0.1);
     y = lerp(y, point_y, 0.1);
 } else if (instance_exists(target_)) {
-    x = lerp(x, target_.x, 0.1);
-    y = lerp(y, target_.y - height_ / 4, 0.1);
+    if (center_on_target) {
+        // transição de porta: player no centro exato da tela
+        x = lerp(x, target_.x, center_lerp);
+        y = lerp(y, target_.y, center_lerp);
+    } else {
+        x = lerp(x, target_.x, 0.1);
+        y = lerp(y, target_.y - height_ / 4, 0.1);
+    }
 }
 // se nenhuma condição bater, x/y simplesmente mantêm o valor do frame anterior
 // em vez de matar o evento inteiro

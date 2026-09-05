@@ -41,7 +41,7 @@ life_max = 5;
 life = 5;
 energy_max = 0;
 energy = 0;
-damage_base = 1;
+damage_base = 3;
 damage = damage_base;
 spd = 2;
 spd_max = 10;
@@ -113,6 +113,8 @@ introduction_start = false;
 transition_phase = 0; // 0 = andando até o centro da porta, 1 = tocando spr_player_transition
 transition_target_x = 0;
 transition_destiny = noone;
+transition_destiny_slot = noone;
+transition_entry_dir = noone; // "up"/"down"/"left"/"right": porta pela qual entra na sala nova
 transition_px = 0;
 transition_py = 0;
 transition_is_boss_door = false;

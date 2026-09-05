@@ -25,7 +25,7 @@ level = 0;
 // durante a run inteira (obj_map é persistent), é limpo em scr_reset_run.
 explored_data  = {};
 explored       = 0;
-reveal_radius  = 4;    // raio de revelação ao redor do player, em tiles
+reveal_radius  = 9;    // raio de revelação ao redor do player, em tiles
 reveal_speed   = 0.08; // quanto cada tile "acende" por frame (0 a 1) - menor = fade mais lento
 border_width   = 2;    // espessura (em px de tela) do contorno dos tiles no mapa
 

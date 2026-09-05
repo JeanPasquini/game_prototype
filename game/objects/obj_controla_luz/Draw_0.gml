@@ -39,6 +39,25 @@ with (obj_environment_torch)
     );
 }
 
+// torch
+with (obj_environment_campfire)
+{
+    var flicker = random_range(0.975, 1);
+    var alpha_flicker = random_range(0.8, 1);
+
+    draw_sprite_ext(
+        spr_light,
+        0,
+        x,
+        y,
+        2 * flicker,
+        2 * flicker,
+        0,
+        make_color_rgb(255, 220, 120),
+        alpha_flicker
+    );
+}
+
 // coin (vermelho)
 with (obj_drop_coin) {
     draw_sprite_ext(spr_light, 0, x, y, 1, 1, 0, c_red, 1);

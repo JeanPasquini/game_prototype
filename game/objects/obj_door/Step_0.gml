@@ -1,25 +1,25 @@
-if (variable_global_exists("rooms_map")) {
+if (variable_global_exists("rooms_map") && variable_global_exists("run_pos")) {
 
 	var _phase = (current_room != noone && current_phase != noone) ? current_phase : global.current_phase;
-	var _room_ref = (current_room != noone && current_phase != noone) ? current_room : room;
-    var room_key = room_get_name(_room_ref);
+	var _key   = (current_room != noone && current_phase != noone) ? current_room  : global.run_pos;
 
-    if (!variable_struct_exists(global.rooms_map[$ _phase], room_key)) return;
-    var dir_str = RoomDirectionToString(room_direction);
-	var room_data = global.rooms_map[$ _phase][$ room_key];
+    if (!variable_struct_exists(global.rooms_map[$ _phase], _key)) return;
 
-	// Checks if this door sends or returns to any room, based on it's direction (left, right...)
+    var dir_str   = RoomDirectionToString(room_direction);
+	var room_data = global.rooms_map[$ _phase][$ _key];
+
+	// A porta so existe se este slot tem conexao nesta direcao (ida OU volta).
     if (!variable_struct_exists(room_data.connections, dir_str)) {
 		instance_destroy();
-		exit; 
+		exit;
 	}
-	
-	var target_room = room_data.connections[$ dir_str];
-	var target_name = room_get_name(target_room);
-	
-	if (string_pos("mini_boss", target_name) > 0) {
+
+	var target_slot = room_data.connections[$ dir_str];
+	var target_node = global.rooms_map[$ _phase][$ target_slot];
+	var target_name = is_undefined(target_node) ? "" : room_get_name(target_node.room);
+
+	if (string_pos("miniboss", target_name) > 0 || string_pos("mini_boss", target_name) > 0) {
 		trans_base_frame = 13;
-		
 	}
 	else if (string_pos("store", target_name) > 0) {
 		trans_base_frame = 26;
