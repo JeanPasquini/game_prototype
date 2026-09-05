@@ -7,7 +7,7 @@ if (!has_talked)
 
     // ===== INICIAR DIÁLOGO =====
     if (dist < range_interaction
-    && keyboard_check_pressed(ord("E"))
+    && input_interact_pressed()
     && obj_player.state != PlayerState.TALKING
     && !scr_menu_lock_blocks_world())
     {

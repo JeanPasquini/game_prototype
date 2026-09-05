@@ -1,3 +1,92 @@
+// ===== INPUT DEBUG SNAPSHOT (F12) =====
+// Temporary: pops up a message with keyboard + gamepad raw/mapped state,
+// plus what our input_* functions (scr_input.gml) currently read, so it's
+// easy to see if a specific button/key isn't registering. Hold the
+// button/key you want to test, then press F12.
+if (keyboard_check_pressed(vk_f12)) {
+
+    var _report = "";
+
+    // ---- KEYBOARD (raw) ----
+    _report += "== KEYBOARD ==\n";
+    _report += "Up:" + string(keyboard_check(vk_up))
+        + " Down:" + string(keyboard_check(vk_down))
+        + " Left:" + string(keyboard_check(vk_left))
+        + " Right:" + string(keyboard_check(vk_right)) + "\n";
+    _report += "Z(attack):" + string(keyboard_check(ord("Z")))
+        + " X(special):" + string(keyboard_check(ord("X")))
+        + " C(dash):" + string(keyboard_check(ord("C")))
+        + " E(interact):" + string(keyboard_check(ord("E"))) + "\n";
+    _report += "Tab(status):" + string(keyboard_check(vk_tab))
+        + " M(map):" + string(keyboard_check(ord("M")))
+        + " Escape(pause):" + string(keyboard_check(vk_escape))
+        + " Enter:" + string(keyboard_check(vk_enter)) + "\n\n";
+
+    // ---- GAMEPAD (raw + mapped) ----
+    var _count = gamepad_get_device_count();
+    _report += "== GAMEPAD ==\n";
+    _report += "device_count: " + string(_count) + "\n";
+
+    for (var i = 0; i < _count; i++) {
+
+        var _connected = gamepad_is_connected(i);
+        _report += "slot " + string(i) + " connected: " + string(_connected) + "\n";
+
+        if (!_connected) continue;
+
+        _report += "description: " + gamepad_get_description(i) + "\n";
+        _report += "button_count: " + string(gamepad_button_count(i))
+            + " axis_count: " + string(gamepad_axis_count(i)) + "\n";
+
+        _report += "MAPPED face1(X):" + string(gamepad_button_check(i, gp_face1))
+            + " face2(O):" + string(gamepad_button_check(i, gp_face2))
+            + " face3(sq):" + string(gamepad_button_check(i, gp_face3))
+            + " face4(tri):" + string(gamepad_button_check(i, gp_face4)) + "\n";
+
+        _report += "MAPPED padu:" + string(gamepad_button_check(i, gp_padu))
+            + " padd:" + string(gamepad_button_check(i, gp_padd))
+            + " padl:" + string(gamepad_button_check(i, gp_padl))
+            + " padr:" + string(gamepad_button_check(i, gp_padr)) + "\n";
+
+        _report += "MAPPED axislh:" + string(gamepad_axis_value(i, gp_axislh))
+            + " axislv:" + string(gamepad_axis_value(i, gp_axislv)) + "\n";
+
+        _report += "MAPPED select:" + string(gamepad_button_check(i, gp_select))
+            + " start:" + string(gamepad_button_check(i, gp_start))
+            + " shoulderl(L1):" + string(gamepad_button_check(i, gp_shoulderl))
+            + " shoulderrb(R2):" + string(gamepad_button_check(i, gp_shoulderrb)) + "\n";
+
+        var _raw_buttons = "RAW buttons pressed: ";
+        var _raw_count = gamepad_button_count(i);
+        for (var b = 0; b < _raw_count; b++) {
+            if (gamepad_button_check(i, b)) _raw_buttons += string(b) + " ";
+        }
+        _report += _raw_buttons + "\n";
+
+        var _raw_axes = "RAW axes: ";
+        var _axis_count = gamepad_axis_count(i);
+        for (var a = 0; a < _axis_count; a++) {
+            _raw_axes += string(a) + "=" + string(gamepad_axis_value(i, a)) + " ";
+        }
+        _report += _raw_axes + "\n";
+    }
+
+    // ---- GAME'S ACTUAL INPUT FUNCTIONS (keyboard OR gamepad combined) ----
+    // Only the "held" ones are meaningful in a single-frame snapshot like
+    // this - the "_pressed" ones (attack, dash, interact, menu...) are
+    // edge-triggered and only true on the exact frame the button was first
+    // pressed, so they'd basically always read false here. Use the raw
+    // KEYBOARD/GAMEPAD sections above (hold the button, then hit F12) to
+    // check those instead.
+    _report += "\n== input_* HELD RESULT (scr_input.gml) ==\n";
+    _report += "jump_held:" + string(input_jump_held())
+        + " move_held_r:" + string(input_move_held(1))
+        + " move_held_l:" + string(input_move_held(-1))
+        + " status_held:" + string(input_status_held()) + "\n";
+
+    show_message(_report);
+}
+
 scr_music_room();
 if(layer_get_visible(layer_get_id("ui_menu_main"))){
     layer_set_visible(layer_get_id("ui_pause_layer"), false);

@@ -18,6 +18,7 @@ randomize();
 global.hitstop = 0;
 global.force_music = noone;
 global.menu_lock = noone;
+global.world_was_blocked = false;
 
 layer_set_visible(layer_get_id("ui_vignette"), true);
 layer_set_visible(layer_get_id("ui_hud_player"), true);

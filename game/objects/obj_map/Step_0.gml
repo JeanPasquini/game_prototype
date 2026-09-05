@@ -1,4 +1,4 @@
-if (keyboard_check_pressed(ord("M"))) {
+if (input_map_toggle_pressed()) {
     if (minimap_state == 0) {
         if (scr_menu_lock_try("map")) {
             minimap_state += 1;

@@ -1,26 +1,31 @@
 
-if(keyboard_check_pressed(vk_escape)){	
+if(input_pause_pressed()){
 	update_pause();
 }
 
 if(layer_get_visible("ui_menu_pause")){
-	if (keyboard_check_pressed(vk_down))
+
+	if (input_menu_back_pressed()){ // círculo: sai do menu de pause
+		update_pause();
+	}
+
+	if (input_menu_down_pressed())
 	{
 	    button_id += 1;
 		if(button_id > 4){
-			button_id = 1;	
+			button_id = 1;
 		}
 	}
 
-	if (keyboard_check_pressed(vk_up))
+	if (input_menu_up_pressed())
 	{
 	    button_id -= 1;
 		if(button_id < 1){
-			button_id = 4;	
+			button_id = 4;
 		}
 	}
 
-	if(keyboard_check_pressed(ord("E"))){
+	if(input_menu_confirm_pressed()){
 		if(button_id == 1){ // resume
 			update_pause();
 		}

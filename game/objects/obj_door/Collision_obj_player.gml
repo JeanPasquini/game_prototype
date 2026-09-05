@@ -15,16 +15,18 @@ var position = noone; // set the direction of entry into the next room, reverse 
 if (instance_exists(obj_player)) {
     var p = obj_player;
 
-    if (room_direction == RoomDirection.LEFT && keyboard_check_pressed(vk_enter)) {
+    var _transition_pressed = input_door_transition_pressed();
+
+    if (room_direction == RoomDirection.LEFT && _transition_pressed) {
         destiny = connections.left;
         position = "right";
-    } else if (room_direction == RoomDirection.RIGHT && keyboard_check_pressed(vk_enter)) {
+    } else if (room_direction == RoomDirection.RIGHT && _transition_pressed) {
         destiny = connections.right;
         position = "left";
-    } else if (room_direction == RoomDirection.UP && keyboard_check_pressed(vk_enter)) {
+    } else if (room_direction == RoomDirection.UP && _transition_pressed) {
         destiny = connections.up;
         position = "down";
-    } else if (room_direction == RoomDirection.DOWN && keyboard_check_pressed(vk_enter)) {
+    } else if (room_direction == RoomDirection.DOWN && _transition_pressed) {
         destiny = connections.down;
         position = "up";
     }

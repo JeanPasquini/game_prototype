@@ -152,27 +152,29 @@ function _update_transition() {
 
 function _update_timers() {
 
-	if (talking) return;
+	if (talking || global.world_was_blocked) return;
 
 	if(state = PlayerState.DASH){
 		var _dir = dash_direction; // ou face
 		obj_effect_unicle.scr_fx_dash_smoke2(x, y, _dir);	
 	}
 
-	if (keyboard_check_pressed(vk_right)) {
+	var _tap_dir = input_move_tap_dir();
+
+	if (_tap_dir == 1) {
 	    if (tap_timer_right > 0) run = true;
 	    else tap_timer_right = double_tap_threshold;
 	}
-	if (keyboard_check_pressed(vk_left)) {
+	if (_tap_dir == -1) {
 	    if (tap_timer_left > 0) run = true;
 	    else tap_timer_left = double_tap_threshold;
 	}
-	
+
 	if (tap_timer_left > 0) tap_timer_left--;
 	if (tap_timer_right > 0) tap_timer_right--;
 
     // JUMP BUFFER
-    if (keyboard_check_pressed(vk_up)) {
+    if (input_jump_pressed()) {
 		if(ong){
 			var sfx = [
 				jump
@@ -207,11 +209,11 @@ function _update_horizontal_input() {
     move_input = 0;
 
     if (!talking) {
-        if (keyboard_check(vk_right)) {
+        if (input_move_held(1)) {
             move_input = 1;
             turn_target_dir = move_input;
         }
-        else if (keyboard_check(vk_left)) {
+        else if (input_move_held(-1)) {
             move_input = -1;
             turn_target_dir = move_input;
         }
@@ -220,7 +222,7 @@ function _update_horizontal_input() {
 
 function _update_dash() {
 
-    var wants_dash = keyboard_check_pressed(ord("C"));
+    var wants_dash = input_dash_pressed();
     var can_dash = !talking && !is_dashing && alarm[2] <= 0 && (ong || air_dash_available);
 
     if (wants_dash && can_dash) {
@@ -320,7 +322,7 @@ function _apply_horizontal_movement() {
 
 function _update_jump() {
 
-    if (talking || is_dashing) return;
+    if (talking || global.world_was_blocked || is_dashing) return;
 
     var can_jump = (ong || coyote_timer > 0);
 
@@ -333,7 +335,7 @@ function _update_jump() {
     }
 
     // JUMP CUT (pulo variável)
-    if (!keyboard_check(vk_up) && vsp < 0) {
+    if (!input_jump_held() && vsp < 0) {
         vsp *= 0.5;
     }
 }

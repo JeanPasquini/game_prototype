@@ -2,7 +2,7 @@ function scr_combat() {
 
 damage = damage_base;
 
-if (keyboard_check_pressed(ord("Z")) && alarm[1] <= 0 && !talking && !is_dashing) {
+if (input_attack_pressed() && alarm[1] <= 0 && !talking && !global.world_was_blocked && !is_dashing) {
 
 	if(instance_exists(obj_perk_passive_energy_attack)) 
 		obj_perk_passive_energy_attack.count_attack++;
@@ -46,7 +46,7 @@ if (sprite_index == spr_player_attacking) {
 
 }
 	
-	if (keyboard_check_pressed(ord("X")) && !talking && energy == energy_max) {
+	if (input_special_pressed() && !talking && !global.world_was_blocked && energy == energy_max) {
 		
 		if(instance_exists(obj_perk_active_temporal_jump)) obj_perk_active_temporal_jump.active_perk();
 		if(instance_exists(obj_perk_active_space_break)) obj_perk_active_space_break.active_perk();

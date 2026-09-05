@@ -115,7 +115,7 @@ var text_money_x = draw_x + 80;
 // shared menu lock, so both can be shown together (status draws in front,
 // see obj_map's depth). It's still blocked while a real blocking menu
 // (pause, transition, boss vignette, perk selection...) is active.
-var tab_held = keyboard_check(vk_tab);
+var tab_held = input_status_held();
 var status_open_allowed = tab_held && !scr_menu_lock_blocks_world();
 
 status_anim_t = clamp(status_anim_t + (status_open_allowed ? 1 : -1) * (1 / 10), 0, 1);

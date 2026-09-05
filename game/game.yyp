@@ -121,6 +121,7 @@
   ],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"dialogue_npc_merchant.csv","CopyToMask":-1,"filePath":"datafiles","name":"dialogue_npc_merchant.csv","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"gamecontrollerdb.txt","CopyToMask":-1,"filePath":"datafiles","name":"gamecontrollerdb.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
   "LibraryEmitters":[
@@ -344,6 +345,7 @@
     {"id":{"name":"scr_earthquake","path":"scripts/scr_earthquake/scr_earthquake.yy",},},
     {"id":{"name":"scr_get_obj_floor_distance","path":"scripts/scr_get_obj_floor_distance/scr_get_obj_floor_distance.yy",},},
     {"id":{"name":"scr_hitstop","path":"scripts/scr_hitstop/scr_hitstop.yy",},},
+    {"id":{"name":"scr_input","path":"scripts/scr_input/scr_input.yy",},},
     {"id":{"name":"scr_menu_lock","path":"scripts/scr_menu_lock/scr_menu_lock.yy",},},
     {"id":{"name":"scr_minimap_traverse","path":"scripts/scr_minimap_traverse/scr_minimap_traverse.yy",},},
     {"id":{"name":"scr_movement","path":"scripts/scr_movement/scr_movement.yy",},},

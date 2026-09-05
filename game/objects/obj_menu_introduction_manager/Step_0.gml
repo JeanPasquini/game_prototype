@@ -1,8 +1,8 @@
 if (!playing) {
     if (layer_get_visible(layer_name)) {
-        if (keyboard_check_pressed(vk_down)) { button_id += 1; if (button_id > 2) button_id = 1; }
-        if (keyboard_check_pressed(vk_up))   { button_id -= 1; if (button_id < 1) button_id = 2; }
-        if (keyboard_check_pressed(ord("E"))) {
+        if (input_menu_down_pressed()) { button_id += 1; if (button_id > 2) button_id = 1; }
+        if (input_menu_up_pressed())   { button_id -= 1; if (button_id < 1) button_id = 2; }
+        if (input_menu_confirm_pressed()) {
             if (button_id == 1) {
                 playing = true;
                 layer_set_visible(layer_name, false);

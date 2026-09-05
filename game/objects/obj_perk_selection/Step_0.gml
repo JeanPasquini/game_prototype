@@ -5,8 +5,8 @@ if(instance_exists(obj_perk_selection)){
 
 if (!confirmed)
 {
-    if (keyboard_check_pressed(vk_left)){  selected_index--; audio_play_sound(sde_perk_selection_change, 1, false);}
-    if (keyboard_check_pressed(vk_right)){ selected_index++; audio_play_sound(sde_perk_selection_change, 1, false);}
+    if (input_menu_left_pressed()){  selected_index--; audio_play_sound(sde_perk_selection_change, 1, false);}
+    if (input_menu_right_pressed()){ selected_index++; audio_play_sound(sde_perk_selection_change, 1, false);}
 
     selected_index = clamp(selected_index, 0, array_length(cards) - 1);
 
@@ -15,7 +15,7 @@ if (!confirmed)
         cards[i].selected = (i == selected_index);
 
     // confirmar
-    if (keyboard_check_pressed(ord("E")))
+    if (input_menu_confirm_pressed())
     {
         audio_play_sound(sde_perk_selection, 1, false);
 
