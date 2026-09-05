@@ -39,6 +39,7 @@ function scr_movement() {
     _resolve_collisions();
     _apply_knockback();
     _update_sprites();
+    scr_player_squash_stretch();
 }
 
 function _update_dying() {
@@ -119,12 +120,18 @@ function _update_transition() {
 
             transition_phase = 1;
 
+            // a animação da porta (spr_player_transition) sempre virada pra direita
+            face = 1;
+
             sprite_index = spr_player_transition;
             image_index = 0;
             image_speed = 1;
         }
     }
     else if (transition_phase == 1) {
+
+        // mantém virada pra direita durante toda a animação de transição
+        face = 1;
 
         hsp = 0;
 
@@ -148,8 +155,6 @@ function _update_transition() {
             }
         }
     }
-
-    image_xscale = face;
 
     _apply_gravity();
     _resolve_collisions();
@@ -204,10 +209,29 @@ function _update_air_states() {
 }
 
 function _apply_gravity() {
-    if (!is_dashing) {
-        vsp += grv;
-        if (vsp > GRV_MAX_FALL) vsp = GRV_MAX_FALL; // limite de velocidade de queda
+
+    if (is_dashing) return;
+
+    var _g = grv_rise;
+
+    // gravidade assimétrica: a queda "pesa" mais do que a subida
+    if (vsp > 0) _g *= fall_grv_mult;
+
+    if (hurt_grav_timer > 0) {
+        // retomada SUAVE da gravidade logo após um hit no ar:
+        // ~0 no instante do golpe -> 100% ao fim da janela (não despenca de uma vez).
+        // (o timer decrementa no Step)
+        _g *= max(1 - (hurt_grav_timer / hurt_grav_max), 0.05);
     }
+    else if (!ong && vsp > -2 && keyboard_check(vk_down) && !talking) {
+        // fast-fall: segurar pra baixo no ar mergulha o personagem
+        _g *= fast_fall_mult;
+    }
+
+    vsp += _g;
+
+    // velocidade terminal de queda
+    if (vsp > vsp_max_fall) vsp = vsp_max_fall;
 }
 
 function _update_horizontal_input() {
@@ -256,7 +280,9 @@ function _update_dash() {
 		    air_dash_available = false;
 		    air_time = 0;
 		}
-		
+
+        // estica na horizontal no arranque do dash
+        player_add_squash(0.34, -0.24);
     }
 
     if (is_dashing) {
@@ -278,12 +304,15 @@ function _update_turning() {
     var base_spd = run ? spd * 2 : spd;
     var accel = 0.3;
 
-    if (move_input != 0 && move_input != face && !turning && !is_dashing) {
+    if (move_input != 0 && move_input != face && !turning && !is_dashing && hurt_recoil_timer <= 0) {
 
         turning = true;
         turn_timer = 0;
         turn_duration = 10;
         turn_target_dir = move_input;
+
+        // pequena compressão ao trocar de direção
+        player_add_squash(-0.12, 0.05);
 
         if (state != PlayerState.ATTACK) {
             image_index = 0;
@@ -308,7 +337,21 @@ function _update_turning() {
 
 function _apply_horizontal_movement() {
 
+    // recuo ao levar dano: vence qualquer controle horizontal, ignora input
+    // e desacelera até parar (timer decrementa no Step).
+    if (hurt_recoil_timer > 0) {
+        hsp = lerp(hsp, 0, 0.15);
+        return;
+    }
+
     if (is_dashing || turning) return;
+
+    // deslize pra frente logo após o golpe (dá "peso" e fluidez ao ataque)
+    if (attack_lunge_timer > 0) {
+        attack_lunge_timer--;
+        hsp = lerp(hsp, 0, 0.22);
+        return;
+    }
 
     var base_spd = run ? spd * 2 : spd;
     var accel = 0.3;
@@ -328,7 +371,7 @@ function _apply_horizontal_movement() {
 
 function _update_jump() {
 
-    if (talking || global.world_was_blocked || is_dashing) return;
+    if (talking || global.world_was_blocked || is_dashing || hurt_recoil_timer > 0) return;
 
     var can_jump = (ong || coyote_timer > 0);
 
@@ -338,6 +381,9 @@ function _update_jump() {
 
         jump_buffer_timer = 0;
         coyote_timer = 0;
+
+        // estica na vertical ao sair do chão
+        player_add_squash(-0.18, 0.30);
     }
 
     // JUMP CUT (pulo variável)
@@ -349,7 +395,7 @@ function _update_jump() {
 function _col(xp, yp) {
 
     if (place_meeting(xp, yp, obj_wall)) return true;
-	
+
     if (place_meeting(xp, yp, obj_wall_block)) return true;
 
     var door = instance_place(xp, yp, obj_parent_enviroment_door);
@@ -361,7 +407,54 @@ function _col(xp, yp) {
     return false;
 }
 
+/// @function _unstick()
+/// @description Se o player está sobreposto a uma parede na posição ATUAL,
+///              busca em anel (raio 1..max) o ponto livre mais próximo e
+///              reposiciona ali. Prioriza sair pra cima, depois pelos lados,
+///              depois pra baixo, e só então nas diagonais.
+///              Barato: sai de imediato quando não há sobreposição.
+function _unstick() {
+
+    if (!_col(x, y)) return;
+
+    // Só encostar/pisar no chão também acusa colisão na posição atual, mas isso
+    // NÃO é ficar preso — o resolver normal cuida. Se dá pra "subir" 1px e sair
+    // da sobreposição, então é só contato de chão: ignora.
+    if (!_col(x, y - 1)) return;
+
+    var _max  = 24;   // alcance máximo da busca, em pixels
+    var _dirs = [
+        [  0, -1 ], [ -1,  0 ], [  1,  0 ], [  0,  1 ],
+        [ -1, -1 ], [  1, -1 ], [ -1,  1 ], [  1,  1 ]
+    ];
+
+    for (var _r = 1; _r <= _max; _r++) {
+        for (var _i = 0; _i < array_length(_dirs); _i++) {
+
+            var _nx = x + _dirs[_i][0] * _r;
+            var _ny = y + _dirs[_i][1] * _r;
+
+            if (!_col(_nx, _ny)) {
+                x = _nx;
+                y = _ny;
+
+                // zera a velocidade no(s) eixo(s) em que empurramos pra fora,
+                // pra não voltar a entrar na parede no mesmo frame
+                if (_dirs[_i][0] != 0) hsp = 0;
+                if (_dirs[_i][1] != 0) { vsp = 0; is_dashing = false; }
+
+                return;
+            }
+        }
+    }
+}
+
 function _resolve_collisions() {
+
+    // rede de segurança: se por qualquer motivo o player terminou DENTRO de
+    // uma parede (spawn, porta/portão fechando, empurrão, tunelamento…),
+    // procura o ponto livre mais próximo e reposiciona ali.
+    _unstick();
 
 	if (!ong) {
 	    air_time++;
@@ -388,19 +481,36 @@ function _resolve_collisions() {
     var previous_ong = ong;
     ong = false;
 
+    var _land_impact = 0;
+
     if (_col(x, y + vsp)) {
 
         while (!_col(x, y + sign(vsp))) {
             y += sign(vsp);
         }
 
-        if (vsp > 0) ong = true;
+        if (vsp > 0) {
+            ong = true;
+            _land_impact = vsp; // velocidade no instante do toque no chão
+        }
         vsp = 0;
     }
 
     if (!is_dashing) y += vsp;
 
 	if (ong && !previous_ong) {
+
+        // 0..1 conforme a força da queda
+        var _land_t = clamp(_land_impact / vsp_max_fall, 0, 1);
+
+        // aterrissagem: achata na vertical, espalha na horizontal
+        player_add_squash(0.12 + 0.55 * _land_t, -(0.12 + 0.45 * _land_t));
+
+        // quedas fortes tremem a câmera e dão um recuo de zoom
+        if (_land_impact >= hard_land_vsp) {
+            scr_camera_shake(2 + 4 * _land_t, 5 + 7 * _land_t);
+            scr_camera_zoom_punch(0.03 + 0.06 * _land_t);
+        }
 
 	    if (air_time >= 30) {
 	        obj_effect_unicle.scr_fx_fall_smoke(x, y + 14);
@@ -410,7 +520,7 @@ function _resolve_collisions() {
 	    air_dash_available = true;
 		var sfx = [
 			fall
-		];						
+		];
 		scr_audio_play(sfx);
 	}
 	
@@ -453,7 +563,11 @@ function _update_sprites() {
 	return;
 	}
 
-    image_xscale = face;
+    // durante o recuo do dano, congela a animação atual: evita o "flicker"
+    // de trocar pra pulo/queda no instante do hit (não existe sprite de dano).
+    if (hurt_recoil_timer > 0) {
+        return;
+    }
 
 // === SPRITES ===
 		
@@ -550,14 +664,27 @@ function _update_sprites() {
 	            }
 
 	            else {
-	                if (abs(hsp) > 0.1) {
+	                // debounce da parada: só vira IDLE depois de alguns frames sem movimento,
+	                // evitando piscar walk<->idle em micro-paradas / trocas de direção
+	                if (abs(hsp) > 0.1 || move_input != 0) idle_delay = 6;
+	                else if (idle_delay > 0) idle_delay--;
+
+	                if (abs(hsp) > 0.1 || idle_delay > 0) {
 						if(!is_dashing){
 		                    state = run ? PlayerState.RUN : PlayerState.WALK;
-		                    sprite_index = run ? spr_player_running : spr_player_walking;
+
+		                    // troca walk<->run preservando a fase da animação (sem "pulo")
+		                    var _want_spr = run ? spr_player_running : spr_player_walking;
+		                    if (sprite_index != _want_spr) {
+		                        var _phase = (sprite_get_number(sprite_index) > 0)
+		                            ? (image_index / sprite_get_number(sprite_index)) : 0;
+		                        sprite_index = _want_spr;
+		                        image_index  = _phase * sprite_get_number(_want_spr);
+		                    }
 		                    image_speed = 1;
-					
+
 							// === FOOTSTEP BY ANIMATION ===
-							if (ong && (state == PlayerState.WALK || state == PlayerState.RUN)) {
+							if (ong && abs(hsp) > 0.1 && (state == PlayerState.WALK || state == PlayerState.RUN)) {
 
 							    var frames = (state == PlayerState.RUN) ? footstep_frames_run : footstep_frames_walk;
 							    var current_frame = floor(image_index);
@@ -605,7 +732,55 @@ function _update_sprites() {
 	                }
 	            }
 	        }
-			image_xscale = face;
 	    }
+}
+
+/// @function player_add_squash(amount_x, amount_y)
+/// @description Injeta um "empurrão" instantâneo na escala do personagem.
+///              A mola em scr_player_squash_stretch() traz de volta para 1.
+///              amount_y > 0 = esticar na vertical | amount_y < 0 = achatar.
+///              Normalmente amount_x e amount_y têm sinais opostos (preserva volume).
+function player_add_squash(_amount_x, _amount_y) {
+    sns_x += _amount_x;
+    sns_y += _amount_y;
+
+    sns_x = clamp(sns_x, 0.55, 1.7);
+    sns_y = clamp(sns_y, 0.55, 1.7);
+}
+
+/// @function scr_player_squash_stretch()
+/// @description Atualiza (1x por frame) a mola de squash & stretch do personagem.
+///              sns_x / sns_y são multiplicadores que oscilam em torno de 1 e
+///              são aplicados por cima da escala base no evento Draw.
+function scr_player_squash_stretch() {
+
+    // "respiração" sutil parado no chão
+    var _breath_x = 0;
+    var _breath_y = 0;
+
+    if (state == PlayerState.IDLE && ong && !is_dashing) {
+        sns_breath_t += 0.08;
+        _breath_y = sin(sns_breath_t) * 0.02;
+        _breath_x = -_breath_y * 0.6;
+    }
+    else {
+        sns_breath_t = 0;
+    }
+
+    var _target_x = 1 + _breath_x;
+    var _target_y = 1 + _breath_y;
+
+    // mola amortecida em direção ao alvo
+    sns_xspd += (_target_x - sns_x) * sns_stiffness;
+    sns_yspd += (_target_y - sns_y) * sns_stiffness;
+
+    sns_xspd *= sns_damping;
+    sns_yspd *= sns_damping;
+
+    sns_x += sns_xspd;
+    sns_y += sns_yspd;
+
+    sns_x = clamp(sns_x, 0.55, 1.7);
+    sns_y = clamp(sns_y, 0.55, 1.7);
 }
 

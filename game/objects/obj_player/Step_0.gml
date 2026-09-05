@@ -2,6 +2,11 @@ if (global.hitstop > 0) {
     exit;
 }
 
+if (hit_flash > 0) hit_flash--;
+if (hurt_fx_timer > 0)     hurt_fx_timer--;
+if (hurt_recoil_timer > 0) hurt_recoil_timer--;
+if (hurt_grav_timer > 0)   hurt_grav_timer--;
+
 if (life <= 0){
 	state = PlayerState.DYING;
 }

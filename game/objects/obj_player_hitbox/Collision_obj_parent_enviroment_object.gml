@@ -19,7 +19,7 @@ attack_hit_confirmed = true;
 var sfx = [
 	attack_1,
 	attack_2
-];						
+];
 scr_audio_play(sfx);
 
 obj_effect_unicle.scr_fx_hit_impact(other.x, other.y);

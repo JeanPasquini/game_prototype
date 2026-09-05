@@ -4,6 +4,8 @@ height_ = camera_get_view_height(view_camera[0]);
 base_width_ = width_;
 base_height_ = height_;
 zoom_target = 1;
+zoom_punch  = 0;   // recuo de zoom aditivo (decai sozinho) — usado na aterrissagem
+fall_look   = 0;   // deslocamento vertical da câmera enquanto cai (look-ahead)
 minimap_state = 0;
 persistent = true;
 shake_force = 0;
@@ -23,6 +25,10 @@ point_y = 0;
 // normal do follow). obj_door liga; obj_transiction desliga ao abrir a sala nova.
 center_on_target = false;
 center_lerp = 0.15;
+
+// ===== Trava temporária ao levar dano (Hollow Knight "focus") =====
+hurt_hold     = 0;   // frames restantes com a câmera congelada no lugar
+hurt_hold_max = 18;
 
 audio_listener_set_position(0, x, y, 0);
 audio_listener_set_orientation(
