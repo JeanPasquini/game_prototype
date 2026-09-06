@@ -22,16 +22,34 @@ else{
 	
 knockbackSmoothing();
 
+// GOLPE FATAL: sem animacao de morte. O inimigo estilhaca em detritos de pixel
+// (obj_pixel_debris) a partir do frame de sprite atual, e e destruido no mesmo
+// passo. Drops / contagem / musica migraram pra ca (antes ficavam no End Step,
+// disparados no ultimo frame da animacao de morte).
 if (life <= 0 && !is_destroyed) {
-    currentState = EnemyState.DYING;
+	is_destroyed  = true;
+	currentState  = EnemyState.DYING;
+
+	var _from_x = instance_exists(obj_player) ? obj_player.x : undefined;
+	scr_enemy_shatter(id, _from_x);
+
+	if (variable_instance_exists(id, "audio_dying")) audio_dying();
+
+	global.force_music = noone;
+	obj_control.enemy_killed++;
+	scr_drop_roll(drops, x, y, "drop");
+
+	instance_destroy();
+	exit;
+}
+
+// Salvaguarda: se por algum motivo continuar vivo em DYING, nao roda a IA.
+if (currentState == EnemyState.DYING) {
+	exit;
 }
 
 // Idle State
-if(currentState == EnemyState.DYING){
-	if(!is_destroyed)is_destroyed = true;
-	return;
-}
-else if (currentState == EnemyState.IDLE) {
+if (currentState == EnemyState.IDLE) {
 	idle_movement_script();
 	if (distance_to_object(obj_player) < detectionRadius) {
 		if (hasToCharge) currentState = EnemyState.CHARGING_ATTACK; else currentState = EnemyState.CHASING;

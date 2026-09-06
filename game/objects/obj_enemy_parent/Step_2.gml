@@ -1,6 +1,3 @@
-if (is_destroyed && image_index >= (image_number - 1)) {
-	global.force_music = noone;
-	obj_control.enemy_killed ++;
-    scr_drop_roll(drops, x, y, "drop");
-    instance_destroy();
-}
+// A morte do inimigo agora e resolvida no Step (evento normal), no bloco do
+// "GOLPE FATAL": estilhaco em pixels + drops + contagem + musica + instance_destroy,
+// tudo no mesmo passo. Nao ha mais animacao de morte pra esperar terminar aqui.
