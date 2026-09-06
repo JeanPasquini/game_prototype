@@ -113,7 +113,8 @@ pending_face = 1;
 run = false;
 tap_timer_left = 0;
 tap_timer_right = 0;
-double_tap_threshold = 15;
+// janela (frames) pra encaixar o segundo toque e sair correndo - maior = mais tolerante
+double_tap_threshold = 26;
 
 previous_state = state;
 smoke_instance = noone;
@@ -207,7 +208,6 @@ sns_breath_t   = 0;      // fase da "respiração" no idle
 // =====================================================================
 grv_rise      = grv;     // gravidade na subida (mantém o pulo atual)
 fall_grv_mult = 1.35;    // cai mais pesado do que sobe (gravidade assimétrica)
-fast_fall_mult = 1.7;    // segurar "baixo" no ar acelera a queda
 vsp_max_fall  = 15;      // velocidade terminal de queda
 hard_land_vsp = 12;      // a partir daqui a aterrissagem "treme a tela"
 

@@ -32,7 +32,7 @@ movementSpeed = 0.5;
 // Randomized time range (in steps) between attacks: 3 to 4 seconds
 range_time_between_attacks = [180, 240];
 
-life = 5;    
+life = 10;    
 damage = 1;   
 
 tentacles = -1

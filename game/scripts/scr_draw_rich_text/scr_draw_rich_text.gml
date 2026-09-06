@@ -23,15 +23,7 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha, _align = noone)
             {
                 end_pos += i - 1;
                 var tag = string_copy(_text, i + 1, end_pos - i - 1);
-                var spr = noone;
-                switch (tag)
-                {
-                    case "JUMP_BUTTON": spr = spr_btn_up; break;
-                    case "MOVE_BUTTON": spr = spr_btn_move; break;
-                    case "ATTACK_BUTTON": spr = spr_btn_z; break;
-                    case "DASH_BUTTON": spr = spr_btn_c; break;
-                    case "INTERACT_BUTTON": spr = spr_btn_e; break;
-                }
+                var spr = scr_prompt_sprite(tag);
                 if (spr != noone)
                 {
                     var icon_scale = _scale * 2;
@@ -83,15 +75,7 @@ function scr_draw_rich_text(_x, _y, _text, _scale, _alpha, _align = noone)
             {
                 end_pos += i - 1;
                 var tag = string_copy(_text, i + 1, end_pos - i - 1);
-                var spr = noone;
-                switch (tag)
-                {
-                    case "JUMP_BUTTON": spr = spr_btn_up; break;
-                    case "MOVE_BUTTON": spr = spr_btn_move; break;
-                    case "ATTACK_BUTTON": spr = spr_btn_z; break;
-                    case "DASH_BUTTON": spr = spr_btn_c; break;
-                    case "INTERACT_BUTTON": spr = spr_btn_e; break;
-                }
+                var spr = scr_prompt_sprite(tag);
                 if (spr != noone)
                 {
                     var icon_scale = _scale * 2;
@@ -153,30 +137,7 @@ function scr_rich_text_width(_text, _scale)
 
                 var tag = string_copy(_text, i + 1, end_pos - i - 1);
 
-                var spr = noone;
-
-                switch (tag)
-                {
-                    case "JUMP_BUTTON":
-                        spr = spr_btn_up;
-                    break;
-
-                    case "MOVE_BUTTON":
-                        spr = spr_btn_move;
-                    break;
-
-                    case "ATTACK_BUTTON":
-                        spr = spr_btn_z;
-                    break;
-
-                    case "DASH_BUTTON":
-                        spr = spr_btn_c;
-                    break;
-
-                    case "INTERACT_BUTTON":
-                        spr = spr_btn_e;
-                    break;
-                }
+                var spr = scr_prompt_sprite(tag);
 
                 if (spr != noone)
                 {

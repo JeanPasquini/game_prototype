@@ -13,7 +13,9 @@ if (fixed_point) {
 } else if (instance_exists(target_)) {
     if (center_on_target) {
         // transição de porta: player no centro exato da tela (sem offset nem look-ahead)
-        fall_look = lerp(fall_look, 0, 0.22);
+        fall_look   = lerp(fall_look, 0, 0.22);
+        look_offset = lerp(look_offset, 0, 0.2);
+        look_hold   = 0;
         x = lerp(x, target_.x, center_lerp);
         y = lerp(y, target_.y, center_lerp);
     } else {
@@ -26,8 +28,30 @@ if (fixed_point) {
         }
         fall_look = lerp(fall_look, _fl_target, (_fl_target > fall_look) ? 0.12 : 0.22);
 
+        // ===== OLHAR PRA CIMA/BAIXO (segurar analogico PARADO, estilo Hollow Knight) =====
+        // -1 = cima, 1 = baixo, 0 = nada. Só conta se o player está no chão, imóvel
+        // e sem menu travando o mundo. Precisa segurar look_hold_max frames antes de
+        // a câmera começar a deslizar; ao soltar/andar volta mais rápido.
+        var _look_dir = input_look_dir();
+        var _player_still = variable_instance_exists(target_, "ong")
+            && target_.ong
+            && abs(target_.hsp) < 0.2
+            && target_.state == PlayerState.IDLE
+            && !global.world_was_blocked;
+
+        if (_look_dir != 0 && _player_still) {
+            look_hold = min(look_hold + 1, look_hold_max);
+        } else {
+            look_hold = max(look_hold - 2, 0);
+        }
+
+        var _look_target = (look_hold >= look_hold_max) ? (_look_dir * look_max) : 0;
+        // desliza devagar pra fora, mas recentra mais rapido quando solta/anda
+        var _look_lerp = (_look_target != 0) ? 0.06 : 0.12;
+        look_offset = lerp(look_offset, _look_target, _look_lerp);
+
         x = lerp(x, target_.x, 0.1);
-        y = lerp(y, target_.y - height_ / 4 + fall_look, 0.1);
+        y = lerp(y, target_.y - height_ / 4 + fall_look + look_offset, 0.1);
     }
 }
 // se nenhuma condição bater, x/y simplesmente mantêm o valor do frame anterior

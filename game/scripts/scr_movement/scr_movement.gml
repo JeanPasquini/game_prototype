@@ -223,10 +223,6 @@ function _apply_gravity() {
         // (o timer decrementa no Step)
         _g *= max(1 - (hurt_grav_timer / hurt_grav_max), 0.05);
     }
-    else if (!ong && vsp > -2 && keyboard_check(vk_down) && !talking) {
-        // fast-fall: segurar pra baixo no ar mergulha o personagem
-        _g *= fast_fall_mult;
-    }
 
     vsp += _g;
 

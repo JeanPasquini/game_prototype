@@ -79,11 +79,24 @@ var screen_h = display_get_gui_height();
 var cx = screen_w - spr_w / 2 - margem;
 var cy = spr_h / 2 + margem;
 
-var spr_btn_w = sprite_get_width(spr_button_open_map) * scale_button;
-var spr_btn_h = sprite_get_height(spr_button_open_map) * scale_button;
+// cluster do canto sup. direito: ICONE do mapa em cima, BOTAO a apertar embaixo.
+// o botao troca entre tecla (M) e controle (Share) conforme o ultimo dispositivo.
+var spr_map_icon   = spr_button_icon_map;
+var spr_map_button = scr_prompt_sprite("OPEN_MAP_BUTTON");
 
-var cx_button = screen_w - spr_btn_w - margem;
+var icon_btn_w = sprite_get_width(spr_map_icon)   * scale_button;
+var icon_btn_h = sprite_get_height(spr_map_icon)  * scale_button;
+var key_btn_h  = sprite_get_height(spr_map_button) * scale_button;
+
+var btn_gap = 6; // espaco vertical entre icone e botao
+
+// ancora do cluster = canto sup. esq. do ICONE (elemento de cima)
+var cx_button = screen_w - icon_btn_w - margem;
 var cy_button = margem;
+
+// mantido pro morph do painel: usa o tamanho do icone como referencia
+var spr_btn_w = icon_btn_w;
+var spr_btn_h = icon_btn_h;
 
 var alpha_map = 0;
 switch (minimap_state) {
@@ -506,9 +519,23 @@ if (alpha_map > 0) {
     }
 }
 else {
+    // ICONE do mapa (em cima) - origem top-left
     draw_sprite_ext(
-        spr_button_open_map, 0,
+        spr_map_icon, 0,
         cx_button, cy_button,
+        scale_button, scale_button,
+        0,
+        c_white,
+        1
+    );
+
+    // BOTAO a apertar (embaixo, centralizado sob o icone) - origem ~central
+    var _key_cx = cx_button + icon_btn_w * 0.5;
+    var _key_cy = cy_button + icon_btn_h + btn_gap + key_btn_h * 0.5;
+
+    draw_sprite_ext(
+        spr_map_button, 0,
+        _key_cx, _key_cy,
         scale_button, scale_button,
         0,
         c_white,

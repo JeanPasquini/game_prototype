@@ -20,6 +20,9 @@ global.force_music = noone;
 global.menu_lock = noone;
 global.world_was_blocked = false;
 
+// dispositivo dos icones de prompt (teclado/controle) - ver scr_input_prompts
+global.prompt_device = PROMPT_DEVICE_KEYBOARD;
+
 layer_set_visible(layer_get_id("ui_vignette"), true);
 layer_set_visible(layer_get_id("ui_hud_player"), true);
 layer_set_visible(layer_get_id("ui_run_finish"), false);

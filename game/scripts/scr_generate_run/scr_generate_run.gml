@@ -57,7 +57,7 @@ function run_pick_rooms(pool, _n, _fallback) {
 /// Troque o "return noone" por, ex.: "return room_challenge_05;" para testar uma
 /// sala. Volte pra noone para o sorteio normal.
 function run_debug_forced_challenge() {
-	return room_challenge_05;
+	return noone; //room_challenge_05;
 }
 
 /// @description (Re)gera global.rooms_map para uma nova RUN.

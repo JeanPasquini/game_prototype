@@ -5,3 +5,6 @@
 // (e.g. X = confirm AND jump) can't leak that same press into gameplay on
 // the exact frame the menu releases the lock.
 global.world_was_blocked = scr_menu_lock_blocks_world();
+
+// atualiza o dispositivo dos icones de prompt (teclado <-> controle)
+input_prompt_update();

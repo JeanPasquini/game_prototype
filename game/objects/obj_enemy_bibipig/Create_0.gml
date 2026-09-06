@@ -1,6 +1,6 @@
 // Inherit the parent event
 event_inherited();
-
+life = 5;
 baseAttackDelay = 90;
 
 maxDetectionRadius = 120;

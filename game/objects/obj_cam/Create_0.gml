@@ -30,6 +30,12 @@ center_lerp = 0.15;
 hurt_hold     = 0;   // frames restantes com a câmera congelada no lugar
 hurt_hold_max = 18;
 
+// ===== Olhar pra cima/baixo (segurar analogico parado, estilo Hollow Knight) =====
+look_offset   = 0;   // deslocamento vertical atual da camera (lerp)
+look_hold     = 0;   // frames segurando o analogico numa direcao valida
+look_hold_max = 28;  // precisa segurar ~0.5s parado antes da camera se mexer
+look_max      = 64;  // quanto a camera desloca (px) quando o olhar esta pleno
+
 audio_listener_set_position(0, x, y, 0);
 audio_listener_set_orientation(
     0,

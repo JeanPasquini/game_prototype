@@ -28,12 +28,12 @@ function input_gamepad_slot() {
 
 function input_jump_pressed() {
     var _pad = input_gamepad_slot();
-    return keyboard_check_pressed(vk_up) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_face1));
+    return keyboard_check_pressed(vk_space) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_face1));
 }
 
 function input_jump_held() {
     var _pad = input_gamepad_slot();
-    return keyboard_check(vk_up) || (_pad != -1 && gamepad_button_check(_pad, gp_face1));
+    return keyboard_check(vk_space) || (_pad != -1 && gamepad_button_check(_pad, gp_face1));
 }
 
 function input_move_held(_sign) {
@@ -124,24 +124,55 @@ function input_menu_confirm_pressed() {
     return keyboard_check_pressed(ord("E")) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_face1));
 }
 
+// Menu navigation accepts keyboard arrows, the D-pad, AND the left analog
+// stick. The stick fires a single "press" on the frame it crosses the
+// deadzone (edge detection vs the previous frame), so holding it tilted
+// doesn't scroll continuously. Each direction keeps its own previous-axis
+// history in a static, so the four functions don't clobber each other.
+#macro GP_MENU_STICK_DEADZONE 0.5
+
 function input_menu_up_pressed() {
+    static _prev = 0;
     var _pad = input_gamepad_slot();
-    return keyboard_check_pressed(vk_up) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padu));
+    var _v = (_pad != -1) ? gamepad_axis_value(_pad, gp_axislv) : 0;
+    var _stick_edge = (_v < -GP_MENU_STICK_DEADZONE && _prev >= -GP_MENU_STICK_DEADZONE);
+    _prev = _v;
+    return keyboard_check_pressed(vk_up)
+        || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padu))
+        || _stick_edge;
 }
 
 function input_menu_down_pressed() {
+    static _prev = 0;
     var _pad = input_gamepad_slot();
-    return keyboard_check_pressed(vk_down) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padd));
+    var _v = (_pad != -1) ? gamepad_axis_value(_pad, gp_axislv) : 0;
+    var _stick_edge = (_v > GP_MENU_STICK_DEADZONE && _prev <= GP_MENU_STICK_DEADZONE);
+    _prev = _v;
+    return keyboard_check_pressed(vk_down)
+        || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padd))
+        || _stick_edge;
 }
 
 function input_menu_left_pressed() {
+    static _prev = 0;
     var _pad = input_gamepad_slot();
-    return keyboard_check_pressed(vk_left) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padl));
+    var _v = (_pad != -1) ? gamepad_axis_value(_pad, gp_axislh) : 0;
+    var _stick_edge = (_v < -GP_MENU_STICK_DEADZONE && _prev >= -GP_MENU_STICK_DEADZONE);
+    _prev = _v;
+    return keyboard_check_pressed(vk_left)
+        || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padl))
+        || _stick_edge;
 }
 
 function input_menu_right_pressed() {
+    static _prev = 0;
     var _pad = input_gamepad_slot();
-    return keyboard_check_pressed(vk_right) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padr));
+    var _v = (_pad != -1) ? gamepad_axis_value(_pad, gp_axislh) : 0;
+    var _stick_edge = (_v > GP_MENU_STICK_DEADZONE && _prev <= GP_MENU_STICK_DEADZONE);
+    _prev = _v;
+    return keyboard_check_pressed(vk_right)
+        || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padr))
+        || _stick_edge;
 }
 
 function input_dialogue_advance_pressed() {
@@ -152,4 +183,23 @@ function input_dialogue_advance_pressed() {
 function input_door_transition_pressed() {
     var _pad = input_gamepad_slot();
     return keyboard_check_pressed(vk_enter) || (_pad != -1 && gamepad_button_check_pressed(_pad, gp_padu));
+}
+
+// HELD (not edge) "look" direction for the camera to pan up/down while the
+// player stands still (Hollow Knight style). -1 = up, 1 = down, 0 = centered.
+// Accepts the keyboard arrows (up/down are free now that jump is Space) and
+// the left analog stick.
+function input_look_dir() {
+
+    if (keyboard_check(vk_up))   return -1;
+    if (keyboard_check(vk_down)) return  1;
+
+    var _pad = input_gamepad_slot();
+    if (_pad != -1) {
+        var _v = gamepad_axis_value(_pad, gp_axislv);
+        if (_v < -GP_STICK_DEADZONE) return -1;
+        if (_v >  GP_STICK_DEADZONE) return  1;
+    }
+
+    return 0;
 }
