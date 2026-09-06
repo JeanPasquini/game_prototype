@@ -1,5 +1,9 @@
 // Inherit the parent event
 event_inherited();
+
+// Mascara de colisao UNICA (nao muda com a animacao).
+scr_enemy_lock_mask(spr_enemy_cegogolho_idle);
+
 life = 5;
 maxDetectionRadius = 180;
 throwsProjectile = obj_projectile;

@@ -5,6 +5,10 @@ if (global.hitstop > 0) {
 
 scr_audio_emitter(x, y, emitterAudio);
 
+// Rede de seguranca: se terminou dentro de uma parede, e expelido pro espaco livre.
+// Bosses ficam de fora: a cutscene deles move x/y na mao e o unstick teleportava.
+if (!is_boss) scr_enemy_unstick();
+
 alpha = lerp(alpha, 0, 0.1);
 
 if(freeze){
@@ -45,22 +49,39 @@ else if (
 	chasing_attack_script();
 }
 
-// Ajusta o movimento para não atravessar a Parede e nem o Player
-// Pode causar efeito colateral no movimento esperado
-if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
-	while (!place_meeting(x + sign(hsp), y, obj_wall)
-	    && !place_meeting(x + sign(hsp), y, obj_player)) {
-	    x += sign(hsp);
+// Ajusta o movimento pra nao atravessar solidos (parede + portao/porta fechados).
+// Inimigo NAO colide com obj_player. Pode causar efeito colateral no movimento.
+// Inimigos que resolvem a propria colisao (ex.: cururu) pulam esse bloco.
+if (is_boss) {
+	// Comportamento ORIGINAL do boss: nao atravessa parede nem player.
+	if (place_meeting(x + hsp, y, obj_wall) || place_meeting(x + hsp, y, obj_player)) {
+		while (!place_meeting(x + sign(hsp), y, obj_wall)
+		    && !place_meeting(x + sign(hsp), y, obj_player)) {
+		    x += sign(hsp);
+		}
+		hsp = 0;
 	}
-	hsp = 0;
-}
+	if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)) {
+		while (!place_meeting(x, y + sign(vsp), obj_wall)
+		    && !place_meeting(x, y + sign(vsp), obj_player)) {
+		    y += sign(vsp);
+		}
+		vsp = 0;
+	}
+} else if (!handles_own_collision) {
+	if (scr_enemy_solid(x + hsp, y)) {
+		while (!scr_enemy_solid(x + sign(hsp), y)) {
+		    x += sign(hsp);
+		}
+		hsp = 0;
+	}
 
-if (place_meeting(x, y + vsp, obj_wall) || place_meeting(x, y + vsp, obj_player)) {
-	while (!place_meeting(x, y + sign(vsp), obj_wall)
-	    && !place_meeting(x, y + sign(vsp), obj_player)) {
-	    y += sign(vsp);
+	if (scr_enemy_solid(x, y + vsp)) {
+		while (!scr_enemy_solid(x, y + sign(vsp))) {
+		    y += sign(vsp);
+		}
+		vsp = 0;
 	}
-	vsp = 0;
 }
 
 function knockbackSmoothing(){
@@ -68,7 +89,11 @@ function knockbackSmoothing(){
 	    var nx = x + knockback_x * 0.5;
 		var ny = y + knockback_y * 0.5;
 
-	    if (!place_meeting(nx, ny, obj_wall) && !place_meeting(nx, ny, obj_player)) {
+	    var _kb_blocked = is_boss
+	        ? (place_meeting(nx, ny, obj_wall) || place_meeting(nx, ny, obj_player))
+	        : scr_enemy_solid(nx, ny);
+
+	    if (!_kb_blocked) {
 		    x = nx;
 		    y = ny;
 		}
@@ -91,8 +116,12 @@ function state_stagger() {
 
 scr_damage_with_knockback();
 
-if (direction == 180) {
-    image_xscale = 1;
+if (is_boss) {
+    // Comportamento ORIGINAL do boss: flip pelo image_xscale (Draw acompanha via face_scale).
+    if (direction == 180) image_xscale = 1; else image_xscale = -1;
+    face_scale = image_xscale;
 } else {
-    image_xscale = -1;
+    // Demais inimigos: flip APENAS visual, a mascara de colisao nunca espelha.
+    if (direction == 180) face_scale = 1; else if (direction == 0) face_scale = -1;
+    image_xscale = 1;
 }

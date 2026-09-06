@@ -351,6 +351,7 @@
     {"id":{"name":"scr_draw_text_wrap_scaled","path":"scripts/scr_draw_text_wrap_scaled/scr_draw_text_wrap_scaled.yy",},},
     {"id":{"name":"scr_drop_roll","path":"scripts/scr_drop_roll/scr_drop_roll.yy",},},
     {"id":{"name":"scr_earthquake","path":"scripts/scr_earthquake/scr_earthquake.yy",},},
+    {"id":{"name":"scr_enemy_collision","path":"scripts/scr_enemy_collision/scr_enemy_collision.yy",},},
     {"id":{"name":"scr_generate_run","path":"scripts/scr_generate_run/scr_generate_run.yy",},},
     {"id":{"name":"scr_get_obj_floor_distance","path":"scripts/scr_get_obj_floor_distance/scr_get_obj_floor_distance.yy",},},
     {"id":{"name":"scr_hitstop","path":"scripts/scr_hitstop/scr_hitstop.yy",},},

@@ -1,6 +1,14 @@
 // Inherit the parent event
 event_inherited();
 
+// Mascara de colisao UNICA (nao muda com a animacao: idle/jumping/charging/attacking).
+scr_enemy_lock_mask(spr_enemy_cururu_idle);
+
+// O cururu resolve TODA a propria colisao dentro dos scripts de pulo (point probes).
+// Sem isso, o resolve de mascara inteira do obj_enemy_parent Step brigava com a
+// logica de ponto e prendia o sapo em quinas.
+handles_own_collision = true;
+
 // Enemy detection and basic stats
 detectionRadius = 180;
 life = 5;

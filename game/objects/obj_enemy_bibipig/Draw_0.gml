@@ -1,5 +1,7 @@
 // Inherit the parent event
-image_xscale = image_xscale * -1;
+// O sprite do bibipig e desenhado virado ao contrario dos outros inimigos, entao
+// invertemos so o flip VISUAL (a mascara de colisao nao e tocada).
+face_scale = -face_scale;
 
 event_inherited();
 

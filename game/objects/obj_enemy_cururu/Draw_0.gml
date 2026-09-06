@@ -1,5 +1,6 @@
 // Inherit the parent event
-image_xscale = face;
+// Flip APENAS visual pelo "face" (a mascara de colisao nao e espelhada).
+if (face != 0) face_scale = sign(face);
 
 event_inherited();
 

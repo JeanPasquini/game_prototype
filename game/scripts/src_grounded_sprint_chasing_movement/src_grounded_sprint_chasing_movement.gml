@@ -15,12 +15,12 @@ function src_grounded_sprint_chasing_movement(){
 		*/
 		if (currentMovement != EnemyState.JUMPING) {
 			// Detects if it is close to falling (first vertex without ground).
-			if (!position_meeting(x + (sprite_width/2*-1) + _dir, y + (sprite_height/2)+1, obj_wall)) {
+			if (!scr_enemy_point_solid(x + (sprite_width/2*-1) + _dir, y + (sprite_height/2)+1)) {
 				// returning state.
 				currentState = EnemyState.IDLE;
 				detectionRadius = 10;
 				exit;
-			} else if (place_meeting(x + _dir, y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
+			} else if (wall_jump_enabled && scr_enemy_solid(x + _dir, y) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
 				jump_direction = _dir;
 				currentMovement = EnemyState.JUMPING;
 			} else {
@@ -36,8 +36,14 @@ function src_grounded_sprint_chasing_movement(){
 			enemy_falling_movement(2.2);
 		} else if (currentState == EnemyState.CHASING) {
 			currentMovement = EnemyState.ONGROUND;
-			enemy_falling_movement(_movSpd);		
-			x += _movSpd * _dir;
+			enemy_falling_movement(_movSpd);
+			var _step = _movSpd * _dir;
+			if (scr_enemy_solid(x + _step, y)) {
+				// para colado na parede em vez de escala-la / atravessa-la
+				while (!scr_enemy_solid(x + sign(_step), y)) x += sign(_step);
+			} else {
+				x += _step;
+			}
 		}
 	}
 }

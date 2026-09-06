@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_enemy_collision",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_enemy_collision",
+  "parent":{
+    "name":"helper_scripts",
+    "path":"folders/Scripts/enemy/helper_scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

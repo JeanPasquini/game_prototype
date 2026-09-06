@@ -36,6 +36,10 @@ face = 1;
 vsp = 0;
 grv = 0.5;
 direction = 0;  // 180 = left, 0 = right
+face_scale = 1; // flip APENAS visual (a mascara nunca espelha; ver obj_enemy_parent Draw)
+wall_jump_enabled = true; // pode saltar degraus/paredes nos scripts grounded
+handles_own_collision = false; // se true, o Step nao roda o resolve hsp/vsp de mascara inteira
+is_boss = false; // bosses ignoram os helpers de colisao novos (unstick/flip) p/ nao quebrar cutscene
 maxDetectionRadius = 100;
 detectionRadius = maxDetectionRadius;
 maxRandomMovement = 100;

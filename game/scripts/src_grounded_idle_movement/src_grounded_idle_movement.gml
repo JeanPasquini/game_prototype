@@ -18,10 +18,10 @@ function src_grounded_idle_movement(){
 		*/
 		
 		if (currentMovement != EnemyState.JUMPING) {
-			if (!position_meeting(x + (sprite_width/2*_dir*-1), y + (sprite_height/2)+1, obj_wall) &&
-				!position_meeting(x + (sprite_width/2*_dir), y + (sprite_height/2)+1, obj_wall)) { // Check if it will be without ground
+			if (!scr_enemy_point_solid(x + (sprite_width/2*_dir*-1), y + (sprite_height/2)+1) &&
+				!scr_enemy_point_solid(x + (sprite_width/2*_dir), y + (sprite_height/2)+1)) { // Check if it will be without ground
 				currentMovement = EnemyState.FALLING;
-			} else if (place_meeting(x + _dir, y, obj_wall) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
+			} else if (wall_jump_enabled && scr_enemy_solid(x + _dir, y) && currentMovement == EnemyState.ONGROUND) { // Check for future wall collision
 				jump_direction = _dir;
 				currentMovement = EnemyState.JUMPING;
 			} else {
@@ -37,9 +37,16 @@ function src_grounded_idle_movement(){
 				enemy_falling_movement(2.2);
 		} else {
 			currentMovement = EnemyState.ONGROUND;
-			enemy_falling_movement(movementSpeed);		
-			x += movementSpeed * _dir;
+			enemy_falling_movement(movementSpeed);
+			var _step = movementSpeed * _dir;
+			if (scr_enemy_solid(x + _step, y)) {
+				// para colado na parede e, na patrulha, inverte o sentido
+				while (!scr_enemy_solid(x + sign(_step), y)) x += sign(_step);
+				direction = (direction == 0) ? 180 : 0;
+			} else {
+				x += _step;
+			}
 		}
-		 
+
 	}
 }

@@ -10,8 +10,8 @@ function src_random_flying_idle_movement(){
 	    // --- Movimento horizontal com verificação de colisão ---
 	    var _dx = lengthdir_x(movementSpeed, direction); // deslocamento pretendido neste step
 
-	    if (place_meeting(x + _dx, y, obj_wall)) {
-	        while (!place_meeting(x + sign(_dx), y, obj_wall)) {
+	    if (scr_enemy_solid(x + _dx, y)) {
+	        while (!scr_enemy_solid(x + sign(_dx), y)) {
 	            x += sign(_dx);
 	        }
 	        direction = (direction == 0) ? 180 : 0; // bate na parede e vira pro outro lado
@@ -48,8 +48,8 @@ function src_random_flying_idle_movement(){
 		
 	    // --- Colisão vertical com paredes/chão ---
 	    if (_dy != 0) {
-	        if (place_meeting(x, y + _dy, obj_wall)) {
-	            while (!place_meeting(x, y + sign(_dy), obj_wall)) {
+	        if (scr_enemy_solid(x, y + _dy)) {
+	            while (!scr_enemy_solid(x, y + sign(_dy))) {
 	                y += sign(_dy);
 	            }
 	            fallSpeed = 0;

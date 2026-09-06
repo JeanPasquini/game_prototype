@@ -1,5 +1,10 @@
 // Inherit the parent event
 event_inherited();
+
+// Mascara de colisao UNICA (nao muda com a animacao) e nao escala paredes.
+scr_enemy_lock_mask(spr_enemy_bibipig_idle);
+wall_jump_enabled = false;
+
 life = 5;
 baseAttackDelay = 90;
 

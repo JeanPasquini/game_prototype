@@ -4,3 +4,7 @@
 maxDetectionRadius = 100000;
 event_inherited();
 
+// Isenta o boss dos helpers de colisao novos (unstick / flip por face_scale):
+// a cutscene de apresentacao move x/y na mao e o unstick a teleportava.
+is_boss = true;
+
