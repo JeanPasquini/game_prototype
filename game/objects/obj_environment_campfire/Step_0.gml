@@ -1,0 +1,1 @@
+scr_audio_emitter(x, y, emitterAudio);

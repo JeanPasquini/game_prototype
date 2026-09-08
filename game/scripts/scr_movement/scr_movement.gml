@@ -78,12 +78,17 @@ function _update_introduction() {
     }
 
     if (introduction_start && sprite_index == spr_player_introduction_idle) {
+		var sfx = [
+			sde_player_introduction
+		];					
+		scr_audio_play(sfx);
         sprite_index = spr_player_introduction_start;
         image_index = 0;
         image_speed = 1;
     }
 
     if (sprite_index == spr_player_introduction_start && image_index >= image_number - 1) {
+		
         introduction_start = false;
         talking = false;
         state = PlayerState.IDLE;
@@ -96,7 +101,7 @@ function _update_transition() {
     dash_timer = 0;
 
     if (transition_phase == 0) {
-
+		
         // anda sozinho até centralizar com a porta, ignorando input
         var _dir = sign(transition_target_x - x);
         var _dist = abs(transition_target_x - x);
@@ -122,7 +127,7 @@ function _update_transition() {
 
             // a animação da porta (spr_player_transition) sempre virada pra direita
             face = 1;
-
+			
             sprite_index = spr_player_transition;
             image_index = 0;
             image_speed = 1;

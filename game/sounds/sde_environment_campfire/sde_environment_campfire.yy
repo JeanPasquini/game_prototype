@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"sde_environment_campfire",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":129.58183,
+  "exportDir":"",
+  "name":"sde_environment_campfire",
+  "parent":{
+    "name":"environment",
+    "path":"folders/Sounds/soundeffect/environment.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sde_environment_campfire.wav",
+  "volume":0.7,
+}

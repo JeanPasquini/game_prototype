@@ -37,10 +37,10 @@ function room_link_points() {
 			right: { px: 160, py: 261 },
 		},
 		store_room: {
-			up:    { px: 563, py: 448 },
-			down:  { px: 488, py: 453 },
-			left:  { px: 32,  py: 453 },
-			right: { px: 976, py: 453 },
+			up:    { px: 208, py: 261 },
+			down:  { px: 208, py: 261 },
+			left:  { px: 208,  py: 261 },
+			right: { px: 208, py: 261 },
 		},
 
 		// Salas challenge NAO precisam de entrada aqui: o scr_room_init posiciona
