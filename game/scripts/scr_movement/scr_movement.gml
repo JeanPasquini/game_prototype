@@ -131,6 +131,11 @@ function _update_transition() {
             sprite_index = spr_player_transition;
             image_index = 0;
             image_speed = 1;
+			
+			var sfx = [
+				sde_player_opening_door
+			];						
+			scr_audio_play(sfx);
         }
     }
     else if (transition_phase == 1) {

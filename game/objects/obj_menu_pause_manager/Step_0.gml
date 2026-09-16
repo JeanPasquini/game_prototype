@@ -15,6 +15,7 @@ if(layer_get_visible("ui_menu_pause")){
 		if(button_id > 4){
 			button_id = 1;
 		}
+		audio_play_sound(sde_perk_selection_change, 1, false);
 	}
 
 	if (input_menu_up_pressed())
@@ -23,9 +24,12 @@ if(layer_get_visible("ui_menu_pause")){
 		if(button_id < 1){
 			button_id = 4;
 		}
+		audio_play_sound(sde_perk_selection_change, 1, false);
 	}
 
 	if(input_menu_confirm_pressed()){
+		audio_play_sound(sde_menu_selection, 1, false);
+
 		if(button_id == 1){ // resume
 			update_pause();
 		}

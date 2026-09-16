@@ -1,8 +1,10 @@
 if (!playing) {
     if (layer_get_visible(layer_name)) {
-        if (input_menu_down_pressed()) { button_id += 1; if (button_id > 2) button_id = 1; }
-        if (input_menu_up_pressed())   { button_id -= 1; if (button_id < 1) button_id = 2; }
+        if (input_menu_down_pressed()) { button_id += 1; if (button_id > 2) button_id = 1; audio_play_sound(sde_perk_selection_change, 1, false); }
+        if (input_menu_up_pressed())   { button_id -= 1; if (button_id < 1) button_id = 2; audio_play_sound(sde_perk_selection_change, 1, false); }
         if (input_menu_confirm_pressed()) {
+            audio_play_sound(sde_menu_selection, 1, false);
+
             if (button_id == 1) {
                 playing = true;
                 layer_set_visible(layer_name, false);
