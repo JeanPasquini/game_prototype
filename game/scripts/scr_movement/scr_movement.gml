@@ -123,6 +123,21 @@ function _update_transition() {
             x = transition_target_x;
             hsp = 0;
 
+            // HUB -> 1a safe room: no centro da luz, pula e cai atrás do chão (phase 2)
+            if (transition_hub_fall) {
+                transition_phase = 2;
+                transition_fall_dying = false;
+                fall_start_y = y;
+                vsp = jmp;
+                ong = false;
+                face = 1;
+                sprite_index = spr_player_jumping;
+                image_index = 0;
+                image_speed = 1;
+                obj_cam.hurt_hold = 99999; // câmera congela: o player cai pra fora da tela
+                return;
+            }
+
             transition_phase = 1;
 
             // a animação da porta (spr_player_transition) sempre virada pra direita
@@ -151,23 +166,59 @@ function _update_transition() {
             image_index = image_number - 1;
             image_speed = 0;
 
-            if (!transition_room_started) {
+            _transition_start_room();
+        }
+    }
+    else if (transition_phase == 2) {
 
-                transition_room_started = true;
+        // ===== HUB: pulo + queda infinita, SEM colisão (atravessa o chão, que fica na frente do player) =====
+        hsp = 0;
 
-                var _t = instance_create_layer(0, 0, "Instances", obj_transiction);
-                _t.destiny = transition_destiny;
-                _t.destiny_slot = transition_destiny_slot;
-                _t.entry_dir = transition_entry_dir;
-                _t.px = transition_px;
-                _t.py = transition_py;
-                _t.is_boss_door = transition_is_boss_door;
+        var _g = (vsp > 0) ? grv_rise * fall_grv_mult : grv_rise;
+        vsp = min(vsp + _g, vsp_max_fall);
+        y += vsp;
+
+        if (!transition_fall_dying) {
+            // passou do apex: sprite de queda
+            if (vsp > 0 && sprite_index == spr_player_jumping) {
+                sprite_index = spr_player_falling;
+                image_index = 0;
+            }
+            // já desceu abaixo do chão (escondido atrás dele): toca a animação de morte, uma vez
+            if (vsp > 0 && y > fall_start_y + 24) {
+                transition_fall_dying = true;
+                audio_play_sound(sde_player_die, 1, false);
+                sprite_index = spr_player_dying;
+                image_index = 0;
+                image_speed = 1;
             }
         }
+        else if (sprite_index == spr_player_dying && image_index >= image_number - 1) {
+            // animação de morto terminou: agora sim a cutscene padrão de transição de sala
+            image_index = image_number - 1;
+            image_speed = 0;
+            _transition_start_room();
+        }
+
+        return; // sem gravidade/colisão normais
     }
 
     _apply_gravity();
     _resolve_collisions();
+}
+
+/// Cria o obj_transiction (fade + room_goto) com os dados guardados pela porta. Só uma vez.
+function _transition_start_room() {
+    if (transition_room_started) return;
+    transition_room_started = true;
+
+    var _t = instance_create_layer(0, 0, "Instances", obj_transiction);
+    _t.destiny = transition_destiny;
+    _t.destiny_slot = transition_destiny_slot;
+    _t.entry_dir = transition_entry_dir;
+    _t.px = transition_px;
+    _t.py = transition_py;
+    _t.is_boss_door = transition_is_boss_door;
 }
 
 function _update_timers() {

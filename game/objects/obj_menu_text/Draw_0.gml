@@ -1,5 +1,6 @@
 draw_set_font(fnt_ui_menu_perk_selection_title);
 draw_set_color(c_white);
+draw_set_alpha(image_alpha);   // o fade da intro usa image_alpha (a função de rich text só aplica alpha nos ícones)
 
 //draw_text(x, y, description);
 
@@ -14,8 +15,9 @@ scr_draw_rich_text(
 	y,
     description,
     image_xscale,
-    1,
+    image_alpha,
 	align
 );
 
 draw_set_halign(fa_left);
+draw_set_alpha(1);

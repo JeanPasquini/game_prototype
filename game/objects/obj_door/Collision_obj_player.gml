@@ -61,6 +61,13 @@ if (destiny_slot != noone && position != noone) {
             obj_player.transition_py = directions.py;
             obj_player.transition_is_boss_door = is_boss_door;
             obj_player.transition_room_started = false;
+
+            // só no HUB: a entrada da run vira a sequência "pula na luz e cai" (ver _update_transition, phase 2)
+            obj_player.transition_hub_fall = (room_get_name(room) == "HUB");
+            obj_player.transition_fall_dying = false;
+            if (obj_player.transition_hub_fall && instance_exists(obj_light_beam)) {
+                obj_player.transition_target_x = instance_nearest(x, y, obj_light_beam).x; // centro da luz
+            }
         }
     }
 }

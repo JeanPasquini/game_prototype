@@ -133,6 +133,12 @@ transition_py = 0;
 transition_is_boss_door = false;
 transition_room_started = false;
 
+// HUB -> 1a safe room: em vez da animação da porta, anda até o centro da luz, pula e cai atrás do chão
+// (phase 2), toca spr_player_dying e SÓ QUANDO ela termina abre a transição de sala (obj_transiction)
+transition_hub_fall = false;
+transition_fall_dying = false;
+fall_start_y = 0;   // y do player quando pulou na luz (referência pra saber que já caiu abaixo do chão)
+
 swimming = false;
 swimming_threshold = 30;
 swimming_timer = swimming_threshold;

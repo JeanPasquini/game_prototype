@@ -16,6 +16,10 @@ function scr_reset_run(){
     if (!is_undefined(directions)) {
         obj_player.x = directions.px;
         obj_player.y = directions.py;
+
+        // câmera já nasce no player (senão desliza da sala da run até o HUB)
+        obj_cam.x = obj_player.x;
+        obj_cam.y = obj_player.y - obj_cam.height_ / 4;
     }
 		
 	obj_control.time_run = 0;

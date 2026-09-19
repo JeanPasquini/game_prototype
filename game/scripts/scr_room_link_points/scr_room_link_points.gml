@@ -16,11 +16,11 @@
 function room_link_points() {
 	return {
 		HUB: {
-			// player nasce no centro do HUB (nao em cima das portas)
-			up:    { px: 471, py: 401 },
-			down:  { px: 471, py: 401 },
-			left:  { px: 471, py: 401 },
-			right: { px: 471, py: 401 },
+			// player nasce no ponto inicial do HUB (mesma posicao da instancia obj_player na sala)
+			up:    { px: 392, py: 1073 },
+			down:  { px: 392, py: 1073 },
+			left:  { px: 392, py: 1073 },
+			right: { px: 392, py: 1073 },
 		},
 		tutorial_room: {
 			up:    { px: 672, py: 196 },
@@ -31,10 +31,10 @@ function room_link_points() {
 		// room_safe: SEMPRE nasce no mesmo lugar, venha por qual porta vier.
 		// Mude so o px/py abaixo para reposicionar o ponto padrao.
 		safe_room: {
-			up:    { px: 160, py: 261 },
-			down:  { px: 160, py: 261 },
-			left:  { px: 160, py: 261 },
-			right: { px: 160, py: 261 },
+			up:    { px: 190, py: 261 },
+			down:  { px: 190, py: 261 },
+			left:  { px: 190, py: 261 },
+			right: { px: 190, py: 261 },
 		},
 		store_room: {
 			up:    { px: 208, py: 261 },

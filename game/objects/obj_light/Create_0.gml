@@ -17,3 +17,5 @@ outer_scale = 1.2;
 //gpu_set_blendmode(bm_add);
 //draw_self();
 //gpu_set_blendmode(bm_normal);
+// brilho visível sempre ATRÁS dos tiles da frente (ver scr_light_layers)
+scr_light_glow_behind_front_tiles(id);

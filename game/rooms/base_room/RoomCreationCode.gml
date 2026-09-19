@@ -9,4 +9,9 @@
 	define global.room_anomaly_* antes de chamar scr_room_init().
 */
 
+// atmosfera de partículas (obj_ambient_fx): ligada por padrão; ponha false no creation code da sala pra desligar
+global.room_ambient_fx_enabled = true;
+// iluminação (escuridão + luzes): ligada por padrão; ponha false no creation code da sala pra desligar
+global.room_lighting_enabled = true;
+
 scr_room_init();

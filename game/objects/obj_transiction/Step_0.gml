@@ -17,6 +17,8 @@ if (join) {
             src_replace_next_phase_room(current_phase, current_room, _next_phase, _next_phase_room);
         }
 
+        obj_cam.hurt_hold = 0; // a queda do HUB congela a câmera; solta antes da sala nova
+
         obj_player.x = px;
         obj_player.y = py;
 

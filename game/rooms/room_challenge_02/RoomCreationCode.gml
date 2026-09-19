@@ -6,6 +6,8 @@
 	Titulo/descricao ficam aqui para facilitar a escrita e a traducao depois.
 */
 
+global.room_ambient_fx_enabled = true;   // atmosfera de partículas (obj_ambient_fx)
+global.room_lighting_enabled   = true;   // iluminação: escuridão + luzes (obj_controla_luz)
 global.room_anomaly_enabled = true;
 global.room_anomaly_id      = "1";
 global.room_anomaly_title   = "Traps 01";

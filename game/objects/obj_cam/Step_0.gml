@@ -83,8 +83,12 @@ width_  = lerp(width_,  base_width_  * _zoom, 0.08);
 height_ = lerp(height_, base_height_ * _zoom, 0.08);
 camera_set_view_size(view_camera[0], width_, height_);
 
-camera_set_view_pos(
-    view_camera[0],
-    (x - width_  / 2) + shake_x,
-    (y - height_ / 2) + shake_y
-);
+// ===== LIMITES DA SALA =====
+// a view nunca mostra área fora da sala (antes o "object following" nativo garantia isso);
+// se a sala for menor que a view, centraliza em vez de clampar
+var _view_x = (x - width_  / 2) + shake_x;
+var _view_y = (y - height_ / 2) + shake_y;
+_view_x = (room_width  > width_)  ? clamp(_view_x, 0, room_width  - width_)  : (room_width  - width_)  / 2;
+_view_y = (room_height > height_) ? clamp(_view_y, 0, room_height - height_) : (room_height - height_) / 2;
+
+camera_set_view_pos(view_camera[0], _view_x, _view_y);

@@ -19,6 +19,14 @@
 		global.room_anomaly_id      = "no_solid_visual";
 		global.room_anomaly_title   = "SEM COLISAO VISIVEL";
 		global.room_anomaly_desc    = "Os blocos solidos ficam invisiveis.";
+
+	Para DESLIGAR a atmosfera de particulas (obj_ambient_fx) numa sala (padrao = ligada):
+
+		global.room_ambient_fx_enabled = false;
+
+	Para DESLIGAR a iluminacao (escuridao + luzes) numa sala (padrao = ligada):
+
+		global.room_lighting_enabled = false;
 */
 
 function scr_room_init() {
@@ -136,6 +144,19 @@ function scr_room_init() {
 	// No creation code da room: global.room_wrap_enabled = true;  (antes de scr_room_init)
 	var _wrap = variable_global_exists("room_wrap_enabled") && global.room_wrap_enabled;
 	global.room_wrap_enabled = false; // nao herda pra proxima sala
+
+	// -------- 4b. atmosfera de particulas (obj_ambient_fx), opcional por sala --------
+	// No creation code da room: global.room_ambient_fx_enabled = false;  (antes de scr_room_init)
+	// Padrao = ligada (sala sem a variavel usa true). Nao herda pra proxima sala.
+	var _fx = !variable_global_exists("room_ambient_fx_enabled") || global.room_ambient_fx_enabled;
+	global.room_ambient_fx_enabled = true;
+	if (instance_exists(obj_ambient_fx)) obj_ambient_fx.enabled = _fx;
+
+	// -------- 4c. iluminacao da sala (escuridao + obj_light + obj_light_beam), opcional por sala --------
+	// No creation code da room: global.room_lighting_enabled = false;  (antes de scr_room_init)
+	// Padrao = ligada. Desligada: o obj_controla_luz nao desenha o mapa de luz e as luzes visiveis somem.
+	global.lighting_on = !variable_global_exists("room_lighting_enabled") || global.room_lighting_enabled;
+	global.room_lighting_enabled = true; // nao herda pra proxima sala
 
 	if (_wrap && !instance_exists(obj_room_wrap)) {
 		var _lay = layer_exists("controls") ? "controls"

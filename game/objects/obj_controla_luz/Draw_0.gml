@@ -1,3 +1,5 @@
+if (!scr_lighting_enabled()) exit;   // sala com iluminação desligada (global.room_lighting_enabled = false)
+
 if (!surface_exists(surf)) {
     surf = surface_create(room_width, room_height);
 }
@@ -13,6 +15,12 @@ gpu_set_blendmode(bm_add);
 // luz geral
 with (obj_light) {
     draw_sprite_ext(sprite_index, image_index, x, y, image_xscale * 0.8, image_yscale * 0.8, image_angle, c_white, 0.5);
+}
+
+// feixes de luz colocados na room: igual ao obj_light, mas com a cor escolhida na instância e na MESMA escala
+// do desenho visível (com 0.8 o mapa de luz virava um segundo feixe menor dentro do primeiro)
+with (obj_light_beam) {
+    draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, light_color, 0.5);
 }
 
 // player
@@ -132,6 +140,34 @@ with (obj_psicotopus_ball) {
 // volta ao normal
 gpu_set_blendmode(bm_normal);
 
+surface_reset_target();
+
+// ===== tiles da frente (tl_front_*) NUNCA recebem luz =====
+// monta uma silhueta dos tiles numa surface auxiliar, pinta ela com a cor ambiente e carimba no mapa de luz:
+// onde há tile da frente o mapa fica só com a escuridão base, então nenhuma luz se sobressai por cima dele.
+if (!surface_exists(surf_mask)) {
+    surf_mask = surface_create(room_width, room_height);
+}
+surface_set_target(surf_mask);
+draw_clear_alpha(c_black, 0);
+var _front_layers = scr_front_tile_layers();
+for (var _fi = 0; _fi < array_length(_front_layers); _fi++) {
+    var _fl = layer_get_id(_front_layers[_fi]);
+    if (_fl == -1) continue;
+    var _tm = layer_tilemap_get_id(_fl);
+    if (_tm == -1) continue;
+    draw_tilemap(_tm, tilemap_get_x(_tm), tilemap_get_y(_tm));
+}
+// cor ambiente por cima, preservando o alpha dos tiles (src * destAlpha)
+gpu_set_blendmode_ext(bm_dest_alpha, bm_zero);
+draw_set_color(make_color_rgb(80, 80, 80));
+draw_rectangle(0, 0, room_width, room_height, false);
+draw_set_color(c_white);
+gpu_set_blendmode(bm_normal);
+surface_reset_target();
+
+surface_set_target(surf);
+draw_surface(surf_mask, 0, 0);
 surface_reset_target();
 
 // 🔥 AQUI É O SEGREDO FINAL 🔥
