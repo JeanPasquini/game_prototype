@@ -1,3 +1,4 @@
+if (trap_stopped) exit;
 var damage_amount = damage;
 var knockback_strength = 10;
 

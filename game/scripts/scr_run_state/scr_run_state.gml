@@ -75,3 +75,44 @@ function run_env_set(_key, _val) {
 	var st = run_state_get(global.run_pos);
 	st.env[$ _key] = _val;
 }
+
+
+/// @description Desliga TODAS as traps da sala (chamado quando a sala de desafio conclui as hordas
+/// e ao revisitar uma sala ja concluida). Elas ficam paradas no visual "recolhido" e sem dano.
+function traps_stop_all() {
+	// flechas em voo somem
+	with (obj_trap_arrow_projectile) instance_destroy();
+
+	// serra: continua girando visualmente, mas nao causa dano
+	with (obj_trap_chainsaw) {
+		trap_stopped = true;
+	}
+
+	// espinhos / lanca: recolhem no frame 0 e param
+	with (obj_trap_spike) {
+		trap_stopped = true;
+		state = TrapSpikeState.NOT_DAMAGE;
+		alarm[0] = -1; alarm[1] = -1;
+		image_index = 0;
+		image_speed = 0;
+	}
+	with (obj_trap_spear) {
+		trap_stopped = true;
+		state = TrapSpearState.NOT_DAMAGE;
+		alarm[0] = -1; alarm[1] = -1;
+		image_index = 0;
+		image_speed = 0;
+	}
+
+	// besta: para de atirar
+	with (obj_trap_arrow) {
+		trap_stopped = true;
+		alarm[0] = -1;
+		image_speed = 0;
+	}
+
+	// espinho estatico (obj_spike): sem dano
+	with (obj_spike) {
+		trap_stopped = true;
+	}
+}

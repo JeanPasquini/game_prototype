@@ -95,10 +95,14 @@ if (spr_icon != noone)
 if (font_title != noone) draw_set_font(font_title);
 
 draw_set_alpha(anim_alpha);
-draw_text(
+var title_scale = 0.8;
+draw_text_transformed(
     fx + title_x * scale_now,
     fy + title_y * scale_now,
-    title_text
+    title_text,
+    title_scale,
+    title_scale,
+    0
 );
 
 var desc_max_w = frame_w - (pad * 2 * scale_now);

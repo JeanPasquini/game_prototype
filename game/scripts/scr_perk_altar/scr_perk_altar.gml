@@ -6,7 +6,7 @@ function scr_perk_altar(_xpos, _ypos)
     [
         obj_perk_altar_temporal_jump,
         obj_perk_altar_space_break,
-        obj_perk_altar_black_hole
+        //obj_perk_altar_black_hole,
     ];
     
     var altar_positions = [_xpos - 40, _xpos + 40];

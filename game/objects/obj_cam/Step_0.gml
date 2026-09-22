@@ -51,7 +51,7 @@ if (fixed_point) {
         look_offset = lerp(look_offset, _look_target, _look_lerp);
 
         x = lerp(x, target_.x, 0.1);
-        y = lerp(y, target_.y - height_ / 4 + fall_look + look_offset, 0.1);
+        y = lerp(y, target_.y - height_ * follow_y_ratio + fall_look + look_offset, 0.1);
     }
 }
 // se nenhuma condição bater, x/y simplesmente mantêm o valor do frame anterior

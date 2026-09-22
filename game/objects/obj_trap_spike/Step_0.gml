@@ -1,3 +1,4 @@
+if (trap_stopped) exit;
 if(image_index == 0 && image_speed > 0){
 	state = TrapSpikeState.NOT_DAMAGE;
 	image_speed = 0;

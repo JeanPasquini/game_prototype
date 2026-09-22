@@ -1,3 +1,4 @@
+if (trap_stopped) exit;
 scr_audio_emitter(x, y, emitterAudio);
 
 if(floor(image_index) == 0 && image_speed > 0){

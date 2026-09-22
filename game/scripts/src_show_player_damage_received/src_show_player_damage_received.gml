@@ -25,8 +25,8 @@ function src_show_player_damage_received(damage){
 			audio_play_sound(sde_player_receive_damage, 1, false);
 		}
 		
-		var dmg = instance_create_layer(obj_player.x, obj_player.y, "instances", obj_damage_text);
-		dmg.text = "- " + string(damage);
+		//var dmg = instance_create_layer(obj_player.x, obj_player.y, "instances", obj_damage_text);
+		//dmg.text = "- " + string(damage);
 		obj_player.life -= damage;
 		obj_player.invencible = true;
 		obj_player.alarm[0] = obj_player.invencible_time;
@@ -64,10 +64,10 @@ function src_show_player_damage_received(damage){
 						hurt_grav_timer = hurt_grav_max;
 					}
 
-					// trava a câmera por um instante pra valorizar o efeito
-					if (instance_exists(obj_cam)) {
-						obj_cam.hurt_hold = max(obj_cam.hurt_hold, obj_cam.hurt_hold_max);
-					}
+					//// trava a câmera por um instante pra valorizar o efeito
+					//if (instance_exists(obj_cam)) {
+					//	obj_cam.hurt_hold = max(obj_cam.hurt_hold, obj_cam.hurt_hold_max);
+					//}
 				}
 			}
 			global.hitstop = max(global.hitstop, 5);

@@ -33,6 +33,7 @@ switch (state) {
         if (instance_number(obj_enemy_parent) == 0) {
             if (current_wave >= total_waves) {
                 state = WaveState.COMPLETE;
+                traps_stop_all();   // sala concluida: todas as traps desligam
                 // persistencia da run: slot concluido nao recria hordas ao revisitar
                 if (variable_global_exists("run_pos")) run_state_mark_cleared(global.run_pos);
             } else {

@@ -4,6 +4,7 @@ height_ = camera_get_view_height(view_camera[0]);
 base_width_ = width_;
 base_height_ = height_;
 zoom_target = 1;
+follow_y_ratio = 0.10;   // quanto a camera fica ACIMA do player, como fracao da altura da view (era 0.25; menor = camera mais baixa)
 zoom_punch  = 0;   // recuo de zoom aditivo (decai sozinho) — usado na aterrissagem
 fall_look   = 0;   // deslocamento vertical da câmera enquanto cai (look-ahead)
 minimap_state = 0;

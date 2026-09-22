@@ -1,3 +1,4 @@
+if (trap_stopped) exit;
 if (alarm[0] <= 0) {
 	var arrow = instance_create_layer(x, y, "Instances", obj_trap_arrow_projectile);
 	arrow.direction = image_angle + 270;

@@ -77,6 +77,7 @@ function scr_room_init() {
 		with (obj_spawn_enemy)  instance_destroy();
 		with (obj_wave_manager) instance_destroy();
 		with (obj_enemy_parent) instance_destroy();
+		traps_stop_all();
 	}
 
 	// -------- 2b. persistencia de objetos de environment (dentro da RUN) --------
