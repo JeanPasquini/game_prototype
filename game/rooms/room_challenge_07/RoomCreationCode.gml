@@ -6,12 +6,12 @@
 	Titulo/descricao ficam aqui para facilitar a escrita e a traducao depois.
 */
 
-global.room_ambient_fx_enabled = false;  // atmosfera de partículas (obj_ambient_fx): desligada nesta sala
-global.room_lighting_enabled   = false;  // iluminação: escuridão + luzes (obj_controla_luz): desligada nesta sala
+global.room_ambient_fx_enabled = true;   // atmosfera de partículas (obj_ambient_fx)
+global.room_lighting_enabled   = true;   // iluminação: escuridão + luzes (obj_controla_luz)
 global.room_anomaly_enabled = true;
-global.room_anomaly_id      = "2";
-global.room_anomaly_title   = "Blank Room 01";
-global.room_anomaly_desc    = "Look the MINIMAP";
+global.room_anomaly_id      = "3";
+global.room_anomaly_title   = "Traps 02";
+global.room_anomaly_desc    = "Watch around!!!";
 
 global.room_wrap_enabled = false;   // wrap de tela (quem sai por uma borda volta pela oposta)
 

@@ -15,7 +15,7 @@ hasToCharge = true;
 currentChargingDelay = baseAttackDelay;
 currentAttackDelay = baseAttackDelay;
 
-knockback_strength = 15;
+knockback_strength = 1;
 
 idle_movement_script = src_grounded_idle_movement();
 chasing_movement_script = src_grounded_sprint_chasing_movement();

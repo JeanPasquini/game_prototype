@@ -1,4 +1,4 @@
-window_set_fullscreen(false);
+window_set_fullscreen(true);
 gpu_set_texfilter(false);
 
 audio_current = noone; 

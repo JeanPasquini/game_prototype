@@ -37,16 +37,24 @@ obj_cam.zoom_target = 0.7;
 obj_cam.x = obj_cam_follow.x;
 obj_cam.y = obj_cam_follow.y - obj_cam.base_height_ * obj_cam.zoom_target / 4;
 
-if (_intro_seen) {
-    // câmera já no enquadramento do player e menu principal direto
+layer_set_visible(layer_get_id("ui_introduction"), true);
+layer_set_visible(layer_get_id("ui_menu_main"), false);
+layer_set_visible(layer_get_id("ui_hud_player"), false);
+layer_set_visible(layer_get_id("ui_vignette"), false);
+
+// pula o "press any button" + descida: câmera já no enquadramento do player e menu principal direto.
+// Também chamado pelo creation code do HUB (global.hub_show_intro = false)
+skip_intro = function() {
+    if (playing || phase == 2) exit;
     obj_cam_follow.x = obj_player.x;
     obj_cam_follow.y = obj_player.y;
     obj_cam.x = obj_cam_follow.x;
     obj_cam.y = obj_cam_follow.y - obj_cam.base_height_ * obj_cam.zoom_target / 4;
+    intro_text_set_alpha(0);
+    layer_set_visible(layer_get_id("ui_introduction"), false);
+    layer_set_visible(layer_get_id(layer_name), true);
+    button_id = 1;
     phase = 2;
-}
+};
 
-layer_set_visible(layer_get_id("ui_introduction"), !_intro_seen);
-layer_set_visible(layer_get_id("ui_menu_main"), _intro_seen);
-layer_set_visible(layer_get_id("ui_hud_player"), false);
-layer_set_visible(layer_get_id("ui_vignette"), false);
+if (_intro_seen) skip_intro();

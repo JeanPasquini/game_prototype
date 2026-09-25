@@ -15,3 +15,15 @@ global.room_ambient_fx_enabled = true;
 global.room_lighting_enabled = true;
 
 scr_room_init();
+
+// ===== HUB: abertura inicial =====
+// true  = abertura completa ("press any button" + descida da câmera até o player)
+// false = pula a abertura e vai direto pro menu principal (Play / Exit)
+if (room == HUB) {
+	global.hub_show_intro = false;
+
+	// o room creation code roda depois do Create das instâncias, então aplica o skip direto no manager
+	if (!global.hub_show_intro) {
+		with (obj_menu_introduction_manager) skip_intro();
+	}
+}
