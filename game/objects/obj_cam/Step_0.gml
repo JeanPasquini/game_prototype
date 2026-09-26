@@ -2,6 +2,41 @@ audio_listener_set_position(0, camera_get_view_x(view_camera[0]) + camera_get_vi
                                camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) * 0.5,
                                0);
 
+// ===== CÂMERA FIXA DA SALA (global.room_cam, definido via scr_room_init) =====
+// Só vale enquanto NADA com prioridade acontece. A ordem abaixo já dá prioridade
+// a fixed_point (boss), hurt_hold (dano) e center_on_target (porta); aqui ainda
+// soltamos a câmera nas cenas do player (porta/introdução) ou se ele sair do
+// enquadramento. TALKING NÃO solta: ele também é usado por pause/menus de perk,
+// e a câmera deve continuar parada atrás do menu.
+var _rc = (variable_global_exists("room_cam") && is_struct(global.room_cam)) ? global.room_cam : noone;
+var _room_fixed_active = false;
+if (_rc != noone && instance_exists(target_)) {
+    var _busy = target_.state == PlayerState.TRANSITION
+        || target_.state == PlayerState.INTRODUCTION;
+
+    // salas maiores que a view: se o player chega perto da borda do quadro fixo, volta a segui-lo
+    var _half_w = base_width_  * _rc.zoom * 0.5 - room_fixed_margin;
+    var _half_h = base_height_ * _rc.zoom * 0.5 - room_fixed_margin;
+    var _inside = abs(target_.x - _rc.x) < _half_w && abs(target_.y - _rc.y) < _half_h;
+
+    _room_fixed_active = !_busy && _inside;
+}
+
+// ===== SAÍDA SUAVE DO PONTO FIXO =====
+// Ao sair do ponto fixo (porta, borda do quadro...), a velocidade do follow não
+// entra de uma vez: sobe numa curva ease-in-out durante room_fixed_release_frames.
+// _follow_ease multiplica o lerp do follow normal e do center_on_target.
+if (_room_fixed_active) {
+    room_fixed_release = 0;
+} else {
+    room_fixed_release = min(room_fixed_release + 1 / room_fixed_release_frames, 1);
+}
+var _follow_ease = 1;
+if (_rc != noone) {
+    var _t = room_fixed_release;
+    _follow_ease = lerp(room_fixed_release_min, 1, _t * _t * (3 - 2 * _t)); // smoothstep
+}
+
 // ===== FOLLOW BASE =====
 if (fixed_point) {
     x = lerp(x, point_x, 0.1);
@@ -16,8 +51,15 @@ if (fixed_point) {
         fall_look   = lerp(fall_look, 0, 0.22);
         look_offset = lerp(look_offset, 0, 0.2);
         look_hold   = 0;
-        x = lerp(x, target_.x, center_lerp);
-        y = lerp(y, target_.y, center_lerp);
+        x = lerp(x, target_.x, center_lerp * _follow_ease);
+        y = lerp(y, target_.y, center_lerp * _follow_ease);
+    } else if (_room_fixed_active) {
+        // ponto fixo da sala: sem look-ahead nem olhar pra cima/baixo
+        fall_look   = lerp(fall_look, 0, 0.22);
+        look_offset = lerp(look_offset, 0, 0.2);
+        look_hold   = 0;
+        x = lerp(x, _rc.x, room_fixed_lerp);
+        y = lerp(y, _rc.y, room_fixed_lerp);
     } else {
         // ===== LOOK-AHEAD DE QUEDA =====
         // enquanto o alvo cai rápido, a câmera "adianta" pra baixo pra mostrar o pouso;
@@ -50,8 +92,8 @@ if (fixed_point) {
         var _look_lerp = (_look_target != 0) ? 0.06 : 0.12;
         look_offset = lerp(look_offset, _look_target, _look_lerp);
 
-        x = lerp(x, target_.x, 0.1);
-        y = lerp(y, target_.y - height_ * follow_y_ratio + fall_look + look_offset, 0.1);
+        x = lerp(x, target_.x, 0.1 * _follow_ease);
+        y = lerp(y, target_.y - height_ * follow_y_ratio + fall_look + look_offset, 0.1 * _follow_ease);
     }
 }
 // se nenhuma condição bater, x/y simplesmente mantêm o valor do frame anterior
@@ -78,6 +120,7 @@ if (shake_time > 0) {
 // ===== UPDATE ZOOM =====
 zoom_punch = lerp(zoom_punch, 0, 0.12);   // recuo de zoom decai sozinho
 var _zoom = zoom_target + zoom_punch;
+if (_room_fixed_active) _zoom *= _rc.zoom;   // zoom opcional do ponto fixo da sala
 
 width_  = lerp(width_,  base_width_  * _zoom, 0.08);
 height_ = lerp(height_, base_height_ * _zoom, 0.08);

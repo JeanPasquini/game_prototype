@@ -27,6 +27,19 @@
 	Para DESLIGAR a iluminacao (escuridao + luzes) numa sala (padrao = ligada):
 
 		global.room_lighting_enabled = false;
+
+	Para deixar a CAMERA FIXA num ponto da sala (padrao = segue o player):
+
+		global.room_camera_fixed = true;
+		global.room_camera_x     = 384;   // centro da camera (coordenadas da sala)
+		global.room_camera_y     = 240;
+		global.room_camera_zoom  = 1;     // opcional (1 = normal, >1 = mostra mais da sala)
+
+	A camera fica parada nesse ponto SO enquanto nada acontece. Qualquer
+	interacao com prioridade assume a camera e depois ela volta pro ponto fixo:
+	cinematica de porta (center_on_target), intro de boss (fixed_point),
+	trava de dano (hurt_hold), player em transicao/introducao, ou o player
+	saindo do enquadramento fixo (salas maiores que a view).
 */
 
 function scr_room_init() {
@@ -158,6 +171,29 @@ function scr_room_init() {
 	// Padrao = ligada. Desligada: o obj_controla_luz nao desenha o mapa de luz e as luzes visiveis somem.
 	global.lighting_on = !variable_global_exists("room_lighting_enabled") || global.room_lighting_enabled;
 	global.room_lighting_enabled = true; // nao herda pra proxima sala
+
+	// -------- 4d. camera fixa da sala, opcional --------
+	// No creation code da room: global.room_camera_fixed = true; + _x/_y (+ _zoom)  (antes de scr_room_init)
+	// global.room_cam guarda o ponto da sala ATUAL (noone = camera segue o player); o obj_cam le todo Step.
+	// Sem _x/_y definidos = centro da sala.
+	var _cam_fixed = variable_global_exists("room_camera_fixed") && global.room_camera_fixed;
+	var _cam_x     = variable_global_exists("room_camera_x")    ? global.room_camera_x    : noone;
+	var _cam_y     = variable_global_exists("room_camera_y")    ? global.room_camera_y    : noone;
+	var _cam_zoom  = variable_global_exists("room_camera_zoom") ? global.room_camera_zoom : noone;
+
+	global.room_cam = noone;
+	if (_cam_fixed) {
+		global.room_cam = {
+			x:    (_cam_x    != noone) ? _cam_x    : room_width  * 0.5,
+			y:    (_cam_y    != noone) ? _cam_y    : room_height * 0.5,
+			zoom: (_cam_zoom != noone) ? _cam_zoom : 1,
+		};
+	}
+	// nao herda pra proxima sala
+	global.room_camera_fixed = false;
+	global.room_camera_x     = noone;
+	global.room_camera_y     = noone;
+	global.room_camera_zoom  = noone;
 
 	if (_wrap && !instance_exists(obj_room_wrap)) {
 		var _lay = layer_exists("controls") ? "controls"

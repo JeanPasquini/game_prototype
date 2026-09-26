@@ -1,69 +1,34 @@
-if (!has_talked)
-{
-    if (instance_exists(obj_player) && !has_talked)
+if (!has_talked && instance_exists(obj_player))
 {
     var player = instance_find(obj_player, 0);
     var dist = point_distance(x, y, player.x, player.y);
 
-    // ===== INICIAR DIÁLOGO =====
+    // ===== INTERAGIR =====
     if (dist < range_interaction
     && input_interact_pressed()
-    && obj_player.state != PlayerState.TALKING
+    && player.state != PlayerState.TALKING
     && !scr_menu_lock_blocks_world())
     {
-        //var dlg_instance = instance_create_layer(x, y, "controls", obj_dialogue);
-
-        obj_player.state = PlayerState.TALKING;
-        obj_player.talking = true;
-
-        //started_dialogue = true;
-        //spawn_perk_after_dialogue = false;
-
-        if (obj_player.money >= 2)
+        // Só trava o player (TALKING) quando a compra realmente acontece: o
+        // obj_perk_selection é quem libera o player ao fechar. Sem cristais ou
+        // sem espaço de perk, apenas mostra um aviso e o player segue livre.
+        if (player.money < price)
         {
-            if (array_length(obj_player.perks_obtained_run) < obj_player.perks_limit_run)
-            {
-                obj_player.money -= 2;
-				instance_create_layer(x, y, "controls", obj_perk_selection);
-				has_talked = true;
-				if (variable_global_exists("run_pos")) run_state_get(global.run_pos).merchant_used = true;
-                //spawn_perk_after_dialogue = true;
-
-                //dlg_instance.dialogue_lines =
-                //    scr_load_dialogue(-1, 0, "dialogue_npc_merchant.csv");
-            }
-            //else
-            //{
-            //    dlg_instance.dialogue_lines =
-            //        scr_load_dialogue(6, 0, "dialogue_npc_merchant.csv");
-            //}
+            merchant_warning("Not enough crystals!");
+        }
+        else if (array_length(player.perks_obtained_run) >= player.perks_limit_run)
+        {
+            merchant_warning("Perk limit reached!");
         }
         else
         {
-            //dlg_instance.dialogue_lines =
-            //    scr_load_dialogue(6, 0, "dialogue_npc_merchant.csv");
+            player.state = PlayerState.TALKING;
+            player.talking = true;
+
+            player.money -= price;
+            instance_create_layer(x, y, "controls", obj_perk_selection);
+            has_talked = true;
+            if (variable_global_exists("run_pos")) run_state_get(global.run_pos).merchant_used = true;
         }
     }
-    
-
-    //// ===== DIÁLOGO TERMINOU =====
-    //if (started_dialogue && !instance_exists(obj_dialogue))
-    //{
-    //    started_dialogue = false;
-
-    //    if (spawn_perk_after_dialogue)
-    //    {
-    //        spawn_perk_after_dialogue = false;
-    //    }
-
-    //    obj_player.state = PlayerState.IDLE;
-    //    obj_player.talking = false;
-
-    //    // 🔥 DESATIVA O NPC PRA SEMPRE
-    //    has_talked = true;
-    //}
 }
-
-}
-
-

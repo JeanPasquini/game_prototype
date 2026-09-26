@@ -6,9 +6,7 @@ wrap_objs = [
 	obj_player,
 	obj_enemy_parent,
 	obj_projectile_parent,
-	obj_drop_coin,
-	obj_drop_key,
-	obj_drop_life,
+	obj_drop_parent,
 ];
 
 wrap_margin = 16; // folga (px) antes de teleportar pra outra borda

@@ -247,7 +247,13 @@ scr_fx_run_smoke = function(_x, _y) {
     part_particles_create(global.PS, _x, _y, global.PT_SMOKE, 1);
 }
 
-scr_fx_crystal_hit = function(_x, _y) {
+/// _up_dir = pra onde é o "cima" do cristal (90 = em pé no chão, 270 = pendurado
+/// no teto). Direção e gravidade das partículas giram junto, então o efeito tem
+/// sempre a mesma cara e sai pra fora do cristal, nunca pra dentro da parede.
+scr_fx_crystal_hit = function(_x, _y, _up_dir = 90) {
+    var _rot = _up_dir - 90;
+    part_type_direction(global.PT_CRYSTAL_HIT, 82 + _rot, 102 + _rot, 0, 0);
+    part_type_gravity(global.PT_CRYSTAL_HIT, 0.02, 270 + _rot);
     part_particles_create(global.PS, _x, _y, global.PT_CRYSTAL_HIT, 4);
 }
 

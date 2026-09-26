@@ -1,20 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_drop_coin",
+  "%Name":"obj_drop_parent",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_drop_coin",
+  "name":"obj_drop_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"drops",
-    "path":"folders/Objects/drops.yy",
+    "name":"Parents",
+    "path":"folders/Objects/Parents.yy",
   },
-  "parentObjectId":{
-    "name":"obj_drop_parent",
-    "path":"objects/obj_drop_parent/obj_drop_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -32,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_drop_coin",
-    "path":"sprites/spr_drop_coin/spr_drop_coin.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

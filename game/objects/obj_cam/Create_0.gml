@@ -27,6 +27,14 @@ point_y = 0;
 center_on_target = false;
 center_lerp = 0.15;
 
+// ===== Ponto fixo POR SALA (global.room_cam, configurado no creation code da room) =====
+// Prioridade mais baixa: qualquer cinemática/interação acima assume a câmera.
+room_fixed_lerp   = 0.08;  // suavidade da ida até o ponto fixo
+room_fixed_margin = 24;    // px antes da borda do quadro fixo em que a câmera volta a seguir o player
+room_fixed_release_frames = 45;   // frames da saída suave do ponto fixo até o follow normal (maior = mais lento)
+room_fixed_release_min    = 0.08; // velocidade inicial do follow na saída (fração do lerp normal)
+room_fixed_release        = 1;    // 0..1 progresso da saída (1 = follow na velocidade normal)
+
 // ===== Trava temporária ao levar dano (Hollow Knight "focus") =====
 hurt_hold     = 0;   // frames restantes com a câmera congelada no lugar
 hurt_hold_max = 18;

@@ -15,4 +15,9 @@ global.room_anomaly_desc    = "";
 
 global.room_wrap_enabled = false;   // wrap de tela (quem sai por uma borda volta pela oposta)
 
+global.room_camera_fixed = true;
+global.room_camera_x     = 384;
+global.room_camera_y     = 256;
+global.room_camera_zoom  = 1;
+
 scr_room_init();

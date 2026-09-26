@@ -33,7 +33,7 @@ if (!has_talked)
 	    draw_text_transformed(
 	        x - 24,
 	        yy,
-	        "2",
+	        string(price),
 	        0.5,
 	        0.5,
 	        0

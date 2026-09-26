@@ -1,14 +1,8 @@
- life_restaured = 2;
- 
-var dir = irandom(360);      
-var spd = random_range(1.5, 3);  
+event_inherited();
 
-hsp = lengthdir_x(spd, dir);
-vsp = -random_range(2, 4);
+life_restaured = 2;
 
-grv = 0.2; 
-
-alarm[0] = 30;
-
-image_xscale = 1;
-image_yscale = 1;
+on_collect = function(_player) {
+	_player.life = min(_player.life + life_restaured, _player.life_max);
+	//audio_play_sound(sde_player_coin_collect, 1, false);
+};
